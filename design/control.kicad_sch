@@ -4,6 +4,12 @@
 	(generator_version "9.0")
 	(uuid "1217940e-0c19-481d-96cc-97886dab6f19")
 	(paper "A4")
+	(title_block
+		(title "BitCrusher: Affordable, Open Source EMFI Platform")
+		(rev "0.1")
+		(company "UNH Resilient Architecture Lab")
+		(comment 1 "Author: George Crane")
+	)
 	(lib_symbols
 		(symbol "Connector:Conn_01x03_Pin"
 			(pin_names
@@ -2816,7 +2822,7 @@
 	)
 	(wire
 		(pts
-			(xy 41.91 68.58) (xy 48.26 68.58)
+			(xy 41.91 68.58) (xy 44.45 68.58)
 		)
 		(stroke
 			(width 0)
@@ -2966,6 +2972,16 @@
 	)
 	(wire
 		(pts
+			(xy 53.34 62.23) (xy 62.23 62.23)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "af696363-0641-47d0-a4f3-02aff95d75b1")
+	)
+	(wire
+		(pts
 			(xy 41.91 66.04) (xy 43.18 66.04)
 		)
 		(stroke
@@ -3006,7 +3022,7 @@
 	)
 	(wire
 		(pts
-			(xy 59.69 62.23) (xy 62.23 62.23)
+			(xy 52.07 68.58) (xy 53.34 68.58)
 		)
 		(stroke
 			(width 0)
@@ -3066,13 +3082,13 @@
 	)
 	(wire
 		(pts
-			(xy 48.26 68.58) (xy 48.26 62.23)
+			(xy 53.34 68.58) (xy 53.34 62.23)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "de3ef80f-76ee-46ab-9854-f0b749619122")
+		(uuid "d82b392f-9223-49ca-8375-befaaff1d608")
 	)
 	(wire
 		(pts
@@ -3093,16 +3109,6 @@
 			(type default)
 		)
 		(uuid "e15972df-8e53-4b2c-9608-97b75e3f50f1")
-	)
-	(wire
-		(pts
-			(xy 48.26 62.23) (xy 52.07 62.23)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "e7e4b0f4-2cba-424d-a701-a5aada23cc5d")
 	)
 	(wire
 		(pts
@@ -3144,7 +3150,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "189b9c52-b1d7-4295-8916-bd29b93f65e2")
-		(property "Reference" "C6"
+		(property "Reference" "C7"
 			(at 100.33 39.3699 0)
 			(effects
 				(font
@@ -3198,7 +3204,7 @@
 		(instances
 			(project ""
 				(path "/e1be550d-9ce6-42b1-a89a-c00b9d7586dd/29f45a98-1f25-4a6e-8231-3aa3a650ea17"
-					(reference "C6")
+					(reference "C7")
 					(unit 1)
 				)
 			)
@@ -3214,7 +3220,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "19e7cd0e-8ba2-490f-8e51-b44de2626e47")
-		(property "Reference" "#PWR02"
+		(property "Reference" "#PWR06"
 			(at 80.01 154.94 0)
 			(effects
 				(font
@@ -3265,7 +3271,7 @@
 		(instances
 			(project ""
 				(path "/e1be550d-9ce6-42b1-a89a-c00b9d7586dd/29f45a98-1f25-4a6e-8231-3aa3a650ea17"
-					(reference "#PWR02")
+					(reference "#PWR06")
 					(unit 1)
 				)
 			)
@@ -3281,7 +3287,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "23d5328d-80ea-49ec-93dd-f4ea99ea8272")
-		(property "Reference" "#PWR03"
+		(property "Reference" "#PWR01"
 			(at 19.05 53.34 0)
 			(effects
 				(font
@@ -3332,7 +3338,7 @@
 		(instances
 			(project "BitCrusher"
 				(path "/e1be550d-9ce6-42b1-a89a-c00b9d7586dd/29f45a98-1f25-4a6e-8231-3aa3a650ea17"
-					(reference "#PWR03")
+					(reference "#PWR01")
 					(unit 1)
 				)
 			)
@@ -3348,7 +3354,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "27b996e9-ed2b-4cbe-ae0f-c1ae422dff56")
-		(property "Reference" "#PWR05"
+		(property "Reference" "#PWR07"
 			(at 87.63 38.1 0)
 			(effects
 				(font
@@ -3398,7 +3404,7 @@
 		(instances
 			(project ""
 				(path "/e1be550d-9ce6-42b1-a89a-c00b9d7586dd/29f45a98-1f25-4a6e-8231-3aa3a650ea17"
-					(reference "#PWR05")
+					(reference "#PWR07")
 					(unit 1)
 				)
 			)
@@ -3414,7 +3420,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "29bbff78-63c3-4ce7-add4-5f18bb8ca568")
-		(property "Reference" "C2"
+		(property "Reference" "C3"
 			(at 35.56 39.3699 0)
 			(effects
 				(font
@@ -3468,7 +3474,7 @@
 		(instances
 			(project "BitCrusher"
 				(path "/e1be550d-9ce6-42b1-a89a-c00b9d7586dd/29f45a98-1f25-4a6e-8231-3aa3a650ea17"
-					(reference "C2")
+					(reference "C3")
 					(unit 1)
 				)
 			)
@@ -3476,7 +3482,7 @@
 	)
 	(symbol
 		(lib_id "Device:R")
-		(at 55.88 62.23 270)
+		(at 48.26 68.58 270)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -3484,7 +3490,7 @@
 		(dnp no)
 		(uuid "3aa85d2a-7eee-43b6-a97d-6fa426c313d1")
 		(property "Reference" "R1"
-			(at 55.88 65.278 90)
+			(at 48.26 71.628 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3492,7 +3498,7 @@
 			)
 		)
 		(property "Value" "10k"
-			(at 55.88 67.818 90)
+			(at 48.26 74.168 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3500,7 +3506,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 55.88 60.452 90)
+			(at 48.26 66.802 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3509,7 +3515,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 55.88 62.23 0)
+			(at 48.26 68.58 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3518,7 +3524,7 @@
 			)
 		)
 		(property "Description" "Resistor"
-			(at 55.88 62.23 0)
+			(at 48.26 68.58 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3551,7 +3557,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "5f665482-3ad6-4c85-8e89-de76de893bee")
-		(property "Reference" "#PWR08"
+		(property "Reference" "#PWR03"
 			(at 43.18 68.58 0)
 			(effects
 				(font
@@ -3601,7 +3607,7 @@
 		(instances
 			(project "BitCrusher"
 				(path "/e1be550d-9ce6-42b1-a89a-c00b9d7586dd/29f45a98-1f25-4a6e-8231-3aa3a650ea17"
-					(reference "#PWR08")
+					(reference "#PWR03")
 					(unit 1)
 				)
 			)
@@ -3687,7 +3693,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "73dc4c32-0b8f-448e-95be-449dc084c9c5")
-		(property "Reference" "#PWR07"
+		(property "Reference" "#PWR04"
 			(at 43.18 78.74 0)
 			(effects
 				(font
@@ -3738,7 +3744,7 @@
 		(instances
 			(project "BitCrusher"
 				(path "/e1be550d-9ce6-42b1-a89a-c00b9d7586dd/29f45a98-1f25-4a6e-8231-3aa3a650ea17"
-					(reference "#PWR07")
+					(reference "#PWR04")
 					(unit 1)
 				)
 			)
@@ -3754,7 +3760,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "7bd99e32-6b10-4bc8-9ce1-1d958d78aebd")
-		(property "Reference" "#PWR01"
+		(property "Reference" "#PWR02"
 			(at 25.4 73.66 0)
 			(effects
 				(font
@@ -3805,7 +3811,7 @@
 		(instances
 			(project "BitCrusher"
 				(path "/e1be550d-9ce6-42b1-a89a-c00b9d7586dd/29f45a98-1f25-4a6e-8231-3aa3a650ea17"
-					(reference "#PWR01")
+					(reference "#PWR02")
 					(unit 1)
 				)
 			)
@@ -3821,7 +3827,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "7eea1d1c-2d42-41a0-8df9-4ae3100fc085")
-		(property "Reference" "C5"
+		(property "Reference" "C6"
 			(at 73.66 39.3699 0)
 			(effects
 				(font
@@ -3884,7 +3890,7 @@
 		(instances
 			(project "BitCrusher"
 				(path "/e1be550d-9ce6-42b1-a89a-c00b9d7586dd/29f45a98-1f25-4a6e-8231-3aa3a650ea17"
-					(reference "C5")
+					(reference "C6")
 					(unit 1)
 				)
 			)
@@ -3900,7 +3906,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "80179e88-2015-486b-91ca-d428528d32d2")
-		(property "Reference" "#PWR04"
+		(property "Reference" "#PWR05"
 			(at 80.01 38.1 0)
 			(effects
 				(font
@@ -3950,7 +3956,7 @@
 		(instances
 			(project ""
 				(path "/e1be550d-9ce6-42b1-a89a-c00b9d7586dd/29f45a98-1f25-4a6e-8231-3aa3a650ea17"
-					(reference "#PWR04")
+					(reference "#PWR05")
 					(unit 1)
 				)
 			)
@@ -3966,7 +3972,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "8212d2a8-c876-435f-a5b5-a8556b9c3b10")
-		(property "Reference" "#PWR06"
+		(property "Reference" "#PWR08"
 			(at 107.95 53.34 0)
 			(effects
 				(font
@@ -4017,7 +4023,7 @@
 		(instances
 			(project "BitCrusher"
 				(path "/e1be550d-9ce6-42b1-a89a-c00b9d7586dd/29f45a98-1f25-4a6e-8231-3aa3a650ea17"
-					(reference "#PWR06")
+					(reference "#PWR08")
 					(unit 1)
 				)
 			)
@@ -4290,7 +4296,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "98785b6f-c255-49e3-af33-ccb041e66659")
-		(property "Reference" "C8"
+		(property "Reference" "C2"
 			(at 29.21 62.2299 0)
 			(effects
 				(font
@@ -4353,7 +4359,7 @@
 		(instances
 			(project "BitCrusher"
 				(path "/e1be550d-9ce6-42b1-a89a-c00b9d7586dd/29f45a98-1f25-4a6e-8231-3aa3a650ea17"
-					(reference "C8")
+					(reference "C2")
 					(unit 1)
 				)
 			)
@@ -4369,7 +4375,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "9b1619bd-14ce-4a07-8e7a-bf71c9266d4f")
-		(property "Reference" "C3"
+		(property "Reference" "C4"
 			(at 48.26 39.3699 0)
 			(effects
 				(font
@@ -4423,7 +4429,7 @@
 		(instances
 			(project "BitCrusher"
 				(path "/e1be550d-9ce6-42b1-a89a-c00b9d7586dd/29f45a98-1f25-4a6e-8231-3aa3a650ea17"
-					(reference "C3")
+					(reference "C4")
 					(unit 1)
 				)
 			)
@@ -4439,7 +4445,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "bf11bf73-3df9-4952-ab45-2d24dc4b0090")
-		(property "Reference" "C4"
+		(property "Reference" "C5"
 			(at 60.96 39.3699 0)
 			(effects
 				(font
@@ -4493,7 +4499,7 @@
 		(instances
 			(project "BitCrusher"
 				(path "/e1be550d-9ce6-42b1-a89a-c00b9d7586dd/29f45a98-1f25-4a6e-8231-3aa3a650ea17"
-					(reference "C4")
+					(reference "C5")
 					(unit 1)
 				)
 			)
@@ -4509,7 +4515,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "f8927dc3-5555-430e-ae9c-a7e5d98dbfe8")
-		(property "Reference" "C7"
+		(property "Reference" "C8"
 			(at 111.76 39.3699 0)
 			(effects
 				(font
@@ -4563,7 +4569,7 @@
 		(instances
 			(project "BitCrusher"
 				(path "/e1be550d-9ce6-42b1-a89a-c00b9d7586dd/29f45a98-1f25-4a6e-8231-3aa3a650ea17"
-					(reference "C7")
+					(reference "C8")
 					(unit 1)
 				)
 			)

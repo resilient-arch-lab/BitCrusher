@@ -4,6 +4,12 @@
 	(generator_version "9.0")
 	(uuid "e1be550d-9ce6-42b1-a89a-c00b9d7586dd")
 	(paper "A4")
+	(title_block
+		(title "BitCrusher: Affordable, Open Source EMFI Platform")
+		(rev "0.1")
+		(company "UNH Resilient Architecture Lab")
+		(comment 1 "Author: George Crane")
+	)
 	(lib_symbols)
 	(sheet
 		(at 30.48 68.58)
