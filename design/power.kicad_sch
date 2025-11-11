@@ -1195,6 +1195,16 @@
 	)
 	(wire
 		(pts
+			(xy 26.67 115.57) (xy 29.21 115.57)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "2dedf602-fec6-4ed4-b978-fd6fcf881625")
+	)
+	(wire
+		(pts
 			(xy 31.75 62.23) (xy 48.26 62.23)
 		)
 		(stroke
@@ -1637,7 +1647,7 @@
 				(hide yes)
 			)
 		)
-		(property "Value" "+3.3V"
+		(property "Value" "+3V3"
 			(at 57.15 109.22 0)
 			(effects
 				(font
@@ -1703,7 +1713,7 @@
 				(hide yes)
 			)
 		)
-		(property "Value" "+3.3VA"
+		(property "Value" "+3V3A"
 			(at 49.53 109.22 0)
 			(effects
 				(font

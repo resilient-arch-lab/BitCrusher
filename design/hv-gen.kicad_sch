@@ -11,4 +11,15 @@
 		(comment 1 "Author: George Crane")
 	)
 	(lib_symbols)
+	(text "The ChipSHOUTER uses a flyback transformer and controller to\ncharge the capacitor bank. I dont really know how these work\nbut I'll look into it."
+		(exclude_from_sim no)
+		(at 25.4 25.4 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left top)
+		)
+		(uuid "e4e9b382-7afb-4438-ad72-7d2e138fa6a9")
+	)
 )
