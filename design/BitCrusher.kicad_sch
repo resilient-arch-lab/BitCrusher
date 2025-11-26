@@ -100,50 +100,6 @@
 		)
 	)
 	(sheet
-		(at 69.85 68.58)
-		(size 33.02 27.94)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(stroke
-			(width 0.1524)
-			(type solid)
-		)
-		(fill
-			(color 0 0 0 0.0000)
-		)
-		(uuid "8b68b02a-7e0c-4254-8511-f52c66b2e5f7")
-		(property "Sheetname" "High Voltage Bank"
-			(at 69.85 67.8684 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.254)
-					(bold yes)
-				)
-				(justify left bottom)
-			)
-		)
-		(property "Sheetfile" "hv-bank.kicad_sch"
-			(at 69.85 97.1046 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left top)
-			)
-		)
-		(instances
-			(project "BitCrusher"
-				(path "/e1be550d-9ce6-42b1-a89a-c00b9d7586dd"
-					(page "5")
-				)
-			)
-		)
-	)
-	(sheet
 		(at 107.95 68.58)
 		(size 33.02 27.94)
 		(exclude_from_sim no)
