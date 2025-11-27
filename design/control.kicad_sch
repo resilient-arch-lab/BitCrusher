@@ -2620,6 +2620,17 @@
 		)
 		(uuid "7b6c87c0-7196-41c6-b6d2-770b4eed275d")
 	)
+	(text "It might make more sense for\nPulseSense to go to a comparator, since it could also \nstop the HV generation when the switch is closed"
+		(exclude_from_sim no)
+		(at 142.494 64.516 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "a4712212-491e-4b72-9259-bd16df4ea9da")
+	)
 	(text "Physical Interface"
 		(exclude_from_sim no)
 		(at 176.53 25.4 0)

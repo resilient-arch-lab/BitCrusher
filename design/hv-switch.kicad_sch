@@ -55,4 +55,26 @@
 			)
 		)
 	)
+	(global_label "HV+"
+		(shape input)
+		(at 139.7 71.12 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "cd888270-dbbc-4299-a764-8e23a93fd4d5")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 132.7233 71.12 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
+	)
 )
