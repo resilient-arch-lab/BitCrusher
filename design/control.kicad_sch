@@ -2586,16 +2586,16 @@
 		)
 		(uuid "573364b8-a47e-4011-ba47-bf1db4ae65ba")
 	)
-	(text "COMP2_INM"
+	(text "DAC1_OUT1"
 		(exclude_from_sim no)
-		(at 139.7 68.58 0)
+		(at 105.918 68.834 0)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
 			(justify left)
 		)
-		(uuid "5b7406f4-10b2-4ee3-b3e2-971fc5a995da")
+		(uuid "60584826-b12c-469c-b1ee-9afaf37b55ab")
 	)
 	(text "For a prototype it might be worth breaking out\na few extra GPIO pins..."
 		(exclude_from_sim no)
@@ -2794,6 +2794,10 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "fee213c1-e2d9-4fef-bc87-e54f9c934580")
+	)
+	(no_connect
+		(at 104.14 68.58)
+		(uuid "d4288780-61e0-47af-9e9d-03ada88e53a9")
 	)
 	(wire
 		(pts
@@ -3014,16 +3018,6 @@
 			(type default)
 		)
 		(uuid "4f8f6449-894e-4430-9c4e-82bfde30737f")
-	)
-	(wire
-		(pts
-			(xy 104.14 68.58) (xy 127 68.58)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "52a5eb90-fdfc-4b1e-a550-1e44ff2cd186")
 	)
 	(wire
 		(pts
@@ -3578,28 +3572,6 @@
 		(uuid "a8637e25-41c4-482a-b280-387d31d24cf6")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 122.1838 137.16 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-	)
-	(global_label "HWTrig-"
-		(shape input)
-		(at 127 68.58 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "ba18dd50-a7f5-42ee-b734-04f67be5320f")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 137.8471 68.58 0)
 			(effects
 				(font
 					(size 1.27 1.27)
