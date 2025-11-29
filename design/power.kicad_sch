@@ -1229,44 +1229,36 @@
 		)
 		(uuid "1ead8382-1463-4725-8238-8a495ac1aca9")
 	)
-	(text "ChipSHOUTER has DC power jack input routed directly to the transformer.\nIt takes 19V DC input rated at max 3.4A with a typical power consumption\nduring charging and pulsing of 5-50W\n"
+	(text "Should support a peak current of the \nflyback converter I_peak (2A)+10%\n(2.2A)"
 		(exclude_from_sim no)
 		(at 18.034 44.196 0)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
-			(justify left)
+			(justify left bottom)
 		)
 		(uuid "2dfe1b7d-da59-40e2-9f27-54ac5515c29e")
 	)
 	(text "LDO regulators for 3V3 and 5V rails"
 		(exclude_from_sim no)
-		(at 35.56 36.068 0)
+		(at 17.78 35.56 0)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
+			(justify left bottom)
 		)
 		(uuid "35436578-8a62-4726-91ea-360fee5c1170")
 	)
-	(text "Barrel connector for 24V supply input"
+	(text "Buck converter to regulate to gate drive voltage (22V)"
 		(exclude_from_sim no)
-		(at 36.576 21.336 0)
+		(at 17.78 31.75 0)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
-		)
-		(uuid "607c2fdc-b19f-49bd-982b-f547f85644e9")
-	)
-	(text "Buck converter to regulate to gate drive voltage (like 20V I think)"
-		(exclude_from_sim no)
-		(at 50.546 31.496 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
+			(justify left bottom)
 		)
 		(uuid "a3dae779-9c84-485d-8d1b-4a4adaede512")
 	)

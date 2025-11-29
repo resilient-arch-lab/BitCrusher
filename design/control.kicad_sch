@@ -2507,6 +2507,17 @@
 		)
 		(uuid d36b5dd2-d1cd-4b1e-aab5-03d51ea5677a)
 	)
+	(text "I could also set a custom\nthreshold for this with the DAC \nwhichcwould probably improve resolution"
+		(exclude_from_sim no)
+		(at 138.43 147.32 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "11b467bb-60c1-46a9-bd64-e66b51b9dc9c")
+	)
 	(text "ADC1_IN2"
 		(exclude_from_sim no)
 		(at 129.54 60.96 0)
