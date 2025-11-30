@@ -77,4 +77,26 @@
 			)
 		)
 	)
+	(global_label "PULSE+"
+		(shape output)
+		(at 184.15 71.12 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "e1619ce6-0f96-4b25-b7fa-6b844f833208")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 194.6947 71.12 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+	)
 )
