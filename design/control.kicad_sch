@@ -5565,6 +5565,28 @@
 			)
 		)
 	)
+	(global_label "Armed"
+		(shape output)
+		(at 228.6 92.71 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "e30ee489-7ed3-4975-b162-f8c03f01e48d")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 237.3909 92.71 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+	)
 	(global_label "PulseVS"
 		(shape input)
 		(at 224.79 54.61 0)
