@@ -100,7 +100,7 @@
 		)
 	)
 	(sheet
-		(at 107.95 68.58)
+		(at 69.85 68.58)
 		(size 33.02 27.94)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -116,7 +116,7 @@
 		)
 		(uuid "a0344160-5a1e-4ade-9868-d857907b9d6d")
 		(property "Sheetname" "High Voltage Switching"
-			(at 107.95 67.8684 0)
+			(at 69.85 67.8684 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -127,7 +127,7 @@
 			)
 		)
 		(property "Sheetfile" "hv-switch.kicad_sch"
-			(at 107.95 97.1046 0)
+			(at 69.85 97.1046 0)
 			(effects
 				(font
 					(size 1.27 1.27)

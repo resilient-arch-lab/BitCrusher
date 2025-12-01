@@ -33,7 +33,7 @@
 			)
 		)
 	)
-	(global_label "PulseSense"
+	(global_label "PulseVS"
 		(shape output)
 		(at 139.7 76.2 180)
 		(fields_autoplaced yes)
