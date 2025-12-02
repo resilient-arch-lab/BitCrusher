@@ -443,6 +443,309 @@
 			)
 			(embedded_fonts no)
 		)
+		(symbol "Isolator:Optocoupler_DC_PhotoNPN_AKEC"
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "U"
+				(at -5.08 5.08 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+				)
+			)
+			(property "Value" "Optocoupler_DC_PhotoNPN_AKEC"
+				(at 0 5.08 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+				)
+			)
+			(property "Footprint" ""
+				(at -5.08 -5.08 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+						(italic yes)
+					)
+					(justify left)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" "~"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+					(hide yes)
+				)
+			)
+			(property "Description" "Generic DC optocoupler with NPN phototransistor output, pins order: anode/cathode/emitter/collector"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_keywords" "NPN DC Optocoupler"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_fp_filters" "DIP*W7.62mm*"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "Optocoupler_DC_PhotoNPN_AKEC_0_1"
+				(rectangle
+					(start -5.08 3.81)
+					(end 5.08 -3.81)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type background)
+					)
+				)
+				(polyline
+					(pts
+						(xy -5.08 2.54) (xy -2.54 2.54) (xy -2.54 -1.27) (xy -2.54 0.635)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy -3.175 -0.635) (xy -1.905 -0.635)
+					)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy -2.54 -0.635) (xy -2.54 -2.54) (xy -5.08 -2.54)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy -2.54 -0.635) (xy -3.175 0.635) (xy -1.905 0.635) (xy -2.54 -0.635)
+					)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy -0.508 0.508) (xy 0.762 0.508) (xy 0.381 0.381) (xy 0.381 0.635) (xy 0.762 0.508)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy -0.508 -0.508) (xy 0.762 -0.508) (xy 0.381 -0.635) (xy 0.381 -0.381) (xy 0.762 -0.508)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 2.54 1.905) (xy 2.54 -1.905)
+					)
+					(stroke
+						(width 0.508)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 2.54 0.635) (xy 4.445 2.54)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 3.048 -1.651) (xy 3.556 -1.143) (xy 4.064 -2.159) (xy 3.048 -1.651)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type outline)
+					)
+				)
+				(polyline
+					(pts
+						(xy 4.445 2.54) (xy 5.08 2.54)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 4.445 -2.54) (xy 2.54 -0.635)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type outline)
+					)
+				)
+				(polyline
+					(pts
+						(xy 4.445 -2.54) (xy 5.08 -2.54)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(symbol "Optocoupler_DC_PhotoNPN_AKEC_1_1"
+				(pin passive line
+					(at -7.62 2.54 0)
+					(length 2.54)
+					(name "~"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at -7.62 -2.54 0)
+					(length 2.54)
+					(name "~"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 7.62 2.54 180)
+					(length 2.54)
+					(name "~"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "4"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 7.62 -2.54 180)
+					(length 2.54)
+					(name "~"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
 		(symbol "Transistor_FET:Q_NMOS_DGS"
 			(pin_names
 				(offset 0)
@@ -2904,7 +3207,7 @@
 	)
 	(text "To disable fast discharge circuit"
 		(exclude_from_sim no)
-		(at 105.918 80.264 0)
+		(at 105.918 92.964 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3041,6 +3344,12 @@
 		(uuid "63c53293-acf1-4431-9d8f-bdd5c84f9df6")
 	)
 	(junction
+		(at 130.81 50.8)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "6be6314c-92f7-4ee7-9661-77cf39067983")
+	)
+	(junction
 		(at 64.77 127)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -3119,6 +3428,16 @@
 			(type default)
 		)
 		(uuid "282ab294-82f8-4848-893f-cfce4563992f")
+	)
+	(wire
+		(pts
+			(xy 113.03 80.01) (xy 114.3 80.01)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "289454f7-4d4e-4aff-b578-e555498022e6")
 	)
 	(wire
 		(pts
@@ -3272,7 +3591,17 @@
 	)
 	(wire
 		(pts
-			(xy 109.22 50.8) (xy 147.32 50.8)
+			(xy 130.81 80.01) (xy 130.81 85.09)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "6abc7415-11cc-4811-a773-28f25d190e8c")
+	)
+	(wire
+		(pts
+			(xy 109.22 50.8) (xy 130.81 50.8)
 		)
 		(stroke
 			(width 0)
@@ -3322,6 +3651,16 @@
 	)
 	(wire
 		(pts
+			(xy 130.81 59.69) (xy 130.81 74.93)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "8c5974e2-45a9-4cd8-b186-165079165e01")
+	)
+	(wire
+		(pts
 			(xy 100.33 50.8) (xy 109.22 50.8)
 		)
 		(stroke
@@ -3362,6 +3701,26 @@
 	)
 	(wire
 		(pts
+			(xy 129.54 80.01) (xy 130.81 80.01)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "94708621-e4d4-43fb-b2d6-ea033b9233ab")
+	)
+	(wire
+		(pts
+			(xy 130.81 74.93) (xy 129.54 74.93)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "9596d61b-d61c-4fe8-a0a5-9f2b37da74ff")
+	)
+	(wire
+		(pts
 			(xy 53.34 43.18) (xy 53.34 77.47)
 		)
 		(stroke
@@ -3389,6 +3748,16 @@
 			(type default)
 		)
 		(uuid "9e2beca2-7df3-41da-a08b-5b1062d98616")
+	)
+	(wire
+		(pts
+			(xy 109.22 74.93) (xy 114.3 74.93)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a37cd166-b728-4f43-931d-cd8c1b7290aa")
 	)
 	(wire
 		(pts
@@ -3432,6 +3801,26 @@
 	)
 	(wire
 		(pts
+			(xy 130.81 50.8) (xy 130.81 52.07)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "cbc1eab7-c154-46bd-aa08-29de385ae5aa")
+	)
+	(wire
+		(pts
+			(xy 113.03 81.28) (xy 113.03 80.01)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "d1c90f67-60c0-46a8-a484-d67545548ad1")
+	)
+	(wire
+		(pts
 			(xy 30.48 87.63) (xy 30.48 88.9)
 		)
 		(stroke
@@ -3469,6 +3858,16 @@
 			(type default)
 		)
 		(uuid "dce22aa3-b0a4-4a89-8448-b417599ea63b")
+	)
+	(wire
+		(pts
+			(xy 130.81 50.8) (xy 147.32 50.8)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "e2c4b54a-db5b-4062-a68b-c2644e1d3f58")
 	)
 	(wire
 		(pts
@@ -3532,7 +3931,7 @@
 	)
 	(global_label "Armed"
 		(shape input)
-		(at 114.3 76.2 180)
+		(at 109.22 74.93 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -3542,7 +3941,7 @@
 		)
 		(uuid "065e7824-f676-411e-b54b-c44f585319bf")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 105.5091 76.2 0)
+			(at 100.4291 74.93 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3659,7 +4058,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "600k"
+		(property "Value" "500k, 1000V"
 			(at 149.86 57.1499 0)
 			(effects
 				(font
@@ -3771,6 +4170,83 @@
 			(project ""
 				(path "/e1be550d-9ce6-42b1-a89a-c00b9d7586dd/1666a107-a514-488b-8729-5533040b5f76"
 					(reference "#PWR013")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Isolator:Optocoupler_DC_PhotoNPN_AKEC")
+		(at 121.92 77.47 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "4e3daa8c-f2bf-4b47-be65-cd84a7c16d0a")
+		(property "Reference" "U6"
+			(at 121.92 68.58 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "Optocoupler_DC"
+			(at 121.92 71.12 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 116.84 82.55 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+					(italic yes)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 121.92 77.47 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Description" "Generic DC optocoupler with NPN phototransistor output, pins order: anode/cathode/emitter/collector"
+			(at 121.92 77.47 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "e1ceae6a-b74c-44df-a562-b5b6278801a0")
+		)
+		(pin "2"
+			(uuid "559f343f-7a1e-4542-a588-7c0e82883b07")
+		)
+		(pin "4"
+			(uuid "3fdd7a93-fb3b-4d68-a777-8f6582eeca8c")
+		)
+		(pin "3"
+			(uuid "9490633f-1f2a-4f53-a842-a154cea0e0ea")
+		)
+		(instances
+			(project ""
+				(path "/e1be550d-9ce6-42b1-a89a-c00b9d7586dd/1666a107-a514-488b-8729-5533040b5f76"
+					(reference "U6")
 					(unit 1)
 				)
 			)
@@ -3993,6 +4469,72 @@
 			(project ""
 				(path "/e1be550d-9ce6-42b1-a89a-c00b9d7586dd/1666a107-a514-488b-8729-5533040b5f76"
 					(reference "CBank1")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GNDPWR")
+		(at 130.81 85.09 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "6dea6168-d80d-4be3-bf1b-47f4ea9e9003")
+		(property "Reference" "#PWR03"
+			(at 130.81 90.17 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GNDHV"
+			(at 130.683 88.9 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 130.81 86.36 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 130.81 86.36 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GNDPWR\" , global ground"
+			(at 130.81 85.09 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "ce54de85-fa99-4efb-9bcc-a5eab1b7706e")
+		)
+		(instances
+			(project "BitCrusher"
+				(path "/e1be550d-9ce6-42b1-a89a-c00b9d7586dd/1666a107-a514-488b-8729-5533040b5f76"
+					(reference "#PWR03")
 					(unit 1)
 				)
 			)
@@ -4279,6 +4821,76 @@
 	)
 	(symbol
 		(lib_id "Device:R")
+		(at 130.81 55.88 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "a6088b14-0bd2-436b-a962-5295432d1c2d")
+		(property "Reference" "R9"
+			(at 133.35 54.6099 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "50k, 1000V"
+			(at 133.35 57.1499 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" ""
+			(at 129.032 55.88 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 130.81 55.88 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 130.81 55.88 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "1ffb4ef5-fc5e-4cea-abd1-8079e1190c72")
+		)
+		(pin "2"
+			(uuid "38c41b2f-aa82-4547-8440-a7b856e4d9f4")
+		)
+		(instances
+			(project "BitCrusher"
+				(path "/e1be550d-9ce6-42b1-a89a-c00b9d7586dd/1666a107-a514-488b-8729-5533040b5f76"
+					(reference "R9")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:R")
 		(at 64.77 121.92 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -4342,6 +4954,72 @@
 			(project ""
 				(path "/e1be550d-9ce6-42b1-a89a-c00b9d7586dd/1666a107-a514-488b-8729-5533040b5f76"
 					(reference "RCS1")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 113.03 81.28 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "c6bf195a-3960-44f1-808a-917f694bec37")
+		(property "Reference" "#PWR04"
+			(at 113.03 87.63 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 113.03 86.36 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 113.03 81.28 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 113.03 81.28 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 113.03 81.28 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "15474ba7-87bb-445a-a3b9-42f54beb5f94")
+		)
+		(instances
+			(project "BitCrusher"
+				(path "/e1be550d-9ce6-42b1-a89a-c00b9d7586dd/1666a107-a514-488b-8729-5533040b5f76"
+					(reference "#PWR04")
 					(unit 1)
 				)
 			)
