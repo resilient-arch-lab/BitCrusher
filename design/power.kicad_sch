@@ -8,7 +8,8 @@
 		(title "BitCrusher: Affordable, Open Source EMFI Platform")
 		(rev "0.1")
 		(company "UNH Resilient Architecture Lab")
-		(comment 1 "Author: George Crane")
+		(comment 1 "Advisor: Dean Sullivan")
+		(comment 2 "Author: George Crane")
 	)
 	(lib_symbols
 		(symbol "Connector:Barrel_Jack"
