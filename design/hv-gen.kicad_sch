@@ -2923,6 +2923,17 @@
 		)
 		(uuid "79b7c774-37bf-4241-b5c2-a7e48e296e5a")
 	)
+	(text "HVVS = HV+ * (R2/R2+R3)\n	~= HV+ * 0.001"
+		(exclude_from_sim no)
+		(at 127 40.64 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "973d65b0-86b8-42cd-a0fd-cf7f8713360a")
+	)
 	(text "Slow discharge"
 		(exclude_from_sim no)
 		(at 150.114 59.69 0)
@@ -2933,17 +2944,6 @@
 			(justify left top)
 		)
 		(uuid "a1886cb8-72e3-41e3-9499-ea64448fcba5")
-	)
-	(text "I need some way of providing\nstrong isolation here"
-		(exclude_from_sim no)
-		(at 127 40.64 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "b77e8056-f195-4a4e-9f22-f1be4fe4ac7c")
 	)
 	(text "Review the TI gate driver app note and\nsee if any turn-off circuit would be useful"
 		(exclude_from_sim no)
@@ -3075,7 +3075,7 @@
 	)
 	(wire
 		(pts
-			(xy 53.34 76.2) (xy 53.34 77.47)
+			(xy 57.15 76.2) (xy 57.15 77.47)
 		)
 		(stroke
 			(width 0)
@@ -3275,7 +3275,7 @@
 	)
 	(wire
 		(pts
-			(xy 52.07 77.47) (xy 53.34 77.47)
+			(xy 52.07 77.47) (xy 57.15 77.47)
 		)
 		(stroke
 			(width 0)
@@ -3583,7 +3583,7 @@
 	)
 	(symbol
 		(lib_id "power:VDD")
-		(at 53.34 76.2 0)
+		(at 57.15 76.2 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -3592,7 +3592,7 @@
 		(fields_autoplaced yes)
 		(uuid "192a1c69-6fc9-4f7e-b489-a85095eb0bfc")
 		(property "Reference" "#PWR03"
-			(at 53.34 80.01 0)
+			(at 57.15 80.01 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3600,8 +3600,8 @@
 				(hide yes)
 			)
 		)
-		(property "Value" "+22V"
-			(at 53.34 71.12 0)
+		(property "Value" "+22V_Drive"
+			(at 57.15 71.12 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3609,7 +3609,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 53.34 76.2 0)
+			(at 57.15 76.2 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3618,7 +3618,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 53.34 76.2 0)
+			(at 57.15 76.2 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3627,7 +3627,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"VDD\""
-			(at 53.34 76.2 0)
+			(at 57.15 76.2 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4373,7 +4373,7 @@
 				(hide yes)
 			)
 		)
-		(property "Value" "+22V"
+		(property "Value" "+22V_Trans"
 			(at 38.1 35.56 0)
 			(effects
 				(font
