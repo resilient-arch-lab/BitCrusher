@@ -3985,7 +3985,7 @@
 		)
 		(uuid "c335743a-51f5-41c2-ab31-c4f33b8e0ba2")
 	)
-	(text "Will trip when HV_CS\nexceeds 1.2V"
+	(text "Will trip when HV_CS\nexceeds DAC1_OUT1"
 		(exclude_from_sim no)
 		(at 248.92 128.27 0)
 		(effects
@@ -5214,7 +5214,7 @@
 			)
 		)
 	)
-	(global_label "HVSense"
+	(global_label "HVVS"
 		(shape input)
 		(at 224.79 49.53 0)
 		(fields_autoplaced yes)
@@ -5226,7 +5226,7 @@
 		)
 		(uuid "5291d02a-b69e-412a-9404-2ad1a478aa78")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 235.7581 49.53 0)
+			(at 232.4924 49.53 0)
 			(effects
 				(font
 					(size 1.27 1.27)
