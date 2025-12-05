@@ -12,6 +12,15 @@
 		(comment 2 "Author: George Crane")
 	)
 	(lib_symbols)
+	(bus_entry
+		(at 0 0)
+		(size 2.54 2.54)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "394834a0-778e-4466-a6bf-8a287a385974")
+	)
 	(sheet
 		(at 30.48 68.58)
 		(size 34.29 27.94)

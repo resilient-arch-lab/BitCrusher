@@ -898,7 +898,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(property "Reference" "U"
-			(at 2.54 2.54 0)
+			(at 10.16 6.35 0)
 			(effects
 				(font
 					(size 1.524 1.524)
@@ -906,7 +906,7 @@
 			)
 		)
 		(property "Value" "TLP152TPL_E"
-			(at 0 0 0)
+			(at 10.16 4.064 0)
 			(effects
 				(font
 					(size 1.524 1.524)
