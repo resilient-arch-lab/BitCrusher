@@ -7,7 +7,7 @@
 	(title_block
 		(title "BitCrusher: Affordable, Open Source EMFI Platform")
 		(rev "0.1")
-		(company "UNH Resilient Architecture Lab")
+		(company "University of New Hampshire, Resilient Architecture Lab")
 		(comment 1 "Advisor: Dean Sullivan")
 		(comment 2 "Author: George Crane")
 	)
@@ -3165,6 +3165,16 @@
 	)
 	(wire
 		(pts
+			(xy 55.88 43.18) (xy 64.77 43.18)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "3e50929e-64d3-483e-829a-59e02fd0776c")
+	)
+	(wire
+		(pts
 			(xy 60.96 115.57) (xy 64.77 115.57)
 		)
 		(stroke
@@ -3205,7 +3215,7 @@
 	)
 	(wire
 		(pts
-			(xy 38.1 43.18) (xy 64.77 43.18)
+			(xy 38.1 43.18) (xy 48.26 43.18)
 		)
 		(stroke
 			(width 0)
@@ -3578,6 +3588,92 @@
 				)
 				(justify left)
 				(hide yes)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:D")
+		(at 52.07 43.18 180)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "04a8d9ac-bad9-4f39-9602-b73781b1163a")
+		(property "Reference" "D2"
+			(at 52.07 36.83 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "D"
+			(at 52.07 39.37 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 52.07 43.18 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 52.07 43.18 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Diode"
+			(at 52.07 43.18 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Device" "D"
+			(at 52.07 43.18 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Pins" "1=K 2=A"
+			(at 52.07 43.18 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "d1c702b4-1e89-461b-ac6a-fc45d36d978b")
+		)
+		(pin "1"
+			(uuid "19d212d3-e25e-430c-b70e-a58eedc313d5")
+		)
+		(instances
+			(project "BitCrusher"
+				(path "/e1be550d-9ce6-42b1-a89a-c00b9d7586dd/1666a107-a514-488b-8729-5533040b5f76"
+					(reference "D2")
+					(unit 1)
+				)
 			)
 		)
 	)

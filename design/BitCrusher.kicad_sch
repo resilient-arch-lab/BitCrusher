@@ -7,7 +7,7 @@
 	(title_block
 		(title "BitCrusher: Affordable, Open Source EMFI Platform")
 		(rev "0.1")
-		(company "UNH Resilient Architecture Lab")
+		(company "University of New Hampshire, Resilient Architecture Lab")
 		(comment 1 "Advisor: Dean Sullivan")
 		(comment 2 "Author: George Crane")
 	)
@@ -148,7 +148,7 @@
 		(instances
 			(project "BitCrusher"
 				(path "/e1be550d-9ce6-42b1-a89a-c00b9d7586dd"
-					(page "6")
+					(page "5")
 				)
 			)
 		)
