@@ -1437,7 +1437,7 @@
 	)
 	(wire
 		(pts
-			(xy 185.42 95.25) (xy 185.42 104.14)
+			(xy 177.8 95.25) (xy 177.8 104.14)
 		)
 		(stroke
 			(width 0)
@@ -1517,16 +1517,6 @@
 	)
 	(wire
 		(pts
-			(xy 168.91 95.25) (xy 185.42 95.25)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "5f6007e6-9030-4fbe-b1ef-3cad4a5d11e1")
-	)
-	(wire
-		(pts
 			(xy 128.27 72.39) (xy 134.62 72.39)
 		)
 		(stroke
@@ -1567,7 +1557,7 @@
 	)
 	(wire
 		(pts
-			(xy 185.42 104.14) (xy 187.96 104.14)
+			(xy 177.8 104.14) (xy 187.96 104.14)
 		)
 		(stroke
 			(width 0)
@@ -1677,6 +1667,16 @@
 	)
 	(wire
 		(pts
+			(xy 177.8 95.25) (xy 168.91 95.25)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a0f8e72f-01f8-48b0-8c84-24c4d89e414e")
+	)
+	(wire
+		(pts
 			(xy 140.97 72.39) (xy 153.67 72.39)
 		)
 		(stroke
@@ -1727,7 +1727,7 @@
 	)
 	(wire
 		(pts
-			(xy 69.85 92.71) (xy 68.58 92.71)
+			(xy 67.31 92.71) (xy 69.85 92.71)
 		)
 		(stroke
 			(width 0)
@@ -1737,7 +1737,7 @@
 	)
 	(wire
 		(pts
-			(xy 68.58 91.44) (xy 68.58 92.71)
+			(xy 67.31 58.42) (xy 67.31 92.71)
 		)
 		(stroke
 			(width 0)
@@ -2293,10 +2293,10 @@
 			)
 		)
 		(pin "2"
-			(uuid "962db214-5f5f-4e01-bf94-60e1130e2cfb")
+			(uuid "962db214-5f5f-4e01-bf94-60e1130e2cfc")
 		)
 		(pin "1"
-			(uuid "5fe6acad-c5c0-4667-a06a-1102f8662af5")
+			(uuid "5fe6acad-c5c0-4667-a06a-1102f8662af6")
 		)
 		(instances
 			(project ""
@@ -2522,7 +2522,7 @@
 	)
 	(symbol
 		(lib_id "power:VDD")
-		(at 68.58 91.44 0)
+		(at 67.31 58.42 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -2531,7 +2531,7 @@
 		(fields_autoplaced yes)
 		(uuid "7d7dbe94-0e3d-4aa3-9f9e-73f45e75559b")
 		(property "Reference" "#PWR030"
-			(at 68.58 95.25 0)
+			(at 67.31 62.23 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2540,7 +2540,7 @@
 			)
 		)
 		(property "Value" "+5V"
-			(at 68.58 86.36 0)
+			(at 67.31 53.34 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2548,7 +2548,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 68.58 91.44 0)
+			(at 67.31 58.42 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2557,7 +2557,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 68.58 91.44 0)
+			(at 67.31 58.42 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2566,7 +2566,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"VDD\""
-			(at 68.58 91.44 0)
+			(at 67.31 58.42 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2709,10 +2709,10 @@
 			)
 		)
 		(pin "2"
-			(uuid "110508f1-7aa1-41e6-9b6d-17b7e3c3e395")
+			(uuid "110508f1-7aa1-41e6-9b6d-17b7e3c3e396")
 		)
 		(pin "1"
-			(uuid "dc073de5-a62a-47de-8907-415f9f0b9a60")
+			(uuid "dc073de5-a62a-47de-8907-415f9f0b9a61")
 		)
 		(instances
 			(project ""
@@ -2776,10 +2776,10 @@
 			)
 		)
 		(pin "2"
-			(uuid "9b5d76d3-3ccb-4cb8-9d6d-b7e5e54ec0be")
+			(uuid "9b5d76d3-3ccb-4cb8-9d6d-b7e5e54ec0bf")
 		)
 		(pin "1"
-			(uuid "43a32160-726e-4a2f-86af-17467f3ea744")
+			(uuid "43a32160-726e-4a2f-86af-17467f3ea745")
 		)
 		(instances
 			(project ""
@@ -2846,10 +2846,10 @@
 			)
 		)
 		(pin "2"
-			(uuid "962db214-5f5f-4e01-bf94-60e1130e2cfb")
+			(uuid "962db214-5f5f-4e01-bf94-60e1130e2cfd")
 		)
 		(pin "1"
-			(uuid "5fe6acad-c5c0-4667-a06a-1102f8662af5")
+			(uuid "5fe6acad-c5c0-4667-a06a-1102f8662af7")
 		)
 		(instances
 			(project ""
@@ -3070,10 +3070,10 @@
 			)
 		)
 		(pin "2"
-			(uuid "962db214-5f5f-4e01-bf94-60e1130e2cfb")
+			(uuid "962db214-5f5f-4e01-bf94-60e1130e2cfe")
 		)
 		(pin "1"
-			(uuid "5fe6acad-c5c0-4667-a06a-1102f8662af5")
+			(uuid "5fe6acad-c5c0-4667-a06a-1102f8662af8")
 		)
 		(instances
 			(project ""
