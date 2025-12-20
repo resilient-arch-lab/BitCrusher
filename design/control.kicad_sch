@@ -3301,179 +3301,6 @@
 			)
 			(embedded_fonts no)
 		)
-		(symbol "power:GNDPWR"
-			(power)
-			(pin_numbers
-				(hide yes)
-			)
-			(pin_names
-				(offset 0)
-				(hide yes)
-			)
-			(exclude_from_sim no)
-			(in_bom yes)
-			(on_board yes)
-			(property "Reference" "#PWR"
-				(at 0 -5.08 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Value" "GNDPWR"
-				(at 0 -3.302 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Footprint" ""
-				(at 0 -1.27 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Datasheet" ""
-				(at 0 -1.27 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Description" "Power symbol creates a global label with name \"GNDPWR\" , global ground"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "ki_keywords" "global ground"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(symbol "GNDPWR_0_1"
-				(polyline
-					(pts
-						(xy -1.016 -1.27) (xy -1.27 -2.032) (xy -1.27 -2.032)
-					)
-					(stroke
-						(width 0.2032)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy -0.508 -1.27) (xy -0.762 -2.032) (xy -0.762 -2.032)
-					)
-					(stroke
-						(width 0.2032)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 0 -1.27) (xy 0 0)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 0 -1.27) (xy -0.254 -2.032) (xy -0.254 -2.032)
-					)
-					(stroke
-						(width 0.2032)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 0.508 -1.27) (xy 0.254 -2.032) (xy 0.254 -2.032)
-					)
-					(stroke
-						(width 0.2032)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 1.016 -1.27) (xy -1.016 -1.27) (xy -1.016 -1.27)
-					)
-					(stroke
-						(width 0.2032)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 1.016 -1.27) (xy 0.762 -2.032) (xy 0.762 -2.032) (xy 0.762 -2.032)
-					)
-					(stroke
-						(width 0.2032)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-			)
-			(symbol "GNDPWR_1_1"
-				(pin power_in line
-					(at 0 0 270)
-					(length 0)
-					(name "~"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-			)
-			(embedded_fonts no)
-		)
 		(symbol "power:VDD"
 			(power)
 			(pin_numbers
@@ -3997,6 +3824,17 @@
 		)
 		(uuid "e96c64a7-4b2c-429e-9794-c4d690ebd515")
 	)
+	(text "Inverted Comp Output"
+		(exclude_from_sim no)
+		(at 247.65 82.55 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "f734414c-a5b3-4c49-ab56-f2fe843a0c07")
+	)
 	(junction
 		(at 199.39 40.64)
 		(diameter 0)
@@ -4505,6 +4343,16 @@
 	)
 	(wire
 		(pts
+			(xy 83.82 33.02) (xy 83.82 30.48)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "637d6f18-497c-4288-a118-b18c96935d03")
+	)
+	(wire
+		(pts
 			(xy 139.7 49.53) (xy 148.59 49.53)
 		)
 		(stroke
@@ -4582,6 +4430,16 @@
 			(type default)
 		)
 		(uuid "762110be-5647-4abb-a318-8db9742190ba")
+	)
+	(wire
+		(pts
+			(xy 73.66 33.02) (xy 83.82 33.02)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "7728d210-6e98-41b2-9cf1-012b05dba9ae")
 	)
 	(wire
 		(pts
@@ -5147,7 +5005,51 @@
 			)
 		)
 	)
-	(global_label "IntTrig"
+	(global_label "IntTrigN"
+		(shape output)
+		(at 237.49 82.55 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "33fb5957-10b6-414e-b536-d79845949ed1")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 247.7928 82.55 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "Probe-"
+		(shape passive)
+		(at 73.66 33.02 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "36a56a20-45c1-4597-b52f-7838cd2df87c")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 64.7709 33.02 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "IntTrigP"
 		(shape output)
 		(at 237.49 80.01 0)
 		(fields_autoplaced yes)
@@ -5159,7 +5061,7 @@
 		)
 		(uuid "41ecd416-c695-4664-898c-a1f18afe7664")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 246.4623 80.01 0)
+			(at 247.7323 80.01 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5257,8 +5159,8 @@
 			)
 		)
 	)
-	(global_label "PULSE+"
-		(shape input)
+	(global_label "Probe+"
+		(shape passive)
 		(at 73.66 25.4 180)
 		(fields_autoplaced yes)
 		(effects
@@ -5269,7 +5171,7 @@
 		)
 		(uuid "7b306047-29dc-4532-a905-cc10c76c280a")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 63.1153 25.4 0)
+			(at 64.7709 25.4 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6037,72 +5939,6 @@
 			(project "BitCrusher"
 				(path "/e1be550d-9ce6-42b1-a89a-c00b9d7586dd/29f45a98-1f25-4a6e-8231-3aa3a650ea17"
 					(reference "C3")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "power:GNDPWR")
-		(at 83.82 30.48 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "30e630e2-b01f-4363-80ec-4436fb68efc8")
-		(property "Reference" "#PWR018"
-			(at 83.82 35.56 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "GNDHV"
-			(at 83.693 34.29 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 83.82 31.75 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 83.82 31.75 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Power symbol creates a global label with name \"GNDPWR\" , global ground"
-			(at 83.82 30.48 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "827715e0-cb2c-4009-bbe1-0c5763548a68")
-		)
-		(instances
-			(project "BitCrusher"
-				(path "/e1be550d-9ce6-42b1-a89a-c00b9d7586dd/29f45a98-1f25-4a6e-8231-3aa3a650ea17"
-					(reference "#PWR018")
 					(unit 1)
 				)
 			)
