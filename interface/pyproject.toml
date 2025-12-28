@@ -1,0 +1,8 @@
+[project]
+name = "bitcrusher"
+version = "0.1.0"
+description = ""
+dependencies = [
+    "pyserial>=3.5"
+]
+requires-python = ">=3.11"
