@@ -960,6 +960,156 @@
 			)
 			(embedded_fonts no)
 		)
+		(symbol "Device:D_TVS"
+			(pin_numbers
+				(hide yes)
+			)
+			(pin_names
+				(offset 1.016)
+				(hide yes)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "D"
+				(at 0 2.54 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "D_TVS"
+				(at 0 -2.54 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" "~"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" "Bidirectional transient-voltage-suppression diode"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_keywords" "diode TVS thyrector"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_fp_filters" "TO-???* *_Diode_* *SingleDiode* D_*"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "D_TVS_0_1"
+				(polyline
+					(pts
+						(xy -2.54 1.27) (xy -2.54 -1.27) (xy 2.54 1.27) (xy 2.54 -1.27) (xy -2.54 1.27)
+					)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 0.508 1.27) (xy 0 1.27) (xy 0 -1.27) (xy -0.508 -1.27)
+					)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 1.27 0) (xy -1.27 0)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(symbol "D_TVS_1_1"
+				(pin passive line
+					(at -3.81 0 0)
+					(length 2.54)
+					(name "A1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 3.81 0 180)
+					(length 2.54)
+					(name "A2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
 		(symbol "Device:R"
 			(pin_numbers
 				(hide yes)
@@ -3763,7 +3913,7 @@
 	)
 	(rectangle
 		(start 19.05 20.32)
-		(end 92.71 60.96)
+		(end 120.65 63.5)
 		(stroke
 			(width 0)
 			(type default)
@@ -4039,6 +4189,12 @@
 		(uuid "2a74cf97-8233-46d2-a83f-40cba48430f8")
 	)
 	(junction
+		(at 77.47 50.8)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "2e5f920b-b866-42fd-ac25-04c72ffb2579")
+	)
+	(junction
 		(at 224.79 38.1)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -4099,16 +4255,34 @@
 		(uuid "b874aa56-ab17-4cb4-94d7-0ac7531ca298")
 	)
 	(junction
+		(at 77.47 44.45)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "c40a1328-40e2-4ca6-bdc7-ae206ad3a088")
+	)
+	(junction
 		(at 148.59 27.94)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "c94fb28a-1e4a-4590-aee6-54df5157b481")
 	)
 	(junction
+		(at 77.47 36.83)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "e47a08a1-8005-49ae-bd74-251d68197ff2")
+	)
+	(junction
 		(at 148.59 38.1)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "e602e3df-524b-4a7f-9f6c-423957a7f356")
+	)
+	(junction
+		(at 77.47 58.42)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "eb80b7ba-c0dd-433d-8078-7c6e30256eed")
 	)
 	(junction
 		(at 194.31 40.64)
@@ -4236,6 +4410,16 @@
 	)
 	(wire
 		(pts
+			(xy 73.66 58.42) (xy 77.47 58.42)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "1cc47ac5-43a6-43e1-9ef0-0e6d15ba3724")
+	)
+	(wire
+		(pts
 			(xy 196.85 140.97) (xy 196.85 139.7)
 		)
 		(stroke
@@ -4286,6 +4470,16 @@
 	)
 	(wire
 		(pts
+			(xy 73.66 33.02) (xy 83.82 33.02)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "268ad83e-ddb0-4def-9349-6d678f3ebf16")
+	)
+	(wire
+		(pts
 			(xy 148.59 27.94) (xy 135.89 27.94)
 		)
 		(stroke
@@ -4313,6 +4507,16 @@
 			(type default)
 		)
 		(uuid "2e059b33-0b93-4802-8188-d8726c28a210")
+	)
+	(wire
+		(pts
+			(xy 83.82 58.42) (xy 83.82 55.88)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "2e590950-d0c7-4c06-a864-f2eed7077f79")
 	)
 	(wire
 		(pts
@@ -4446,6 +4650,16 @@
 	)
 	(wire
 		(pts
+			(xy 73.66 44.45) (xy 77.47 44.45)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "50ac0e0d-da84-4aee-816a-6f46a4b19da6")
+	)
+	(wire
+		(pts
 			(xy 213.36 27.94) (xy 224.79 27.94)
 		)
 		(stroke
@@ -4483,6 +4697,16 @@
 			(type default)
 		)
 		(uuid "56e37c7b-4546-435b-9e15-3c9c3ef26d39")
+	)
+	(wire
+		(pts
+			(xy 77.47 50.8) (xy 78.74 50.8)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "58acb021-a867-4cfa-b184-dd410fc5642d")
 	)
 	(wire
 		(pts
@@ -4596,23 +4820,13 @@
 	)
 	(wire
 		(pts
-			(xy 30.48 38.1) (xy 35.56 38.1)
+			(xy 73.66 36.83) (xy 77.47 36.83)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
 		(uuid "762110be-5647-4abb-a318-8db9742190ba")
-	)
-	(wire
-		(pts
-			(xy 73.66 33.02) (xy 83.82 33.02)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "7728d210-6e98-41b2-9cf1-012b05dba9ae")
 	)
 	(wire
 		(pts
@@ -4776,6 +4990,16 @@
 	)
 	(wire
 		(pts
+			(xy 83.82 44.45) (xy 77.47 44.45)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "938018d9-c0df-4fce-8bc2-5713aace5315")
+	)
+	(wire
+		(pts
 			(xy 62.23 96.52) (xy 64.77 96.52)
 		)
 		(stroke
@@ -4783,6 +5007,16 @@
 			(type default)
 		)
 		(uuid "9427e7c3-ac25-4acf-ae20-50b1de74c98a")
+	)
+	(wire
+		(pts
+			(xy 83.82 58.42) (xy 77.47 58.42)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "949a4eba-cb13-4e7c-ac61-844dc3798e22")
 	)
 	(wire
 		(pts
@@ -4876,6 +5110,16 @@
 	)
 	(wire
 		(pts
+			(xy 77.47 36.83) (xy 78.74 36.83)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a8714435-6dfc-44bc-8cae-5319c5f0a420")
+	)
+	(wire
+		(pts
 			(xy 67.31 91.44) (xy 46.99 91.44)
 		)
 		(stroke
@@ -4916,7 +5160,7 @@
 	)
 	(wire
 		(pts
-			(xy 30.48 50.8) (xy 35.56 50.8)
+			(xy 73.66 50.8) (xy 77.47 50.8)
 		)
 		(stroke
 			(width 0)
@@ -4933,6 +5177,16 @@
 			(type default)
 		)
 		(uuid "c228a56f-59c2-4481-ac66-e0da9ca2a148")
+	)
+	(wire
+		(pts
+			(xy 83.82 41.91) (xy 83.82 44.45)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c2a3a7dd-c4a3-4d1e-b703-0b085dd5c671")
 	)
 	(wire
 		(pts
@@ -5290,7 +5544,7 @@
 	)
 	(global_label "PulseVS"
 		(shape input)
-		(at 30.48 38.1 180)
+		(at 73.66 36.83 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -5300,7 +5554,7 @@
 		)
 		(uuid "7213e9ac-11a6-4c21-8161-22ad0994a049")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 19.9958 38.1 0)
+			(at 63.1758 36.83 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5378,7 +5632,7 @@
 	)
 	(global_label "PulseCS"
 		(shape input)
-		(at 30.48 50.8 180)
+		(at 73.66 50.8 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -5388,7 +5642,7 @@
 		)
 		(uuid "8b29a923-c4d2-44c0-adeb-8ed4531e7fcb")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 19.8144 50.8 0)
+			(at 62.9944 50.8 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5779,7 +6033,7 @@
 	)
 	(symbol
 		(lib_id "power:GNDPWR")
-		(at 40.64 55.88 0)
+		(at 73.66 58.42 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -5788,7 +6042,7 @@
 		(fields_autoplaced yes)
 		(uuid "0a168c36-0639-499f-b609-391828360d1f")
 		(property "Reference" "#PWR05"
-			(at 40.64 60.96 0)
+			(at 73.66 63.5 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5797,7 +6051,7 @@
 			)
 		)
 		(property "Value" "GNDHV"
-			(at 40.513 59.69 0)
+			(at 73.533 62.23 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5805,7 +6059,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 40.64 57.15 0)
+			(at 73.66 59.69 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5814,7 +6068,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 40.64 57.15 0)
+			(at 73.66 59.69 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5823,7 +6077,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GNDPWR\" , global ground"
-			(at 40.64 55.88 0)
+			(at 73.66 58.42 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5975,6 +6229,75 @@
 			(project ""
 				(path "/e1be550d-9ce6-42b1-a89a-c00b9d7586dd/29f45a98-1f25-4a6e-8231-3aa3a650ea17"
 					(reference "#PWR013")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:D_TVS")
+		(at 77.47 54.61 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "1b43f7a5-996d-4173-941e-8886dce2fd10")
+		(property "Reference" "D9"
+			(at 74.93 53.3399 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "D_TVS"
+			(at 74.93 55.8799 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" ""
+			(at 77.47 54.61 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 77.47 54.61 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Bidirectional transient-voltage-suppression diode"
+			(at 77.47 54.61 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "3fd8def6-4ec8-45e3-a379-1eabad0c8e40")
+		)
+		(pin "1"
+			(uuid "dd409880-a848-48cc-9547-8538e6c4e692")
+		)
+		(instances
+			(project "BitCrusher"
+				(path "/e1be550d-9ce6-42b1-a89a-c00b9d7586dd/29f45a98-1f25-4a6e-8231-3aa3a650ea17"
+					(reference "D9")
 					(unit 1)
 				)
 			)
@@ -6252,7 +6575,7 @@
 	)
 	(symbol
 		(lib_id "Connector:Conn_Coaxial")
-		(at 40.64 50.8 0)
+		(at 83.82 50.8 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -6261,7 +6584,7 @@
 		(fields_autoplaced yes)
 		(uuid "445020e9-ec3a-438e-a425-6de724e11773")
 		(property "Reference" "J4"
-			(at 44.45 49.8231 0)
+			(at 87.63 49.8231 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6270,7 +6593,7 @@
 			)
 		)
 		(property "Value" "Conn-OScope"
-			(at 44.45 52.3631 0)
+			(at 87.63 52.3631 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6279,7 +6602,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 40.64 50.8 0)
+			(at 83.82 50.8 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6288,7 +6611,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 40.64 50.8 0)
+			(at 83.82 50.8 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6297,7 +6620,7 @@
 			)
 		)
 		(property "Description" "coaxial connector SMA"
-			(at 40.64 50.8 0)
+			(at 83.82 50.8 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7490,7 +7813,7 @@
 	)
 	(symbol
 		(lib_id "Connector:Conn_Coaxial")
-		(at 40.64 38.1 0)
+		(at 83.82 36.83 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -7499,7 +7822,7 @@
 		(fields_autoplaced yes)
 		(uuid "99b88106-d11b-49d9-a579-6ccbef4cc8bf")
 		(property "Reference" "J3"
-			(at 44.45 37.1231 0)
+			(at 87.63 35.8531 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7508,7 +7831,7 @@
 			)
 		)
 		(property "Value" "Conn-OScope"
-			(at 44.45 39.6631 0)
+			(at 87.63 38.3931 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7517,7 +7840,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 40.64 38.1 0)
+			(at 83.82 36.83 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7526,7 +7849,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 40.64 38.1 0)
+			(at 83.82 36.83 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7535,7 +7858,7 @@
 			)
 		)
 		(property "Description" "coaxial connector SMA"
-			(at 40.64 38.1 0)
+			(at 83.82 36.83 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7942,6 +8265,75 @@
 		)
 	)
 	(symbol
+		(lib_id "Device:D_TVS")
+		(at 77.47 40.64 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "c043f57c-ce4d-4518-ae8b-a0dfd7b5504a")
+		(property "Reference" "D8"
+			(at 74.93 39.3699 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "D_TVS"
+			(at 74.93 41.9099 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" ""
+			(at 77.47 40.64 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 77.47 40.64 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Bidirectional transient-voltage-suppression diode"
+			(at 77.47 40.64 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "a9dac330-931a-4829-ac05-1e5743710bfb")
+		)
+		(pin "1"
+			(uuid "5dd7cdde-809b-4d6c-adab-608d6913d448")
+		)
+		(instances
+			(project "BitCrusher"
+				(path "/e1be550d-9ce6-42b1-a89a-c00b9d7586dd/29f45a98-1f25-4a6e-8231-3aa3a650ea17"
+					(reference "D8")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Connector:Conn_Coaxial")
 		(at 83.82 25.4 0)
 		(unit 1)
@@ -8164,7 +8556,7 @@
 	)
 	(symbol
 		(lib_id "power:GNDPWR")
-		(at 40.64 43.18 0)
+		(at 73.66 44.45 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -8173,7 +8565,7 @@
 		(fields_autoplaced yes)
 		(uuid "f564b1d8-e37f-4129-9636-5e5857373335")
 		(property "Reference" "#PWR04"
-			(at 40.64 48.26 0)
+			(at 73.66 49.53 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8182,7 +8574,7 @@
 			)
 		)
 		(property "Value" "GNDHV"
-			(at 40.513 46.99 0)
+			(at 73.533 48.26 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8190,7 +8582,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 40.64 44.45 0)
+			(at 73.66 45.72 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8199,7 +8591,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 40.64 44.45 0)
+			(at 73.66 45.72 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8208,7 +8600,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GNDPWR\" , global ground"
-			(at 40.64 43.18 0)
+			(at 73.66 44.45 0)
 			(effects
 				(font
 					(size 1.27 1.27)
