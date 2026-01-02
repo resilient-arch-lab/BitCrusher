@@ -4147,17 +4147,6 @@
 		)
 		(uuid "e96c64a7-4b2c-429e-9794-c4d690ebd515")
 	)
-	(text "Inverted Comp Output"
-		(exclude_from_sim no)
-		(at 247.65 82.55 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "f734414c-a5b3-4c49-ab56-f2fe843a0c07")
-	)
 	(junction
 		(at 199.39 40.64)
 		(diameter 0)
@@ -5432,7 +5421,7 @@
 			)
 		)
 	)
-	(global_label "IntTrigN"
+	(global_label "PulseEN"
 		(shape output)
 		(at 237.49 82.55 0)
 		(fields_autoplaced yes)
@@ -5444,7 +5433,7 @@
 		)
 		(uuid "33fb5957-10b6-414e-b536-d79845949ed1")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 247.7928 82.55 0)
+			(at 248.1556 82.55 0)
 			(effects
 				(font
 					(size 1.27 1.27)
