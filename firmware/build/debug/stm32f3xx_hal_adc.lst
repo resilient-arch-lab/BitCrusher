@@ -1,0 +1,1840 @@
+ARM GAS  /tmp/cc6PWc7y.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.arch armv7e-m
+   3              		.fpu fpv4-sp-d16
+   4              		.eabi_attribute 27, 1
+   5              		.eabi_attribute 28, 1
+   6              		.eabi_attribute 20, 1
+   7              		.eabi_attribute 21, 1
+   8              		.eabi_attribute 23, 3
+   9              		.eabi_attribute 24, 1
+  10              		.eabi_attribute 25, 1
+  11              		.eabi_attribute 26, 1
+  12              		.eabi_attribute 30, 1
+  13              		.eabi_attribute 34, 1
+  14              		.eabi_attribute 18, 4
+  15              		.file	"stm32f3xx_hal_adc.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.file 1 "Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c"
+  20              		.section	.text.HAL_ADC_Init,"ax",%progbits
+  21              		.align	1
+  22              		.weak	HAL_ADC_Init
+  23              		.syntax unified
+  24              		.thumb
+  25              		.thumb_func
+  27              	HAL_ADC_Init:
+  28              	.LVL0:
+  29              	.LFB130:
+   1:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** /**
+   2:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   ******************************************************************************
+   3:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   * @file    stm32f3xx_hal_adc.c
+   4:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   * @author  MCD Application Team
+   5:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   * @brief   This file provides firmware functions to manage the following 
+   6:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   *          functionalities of the Analog to Digital Convertor (ADC)
+   7:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   *          peripheral:
+   8:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   *           + Initialization and de-initialization functions
+   9:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   *           + Peripheral Control functions
+  10:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   *           + Peripheral State functions
+  11:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   *          Other functions (extended functions) are available in file 
+  12:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   *          "stm32f3xx_hal_adc_ex.c".
+  13:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   *
+  14:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   ******************************************************************************
+  15:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   * @attention
+  16:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   *
+  17:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   * Copyright (c) 2016 STMicroelectronics.
+  18:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   * All rights reserved.
+  19:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   *
+  20:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   * This software is licensed under terms that can be found in the LICENSE file
+  21:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   * in the root directory of this software component.
+  22:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   * If no LICENSE file comes with this software, it is provided AS-IS.
+  23:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   *
+  24:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   ******************************************************************************
+  25:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   @verbatim
+  26:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   ==============================================================================
+  27:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****                      ##### ADC peripheral features #####
+  28:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   ==============================================================================
+  29:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   [..] 
+ARM GAS  /tmp/cc6PWc7y.s 			page 2
+
+
+  30:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   (+) 12-bit, 10-bit, 8-bit or 6-bit configurable resolution (available only on 
+  31:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****       STM32F30xxC devices).
+  32:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** 
+  33:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   (+) Interrupt generation at the end of regular conversion, end of injected
+  34:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****       conversion, and in case of analog watchdog or overrun events.
+  35:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   
+  36:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   (+) Single and continuous conversion modes.
+  37:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   
+  38:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   (+) Scan mode for conversion of several channels sequentially.
+  39:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   
+  40:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   (+) Data alignment with in-built data coherency.
+  41:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   
+  42:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   (+) Programmable sampling time (channel wise)
+  43:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   
+  44:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   (+) ADC conversion of regular group and injected group.
+  45:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** 
+  46:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   (+) External trigger (timer or EXTI) with configurable polarity
+  47:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****       for both regular and injected groups.
+  48:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** 
+  49:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   (+) DMA request generation for transfer of conversions data of regular group.
+  50:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** 
+  51:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   (+) Multimode dual mode (available on devices with 2 ADCs or more).
+  52:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   
+  53:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   (+) Configurable DMA data storage in Multimode Dual mode (available on devices
+  54:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****       with 2 DCs or more).
+  55:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   
+  56:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   (+) Configurable delay between conversions in Dual interleaved mode (available 
+  57:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****       on devices with 2 DCs or more).
+  58:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   
+  59:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   (+) ADC calibration
+  60:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** 
+  61:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   (+) ADC channels selectable single/differential input (available only on
+  62:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****       STM32F30xxC devices)
+  63:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** 
+  64:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   (+) ADC Injected sequencer&channels configuration context queue (available 
+  65:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****       only on STM32F30xxC devices)
+  66:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** 
+  67:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   (+) ADC offset on injected and regular groups (offset on regular group 
+  68:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****       available only on STM32F30xxC devices)
+  69:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** 
+  70:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   (+) ADC supply requirements: 2.4 V to 3.6 V at full speed and down to 1.8 V at 
+  71:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****       slower speed.
+  72:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   
+  73:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   (+) ADC input range: from Vref- (connected to Vssa) to Vref+ (connected to 
+  74:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****       Vdda or to an external voltage reference).
+  75:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** 
+  76:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** 
+  77:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****                      ##### How to use this driver #####
+  78:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   ==============================================================================
+  79:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****     [..]
+  80:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** 
+  81:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****      *** Configuration of top level parameters related to ADC ***
+  82:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****      ============================================================
+  83:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****      [..]
+  84:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** 
+  85:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****     (#) Enable the ADC interface
+  86:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****       (++) As prerequisite, ADC clock must be configured at RCC top level.
+ARM GAS  /tmp/cc6PWc7y.s 			page 3
+
+
+  87:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****       
+  88:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****         (++) For STM32F30x/STM32F33x devices:
+  89:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****              Two possible clock sources: synchronous clock derived from AHB clock 
+  90:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****              or asynchronous clock derived from ADC dedicated PLL 72MHz.
+  91:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****               - Synchronous clock is mandatory since used as ADC core clock.
+  92:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****                 Synchronous clock can be used optionally as ADC conversion clock, depending on ADC 
+  93:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****                 Synchronous clock is configured using macro __ADCx_CLK_ENABLE().
+  94:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****               - Asynchronous can be used optionally as ADC conversion clock, depending on ADC init 
+  95:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****                 Asynchronous clock is configured using function HAL_RCCEx_PeriphCLKConfig().
+  96:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****              (+++) For example, in case of device with a single ADC:
+  97:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****                    Into HAL_ADC_MspInit() (recommended code location) or with
+  98:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****                    other device clock parameters configuration:
+  99:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****                (+++) __HAL_RCC_ADC1_CLK_ENABLE()                            (mandatory)
+ 100:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****                (+++) PeriphClkInit.PeriphClockSelection = RCC_PERIPHCLK_ADC (optional, if ADC conve
+ 101:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****                (+++) PeriphClkInit.Adc1ClockSelection = RCC_ADC1PLLCLK_DIV1 (optional, if ADC conve
+ 102:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****                (+++) HAL_RCCEx_PeriphCLKConfig(&RCC_PeriphClkInitStructure) (optional, if ADC conve
+ 103:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** 
+ 104:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****              (+++) For example, in case of device with 4 ADCs:
+ 105:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** 
+ 106:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****                (+++) if((hadc->Instance == ADC1) || (hadc->Instance == ADC2))   
+ 107:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****                (+++) {                                                          
+ 108:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****                (+++)   __HAL_RCC_ADC12_CLK_ENABLE()                             (mandatory)
+ 109:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****                (+++)   PeriphClkInit.PeriphClockSelection = RCC_PERIPHCLK_ADC   (optional, if ADC c
+ 110:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****                (+++)   PeriphClkInit.Adc12ClockSelection = RCC_ADC12PLLCLK_DIV1 (optional, if ADC c
+ 111:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****                (+++)   HAL_RCCEx_PeriphCLKConfig(&RCC_PeriphClkInitStructure)   (optional, if ADC c
+ 112:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****                (+++) }                                                          
+ 113:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****                (+++) else                                                       
+ 114:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****                (+++) {                                                          
+ 115:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****                (+++)   __HAL_RCC_ADC34_CLK_ENABLE()                              (mandatory)
+ 116:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****                (+++)   PeriphClkInit.Adc34ClockSelection = RCC_ADC34PLLCLK_DIV1; (optional, if ADC 
+ 117:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****                (+++)   HAL_RCCEx_PeriphCLKConfig(&RCC_PeriphClkInitStructure);   (optional, if ADC 
+ 118:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****                (+++) }                                                          
+ 119:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****       
+ 120:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****         (++) For STM32F37x devices:
+ 121:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****              One clock setting is mandatory: 
+ 122:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****              ADC clock (core and conversion clock) from APB2 clock.
+ 123:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****              (+++) Example:
+ 124:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****                    Into HAL_ADC_MspInit() (recommended code location) or with
+ 125:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****                    other device clock parameters configuration:
+ 126:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****                (+++) PeriphClkInit.PeriphClockSelection = RCC_PERIPHCLK_ADC
+ 127:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****                (+++) PeriphClkInit.AdcClockSelection = RCC_ADCPLLCLK_DIV2
+ 128:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****                (+++) HAL_RCCEx_PeriphCLKConfig(&PeriphClkInit)
+ 129:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** 
+ 130:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****     (#) ADC pins configuration
+ 131:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****          (++) Enable the clock for the ADC GPIOs
+ 132:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****               using macro __HAL_RCC_GPIOx_CLK_ENABLE()
+ 133:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****          (++) Configure these ADC pins in analog mode
+ 134:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****               using function HAL_GPIO_Init()
+ 135:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** 
+ 136:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****     (#) Optionally, in case of usage of ADC with interruptions:
+ 137:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****          (++) Configure the NVIC for ADC
+ 138:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****               using function HAL_NVIC_EnableIRQ(ADCx_IRQn)
+ 139:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****          (++) Insert the ADC interruption handler function HAL_ADC_IRQHandler() 
+ 140:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****               into the function of corresponding ADC interruption vector 
+ 141:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****               ADCx_IRQHandler().
+ 142:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** 
+ 143:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****     (#) Optionally, in case of usage of DMA:
+ARM GAS  /tmp/cc6PWc7y.s 			page 4
+
+
+ 144:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****          (++) Configure the DMA (DMA channel, mode normal or circular, ...)
+ 145:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****               using function HAL_DMA_Init().
+ 146:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****          (++) Configure the NVIC for DMA
+ 147:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****               using function HAL_NVIC_EnableIRQ(DMAx_Channelx_IRQn)
+ 148:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****          (++) Insert the ADC interruption handler function HAL_ADC_IRQHandler() 
+ 149:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****               into the function of corresponding DMA interruption vector 
+ 150:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****               DMAx_Channelx_IRQHandler().
+ 151:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** 
+ 152:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****      *** Configuration of ADC, groups regular/injected, channels parameters ***
+ 153:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****      ==========================================================================
+ 154:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****      [..]
+ 155:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** 
+ 156:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****     (#) Configure the ADC parameters (resolution, data alignment, ...)
+ 157:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****         and regular group parameters (conversion trigger, sequencer, ...)
+ 158:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****         using function HAL_ADC_Init().
+ 159:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** 
+ 160:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****     (#) Configure the channels for regular group parameters (channel number, 
+ 161:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****         channel rank into sequencer, ..., into regular group)
+ 162:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****         using function HAL_ADC_ConfigChannel().
+ 163:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** 
+ 164:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****     (#) Optionally, configure the injected group parameters (conversion trigger, 
+ 165:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****         sequencer, ..., of injected group)
+ 166:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****         and the channels for injected group parameters (channel number, 
+ 167:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****         channel rank into sequencer, ..., into injected group)
+ 168:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****         using function HAL_ADCEx_InjectedConfigChannel().
+ 169:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** 
+ 170:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****     (#) Optionally, configure the analog watchdog parameters (channels
+ 171:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****         monitored, thresholds, ...)
+ 172:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****         using function HAL_ADC_AnalogWDGConfig().
+ 173:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** 
+ 174:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****     (#) Optionally, for devices with several ADC instances: configure the 
+ 175:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****         multimode parameters
+ 176:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****         using function HAL_ADCEx_MultiModeConfigChannel().
+ 177:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** 
+ 178:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****      *** Execution of ADC conversions ***
+ 179:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****      ====================================
+ 180:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****      [..]
+ 181:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** 
+ 182:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****     (#) Optionally, perform an automatic ADC calibration to improve the
+ 183:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****         conversion accuracy
+ 184:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****         using function HAL_ADCEx_Calibration_Start().
+ 185:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** 
+ 186:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****     (#) ADC driver can be used among three modes: polling, interruption,
+ 187:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****         transfer by DMA.
+ 188:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** 
+ 189:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****         (++) ADC conversion by polling:
+ 190:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****           (+++) Activate the ADC peripheral and start conversions
+ 191:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****                 using function HAL_ADC_Start()
+ 192:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****           (+++) Wait for ADC conversion completion 
+ 193:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****                 using function HAL_ADC_PollForConversion()
+ 194:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****                 (or for injected group: HAL_ADCEx_InjectedPollForConversion() )
+ 195:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****           (+++) Retrieve conversion results 
+ 196:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****                 using function HAL_ADC_GetValue()
+ 197:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****                 (or for injected group: HAL_ADCEx_InjectedGetValue() )
+ 198:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****           (+++) Stop conversion and disable the ADC peripheral 
+ 199:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****                 using function HAL_ADC_Stop()
+ 200:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** 
+ARM GAS  /tmp/cc6PWc7y.s 			page 5
+
+
+ 201:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****         (++) ADC conversion by interruption: 
+ 202:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****           (+++) Activate the ADC peripheral and start conversions
+ 203:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****                 using function HAL_ADC_Start_IT()
+ 204:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****           (+++) Wait for ADC conversion completion by call of function
+ 205:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****                 HAL_ADC_ConvCpltCallback()
+ 206:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****                 (this function must be implemented in user program)
+ 207:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****                 (or for injected group: HAL_ADCEx_InjectedConvCpltCallback() )
+ 208:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****           (+++) Retrieve conversion results 
+ 209:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****                 using function HAL_ADC_GetValue()
+ 210:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****                 (or for injected group: HAL_ADCEx_InjectedGetValue() )
+ 211:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****           (+++) Stop conversion and disable the ADC peripheral 
+ 212:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****                 using function HAL_ADC_Stop_IT()
+ 213:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** 
+ 214:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****         (++) ADC conversion with transfer by DMA:
+ 215:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****           (+++) Activate the ADC peripheral and start conversions
+ 216:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****                 using function HAL_ADC_Start_DMA()
+ 217:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****           (+++) Wait for ADC conversion completion by call of function
+ 218:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****                 HAL_ADC_ConvCpltCallback() or HAL_ADC_ConvHalfCpltCallback()
+ 219:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****                 (these functions must be implemented in user program)
+ 220:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****           (+++) Conversion results are automatically transferred by DMA into
+ 221:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****                 destination variable address.
+ 222:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****           (+++) Stop conversion and disable the ADC peripheral 
+ 223:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****                 using function HAL_ADC_Stop_DMA()
+ 224:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** 
+ 225:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****         (++) For devices with several ADCs: ADC multimode conversion 
+ 226:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****              with transfer by DMA:
+ 227:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****           (+++) Activate the ADC peripheral (slave)
+ 228:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****                 using function HAL_ADC_Start()
+ 229:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****                 (conversion start pending ADC master)
+ 230:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****           (+++) Activate the ADC peripheral (master) and start conversions
+ 231:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****                 using function HAL_ADCEx_MultiModeStart_DMA()
+ 232:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****           (+++) Wait for ADC conversion completion by call of function
+ 233:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****                 HAL_ADC_ConvCpltCallback() or HAL_ADC_ConvHalfCpltCallback()
+ 234:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****                 (these functions must be implemented in user program)
+ 235:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****           (+++) Conversion results are automatically transferred by DMA into
+ 236:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****                 destination variable address.
+ 237:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****           (+++) Stop conversion and disable the ADC peripheral (master)
+ 238:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****                 using function HAL_ADCEx_MultiModeStop_DMA()
+ 239:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****           (+++) Stop conversion and disable the ADC peripheral (slave)
+ 240:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****                 using function HAL_ADC_Stop_IT()
+ 241:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** 
+ 242:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****      [..]
+ 243:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** 
+ 244:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****     (@) Callback functions must be implemented in user program:
+ 245:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****       (+@) HAL_ADC_ErrorCallback()
+ 246:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****       (+@) HAL_ADC_LevelOutOfWindowCallback() (callback of analog watchdog)
+ 247:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****       (+@) HAL_ADC_ConvCpltCallback()
+ 248:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****       (+@) HAL_ADC_ConvHalfCpltCallback
+ 249:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****       (+@) HAL_ADCEx_InjectedConvCpltCallback()
+ 250:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****       (+@) HAL_ADCEx_InjectedQueueOverflowCallback() (for STM32F30x/STM32F33x devices)
+ 251:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** 
+ 252:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****      *** Deinitialization of ADC ***
+ 253:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****      ============================================================
+ 254:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****      [..]
+ 255:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** 
+ 256:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****     (#) Disable the ADC interface
+ 257:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****       (++) ADC clock can be hard reset and disabled at RCC top level.
+ARM GAS  /tmp/cc6PWc7y.s 			page 6
+
+
+ 258:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****         (++) Hard reset of ADC peripherals
+ 259:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****              using macro __ADCx_FORCE_RESET(), __ADCx_RELEASE_RESET().
+ 260:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****         (++) ADC clock disable
+ 261:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****              using the equivalent macro/functions as configuration step.
+ 262:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** 
+ 263:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****         (++) For STM32F30x/STM32F33x devices:
+ 264:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****            Caution: For devices with several ADCs:
+ 265:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****            These settings impact both ADC of common group: ADC1&ADC2, ADC3&ADC4
+ 266:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****            if available (ADC2, ADC3, ADC4 availability depends on STM32 product)
+ 267:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** 
+ 268:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****              (+++) For example, in case of device with a single ADC:
+ 269:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****                    Into HAL_ADC_MspDeInit() (recommended code location) or with
+ 270:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****                    other device clock parameters configuration:
+ 271:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****                (+++) __HAL_RCC_ADC1_FORCE_RESET()                           (optional)
+ 272:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****                (+++) __HAL_RCC_ADC1_RELEASE_RESET()                         (optional)
+ 273:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****                (+++) __HAL_RCC_ADC1_CLK_DISABLE()                           (mandatory)
+ 274:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****                (+++) PeriphClkInit.PeriphClockSelection = RCC_PERIPHCLK_ADC (optional, if configure
+ 275:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****                (+++) PeriphClkInit.Adc1ClockSelection = RCC_ADC1PLLCLK_OFF  (optional, if configure
+ 276:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****                (+++) HAL_RCCEx_PeriphCLKConfig(&RCC_PeriphClkInitStructure) (optional, if configure
+ 277:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** 
+ 278:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****              (+++) For example, in case of device with 4 ADCs:
+ 279:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****                (+++) if((hadc->Instance == ADC1) || (hadc->Instance == ADC2))   
+ 280:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****                (+++) {                                                          
+ 281:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****                (+++)   __HAL_RCC_ADC12_FORCE_RESET()                            (optional)
+ 282:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****                (+++)   __HAL_RCC_ADC12_RELEASE_RESET()                          (optional)
+ 283:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****                (+++)   __HAL_RCC_ADC12_CLK_DISABLE()                            (mandatory)
+ 284:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****                (+++)   PeriphClkInit.PeriphClockSelection = RCC_PERIPHCLK_ADC   (optional, if confi
+ 285:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****                (+++)   PeriphClkInit.Adc12ClockSelection = RCC_ADC12PLLCLK_OFF  (optional, if confi
+ 286:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****                (+++)   HAL_RCCEx_PeriphCLKConfig(&RCC_PeriphClkInitStructure)   (optional, if confi
+ 287:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****                (+++) }                                                          
+ 288:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****                (+++) else                                                       
+ 289:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****                (+++) {                                                          
+ 290:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****                (+++)   __HAL_RCC_ADC32_FORCE_RESET()                            (optional)
+ 291:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****                (+++)   __HAL_RCC_ADC32_RELEASE_RESET()                          (optional)
+ 292:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****                (+++)   __HAL_RCC_ADC34_CLK_DISABLE()                            (mandatory)
+ 293:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****                (+++)   PeriphClkInit.Adc34ClockSelection = RCC_ADC34PLLCLK_OFF  (optional, if confi
+ 294:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****                (+++)   HAL_RCCEx_PeriphCLKConfig(&RCC_PeriphClkInitStructure)   (optional, if confi
+ 295:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****                (+++) }                                                          
+ 296:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****       
+ 297:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****         (++) For STM32F37x devices:
+ 298:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****              (+++) Example:
+ 299:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****                    Into HAL_ADC_MspDeInit() (recommended code location) or with
+ 300:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****                    other device clock parameters configuration:
+ 301:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****                (+++) PeriphClkInit.PeriphClockSelection = RCC_PERIPHCLK_ADC
+ 302:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****                (+++) PeriphClkInit.AdcClockSelection = RCC_ADCPLLCLK_OFF
+ 303:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****                (+++) HAL_RCCEx_PeriphCLKConfig(&PeriphClkInit)
+ 304:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** 
+ 305:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****     (#) ADC pins configuration
+ 306:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****          (++) Disable the clock for the ADC GPIOs
+ 307:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****               using macro __HAL_RCC_GPIOx_CLK_DISABLE()
+ 308:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** 
+ 309:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****     (#) Optionally, in case of usage of ADC with interruptions:
+ 310:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****          (++) Disable the NVIC for ADC
+ 311:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****               using function HAL_NVIC_DisableIRQ(ADCx_IRQn)
+ 312:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** 
+ 313:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****     (#) Optionally, in case of usage of DMA:
+ 314:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****          (++) Deinitialize the DMA
+ARM GAS  /tmp/cc6PWc7y.s 			page 7
+
+
+ 315:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****               using function HAL_DMA_DeInit().
+ 316:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****          (++) Disable the NVIC for DMA
+ 317:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****               using function HAL_NVIC_DisableIRQ(DMAx_Channelx_IRQn)
+ 318:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** 
+ 319:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****     [..]
+ 320:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****     
+ 321:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****     *** Callback registration ***
+ 322:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****     =============================================
+ 323:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****     [..]
+ 324:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** 
+ 325:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****      The compilation flag USE_HAL_ADC_REGISTER_CALLBACKS, when set to 1,
+ 326:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****      allows the user to configure dynamically the driver callbacks.
+ 327:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****      Use Functions HAL_ADC_RegisterCallback()
+ 328:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****      to register an interrupt callback.
+ 329:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****     [..]
+ 330:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** 
+ 331:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****      Function HAL_ADC_RegisterCallback() allows to register following callbacks:
+ 332:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****        (+) ConvCpltCallback               : ADC conversion complete callback
+ 333:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****        (+) ConvHalfCpltCallback           : ADC conversion DMA half-transfer callback
+ 334:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****        (+) LevelOutOfWindowCallback       : ADC analog watchdog 1 callback
+ 335:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****        (+) ErrorCallback                  : ADC error callback
+ 336:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****        (+) InjectedConvCpltCallback       : ADC group injected conversion complete callback
+ 337:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****        (+) MspInitCallback                : ADC Msp Init callback
+ 338:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****        (+) MspDeInitCallback              : ADC Msp DeInit callback
+ 339:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****      This function takes as parameters the HAL peripheral handle, the Callback ID
+ 340:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****      and a pointer to the user callback function.
+ 341:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****     [..]
+ 342:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** 
+ 343:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****      Use function HAL_ADC_UnRegisterCallback to reset a callback to the default
+ 344:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****      weak function.
+ 345:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****     [..]
+ 346:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** 
+ 347:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****      HAL_ADC_UnRegisterCallback takes as parameters the HAL peripheral handle,
+ 348:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****      and the Callback ID.
+ 349:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****      This function allows to reset following callbacks:
+ 350:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****        (+) ConvCpltCallback               : ADC conversion complete callback
+ 351:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****        (+) ConvHalfCpltCallback           : ADC conversion DMA half-transfer callback
+ 352:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****        (+) LevelOutOfWindowCallback       : ADC analog watchdog 1 callback
+ 353:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****        (+) ErrorCallback                  : ADC error callback
+ 354:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****        (+) InjectedConvCpltCallback       : ADC group injected conversion complete callback
+ 355:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****        (+) MspInitCallback                : ADC Msp Init callback
+ 356:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****        (+) MspDeInitCallback              : ADC Msp DeInit callback
+ 357:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****      [..]
+ 358:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** 
+ 359:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****      By default, after the HAL_ADC_Init() and when the state is HAL_ADC_STATE_RESET
+ 360:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****      all callbacks are set to the corresponding weak functions:
+ 361:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****      examples HAL_ADC_ConvCpltCallback(), HAL_ADC_ErrorCallback().
+ 362:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****      Exception done for MspInit and MspDeInit functions that are
+ 363:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****      reset to the legacy weak functions in the HAL_ADC_Init()/ HAL_ADC_DeInit() only when
+ 364:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****      these callbacks are null (not registered beforehand).
+ 365:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****     [..]
+ 366:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** 
+ 367:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****      If MspInit or MspDeInit are not null, the HAL_ADC_Init()/ HAL_ADC_DeInit()
+ 368:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****      keep and use the user MspInit/MspDeInit callbacks (registered beforehand) whatever the state.
+ 369:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****      [..]
+ 370:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** 
+ 371:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****      Callbacks can be registered/unregistered in HAL_ADC_STATE_READY state only.
+ARM GAS  /tmp/cc6PWc7y.s 			page 8
+
+
+ 372:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****      Exception done MspInit/MspDeInit functions that can be registered/unregistered
+ 373:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****      in HAL_ADC_STATE_READY or HAL_ADC_STATE_RESET state,
+ 374:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****      thus registered (user) MspInit/DeInit callbacks can be used during the Init/DeInit.
+ 375:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****     [..]
+ 376:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** 
+ 377:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****      Then, the user first registers the MspInit/MspDeInit user callbacks
+ 378:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****      using HAL_ADC_RegisterCallback() before calling HAL_ADC_DeInit()
+ 379:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****      or HAL_ADC_Init() function.
+ 380:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****      [..]
+ 381:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** 
+ 382:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****      When the compilation flag USE_HAL_ADC_REGISTER_CALLBACKS is set to 0 or
+ 383:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****      not defined, the callback registration feature is not available and all callbacks
+ 384:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****      are set to the corresponding weak functions.
+ 385:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   
+ 386:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****     @endverbatim
+ 387:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   */
+ 388:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** 
+ 389:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** /* Includes ------------------------------------------------------------------*/
+ 390:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** #include "stm32f3xx_hal.h"
+ 391:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** 
+ 392:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** /** @addtogroup STM32F3xx_HAL_Driver
+ 393:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   * @{
+ 394:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   */
+ 395:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** 
+ 396:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** /** @defgroup ADC ADC
+ 397:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   * @brief ADC HAL module driver
+ 398:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   * @{
+ 399:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   */
+ 400:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** 
+ 401:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** #ifdef HAL_ADC_MODULE_ENABLED
+ 402:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****     
+ 403:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** /* Private typedef -----------------------------------------------------------*/
+ 404:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** /* Private define ------------------------------------------------------------*/
+ 405:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** /* Private macro -------------------------------------------------------------*/
+ 406:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** /* Private variables ---------------------------------------------------------*/
+ 407:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** /* Private function prototypes -----------------------------------------------*/
+ 408:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** /* Exported functions --------------------------------------------------------*/
+ 409:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** 
+ 410:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** /** @defgroup ADC_Exported_Functions ADC Exported Functions
+ 411:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   * @{
+ 412:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   */ 
+ 413:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** 
+ 414:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** /** @defgroup ADC_Exported_Functions_Group1 Initialization and de-initialization functions
+ 415:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****  *  @brief    Initialization and Configuration functions 
+ 416:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****  *
+ 417:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** @verbatim    
+ 418:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****  ===============================================================================
+ 419:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****               ##### Initialization and de-initialization functions #####
+ 420:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****  ===============================================================================
+ 421:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****     [..]  This section provides functions allowing to:
+ 422:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****       (+) Initialize and configure the ADC. 
+ 423:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****       (+) De-initialize the ADC. 
+ 424:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****          
+ 425:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** @endverbatim
+ 426:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   * @{
+ 427:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   */
+ 428:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** 
+ARM GAS  /tmp/cc6PWc7y.s 			page 9
+
+
+ 429:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** /**
+ 430:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   * @brief  Initializes the ADC peripheral and regular group according to  
+ 431:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   *         parameters specified in structure "ADC_InitTypeDef".
+ 432:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   * @note   As prerequisite, ADC clock must be configured at RCC top level
+ 433:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   *         depending on both possible clock sources: PLL clock or AHB clock.
+ 434:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   *         See commented example code below that can be copied and uncommented 
+ 435:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   *         into HAL_ADC_MspInit().
+ 436:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   * @note   Possibility to update parameters on the fly:
+ 437:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   *         This function initializes the ADC MSP (HAL_ADC_MspInit()) only when
+ 438:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   *         coming from ADC state reset. Following calls to this function can
+ 439:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   *         be used to reconfigure some parameters of ADC_InitTypeDef  
+ 440:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   *         structure on the fly, without modifying MSP configuration. If ADC  
+ 441:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   *         MSP has to be modified again, HAL_ADC_DeInit() must be called
+ 442:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   *         before HAL_ADC_Init().
+ 443:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   *         The setting of these parameters is conditioned to ADC state.
+ 444:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   *         For parameters constraints, see comments of structure 
+ 445:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   *         "ADC_InitTypeDef".
+ 446:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   * @note   This function configures the ADC within 2 scopes: scope of entire 
+ 447:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   *         ADC and scope of regular group. For parameters details, see comments 
+ 448:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   *         of structure "ADC_InitTypeDef".
+ 449:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   * @note   For devices with several ADCs: parameters related to common ADC 
+ 450:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   *         registers (ADC clock mode) are set only if all ADCs sharing the
+ 451:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   *         same common group are disabled.
+ 452:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   *         If this is not the case, these common parameters setting are  
+ 453:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   *         bypassed without error reporting: it can be the intended behaviour in
+ 454:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   *         case of update of a parameter of ADC_InitTypeDef on the fly,
+ 455:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   *         without  disabling the other ADCs sharing the same common group.
+ 456:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   * @param  hadc ADC handle
+ 457:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   * @retval HAL status
+ 458:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   */
+ 459:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** __weak HAL_StatusTypeDef HAL_ADC_Init(ADC_HandleTypeDef* hadc)
+ 460:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** {
+  30              		.loc 1 460 1 view -0
+  31              		.cfi_startproc
+  32              		@ args = 0, pretend = 0, frame = 0
+  33              		@ frame_needed = 0, uses_anonymous_args = 0
+  34              		@ link register save eliminated.
+ 461:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   /* Prevent unused argument(s) compilation warning */
+ 462:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   UNUSED(hadc);
+  35              		.loc 1 462 3 view .LVU1
+ 463:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** 
+ 464:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   /* Note : This function is defined into this file for library reference. */
+ 465:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   /*        Function content is located into file stm32f3xx_hal_adc_ex.c   */
+ 466:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   
+ 467:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   /* Return function status */
+ 468:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   return HAL_ERROR;
+  36              		.loc 1 468 3 view .LVU2
+ 469:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** }
+  37              		.loc 1 469 1 is_stmt 0 view .LVU3
+  38 0000 0120     		movs	r0, #1
+  39              	.LVL1:
+  40              		.loc 1 469 1 view .LVU4
+  41 0002 7047     		bx	lr
+  42              		.cfi_endproc
+  43              	.LFE130:
+  45              		.section	.text.HAL_ADC_DeInit,"ax",%progbits
+  46              		.align	1
+ARM GAS  /tmp/cc6PWc7y.s 			page 10
+
+
+  47              		.weak	HAL_ADC_DeInit
+  48              		.syntax unified
+  49              		.thumb
+  50              		.thumb_func
+  52              	HAL_ADC_DeInit:
+  53              	.LVL2:
+  54              	.LFB131:
+ 470:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** 
+ 471:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** /**
+ 472:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   * @brief  Deinitialize the ADC peripheral registers to their default reset
+ 473:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   *         values, with deinitialization of the ADC MSP.
+ 474:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   * @note   For devices with several ADCs: reset of ADC common registers is done 
+ 475:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   *         only if all ADCs sharing the same common group are disabled.
+ 476:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   *         If this is not the case, reset of these common parameters reset is  
+ 477:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   *         bypassed without error reporting: it can be the intended behaviour in
+ 478:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   *         case of reset of a single ADC while the other ADCs sharing the same 
+ 479:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   *         common group is still running.
+ 480:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   * @note   For devices with several ADCs: Global reset of all ADCs sharing a
+ 481:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   *         common group is possible.
+ 482:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   *         As this function is intended to reset a single ADC, to not impact 
+ 483:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   *         other ADCs, instructions for global reset of multiple ADCs have been
+ 484:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   *         let commented below.
+ 485:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   *         If needed, the example code can be copied and uncommented into
+ 486:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   *         function HAL_ADC_MspDeInit().
+ 487:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   * @param  hadc ADC handle
+ 488:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   * @retval HAL status
+ 489:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   */
+ 490:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** __weak HAL_StatusTypeDef HAL_ADC_DeInit(ADC_HandleTypeDef* hadc)
+ 491:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** {
+  55              		.loc 1 491 1 is_stmt 1 view -0
+  56              		.cfi_startproc
+  57              		@ args = 0, pretend = 0, frame = 0
+  58              		@ frame_needed = 0, uses_anonymous_args = 0
+  59              		@ link register save eliminated.
+ 492:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   /* Prevent unused argument(s) compilation warning */
+ 493:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   UNUSED(hadc);
+  60              		.loc 1 493 3 view .LVU6
+ 494:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** 
+ 495:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   /* Note : This function is defined into this file for library reference. */
+ 496:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   /*        Function content is located into file stm32f3xx_hal_adc_ex.c   */
+ 497:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   
+ 498:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   /* Return function status */
+ 499:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   return HAL_ERROR;
+  61              		.loc 1 499 3 view .LVU7
+ 500:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** }
+  62              		.loc 1 500 1 is_stmt 0 view .LVU8
+  63 0000 0120     		movs	r0, #1
+  64              	.LVL3:
+  65              		.loc 1 500 1 view .LVU9
+  66 0002 7047     		bx	lr
+  67              		.cfi_endproc
+  68              	.LFE131:
+  70              		.section	.text.HAL_ADC_MspInit,"ax",%progbits
+  71              		.align	1
+  72              		.weak	HAL_ADC_MspInit
+  73              		.syntax unified
+  74              		.thumb
+ARM GAS  /tmp/cc6PWc7y.s 			page 11
+
+
+  75              		.thumb_func
+  77              	HAL_ADC_MspInit:
+  78              	.LVL4:
+  79              	.LFB132:
+ 501:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****     
+ 502:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** /**
+ 503:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   * @brief  Initializes the ADC MSP.
+ 504:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   * @param  hadc ADC handle
+ 505:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   * @retval None
+ 506:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   */
+ 507:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** __weak void HAL_ADC_MspInit(ADC_HandleTypeDef* hadc)
+ 508:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** {
+  80              		.loc 1 508 1 is_stmt 1 view -0
+  81              		.cfi_startproc
+  82              		@ args = 0, pretend = 0, frame = 0
+  83              		@ frame_needed = 0, uses_anonymous_args = 0
+  84              		@ link register save eliminated.
+ 509:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   /* Prevent unused argument(s) compilation warning */
+ 510:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   UNUSED(hadc);
+  85              		.loc 1 510 3 view .LVU11
+ 511:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** 
+ 512:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   /* NOTE : This function should not be modified. When the callback is needed,
+ 513:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****             function HAL_ADC_MspInit must be implemented in the user file.
+ 514:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****    */ 
+ 515:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** }
+  86              		.loc 1 515 1 is_stmt 0 view .LVU12
+  87 0000 7047     		bx	lr
+  88              		.cfi_endproc
+  89              	.LFE132:
+  91              		.section	.text.HAL_ADC_MspDeInit,"ax",%progbits
+  92              		.align	1
+  93              		.weak	HAL_ADC_MspDeInit
+  94              		.syntax unified
+  95              		.thumb
+  96              		.thumb_func
+  98              	HAL_ADC_MspDeInit:
+  99              	.LVL5:
+ 100              	.LFB133:
+ 516:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** 
+ 517:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** /**
+ 518:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   * @brief  DeInitializes the ADC MSP.
+ 519:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   * @param  hadc ADC handle
+ 520:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   * @retval None
+ 521:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   */
+ 522:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** __weak void HAL_ADC_MspDeInit(ADC_HandleTypeDef* hadc)
+ 523:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** {
+ 101              		.loc 1 523 1 is_stmt 1 view -0
+ 102              		.cfi_startproc
+ 103              		@ args = 0, pretend = 0, frame = 0
+ 104              		@ frame_needed = 0, uses_anonymous_args = 0
+ 105              		@ link register save eliminated.
+ 524:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   /* Prevent unused argument(s) compilation warning */
+ 525:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   UNUSED(hadc);
+ 106              		.loc 1 525 3 view .LVU14
+ 526:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** 
+ 527:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   /* NOTE : This function should not be modified. When the callback is needed,
+ 528:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****             function HAL_ADC_MspDeInit must be implemented in the user file.
+ARM GAS  /tmp/cc6PWc7y.s 			page 12
+
+
+ 529:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****    */ 
+ 530:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** }
+ 107              		.loc 1 530 1 is_stmt 0 view .LVU15
+ 108 0000 7047     		bx	lr
+ 109              		.cfi_endproc
+ 110              	.LFE133:
+ 112              		.section	.text.HAL_ADC_Start,"ax",%progbits
+ 113              		.align	1
+ 114              		.weak	HAL_ADC_Start
+ 115              		.syntax unified
+ 116              		.thumb
+ 117              		.thumb_func
+ 119              	HAL_ADC_Start:
+ 120              	.LVL6:
+ 121              	.LFB134:
+ 531:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** 
+ 532:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** #if (USE_HAL_ADC_REGISTER_CALLBACKS == 1)
+ 533:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** /**
+ 534:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   * @brief  Register a User ADC Callback
+ 535:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   *         To be used instead of the weak predefined callback
+ 536:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   * @param  hadc Pointer to a ADC_HandleTypeDef structure that contains
+ 537:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   *                the configuration information for the specified ADC.
+ 538:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   * @param  CallbackID ID of the callback to be registered
+ 539:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   *         This parameter can be one of the following values:
+ 540:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   *          @arg @ref HAL_ADC_CONVERSION_COMPLETE_CB_ID      ADC conversion complete callback ID
+ 541:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   *          @arg @ref HAL_ADC_CONVERSION_HALF_CB_ID          ADC conversion complete callback ID
+ 542:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   *          @arg @ref HAL_ADC_LEVEL_OUT_OF_WINDOW_1_CB_ID    ADC analog watchdog 1 callback ID
+ 543:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   *          @arg @ref HAL_ADC_ERROR_CB_ID                    ADC error callback ID
+ 544:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   *          @arg @ref HAL_ADC_INJ_CONVERSION_COMPLETE_CB_ID  ADC group injected conversion complet
+ 545:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   *          @arg @ref HAL_ADC_MSPINIT_CB_ID                  ADC Msp Init callback ID
+ 546:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   *          @arg @ref HAL_ADC_MSPDEINIT_CB_ID                ADC Msp DeInit callback ID
+ 547:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   *          @arg @ref HAL_ADC_MSPINIT_CB_ID MspInit callback ID
+ 548:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   *          @arg @ref HAL_ADC_MSPDEINIT_CB_ID MspDeInit callback ID
+ 549:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   * @param  pCallback pointer to the Callback function
+ 550:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   * @retval HAL status
+ 551:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   */
+ 552:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** HAL_StatusTypeDef HAL_ADC_RegisterCallback(ADC_HandleTypeDef *hadc, HAL_ADC_CallbackIDTypeDef Callb
+ 553:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** {
+ 554:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   HAL_StatusTypeDef status = HAL_OK;
+ 555:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   
+ 556:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   if (pCallback == NULL)
+ 557:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   {
+ 558:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****     /* Update the error code */
+ 559:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****     hadc->ErrorCode |= HAL_ADC_ERROR_INVALID_CALLBACK;
+ 560:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** 
+ 561:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****     return HAL_ERROR;
+ 562:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   }
+ 563:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   
+ 564:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   if ((hadc->State & HAL_ADC_STATE_READY) != 0)
+ 565:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   {
+ 566:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****     switch (CallbackID)
+ 567:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****     {
+ 568:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****       case HAL_ADC_CONVERSION_COMPLETE_CB_ID :
+ 569:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****         hadc->ConvCpltCallback = pCallback;
+ 570:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****         break;
+ 571:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****       
+ 572:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****       case HAL_ADC_CONVERSION_HALF_CB_ID :
+ARM GAS  /tmp/cc6PWc7y.s 			page 13
+
+
+ 573:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****         hadc->ConvHalfCpltCallback = pCallback;
+ 574:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****         break;
+ 575:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****       
+ 576:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****       case HAL_ADC_LEVEL_OUT_OF_WINDOW_1_CB_ID :
+ 577:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****         hadc->LevelOutOfWindowCallback = pCallback;
+ 578:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****         break;
+ 579:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****       
+ 580:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****       case HAL_ADC_ERROR_CB_ID :
+ 581:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****         hadc->ErrorCallback = pCallback;
+ 582:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****         break;
+ 583:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****       
+ 584:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****       case HAL_ADC_INJ_CONVERSION_COMPLETE_CB_ID :
+ 585:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****         hadc->InjectedConvCpltCallback = pCallback;
+ 586:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****         break;
+ 587:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****       
+ 588:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****       case HAL_ADC_MSPINIT_CB_ID :
+ 589:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****         hadc->MspInitCallback = pCallback;
+ 590:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****         break;
+ 591:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****       
+ 592:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****       case HAL_ADC_MSPDEINIT_CB_ID :
+ 593:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****         hadc->MspDeInitCallback = pCallback;
+ 594:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****         break;
+ 595:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****       
+ 596:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****       default :
+ 597:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****         /* Update the error code */
+ 598:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****         hadc->ErrorCode |= HAL_ADC_ERROR_INVALID_CALLBACK;
+ 599:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** 
+ 600:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****         /* Return error status */
+ 601:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****         status = HAL_ERROR;
+ 602:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****         break;
+ 603:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****     }
+ 604:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   }
+ 605:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   else if (HAL_ADC_STATE_RESET == hadc->State)
+ 606:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   {
+ 607:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****     switch (CallbackID)
+ 608:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****     {
+ 609:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****       case HAL_ADC_MSPINIT_CB_ID :
+ 610:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****         hadc->MspInitCallback = pCallback;
+ 611:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****         break;
+ 612:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****       
+ 613:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****       case HAL_ADC_MSPDEINIT_CB_ID :
+ 614:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****         hadc->MspDeInitCallback = pCallback;
+ 615:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****         break;
+ 616:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****       
+ 617:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****       default :
+ 618:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****         /* Update the error code */
+ 619:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****         hadc->ErrorCode |= HAL_ADC_ERROR_INVALID_CALLBACK;
+ 620:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****       
+ 621:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****         /* Return error status */
+ 622:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****         status = HAL_ERROR;
+ 623:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****         break;
+ 624:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****     }
+ 625:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   }
+ 626:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   else
+ 627:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   {
+ 628:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****     /* Update the error code */
+ 629:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****     hadc->ErrorCode |= HAL_ADC_ERROR_INVALID_CALLBACK;
+ARM GAS  /tmp/cc6PWc7y.s 			page 14
+
+
+ 630:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****     
+ 631:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****     /* Return error status */
+ 632:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****     status =  HAL_ERROR;
+ 633:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   }
+ 634:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   
+ 635:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   return status;
+ 636:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** }
+ 637:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** 
+ 638:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** /**
+ 639:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   * @brief  Unregister a ADC Callback
+ 640:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   *         ADC callback is redirected to the weak predefined callback
+ 641:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   * @param  hadc Pointer to a ADC_HandleTypeDef structure that contains
+ 642:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   *                the configuration information for the specified ADC.
+ 643:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   * @param  CallbackID ID of the callback to be unregistered
+ 644:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   *         This parameter can be one of the following values:
+ 645:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   *          @arg @ref HAL_ADC_CONVERSION_COMPLETE_CB_ID      ADC conversion complete callback ID
+ 646:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   *          @arg @ref HAL_ADC_CONVERSION_HALF_CB_ID          ADC conversion complete callback ID
+ 647:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   *          @arg @ref HAL_ADC_LEVEL_OUT_OF_WINDOW_1_CB_ID    ADC analog watchdog 1 callback ID
+ 648:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   *          @arg @ref HAL_ADC_ERROR_CB_ID                    ADC error callback ID
+ 649:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   *          @arg @ref HAL_ADC_INJ_CONVERSION_COMPLETE_CB_ID  ADC group injected conversion complet
+ 650:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   *          @arg @ref HAL_ADC_MSPINIT_CB_ID                  ADC Msp Init callback ID
+ 651:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   *          @arg @ref HAL_ADC_MSPDEINIT_CB_ID                ADC Msp DeInit callback ID
+ 652:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   *          @arg @ref HAL_ADC_MSPINIT_CB_ID MspInit callback ID
+ 653:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   *          @arg @ref HAL_ADC_MSPDEINIT_CB_ID MspDeInit callback ID
+ 654:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   * @retval HAL status
+ 655:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   */
+ 656:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** HAL_StatusTypeDef HAL_ADC_UnRegisterCallback(ADC_HandleTypeDef *hadc, HAL_ADC_CallbackIDTypeDef Cal
+ 657:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** {
+ 658:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   HAL_StatusTypeDef status = HAL_OK;
+ 659:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   
+ 660:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   if ((hadc->State & HAL_ADC_STATE_READY) != 0)
+ 661:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   {
+ 662:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****     switch (CallbackID)
+ 663:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****     {
+ 664:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****       case HAL_ADC_CONVERSION_COMPLETE_CB_ID :
+ 665:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****         hadc->ConvCpltCallback = HAL_ADC_ConvCpltCallback;
+ 666:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****         break;
+ 667:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****       
+ 668:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****       case HAL_ADC_CONVERSION_HALF_CB_ID :
+ 669:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****         hadc->ConvHalfCpltCallback = HAL_ADC_ConvHalfCpltCallback;
+ 670:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****         break;
+ 671:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****       
+ 672:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****       case HAL_ADC_LEVEL_OUT_OF_WINDOW_1_CB_ID :
+ 673:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****         hadc->LevelOutOfWindowCallback = HAL_ADC_LevelOutOfWindowCallback;
+ 674:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****         break;
+ 675:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****       
+ 676:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****       case HAL_ADC_ERROR_CB_ID :
+ 677:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****         hadc->ErrorCallback = HAL_ADC_ErrorCallback;
+ 678:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****         break;
+ 679:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****       
+ 680:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****       case HAL_ADC_INJ_CONVERSION_COMPLETE_CB_ID :
+ 681:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****         hadc->InjectedConvCpltCallback = HAL_ADCEx_InjectedConvCpltCallback;
+ 682:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****         break;
+ 683:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****       
+ 684:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****       case HAL_ADC_MSPINIT_CB_ID :
+ 685:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****         hadc->MspInitCallback = HAL_ADC_MspInit; /* Legacy weak MspInit              */
+ 686:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****         break;
+ARM GAS  /tmp/cc6PWc7y.s 			page 15
+
+
+ 687:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****       
+ 688:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****       case HAL_ADC_MSPDEINIT_CB_ID :
+ 689:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****         hadc->MspDeInitCallback = HAL_ADC_MspDeInit; /* Legacy weak MspDeInit            */
+ 690:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****         break;
+ 691:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****       
+ 692:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****       default :
+ 693:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****         /* Update the error code */
+ 694:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****         hadc->ErrorCode |= HAL_ADC_ERROR_INVALID_CALLBACK;
+ 695:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****         
+ 696:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****         /* Return error status */
+ 697:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****         status =  HAL_ERROR;
+ 698:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****         break;
+ 699:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****     }
+ 700:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   }
+ 701:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   else if (HAL_ADC_STATE_RESET == hadc->State)
+ 702:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   {
+ 703:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****     switch (CallbackID)
+ 704:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****     {
+ 705:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****       case HAL_ADC_MSPINIT_CB_ID :
+ 706:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****         hadc->MspInitCallback = HAL_ADC_MspInit;                   /* Legacy weak MspInit          
+ 707:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****         break;
+ 708:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****         
+ 709:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****       case HAL_ADC_MSPDEINIT_CB_ID :
+ 710:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****         hadc->MspDeInitCallback = HAL_ADC_MspDeInit;               /* Legacy weak MspDeInit        
+ 711:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****         break;
+ 712:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****         
+ 713:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****       default :
+ 714:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****         /* Update the error code */
+ 715:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****         hadc->ErrorCode |= HAL_ADC_ERROR_INVALID_CALLBACK;
+ 716:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****         
+ 717:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****         /* Return error status */
+ 718:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****         status =  HAL_ERROR;
+ 719:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****         break;
+ 720:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****     }
+ 721:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   }
+ 722:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   else
+ 723:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   {
+ 724:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****     /* Update the error code */
+ 725:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****     hadc->ErrorCode |= HAL_ADC_ERROR_INVALID_CALLBACK;
+ 726:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****     
+ 727:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****     /* Return error status */
+ 728:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****     status =  HAL_ERROR;
+ 729:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   }
+ 730:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   
+ 731:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   return status;
+ 732:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** }
+ 733:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** 
+ 734:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** #endif /* USE_HAL_ADC_REGISTER_CALLBACKS */
+ 735:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** 
+ 736:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** /**
+ 737:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   * @}
+ 738:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   */
+ 739:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** 
+ 740:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** /** @defgroup ADC_Exported_Functions_Group2 Input and Output operation functions
+ 741:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****  *  @brief    IO operation functions 
+ 742:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****  *
+ 743:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** @verbatim   
+ARM GAS  /tmp/cc6PWc7y.s 			page 16
+
+
+ 744:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****  ===============================================================================
+ 745:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****              ##### IO operation functions #####
+ 746:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****  ===============================================================================  
+ 747:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****     [..]  This section provides functions allowing to:
+ 748:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****       (+) Start conversion of regular group.
+ 749:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****       (+) Stop conversion of regular group.
+ 750:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****       (+) Poll for conversion complete on regular group.
+ 751:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****       (+) Poll for conversion event.
+ 752:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****       (+) Get result of regular channel conversion.
+ 753:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****       (+) Start conversion of regular group and enable interruptions.
+ 754:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****       (+) Stop conversion of regular group and disable interruptions.
+ 755:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****       (+) Handle ADC interrupt request
+ 756:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****       (+) Start conversion of regular group and enable DMA transfer.
+ 757:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****       (+) Stop conversion of regular group and disable ADC DMA transfer.
+ 758:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****                
+ 759:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** @endverbatim
+ 760:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   * @{
+ 761:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   */
+ 762:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** /**
+ 763:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   * @brief  Enables ADC, starts conversion of regular group.
+ 764:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   *         Interruptions enabled in this function: None.
+ 765:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   * @note:  Case of multimode enabled (for devices with several ADCs): This 
+ 766:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   *         function must be called for ADC slave first, then ADC master. 
+ 767:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   *         For ADC slave, ADC is enabled only (conversion is not started).  
+ 768:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   *         For ADC master, ADC is enabled and multimode conversion is started.
+ 769:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   * @param  hadc ADC handle
+ 770:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   * @retval HAL status
+ 771:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   */
+ 772:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** __weak HAL_StatusTypeDef HAL_ADC_Start(ADC_HandleTypeDef* hadc)
+ 773:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** {
+ 122              		.loc 1 773 1 is_stmt 1 view -0
+ 123              		.cfi_startproc
+ 124              		@ args = 0, pretend = 0, frame = 0
+ 125              		@ frame_needed = 0, uses_anonymous_args = 0
+ 126              		@ link register save eliminated.
+ 774:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   /* Prevent unused argument(s) compilation warning */
+ 775:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   UNUSED(hadc);
+ 127              		.loc 1 775 3 view .LVU17
+ 776:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** 
+ 777:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   /* Return function status */
+ 778:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   return HAL_ERROR;
+ 128              		.loc 1 778 3 view .LVU18
+ 779:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** }
+ 129              		.loc 1 779 1 is_stmt 0 view .LVU19
+ 130 0000 0120     		movs	r0, #1
+ 131              	.LVL7:
+ 132              		.loc 1 779 1 view .LVU20
+ 133 0002 7047     		bx	lr
+ 134              		.cfi_endproc
+ 135              	.LFE134:
+ 137              		.section	.text.HAL_ADC_Stop,"ax",%progbits
+ 138              		.align	1
+ 139              		.weak	HAL_ADC_Stop
+ 140              		.syntax unified
+ 141              		.thumb
+ 142              		.thumb_func
+ 144              	HAL_ADC_Stop:
+ARM GAS  /tmp/cc6PWc7y.s 			page 17
+
+
+ 145              	.LVL8:
+ 146              	.LFB135:
+ 780:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** 
+ 781:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** /**
+ 782:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   * @brief  Stop ADC conversion of regular group (and injected group in 
+ 783:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   *         case of auto_injection mode), disable ADC peripheral.
+ 784:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   * @note:  ADC peripheral disable is forcing stop of potential 
+ 785:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   *         conversion on injected group. If injected group is under use, it
+ 786:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   *         should be preliminarily stopped using HAL_ADCEx_InjectedStop function.
+ 787:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   * @note:  Case of multimode enabled (for devices with several ADCs): This 
+ 788:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   *         function must be called for ADC master first, then ADC slave.
+ 789:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   *         For ADC master, conversion is stopped and ADC is disabled. 
+ 790:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   *         For ADC slave, ADC is disabled only (conversion stop of ADC master
+ 791:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   *         has already stopped conversion of ADC slave).
+ 792:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   * @param  hadc ADC handle
+ 793:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   * @retval HAL status.
+ 794:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   */
+ 795:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** __weak HAL_StatusTypeDef HAL_ADC_Stop(ADC_HandleTypeDef* hadc)
+ 796:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** {
+ 147              		.loc 1 796 1 is_stmt 1 view -0
+ 148              		.cfi_startproc
+ 149              		@ args = 0, pretend = 0, frame = 0
+ 150              		@ frame_needed = 0, uses_anonymous_args = 0
+ 151              		@ link register save eliminated.
+ 797:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   /* Prevent unused argument(s) compilation warning */
+ 798:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   UNUSED(hadc);
+ 152              		.loc 1 798 3 view .LVU22
+ 799:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** 
+ 800:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   /* Note : This function is defined into this file for library reference. */
+ 801:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   /*        Function content is located into file stm32f3xx_hal_adc_ex.c   */
+ 802:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   
+ 803:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   /* Return function status */
+ 804:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   return HAL_ERROR;
+ 153              		.loc 1 804 3 view .LVU23
+ 805:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** }
+ 154              		.loc 1 805 1 is_stmt 0 view .LVU24
+ 155 0000 0120     		movs	r0, #1
+ 156              	.LVL9:
+ 157              		.loc 1 805 1 view .LVU25
+ 158 0002 7047     		bx	lr
+ 159              		.cfi_endproc
+ 160              	.LFE135:
+ 162              		.section	.text.HAL_ADC_PollForConversion,"ax",%progbits
+ 163              		.align	1
+ 164              		.weak	HAL_ADC_PollForConversion
+ 165              		.syntax unified
+ 166              		.thumb
+ 167              		.thumb_func
+ 169              	HAL_ADC_PollForConversion:
+ 170              	.LVL10:
+ 171              	.LFB136:
+ 806:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** 
+ 807:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** /**
+ 808:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   * @brief  Wait for regular group conversion to be completed.
+ 809:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   * @param  hadc ADC handle
+ 810:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   * @param  Timeout Timeout value in millisecond.
+ 811:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   * @retval HAL status
+ARM GAS  /tmp/cc6PWc7y.s 			page 18
+
+
+ 812:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   */
+ 813:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** __weak HAL_StatusTypeDef HAL_ADC_PollForConversion(ADC_HandleTypeDef* hadc, uint32_t Timeout)
+ 814:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** {
+ 172              		.loc 1 814 1 is_stmt 1 view -0
+ 173              		.cfi_startproc
+ 174              		@ args = 0, pretend = 0, frame = 0
+ 175              		@ frame_needed = 0, uses_anonymous_args = 0
+ 176              		@ link register save eliminated.
+ 815:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   /* Prevent unused argument(s) compilation warning */
+ 816:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   UNUSED(hadc);
+ 177              		.loc 1 816 3 view .LVU27
+ 817:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   UNUSED(Timeout);
+ 178              		.loc 1 817 3 view .LVU28
+ 818:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** 
+ 819:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   /* Note : This function is defined into this file for library reference. */
+ 820:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   /*        Function content is located into file stm32f3xx_hal_adc_ex.c   */
+ 821:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   
+ 822:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   /* Return function status */
+ 823:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   return HAL_ERROR;
+ 179              		.loc 1 823 3 view .LVU29
+ 824:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** }
+ 180              		.loc 1 824 1 is_stmt 0 view .LVU30
+ 181 0000 0120     		movs	r0, #1
+ 182              	.LVL11:
+ 183              		.loc 1 824 1 view .LVU31
+ 184 0002 7047     		bx	lr
+ 185              		.cfi_endproc
+ 186              	.LFE136:
+ 188              		.section	.text.HAL_ADC_PollForEvent,"ax",%progbits
+ 189              		.align	1
+ 190              		.weak	HAL_ADC_PollForEvent
+ 191              		.syntax unified
+ 192              		.thumb
+ 193              		.thumb_func
+ 195              	HAL_ADC_PollForEvent:
+ 196              	.LVL12:
+ 197              	.LFB137:
+ 825:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** 
+ 826:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** /**
+ 827:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   * @brief  Poll for conversion event.
+ 828:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   * @param  hadc ADC handle
+ 829:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   * @param  EventType the ADC event type.
+ 830:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   *          This parameter can be one of the following values:
+ 831:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   *            @arg ADC_AWD_EVENT: ADC Analog watchdog 1 event (main analog watchdog, present on al
+ 832:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   *            @arg ADC_AWD2_EVENT: ADC Analog watchdog 2 event (additional analog watchdog, presen
+ 833:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   *            @arg ADC_AWD3_EVENT: ADC Analog watchdog 3 event (additional analog watchdog, presen
+ 834:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   *            @arg ADC_OVR_EVENT: ADC Overrun event
+ 835:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   *            @arg ADC_JQOVF_EVENT: ADC Injected context queue overflow event
+ 836:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   * @param  Timeout Timeout value in millisecond.
+ 837:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   * @retval HAL status
+ 838:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   */
+ 839:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** __weak HAL_StatusTypeDef HAL_ADC_PollForEvent(ADC_HandleTypeDef* hadc, uint32_t EventType, uint32_t
+ 840:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** {
+ 198              		.loc 1 840 1 is_stmt 1 view -0
+ 199              		.cfi_startproc
+ 200              		@ args = 0, pretend = 0, frame = 0
+ 201              		@ frame_needed = 0, uses_anonymous_args = 0
+ARM GAS  /tmp/cc6PWc7y.s 			page 19
+
+
+ 202              		@ link register save eliminated.
+ 841:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   /* Prevent unused argument(s) compilation warning */
+ 842:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   UNUSED(hadc);
+ 203              		.loc 1 842 3 view .LVU33
+ 843:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   UNUSED(EventType);
+ 204              		.loc 1 843 3 view .LVU34
+ 844:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   UNUSED(Timeout);
+ 205              		.loc 1 844 3 view .LVU35
+ 845:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** 
+ 846:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   /* Note : This function is defined into this file for library reference. */
+ 847:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   /*        Function content is located into file stm32f3xx_hal_adc_ex.c   */
+ 848:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   
+ 849:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   /* Return function status */
+ 850:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   return HAL_ERROR;
+ 206              		.loc 1 850 3 view .LVU36
+ 851:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** }
+ 207              		.loc 1 851 1 is_stmt 0 view .LVU37
+ 208 0000 0120     		movs	r0, #1
+ 209              	.LVL13:
+ 210              		.loc 1 851 1 view .LVU38
+ 211 0002 7047     		bx	lr
+ 212              		.cfi_endproc
+ 213              	.LFE137:
+ 215              		.section	.text.HAL_ADC_Start_IT,"ax",%progbits
+ 216              		.align	1
+ 217              		.weak	HAL_ADC_Start_IT
+ 218              		.syntax unified
+ 219              		.thumb
+ 220              		.thumb_func
+ 222              	HAL_ADC_Start_IT:
+ 223              	.LVL14:
+ 224              	.LFB138:
+ 852:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** 
+ 853:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** /**
+ 854:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   * @brief  Enables ADC, starts conversion of regular group with interruption.
+ 855:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   *         Interruptions enabled in this function:
+ 856:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   *          - EOC (end of conversion of regular group) or EOS (end of 
+ 857:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   *            sequence of regular group) depending on ADC initialization 
+ 858:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   *            parameter "EOCSelection" (if available)
+ 859:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   *          - overrun (if available)
+ 860:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   *         Each of these interruptions has its dedicated callback function.
+ 861:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   * @note:  Case of multimode enabled (for devices with several ADCs): This 
+ 862:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   *         function must be called for ADC slave first, then ADC master. 
+ 863:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   *         For ADC slave, ADC is enabled only (conversion is not started).  
+ 864:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   *         For ADC master, ADC is enabled and multimode conversion is started.
+ 865:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   * @param  hadc ADC handle
+ 866:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   * @retval HAL status
+ 867:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   */
+ 868:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** __weak HAL_StatusTypeDef HAL_ADC_Start_IT(ADC_HandleTypeDef* hadc)
+ 869:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** {
+ 225              		.loc 1 869 1 is_stmt 1 view -0
+ 226              		.cfi_startproc
+ 227              		@ args = 0, pretend = 0, frame = 0
+ 228              		@ frame_needed = 0, uses_anonymous_args = 0
+ 229              		@ link register save eliminated.
+ 870:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   /* Prevent unused argument(s) compilation warning */
+ 871:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   UNUSED(hadc);
+ARM GAS  /tmp/cc6PWc7y.s 			page 20
+
+
+ 230              		.loc 1 871 3 view .LVU40
+ 872:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** 
+ 873:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   /* Note : This function is defined into this file for library reference. */
+ 874:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   /*        Function content is located into file stm32f3xx_hal_adc_ex.c   */
+ 875:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   
+ 876:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   /* Return function status */
+ 877:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   return HAL_ERROR;
+ 231              		.loc 1 877 3 view .LVU41
+ 878:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** }
+ 232              		.loc 1 878 1 is_stmt 0 view .LVU42
+ 233 0000 0120     		movs	r0, #1
+ 234              	.LVL15:
+ 235              		.loc 1 878 1 view .LVU43
+ 236 0002 7047     		bx	lr
+ 237              		.cfi_endproc
+ 238              	.LFE138:
+ 240              		.section	.text.HAL_ADC_Stop_IT,"ax",%progbits
+ 241              		.align	1
+ 242              		.weak	HAL_ADC_Stop_IT
+ 243              		.syntax unified
+ 244              		.thumb
+ 245              		.thumb_func
+ 247              	HAL_ADC_Stop_IT:
+ 248              	.LVL16:
+ 249              	.LFB139:
+ 879:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** 
+ 880:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** /**
+ 881:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   * @brief  Stop ADC conversion of regular group (and injected group in 
+ 882:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   *         case of auto_injection mode), disable interruption of 
+ 883:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   *         end-of-conversion, disable ADC peripheral.
+ 884:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   * @note:  ADC peripheral disable is forcing stop of potential 
+ 885:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   *         conversion on injected group. If injected group is under use, it
+ 886:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   *         should be preliminarily stopped using HAL_ADCEx_InjectedStop function.
+ 887:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   * @note:  Case of multimode enabled (for devices with several ADCs): This 
+ 888:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   *         function must be called for ADC master first, then ADC slave.
+ 889:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   *         For ADC master, conversion is stopped and ADC is disabled. 
+ 890:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   *         For ADC slave, ADC is disabled only (conversion stop of ADC master
+ 891:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   *         has already stopped conversion of ADC slave).
+ 892:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   * @param  hadc ADC handle
+ 893:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   * @retval HAL status.
+ 894:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   */
+ 895:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** __weak HAL_StatusTypeDef HAL_ADC_Stop_IT(ADC_HandleTypeDef* hadc)
+ 896:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** {
+ 250              		.loc 1 896 1 is_stmt 1 view -0
+ 251              		.cfi_startproc
+ 252              		@ args = 0, pretend = 0, frame = 0
+ 253              		@ frame_needed = 0, uses_anonymous_args = 0
+ 254              		@ link register save eliminated.
+ 897:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   /* Prevent unused argument(s) compilation warning */
+ 898:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   UNUSED(hadc);
+ 255              		.loc 1 898 3 view .LVU45
+ 899:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** 
+ 900:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   /* Note : This function is defined into this file for library reference. */
+ 901:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   /*        Function content is located into file stm32f3xx_hal_adc_ex.c   */
+ 902:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   
+ 903:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   /* Return function status */
+ 904:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   return HAL_ERROR;
+ARM GAS  /tmp/cc6PWc7y.s 			page 21
+
+
+ 256              		.loc 1 904 3 view .LVU46
+ 905:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** }
+ 257              		.loc 1 905 1 is_stmt 0 view .LVU47
+ 258 0000 0120     		movs	r0, #1
+ 259              	.LVL17:
+ 260              		.loc 1 905 1 view .LVU48
+ 261 0002 7047     		bx	lr
+ 262              		.cfi_endproc
+ 263              	.LFE139:
+ 265              		.section	.text.HAL_ADC_Start_DMA,"ax",%progbits
+ 266              		.align	1
+ 267              		.weak	HAL_ADC_Start_DMA
+ 268              		.syntax unified
+ 269              		.thumb
+ 270              		.thumb_func
+ 272              	HAL_ADC_Start_DMA:
+ 273              	.LVL18:
+ 274              	.LFB140:
+ 906:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** 
+ 907:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** /**
+ 908:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   * @brief  Enables ADC, starts conversion of regular group and transfers result
+ 909:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   *         through DMA.
+ 910:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   *         Interruptions enabled in this function:
+ 911:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   *          - DMA transfer complete
+ 912:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   *          - DMA half transfer
+ 913:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   *          - overrun (if available)
+ 914:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   *         Each of these interruptions has its dedicated callback function.
+ 915:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   * @note:  Case of multimode enabled (for devices with several ADCs): This 
+ 916:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   *         function is for single-ADC mode only. For multimode, use the 
+ 917:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   *         dedicated MultimodeStart function.
+ 918:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   * @param  hadc ADC handle
+ 919:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   * @param  pData The destination Buffer address.
+ 920:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   * @param  Length The length of data to be transferred from ADC peripheral to memory.
+ 921:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   * @retval None
+ 922:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   */
+ 923:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** __weak HAL_StatusTypeDef HAL_ADC_Start_DMA(ADC_HandleTypeDef* hadc, uint32_t* pData, uint32_t Lengt
+ 924:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** {
+ 275              		.loc 1 924 1 is_stmt 1 view -0
+ 276              		.cfi_startproc
+ 277              		@ args = 0, pretend = 0, frame = 0
+ 278              		@ frame_needed = 0, uses_anonymous_args = 0
+ 279              		@ link register save eliminated.
+ 925:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   /* Prevent unused argument(s) compilation warning */
+ 926:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   UNUSED(hadc);
+ 280              		.loc 1 926 3 view .LVU50
+ 927:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   UNUSED(pData);
+ 281              		.loc 1 927 3 view .LVU51
+ 928:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   UNUSED(Length);
+ 282              		.loc 1 928 3 view .LVU52
+ 929:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** 
+ 930:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   /* Note : This function is defined into this file for library reference. */
+ 931:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   /*        Function content is located into file stm32f3xx_hal_adc_ex.c   */
+ 932:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   
+ 933:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   /* Return function status */
+ 934:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   return HAL_ERROR;
+ 283              		.loc 1 934 3 view .LVU53
+ 935:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** }
+ARM GAS  /tmp/cc6PWc7y.s 			page 22
+
+
+ 284              		.loc 1 935 1 is_stmt 0 view .LVU54
+ 285 0000 0120     		movs	r0, #1
+ 286              	.LVL19:
+ 287              		.loc 1 935 1 view .LVU55
+ 288 0002 7047     		bx	lr
+ 289              		.cfi_endproc
+ 290              	.LFE140:
+ 292              		.section	.text.HAL_ADC_Stop_DMA,"ax",%progbits
+ 293              		.align	1
+ 294              		.weak	HAL_ADC_Stop_DMA
+ 295              		.syntax unified
+ 296              		.thumb
+ 297              		.thumb_func
+ 299              	HAL_ADC_Stop_DMA:
+ 300              	.LVL20:
+ 301              	.LFB141:
+ 936:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** 
+ 937:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** /**
+ 938:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   * @brief  Stop ADC conversion of regular group (and injected group in 
+ 939:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   *         case of auto_injection mode), disable ADC DMA transfer, disable 
+ 940:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   *         ADC peripheral.
+ 941:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   * @note:  ADC peripheral disable is forcing stop of potential 
+ 942:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   *         conversion on injected group. If injected group is under use, it
+ 943:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   *         should be preliminarily stopped using HAL_ADCEx_InjectedStop function.
+ 944:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   * @note:  Case of multimode enabled (for devices with several ADCs): This 
+ 945:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   *         function is for single-ADC mode only. For multimode, use the 
+ 946:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   *         dedicated MultimodeStop function.
+ 947:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   * @param  hadc ADC handle
+ 948:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   * @retval HAL status.
+ 949:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   */
+ 950:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** __weak HAL_StatusTypeDef HAL_ADC_Stop_DMA(ADC_HandleTypeDef* hadc)
+ 951:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** {
+ 302              		.loc 1 951 1 is_stmt 1 view -0
+ 303              		.cfi_startproc
+ 304              		@ args = 0, pretend = 0, frame = 0
+ 305              		@ frame_needed = 0, uses_anonymous_args = 0
+ 306              		@ link register save eliminated.
+ 952:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   /* Prevent unused argument(s) compilation warning */
+ 953:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   UNUSED(hadc);
+ 307              		.loc 1 953 3 view .LVU57
+ 954:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** 
+ 955:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   /* Note : This function is defined into this file for library reference. */
+ 956:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   /*        Function content is located into file stm32f3xx_hal_adc_ex.c   */
+ 957:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   
+ 958:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   /* Return function status */
+ 959:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   return HAL_ERROR;
+ 308              		.loc 1 959 3 view .LVU58
+ 960:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** }
+ 309              		.loc 1 960 1 is_stmt 0 view .LVU59
+ 310 0000 0120     		movs	r0, #1
+ 311              	.LVL21:
+ 312              		.loc 1 960 1 view .LVU60
+ 313 0002 7047     		bx	lr
+ 314              		.cfi_endproc
+ 315              	.LFE141:
+ 317              		.section	.text.HAL_ADC_GetValue,"ax",%progbits
+ 318              		.align	1
+ARM GAS  /tmp/cc6PWc7y.s 			page 23
+
+
+ 319              		.weak	HAL_ADC_GetValue
+ 320              		.syntax unified
+ 321              		.thumb
+ 322              		.thumb_func
+ 324              	HAL_ADC_GetValue:
+ 325              	.LVL22:
+ 326              	.LFB142:
+ 961:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** 
+ 962:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** /**
+ 963:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   * @brief  Get ADC regular group conversion result.
+ 964:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   * @note   Reading DR register automatically clears EOC (end of conversion of
+ 965:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   *         regular group) flag.
+ 966:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   *         Additionally, this functions clears EOS (end of sequence of
+ 967:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   *         regular group) flag, in case of the end of the sequence is reached.
+ 968:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   * @param  hadc ADC handle
+ 969:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   * @retval Converted value
+ 970:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   */
+ 971:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** __weak uint32_t HAL_ADC_GetValue(ADC_HandleTypeDef* hadc)
+ 972:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** {
+ 327              		.loc 1 972 1 is_stmt 1 view -0
+ 328              		.cfi_startproc
+ 329              		@ args = 0, pretend = 0, frame = 0
+ 330              		@ frame_needed = 0, uses_anonymous_args = 0
+ 331              		@ link register save eliminated.
+ 973:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   /* Note : This function is defined into this file for library reference. */
+ 974:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   /*        Function content is located into file stm32f3xx_hal_adc_ex.c   */
+ 975:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   
+ 976:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   /* Return ADC converted value */ 
+ 977:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   return hadc->Instance->DR;
+ 332              		.loc 1 977 3 view .LVU62
+ 333              		.loc 1 977 14 is_stmt 0 view .LVU63
+ 334 0000 0368     		ldr	r3, [r0]
+ 335              		.loc 1 977 24 view .LVU64
+ 336 0002 186C     		ldr	r0, [r3, #64]
+ 337              	.LVL23:
+ 978:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** }
+ 338              		.loc 1 978 1 view .LVU65
+ 339 0004 7047     		bx	lr
+ 340              		.cfi_endproc
+ 341              	.LFE142:
+ 343              		.section	.text.HAL_ADC_IRQHandler,"ax",%progbits
+ 344              		.align	1
+ 345              		.weak	HAL_ADC_IRQHandler
+ 346              		.syntax unified
+ 347              		.thumb
+ 348              		.thumb_func
+ 350              	HAL_ADC_IRQHandler:
+ 351              	.LVL24:
+ 352              	.LFB143:
+ 979:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** 
+ 980:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** /**
+ 981:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   * @brief  Handles ADC interrupt request.  
+ 982:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   * @param  hadc ADC handle
+ 983:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   * @retval None
+ 984:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   */
+ 985:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** __weak void HAL_ADC_IRQHandler(ADC_HandleTypeDef* hadc)
+ 986:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** {
+ARM GAS  /tmp/cc6PWc7y.s 			page 24
+
+
+ 353              		.loc 1 986 1 is_stmt 1 view -0
+ 354              		.cfi_startproc
+ 355              		@ args = 0, pretend = 0, frame = 0
+ 356              		@ frame_needed = 0, uses_anonymous_args = 0
+ 357              		@ link register save eliminated.
+ 987:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   /* Prevent unused argument(s) compilation warning */
+ 988:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   UNUSED(hadc);
+ 358              		.loc 1 988 3 view .LVU67
+ 989:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** 
+ 990:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   /* Note : This function is defined into this file for library reference. */
+ 991:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   /*        Function content is located into file stm32f3xx_hal_adc_ex.c   */
+ 992:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** }
+ 359              		.loc 1 992 1 is_stmt 0 view .LVU68
+ 360 0000 7047     		bx	lr
+ 361              		.cfi_endproc
+ 362              	.LFE143:
+ 364              		.section	.text.HAL_ADC_ConvCpltCallback,"ax",%progbits
+ 365              		.align	1
+ 366              		.weak	HAL_ADC_ConvCpltCallback
+ 367              		.syntax unified
+ 368              		.thumb
+ 369              		.thumb_func
+ 371              	HAL_ADC_ConvCpltCallback:
+ 372              	.LVL25:
+ 373              	.LFB144:
+ 993:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** 
+ 994:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** /**
+ 995:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   * @brief  Conversion complete callback in non blocking mode 
+ 996:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   * @param  hadc ADC handle
+ 997:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   * @retval None
+ 998:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   */
+ 999:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** __weak void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc)
+1000:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** {
+ 374              		.loc 1 1000 1 is_stmt 1 view -0
+ 375              		.cfi_startproc
+ 376              		@ args = 0, pretend = 0, frame = 0
+ 377              		@ frame_needed = 0, uses_anonymous_args = 0
+ 378              		@ link register save eliminated.
+1001:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   /* Prevent unused argument(s) compilation warning */
+1002:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   UNUSED(hadc);
+ 379              		.loc 1 1002 3 view .LVU70
+1003:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** 
+1004:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   /* NOTE : This function should not be modified. When the callback is needed,
+1005:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****             function HAL_ADC_ConvCpltCallback must be implemented in the user file.
+1006:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****    */
+1007:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** }
+ 380              		.loc 1 1007 1 is_stmt 0 view .LVU71
+ 381 0000 7047     		bx	lr
+ 382              		.cfi_endproc
+ 383              	.LFE144:
+ 385              		.section	.text.HAL_ADC_ConvHalfCpltCallback,"ax",%progbits
+ 386              		.align	1
+ 387              		.weak	HAL_ADC_ConvHalfCpltCallback
+ 388              		.syntax unified
+ 389              		.thumb
+ 390              		.thumb_func
+ 392              	HAL_ADC_ConvHalfCpltCallback:
+ARM GAS  /tmp/cc6PWc7y.s 			page 25
+
+
+ 393              	.LVL26:
+ 394              	.LFB145:
+1008:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** 
+1009:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** /**
+1010:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   * @brief  Conversion DMA half-transfer callback in non blocking mode 
+1011:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   * @param  hadc ADC handle
+1012:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   * @retval None
+1013:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   */
+1014:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** __weak void HAL_ADC_ConvHalfCpltCallback(ADC_HandleTypeDef* hadc)
+1015:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** {
+ 395              		.loc 1 1015 1 is_stmt 1 view -0
+ 396              		.cfi_startproc
+ 397              		@ args = 0, pretend = 0, frame = 0
+ 398              		@ frame_needed = 0, uses_anonymous_args = 0
+ 399              		@ link register save eliminated.
+1016:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   /* Prevent unused argument(s) compilation warning */
+1017:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   UNUSED(hadc);
+ 400              		.loc 1 1017 3 view .LVU73
+1018:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** 
+1019:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   /* NOTE : This function should not be modified. When the callback is needed,
+1020:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****             function HAL_ADC_ConvHalfCpltCallback must be implemented in the user file.
+1021:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   */
+1022:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** }
+ 401              		.loc 1 1022 1 is_stmt 0 view .LVU74
+ 402 0000 7047     		bx	lr
+ 403              		.cfi_endproc
+ 404              	.LFE145:
+ 406              		.section	.text.HAL_ADC_LevelOutOfWindowCallback,"ax",%progbits
+ 407              		.align	1
+ 408              		.weak	HAL_ADC_LevelOutOfWindowCallback
+ 409              		.syntax unified
+ 410              		.thumb
+ 411              		.thumb_func
+ 413              	HAL_ADC_LevelOutOfWindowCallback:
+ 414              	.LVL27:
+ 415              	.LFB146:
+1023:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** 
+1024:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** /**
+1025:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   * @brief  Analog watchdog callback in non blocking mode. 
+1026:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   * @param  hadc ADC handle
+1027:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   * @retval None
+1028:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   */
+1029:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** __weak void HAL_ADC_LevelOutOfWindowCallback(ADC_HandleTypeDef* hadc)
+1030:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** {
+ 416              		.loc 1 1030 1 is_stmt 1 view -0
+ 417              		.cfi_startproc
+ 418              		@ args = 0, pretend = 0, frame = 0
+ 419              		@ frame_needed = 0, uses_anonymous_args = 0
+ 420              		@ link register save eliminated.
+1031:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   /* Prevent unused argument(s) compilation warning */
+1032:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   UNUSED(hadc);
+ 421              		.loc 1 1032 3 view .LVU76
+1033:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** 
+1034:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   /* NOTE : This function should not be modified. When the callback is needed,
+1035:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****             function HAL_ADC_LevelOoutOfWindowCallback must be implemented in the user file.
+1036:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   */
+1037:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** }
+ARM GAS  /tmp/cc6PWc7y.s 			page 26
+
+
+ 422              		.loc 1 1037 1 is_stmt 0 view .LVU77
+ 423 0000 7047     		bx	lr
+ 424              		.cfi_endproc
+ 425              	.LFE146:
+ 427              		.section	.text.HAL_ADC_ErrorCallback,"ax",%progbits
+ 428              		.align	1
+ 429              		.weak	HAL_ADC_ErrorCallback
+ 430              		.syntax unified
+ 431              		.thumb
+ 432              		.thumb_func
+ 434              	HAL_ADC_ErrorCallback:
+ 435              	.LVL28:
+ 436              	.LFB147:
+1038:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** 
+1039:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** /**
+1040:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   * @brief  ADC error callback in non blocking mode
+1041:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   *        (ADC conversion with interruption or transfer by DMA)
+1042:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   * @param  hadc ADC handle
+1043:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   * @retval None
+1044:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   */
+1045:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** __weak void HAL_ADC_ErrorCallback(ADC_HandleTypeDef *hadc)
+1046:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** {
+ 437              		.loc 1 1046 1 is_stmt 1 view -0
+ 438              		.cfi_startproc
+ 439              		@ args = 0, pretend = 0, frame = 0
+ 440              		@ frame_needed = 0, uses_anonymous_args = 0
+ 441              		@ link register save eliminated.
+1047:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   /* Prevent unused argument(s) compilation warning */
+1048:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   UNUSED(hadc);
+ 442              		.loc 1 1048 3 view .LVU79
+1049:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** 
+1050:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   /* NOTE : This function should not be modified. When the callback is needed,
+1051:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****             function HAL_ADC_ErrorCallback must be implemented in the user file.
+1052:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   */
+1053:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** }
+ 443              		.loc 1 1053 1 is_stmt 0 view .LVU80
+ 444 0000 7047     		bx	lr
+ 445              		.cfi_endproc
+ 446              	.LFE147:
+ 448              		.section	.text.HAL_ADC_ConfigChannel,"ax",%progbits
+ 449              		.align	1
+ 450              		.weak	HAL_ADC_ConfigChannel
+ 451              		.syntax unified
+ 452              		.thumb
+ 453              		.thumb_func
+ 455              	HAL_ADC_ConfigChannel:
+ 456              	.LVL29:
+ 457              	.LFB148:
+1054:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** 
+1055:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** /**
+1056:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   * @}
+1057:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   */
+1058:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** 
+1059:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** /** @defgroup ADC_Exported_Functions_Group3 Peripheral Control functions
+1060:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****  *  @brief    Peripheral Control functions 
+1061:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****  *
+1062:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** @verbatim   
+ARM GAS  /tmp/cc6PWc7y.s 			page 27
+
+
+1063:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****  ===============================================================================
+1064:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****              ##### Peripheral Control functions #####
+1065:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****  ===============================================================================  
+1066:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****     [..]  This section provides functions allowing to:
+1067:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****       (+) Configure channels on regular group
+1068:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****       (+) Configure the analog watchdog
+1069:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****       
+1070:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** @endverbatim
+1071:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   * @{
+1072:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   */
+1073:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** 
+1074:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** /**
+1075:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   * @brief  Configures the the selected channel to be linked to the regular
+1076:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   *         group.
+1077:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   * @note   In case of usage of internal measurement channels:
+1078:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   *         Vbat/VrefInt/TempSensor.
+1079:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   *         The recommended sampling time is at least:
+1080:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   *          - For devices STM32F37x: 17.1us for temperature sensor
+1081:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   *          - For the other STM32F3 devices: 2.2us for each of channels 
+1082:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   *            Vbat/VrefInt/TempSensor.
+1083:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   *         These internal paths can be be disabled using function 
+1084:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   *         HAL_ADC_DeInit().
+1085:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   * @note   Possibility to update parameters on the fly:
+1086:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   *         This function initializes channel into regular group, following  
+1087:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   *         calls to this function can be used to reconfigure some parameters 
+1088:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   *         of structure "ADC_ChannelConfTypeDef" on the fly, without resetting 
+1089:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   *         the ADC.
+1090:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   *         The setting of these parameters is conditioned to ADC state.
+1091:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   *         For parameters constraints, see comments of structure 
+1092:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   *         "ADC_ChannelConfTypeDef".
+1093:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   * @param  hadc ADC handle
+1094:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   * @param  sConfig Structure of ADC channel for regular group.
+1095:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   * @retval HAL status
+1096:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   */
+1097:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** __weak HAL_StatusTypeDef HAL_ADC_ConfigChannel(ADC_HandleTypeDef* hadc, ADC_ChannelConfTypeDef* sCo
+1098:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** {
+ 458              		.loc 1 1098 1 is_stmt 1 view -0
+ 459              		.cfi_startproc
+ 460              		@ args = 0, pretend = 0, frame = 0
+ 461              		@ frame_needed = 0, uses_anonymous_args = 0
+ 462              		@ link register save eliminated.
+1099:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   /* Prevent unused argument(s) compilation warning */
+1100:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   UNUSED(hadc);
+ 463              		.loc 1 1100 3 view .LVU82
+1101:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   UNUSED(sConfig);
+ 464              		.loc 1 1101 3 view .LVU83
+1102:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** 
+1103:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   /* Note : This function is defined into this file for library reference. */
+1104:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   /*        Function content is located into file stm32f3xx_hal_adc_ex.c   */
+1105:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   
+1106:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   /* Return function status */
+1107:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   return HAL_ERROR;
+ 465              		.loc 1 1107 3 view .LVU84
+1108:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** }
+ 466              		.loc 1 1108 1 is_stmt 0 view .LVU85
+ 467 0000 0120     		movs	r0, #1
+ 468              	.LVL30:
+ARM GAS  /tmp/cc6PWc7y.s 			page 28
+
+
+ 469              		.loc 1 1108 1 view .LVU86
+ 470 0002 7047     		bx	lr
+ 471              		.cfi_endproc
+ 472              	.LFE148:
+ 474              		.section	.text.HAL_ADC_AnalogWDGConfig,"ax",%progbits
+ 475              		.align	1
+ 476              		.weak	HAL_ADC_AnalogWDGConfig
+ 477              		.syntax unified
+ 478              		.thumb
+ 479              		.thumb_func
+ 481              	HAL_ADC_AnalogWDGConfig:
+ 482              	.LVL31:
+ 483              	.LFB149:
+1109:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** 
+1110:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** /**
+1111:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   * @brief  Configures the analog watchdog.
+1112:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   * @note   Possibility to update parameters on the fly:
+1113:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   *         This function initializes the selected analog watchdog, following  
+1114:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   *         calls to this function can be used to reconfigure some parameters 
+1115:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   *         of structure "ADC_AnalogWDGConfTypeDef" on the fly, without resetting 
+1116:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   *         the ADC.
+1117:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   *         The setting of these parameters is conditioned to ADC state.
+1118:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   *         For parameters constraints, see comments of structure 
+1119:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   *         "ADC_AnalogWDGConfTypeDef".
+1120:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   * @param  hadc ADC handle
+1121:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   * @param  AnalogWDGConfig Structure of ADC analog watchdog configuration
+1122:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   * @retval HAL status
+1123:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   */
+1124:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** __weak HAL_StatusTypeDef HAL_ADC_AnalogWDGConfig(ADC_HandleTypeDef* hadc, ADC_AnalogWDGConfTypeDef*
+1125:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** {
+ 484              		.loc 1 1125 1 is_stmt 1 view -0
+ 485              		.cfi_startproc
+ 486              		@ args = 0, pretend = 0, frame = 0
+ 487              		@ frame_needed = 0, uses_anonymous_args = 0
+ 488              		@ link register save eliminated.
+1126:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   /* Prevent unused argument(s) compilation warning */
+1127:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   UNUSED(hadc);
+ 489              		.loc 1 1127 3 view .LVU88
+1128:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   UNUSED(AnalogWDGConfig);
+ 490              		.loc 1 1128 3 view .LVU89
+1129:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** 
+1130:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   /* Note : This function is defined into this file for library reference. */
+1131:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   /*        Function content is located into file stm32f3xx_hal_adc_ex.c   */
+1132:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   
+1133:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   /* Return function status */
+1134:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   return HAL_ERROR;
+ 491              		.loc 1 1134 3 view .LVU90
+1135:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** }
+ 492              		.loc 1 1135 1 is_stmt 0 view .LVU91
+ 493 0000 0120     		movs	r0, #1
+ 494              	.LVL32:
+ 495              		.loc 1 1135 1 view .LVU92
+ 496 0002 7047     		bx	lr
+ 497              		.cfi_endproc
+ 498              	.LFE149:
+ 500              		.section	.text.HAL_ADC_GetState,"ax",%progbits
+ 501              		.align	1
+ARM GAS  /tmp/cc6PWc7y.s 			page 29
+
+
+ 502              		.global	HAL_ADC_GetState
+ 503              		.syntax unified
+ 504              		.thumb
+ 505              		.thumb_func
+ 507              	HAL_ADC_GetState:
+ 508              	.LVL33:
+ 509              	.LFB150:
+1136:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** 
+1137:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** /**
+1138:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   * @}
+1139:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   */
+1140:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** 
+1141:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** /** @defgroup ADC_Exported_Functions_Group4 Peripheral State functions
+1142:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****  *  @brief   ADC Peripheral State functions 
+1143:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****  *
+1144:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** @verbatim   
+1145:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****  ===============================================================================
+1146:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****             ##### Peripheral state and errors functions #####
+1147:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****  ===============================================================================
+1148:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****     [..]
+1149:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****     This subsection provides functions to get in run-time the status of the  
+1150:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****     peripheral.
+1151:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****       (+) Check the ADC state
+1152:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****       (+) Check the ADC error code
+1153:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****          
+1154:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** @endverbatim
+1155:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   * @{
+1156:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   */
+1157:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   
+1158:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** /**
+1159:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   * @brief  return the ADC state
+1160:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   * @note   ADC state machine is managed by bitfield, state must be compared
+1161:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   *         with bit by bit.
+1162:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   *         For example:                                                         
+1163:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   *           " if (HAL_IS_BIT_SET(HAL_ADC_GetState(hadc1), HAL_ADC_STATE_REG_BUSY)) "
+1164:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   *           " if (HAL_IS_BIT_SET(HAL_ADC_GetState(hadc1), HAL_ADC_STATE_AWD1)    ) "
+1165:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   * @param  hadc ADC handle
+1166:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   * @retval HAL state
+1167:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   */
+1168:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** uint32_t HAL_ADC_GetState(ADC_HandleTypeDef* hadc)
+1169:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** {
+ 510              		.loc 1 1169 1 is_stmt 1 view -0
+ 511              		.cfi_startproc
+ 512              		@ args = 0, pretend = 0, frame = 0
+ 513              		@ frame_needed = 0, uses_anonymous_args = 0
+ 514              		@ link register save eliminated.
+1170:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   /* Check the parameters */
+1171:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   assert_param(IS_ADC_ALL_INSTANCE(hadc->Instance));
+ 515              		.loc 1 1171 3 view .LVU94
+1172:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   
+1173:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   /* Return ADC state */
+1174:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   return hadc->State;
+ 516              		.loc 1 1174 3 view .LVU95
+ 517              		.loc 1 1174 14 is_stmt 0 view .LVU96
+ 518 0000 006C     		ldr	r0, [r0, #64]
+ 519              	.LVL34:
+1175:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** }
+ARM GAS  /tmp/cc6PWc7y.s 			page 30
+
+
+ 520              		.loc 1 1175 1 view .LVU97
+ 521 0002 7047     		bx	lr
+ 522              		.cfi_endproc
+ 523              	.LFE150:
+ 525              		.section	.text.HAL_ADC_GetError,"ax",%progbits
+ 526              		.align	1
+ 527              		.global	HAL_ADC_GetError
+ 528              		.syntax unified
+ 529              		.thumb
+ 530              		.thumb_func
+ 532              	HAL_ADC_GetError:
+ 533              	.LVL35:
+ 534              	.LFB151:
+1176:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** 
+1177:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** /**
+1178:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   * @brief  Return the ADC error code
+1179:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   * @param  hadc ADC handle
+1180:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   * @retval ADC Error Code
+1181:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   */
+1182:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** uint32_t HAL_ADC_GetError(ADC_HandleTypeDef *hadc)
+1183:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** {
+ 535              		.loc 1 1183 1 is_stmt 1 view -0
+ 536              		.cfi_startproc
+ 537              		@ args = 0, pretend = 0, frame = 0
+ 538              		@ frame_needed = 0, uses_anonymous_args = 0
+ 539              		@ link register save eliminated.
+1184:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c ****   return hadc->ErrorCode;
+ 540              		.loc 1 1184 3 view .LVU99
+ 541              		.loc 1 1184 14 is_stmt 0 view .LVU100
+ 542 0000 406C     		ldr	r0, [r0, #68]
+ 543              	.LVL36:
+1185:Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_adc.c **** }
+ 544              		.loc 1 1185 1 view .LVU101
+ 545 0002 7047     		bx	lr
+ 546              		.cfi_endproc
+ 547              	.LFE151:
+ 549              		.text
+ 550              	.Letext0:
+ 551              		.file 2 "/usr/arm-none-eabi/include/machine/_default_types.h"
+ 552              		.file 3 "/usr/arm-none-eabi/include/sys/_stdint.h"
+ 553              		.file 4 "Inc/CMSIS/Device/ST/STM32F3xx/Include/stm32f303xe.h"
+ 554              		.file 5 "Inc/CMSIS/Device/ST/STM32F3xx/Include/stm32f3xx.h"
+ 555              		.file 6 "Inc/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_def.h"
+ 556              		.file 7 "Inc/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_dma.h"
+ 557              		.file 8 "Inc/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_adc_ex.h"
+ 558              		.file 9 "Inc/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_adc.h"
+ARM GAS  /tmp/cc6PWc7y.s 			page 31
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 stm32f3xx_hal_adc.c
+     /tmp/cc6PWc7y.s:21     .text.HAL_ADC_Init:00000000 $t
+     /tmp/cc6PWc7y.s:27     .text.HAL_ADC_Init:00000000 HAL_ADC_Init
+     /tmp/cc6PWc7y.s:46     .text.HAL_ADC_DeInit:00000000 $t
+     /tmp/cc6PWc7y.s:52     .text.HAL_ADC_DeInit:00000000 HAL_ADC_DeInit
+     /tmp/cc6PWc7y.s:71     .text.HAL_ADC_MspInit:00000000 $t
+     /tmp/cc6PWc7y.s:77     .text.HAL_ADC_MspInit:00000000 HAL_ADC_MspInit
+     /tmp/cc6PWc7y.s:92     .text.HAL_ADC_MspDeInit:00000000 $t
+     /tmp/cc6PWc7y.s:98     .text.HAL_ADC_MspDeInit:00000000 HAL_ADC_MspDeInit
+     /tmp/cc6PWc7y.s:113    .text.HAL_ADC_Start:00000000 $t
+     /tmp/cc6PWc7y.s:119    .text.HAL_ADC_Start:00000000 HAL_ADC_Start
+     /tmp/cc6PWc7y.s:138    .text.HAL_ADC_Stop:00000000 $t
+     /tmp/cc6PWc7y.s:144    .text.HAL_ADC_Stop:00000000 HAL_ADC_Stop
+     /tmp/cc6PWc7y.s:163    .text.HAL_ADC_PollForConversion:00000000 $t
+     /tmp/cc6PWc7y.s:169    .text.HAL_ADC_PollForConversion:00000000 HAL_ADC_PollForConversion
+     /tmp/cc6PWc7y.s:189    .text.HAL_ADC_PollForEvent:00000000 $t
+     /tmp/cc6PWc7y.s:195    .text.HAL_ADC_PollForEvent:00000000 HAL_ADC_PollForEvent
+     /tmp/cc6PWc7y.s:216    .text.HAL_ADC_Start_IT:00000000 $t
+     /tmp/cc6PWc7y.s:222    .text.HAL_ADC_Start_IT:00000000 HAL_ADC_Start_IT
+     /tmp/cc6PWc7y.s:241    .text.HAL_ADC_Stop_IT:00000000 $t
+     /tmp/cc6PWc7y.s:247    .text.HAL_ADC_Stop_IT:00000000 HAL_ADC_Stop_IT
+     /tmp/cc6PWc7y.s:266    .text.HAL_ADC_Start_DMA:00000000 $t
+     /tmp/cc6PWc7y.s:272    .text.HAL_ADC_Start_DMA:00000000 HAL_ADC_Start_DMA
+     /tmp/cc6PWc7y.s:293    .text.HAL_ADC_Stop_DMA:00000000 $t
+     /tmp/cc6PWc7y.s:299    .text.HAL_ADC_Stop_DMA:00000000 HAL_ADC_Stop_DMA
+     /tmp/cc6PWc7y.s:318    .text.HAL_ADC_GetValue:00000000 $t
+     /tmp/cc6PWc7y.s:324    .text.HAL_ADC_GetValue:00000000 HAL_ADC_GetValue
+     /tmp/cc6PWc7y.s:344    .text.HAL_ADC_IRQHandler:00000000 $t
+     /tmp/cc6PWc7y.s:350    .text.HAL_ADC_IRQHandler:00000000 HAL_ADC_IRQHandler
+     /tmp/cc6PWc7y.s:365    .text.HAL_ADC_ConvCpltCallback:00000000 $t
+     /tmp/cc6PWc7y.s:371    .text.HAL_ADC_ConvCpltCallback:00000000 HAL_ADC_ConvCpltCallback
+     /tmp/cc6PWc7y.s:386    .text.HAL_ADC_ConvHalfCpltCallback:00000000 $t
+     /tmp/cc6PWc7y.s:392    .text.HAL_ADC_ConvHalfCpltCallback:00000000 HAL_ADC_ConvHalfCpltCallback
+     /tmp/cc6PWc7y.s:407    .text.HAL_ADC_LevelOutOfWindowCallback:00000000 $t
+     /tmp/cc6PWc7y.s:413    .text.HAL_ADC_LevelOutOfWindowCallback:00000000 HAL_ADC_LevelOutOfWindowCallback
+     /tmp/cc6PWc7y.s:428    .text.HAL_ADC_ErrorCallback:00000000 $t
+     /tmp/cc6PWc7y.s:434    .text.HAL_ADC_ErrorCallback:00000000 HAL_ADC_ErrorCallback
+     /tmp/cc6PWc7y.s:449    .text.HAL_ADC_ConfigChannel:00000000 $t
+     /tmp/cc6PWc7y.s:455    .text.HAL_ADC_ConfigChannel:00000000 HAL_ADC_ConfigChannel
+     /tmp/cc6PWc7y.s:475    .text.HAL_ADC_AnalogWDGConfig:00000000 $t
+     /tmp/cc6PWc7y.s:481    .text.HAL_ADC_AnalogWDGConfig:00000000 HAL_ADC_AnalogWDGConfig
+     /tmp/cc6PWc7y.s:501    .text.HAL_ADC_GetState:00000000 $t
+     /tmp/cc6PWc7y.s:507    .text.HAL_ADC_GetState:00000000 HAL_ADC_GetState
+     /tmp/cc6PWc7y.s:526    .text.HAL_ADC_GetError:00000000 $t
+     /tmp/cc6PWc7y.s:532    .text.HAL_ADC_GetError:00000000 HAL_ADC_GetError
+
+NO UNDEFINED SYMBOLS
