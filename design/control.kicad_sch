@@ -4634,6 +4634,17 @@
 		)
 		(uuid "dfff0607-04c6-43f8-95cf-f0c3f1b033f8")
 	)
+	(text "Breakout some extra GPIOs"
+		(exclude_from_sim no)
+		(at 241.3 88.9 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.1588)
+			)
+		)
+		(uuid "e628fe4b-e289-4316-bc2a-f00ff22cac57")
+	)
 	(text "COMP3_INP"
 		(exclude_from_sim no)
 		(at 234.95 128.27 0)
