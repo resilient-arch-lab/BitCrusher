@@ -3,6 +3,7 @@
 """
 
 import serial
+from time import time
 from dataclasses import dataclass
 from .comms import Protocol, to_msg
 
@@ -24,10 +25,21 @@ class Device:
     serial_conn: serial.Serial  # the port (e.g. "/dev/ttyUSB0") should be passed as param to __init__ so that the port is opened on serial object creation
 
     def __init__(self, port: str = "/dev/ttyUSB0", 
-                 baud_rate: int = 9600) -> None:
+                 baud_rate: int = 9600, serial_timeout: float | None = 3) -> None:
 
-        self.serial_conn = serial.Serial(port, baudrate=baud_rate)
+        self.serial_conn = serial.Serial(port, baudrate=baud_rate, timeout=serial_timeout)
+
+    def _send_msg(self, hdr: bytes, body: bytes):
+        self.serial_conn.write(to_msg(hdr, body))
+    
+    def _get_msg(self):
+        hdr = self.serial_conn.read(1)
+        msg_len = int(self.serial_conn.read(1))
+        body = self.serial_conn.read(msg_len)
+
+
+
 
     def get_state(self) -> str:
-        self.serial_conn.write(to_msg(Protocol.get_state, b""))
+        self._send_msg(Protocol.Headers.get_state.value, b"")
         # Need some kind of method to await a response from the device
