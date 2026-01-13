@@ -12,6 +12,169 @@
 		(comment 2 "Author: George Crane")
 	)
 	(lib_symbols
+		(symbol "Connector:Conn_01x02_Pin"
+			(pin_names
+				(offset 1.016)
+				(hide yes)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "J"
+				(at 0 2.54 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "Conn_01x02_Pin"
+				(at 0 -5.08 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" "~"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" "Generic connector, single row, 01x02, script generated"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_locked" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_keywords" "connector"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_fp_filters" "Connector*:*_1x??_*"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "Conn_01x02_Pin_1_1"
+				(rectangle
+					(start 0.8636 0.127)
+					(end 0 -0.127)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type outline)
+					)
+				)
+				(rectangle
+					(start 0.8636 -2.413)
+					(end 0 -2.667)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type outline)
+					)
+				)
+				(polyline
+					(pts
+						(xy 1.27 0) (xy 0.8636 0)
+					)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 1.27 -2.54) (xy 0.8636 -2.54)
+					)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(pin passive line
+					(at 5.08 0 180)
+					(length 3.81)
+					(name "Pin_1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 5.08 -2.54 180)
+					(length 3.81)
+					(name "Pin_2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
 		(symbol "Connector:Conn_Coaxial"
 			(pin_names
 				(offset 1.016)
@@ -4435,7 +4598,7 @@
 	)
 	(rectangle
 		(start 19.05 20.32)
-		(end 120.65 63.5)
+		(end 90.17 63.5)
 		(stroke
 			(width 0)
 			(type default)
@@ -4480,7 +4643,7 @@
 	)
 	(text "USART1_RX"
 		(exclude_from_sim no)
-		(at 157.48 85.09 0)
+		(at 179.07 84.328 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -4625,7 +4788,7 @@
 	)
 	(text "USART1_TX"
 		(exclude_from_sim no)
-		(at 157.48 82.55 0)
+		(at 179.07 81.788 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -4729,7 +4892,7 @@
 		(uuid "2d48a44f-3a36-4b53-9650-e894f5c91529")
 	)
 	(junction
-		(at 77.47 50.8)
+		(at 64.77 50.8)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "2e5f920b-b866-42fd-ac25-04c72ffb2579")
@@ -4807,7 +4970,7 @@
 		(uuid "b874aa56-ab17-4cb4-94d7-0ac7531ca298")
 	)
 	(junction
-		(at 77.47 44.45)
+		(at 64.77 44.45)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "c40a1328-40e2-4ca6-bdc7-ae206ad3a088")
@@ -4831,7 +4994,7 @@
 		(uuid "db169522-08ed-4bb6-b9e2-f25d1ccee94a")
 	)
 	(junction
-		(at 77.47 36.83)
+		(at 64.77 36.83)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "e47a08a1-8005-49ae-bd74-251d68197ff2")
@@ -4843,7 +5006,7 @@
 		(uuid "e602e3df-524b-4a7f-9f6c-423957a7f356")
 	)
 	(junction
-		(at 77.47 58.42)
+		(at 64.77 58.42)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "eb80b7ba-c0dd-433d-8078-7c6e30256eed")
@@ -4976,7 +5139,7 @@
 	)
 	(wire
 		(pts
-			(xy 73.66 58.42) (xy 77.47 58.42)
+			(xy 60.96 58.42) (xy 64.77 58.42)
 		)
 		(stroke
 			(width 0)
@@ -5036,7 +5199,7 @@
 	)
 	(wire
 		(pts
-			(xy 73.66 33.02) (xy 83.82 33.02)
+			(xy 60.96 33.02) (xy 71.12 33.02)
 		)
 		(stroke
 			(width 0)
@@ -5076,7 +5239,7 @@
 	)
 	(wire
 		(pts
-			(xy 83.82 58.42) (xy 83.82 55.88)
+			(xy 71.12 58.42) (xy 71.12 55.88)
 		)
 		(stroke
 			(width 0)
@@ -5196,7 +5359,7 @@
 	)
 	(wire
 		(pts
-			(xy 173.99 82.55) (xy 179.07 82.55)
+			(xy 167.64 82.55) (xy 179.07 82.55)
 		)
 		(stroke
 			(width 0)
@@ -5206,7 +5369,7 @@
 	)
 	(wire
 		(pts
-			(xy 173.99 85.09) (xy 179.07 85.09)
+			(xy 167.64 85.09) (xy 179.07 85.09)
 		)
 		(stroke
 			(width 0)
@@ -5226,7 +5389,7 @@
 	)
 	(wire
 		(pts
-			(xy 73.66 44.45) (xy 77.47 44.45)
+			(xy 60.96 44.45) (xy 64.77 44.45)
 		)
 		(stroke
 			(width 0)
@@ -5276,7 +5439,7 @@
 	)
 	(wire
 		(pts
-			(xy 77.47 50.8) (xy 78.74 50.8)
+			(xy 64.77 50.8) (xy 66.04 50.8)
 		)
 		(stroke
 			(width 0)
@@ -5326,7 +5489,7 @@
 	)
 	(wire
 		(pts
-			(xy 73.66 25.4) (xy 78.74 25.4)
+			(xy 60.96 25.4) (xy 66.04 25.4)
 		)
 		(stroke
 			(width 0)
@@ -5336,7 +5499,7 @@
 	)
 	(wire
 		(pts
-			(xy 83.82 33.02) (xy 83.82 30.48)
+			(xy 71.12 33.02) (xy 71.12 30.48)
 		)
 		(stroke
 			(width 0)
@@ -5436,7 +5599,7 @@
 	)
 	(wire
 		(pts
-			(xy 73.66 36.83) (xy 77.47 36.83)
+			(xy 60.96 36.83) (xy 64.77 36.83)
 		)
 		(stroke
 			(width 0)
@@ -5646,7 +5809,7 @@
 	)
 	(wire
 		(pts
-			(xy 83.82 44.45) (xy 77.47 44.45)
+			(xy 71.12 44.45) (xy 64.77 44.45)
 		)
 		(stroke
 			(width 0)
@@ -5666,7 +5829,7 @@
 	)
 	(wire
 		(pts
-			(xy 83.82 58.42) (xy 77.47 58.42)
+			(xy 71.12 58.42) (xy 64.77 58.42)
 		)
 		(stroke
 			(width 0)
@@ -5796,7 +5959,7 @@
 	)
 	(wire
 		(pts
-			(xy 77.47 36.83) (xy 78.74 36.83)
+			(xy 64.77 36.83) (xy 66.04 36.83)
 		)
 		(stroke
 			(width 0)
@@ -5886,7 +6049,7 @@
 	)
 	(wire
 		(pts
-			(xy 73.66 50.8) (xy 77.47 50.8)
+			(xy 60.96 50.8) (xy 64.77 50.8)
 		)
 		(stroke
 			(width 0)
@@ -5906,7 +6069,7 @@
 	)
 	(wire
 		(pts
-			(xy 83.82 41.91) (xy 83.82 44.45)
+			(xy 71.12 41.91) (xy 71.12 44.45)
 		)
 		(stroke
 			(width 0)
@@ -6272,7 +6435,7 @@
 	)
 	(global_label "Probe-"
 		(shape passive)
-		(at 73.66 33.02 180)
+		(at 60.96 33.02 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -6282,7 +6445,7 @@
 		)
 		(uuid "36a56a20-45c1-4597-b52f-7838cd2df87c")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 64.7709 33.02 0)
+			(at 52.0709 33.02 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6314,10 +6477,52 @@
 			)
 		)
 	)
+	(global_label "RST"
+		(shape input)
+		(at 29.21 162.56 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "590d14d2-58c7-4931-9bec-076bb4925ea5")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 22.7777 162.56 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
+	)
 	(global_label "USART1_RX"
 		(shape input)
-		(at 173.99 85.09 180)
-		(fields_autoplaced yes)
+		(at 29.21 157.48 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "5e9d334c-2df3-41ec-8386-9ba96b7e309c")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 37.292 157.48 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "USART1_RX"
+		(shape input)
+		(at 167.64 85.09 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -6326,7 +6531,7 @@
 		)
 		(uuid "677af20d-60e1-48ee-8ff2-bed7894f1164")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 160.482 85.09 0)
+			(at 175.722 85.09 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6360,7 +6565,7 @@
 	)
 	(global_label "PulseVS"
 		(shape input)
-		(at 73.66 36.83 180)
+		(at 60.96 36.83 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -6370,7 +6575,7 @@
 		)
 		(uuid "7213e9ac-11a6-4c21-8161-22ad0994a049")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 63.1758 36.83 0)
+			(at 50.4758 36.83 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6404,7 +6609,7 @@
 	)
 	(global_label "Probe+"
 		(shape passive)
-		(at 73.66 25.4 180)
+		(at 60.96 25.4 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -6414,7 +6619,7 @@
 		)
 		(uuid "7b306047-29dc-4532-a905-cc10c76c280a")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 64.7709 25.4 0)
+			(at 52.0709 25.4 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6448,7 +6653,7 @@
 	)
 	(global_label "PulseCS"
 		(shape input)
-		(at 73.66 50.8 180)
+		(at 60.96 50.8 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -6458,7 +6663,51 @@
 		)
 		(uuid "8b29a923-c4d2-44c0-adeb-8ed4531e7fcb")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 62.9944 50.8 0)
+			(at 50.2944 50.8 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "BOOTSEL"
+		(shape input)
+		(at 29.21 165.1 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "939e0ba1-8b42-4c1a-ab95-814525e8ff19")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 17.9396 165.1 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "USART1_TX"
+		(shape output)
+		(at 29.21 154.94 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "9dc52dda-13bb-48d8-b77a-198e62fdb721")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 16.0044 154.94 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6624,7 +6873,7 @@
 	)
 	(global_label "USART1_TX"
 		(shape output)
-		(at 173.99 82.55 180)
+		(at 167.64 82.55 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -6634,7 +6883,7 @@
 		)
 		(uuid "d8926d64-3b82-49d3-949c-1e4e3c3d92a1")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 160.7844 82.55 0)
+			(at 154.4344 82.55 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6961,7 +7210,7 @@
 	)
 	(symbol
 		(lib_id "power:GNDPWR")
-		(at 73.66 58.42 0)
+		(at 60.96 58.42 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -6970,7 +7219,7 @@
 		(fields_autoplaced yes)
 		(uuid "0a168c36-0639-499f-b609-391828360d1f")
 		(property "Reference" "#PWR05"
-			(at 73.66 63.5 0)
+			(at 60.96 63.5 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6979,7 +7228,7 @@
 			)
 		)
 		(property "Value" "GNDHV"
-			(at 73.533 62.23 0)
+			(at 60.833 62.23 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6987,7 +7236,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 73.66 59.69 0)
+			(at 60.96 59.69 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6996,7 +7245,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 73.66 59.69 0)
+			(at 60.96 59.69 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7005,7 +7254,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GNDPWR\" , global ground"
-			(at 73.66 58.42 0)
+			(at 60.96 58.42 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7164,7 +7413,7 @@
 	)
 	(symbol
 		(lib_id "Device:D_TVS")
-		(at 77.47 54.61 90)
+		(at 64.77 54.61 90)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -7172,7 +7421,7 @@
 		(dnp no)
 		(uuid "1b43f7a5-996d-4173-941e-8886dce2fd10")
 		(property "Reference" "D9"
-			(at 74.93 53.3399 90)
+			(at 62.23 53.3399 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7181,7 +7430,7 @@
 			)
 		)
 		(property "Value" "D_TVS"
-			(at 74.93 55.8799 90)
+			(at 62.23 55.8799 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7190,7 +7439,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 77.47 54.61 0)
+			(at 64.77 54.61 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7199,7 +7448,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 77.47 54.61 0)
+			(at 64.77 54.61 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7208,7 +7457,7 @@
 			)
 		)
 		(property "Description" "Bidirectional transient-voltage-suppression diode"
-			(at 77.47 54.61 0)
+			(at 64.77 54.61 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7712,7 +7961,7 @@
 	)
 	(symbol
 		(lib_id "Connector:Conn_Coaxial")
-		(at 83.82 50.8 0)
+		(at 71.12 50.8 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -7721,7 +7970,7 @@
 		(fields_autoplaced yes)
 		(uuid "445020e9-ec3a-438e-a425-6de724e11773")
 		(property "Reference" "J4"
-			(at 87.63 49.8231 0)
+			(at 74.93 49.8231 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7730,7 +7979,7 @@
 			)
 		)
 		(property "Value" "Conn-OScope"
-			(at 87.63 52.3631 0)
+			(at 74.93 52.3631 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7739,7 +7988,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 83.82 50.8 0)
+			(at 71.12 50.8 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7748,7 +7997,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 83.82 50.8 0)
+			(at 71.12 50.8 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7757,7 +8006,7 @@
 			)
 		)
 		(property "Description" "coaxial connector SMA"
-			(at 83.82 50.8 0)
+			(at 71.12 50.8 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8064,6 +8313,76 @@
 			(project "BitCrusher"
 				(path "/e1be550d-9ce6-42b1-a89a-c00b9d7586dd/29f45a98-1f25-4a6e-8231-3aa3a650ea17"
 					(reference "R1")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Connector:Conn_01x02_Pin")
+		(at 34.29 162.56 0)
+		(mirror y)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "6eaff4c1-6f47-4ff5-977f-c1cb0637f67d")
+		(property "Reference" "J8"
+			(at 35.56 162.5599 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Value" "Conn_01x02_Pin"
+			(at 35.56 165.0999 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Footprint" ""
+			(at 34.29 162.56 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 34.29 162.56 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Generic connector, single row, 01x02, script generated"
+			(at 34.29 162.56 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "68fdaa65-2033-42ee-97a7-d9fda0ef1b7e")
+		)
+		(pin "1"
+			(uuid "3b598d12-685b-438f-8e5e-c6465681c8db")
+		)
+		(instances
+			(project "BitCrusher"
+				(path "/e1be550d-9ce6-42b1-a89a-c00b9d7586dd/29f45a98-1f25-4a6e-8231-3aa3a650ea17"
+					(reference "J8")
 					(unit 1)
 				)
 			)
@@ -8837,7 +9156,7 @@
 	)
 	(symbol
 		(lib_id "Connector:Conn_Coaxial")
-		(at 83.82 36.83 0)
+		(at 71.12 36.83 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -8846,7 +9165,7 @@
 		(fields_autoplaced yes)
 		(uuid "99b88106-d11b-49d9-a579-6ccbef4cc8bf")
 		(property "Reference" "J3"
-			(at 87.63 35.8531 0)
+			(at 74.93 35.8531 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8855,7 +9174,7 @@
 			)
 		)
 		(property "Value" "Conn-OScope"
-			(at 87.63 38.3931 0)
+			(at 74.93 38.3931 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8864,7 +9183,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 83.82 36.83 0)
+			(at 71.12 36.83 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8873,7 +9192,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 83.82 36.83 0)
+			(at 71.12 36.83 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8882,7 +9201,7 @@
 			)
 		)
 		(property "Description" "coaxial connector SMA"
-			(at 83.82 36.83 0)
+			(at 71.12 36.83 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9217,6 +9536,76 @@
 		)
 	)
 	(symbol
+		(lib_id "Connector:Conn_01x02_Pin")
+		(at 34.29 154.94 0)
+		(mirror y)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "b796160c-b329-4a12-93a0-5f64ac505add")
+		(property "Reference" "J7"
+			(at 35.56 154.9399 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Value" "Conn_01x02_Pin"
+			(at 35.56 157.4799 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Footprint" ""
+			(at 34.29 154.94 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 34.29 154.94 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Generic connector, single row, 01x02, script generated"
+			(at 34.29 154.94 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "0577c55c-a2bf-4efd-acfc-662b6c5d3a52")
+		)
+		(pin "1"
+			(uuid "b7d209e3-7bd1-4fcb-a144-a4c414045410")
+		)
+		(instances
+			(project "BitCrusher"
+				(path "/e1be550d-9ce6-42b1-a89a-c00b9d7586dd/29f45a98-1f25-4a6e-8231-3aa3a650ea17"
+					(reference "J7")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "power:GND")
 		(at 24.13 129.54 0)
 		(unit 1)
@@ -9355,7 +9744,7 @@
 	)
 	(symbol
 		(lib_id "Device:D_TVS")
-		(at 77.47 40.64 90)
+		(at 64.77 40.64 90)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -9363,7 +9752,7 @@
 		(dnp no)
 		(uuid "c043f57c-ce4d-4518-ae8b-a0dfd7b5504a")
 		(property "Reference" "D8"
-			(at 74.93 39.3699 90)
+			(at 62.23 39.3699 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9372,7 +9761,7 @@
 			)
 		)
 		(property "Value" "D_TVS"
-			(at 74.93 41.9099 90)
+			(at 62.23 41.9099 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9381,7 +9770,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 77.47 40.64 0)
+			(at 64.77 40.64 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9390,7 +9779,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 77.47 40.64 0)
+			(at 64.77 40.64 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9399,7 +9788,7 @@
 			)
 		)
 		(property "Description" "Bidirectional transient-voltage-suppression diode"
-			(at 77.47 40.64 0)
+			(at 64.77 40.64 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9424,7 +9813,7 @@
 	)
 	(symbol
 		(lib_id "Connector:Conn_Coaxial")
-		(at 83.82 25.4 0)
+		(at 71.12 25.4 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -9433,7 +9822,7 @@
 		(fields_autoplaced yes)
 		(uuid "c4bb8fc6-d2d0-4739-97b5-b8fa0cdd339c")
 		(property "Reference" "J5"
-			(at 87.63 24.4231 0)
+			(at 74.93 24.4231 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9442,7 +9831,7 @@
 			)
 		)
 		(property "Value" "SMA"
-			(at 87.63 26.9631 0)
+			(at 74.93 26.9631 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9451,7 +9840,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 83.82 25.4 0)
+			(at 71.12 25.4 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9460,7 +9849,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 83.82 25.4 0)
+			(at 71.12 25.4 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9469,7 +9858,7 @@
 			)
 		)
 		(property "Description" "coaxial connector SMA"
-			(at 83.82 25.4 0)
+			(at 71.12 25.4 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9785,7 +10174,7 @@
 	)
 	(symbol
 		(lib_id "power:GNDPWR")
-		(at 73.66 44.45 0)
+		(at 60.96 44.45 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -9794,7 +10183,7 @@
 		(fields_autoplaced yes)
 		(uuid "f564b1d8-e37f-4129-9636-5e5857373335")
 		(property "Reference" "#PWR04"
-			(at 73.66 49.53 0)
+			(at 60.96 49.53 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9803,7 +10192,7 @@
 			)
 		)
 		(property "Value" "GNDHV"
-			(at 73.533 48.26 0)
+			(at 60.833 48.26 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9811,7 +10200,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 73.66 45.72 0)
+			(at 60.96 45.72 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9820,7 +10209,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 73.66 45.72 0)
+			(at 60.96 45.72 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9829,7 +10218,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GNDPWR\" , global ground"
-			(at 73.66 44.45 0)
+			(at 60.96 44.45 0)
 			(effects
 				(font
 					(size 1.27 1.27)

@@ -4634,7 +4634,7 @@
 				(hide yes)
 			)
 		)
-		(property "Value" "+22V_Drive"
+		(property "Value" "+22V"
 			(at 83.82 95.25 0)
 			(effects
 				(font
@@ -6281,7 +6281,7 @@
 				(hide yes)
 			)
 		)
-		(property "Value" "+22V_Trans"
+		(property "Value" "+22V"
 			(at 58.42 59.69 0)
 			(effects
 				(font
