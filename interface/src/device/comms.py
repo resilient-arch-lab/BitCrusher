@@ -5,12 +5,6 @@
 import serial
 from enum import Enum
 
-# Convert header and body to formatted UART message
-def to_msg(hdr: bytes, body: bytes) -> bytes:
-    body_len = len(body)
-    msg: bytes = hdr + bytes(body_len) + body
-    return msg
-
 # The BitCrusher UART protocol
 class Protocol:
     # headers: dict[str, bytes] = {
@@ -77,3 +71,9 @@ class Protocol:
 
         return hdr_val, body
         
+# Convert header and body to formatted UART message
+def to_msg(hdr: bytes | Protocol.Headers, body: bytes) -> bytes:
+    body_len = len(body)
+    hdr = hdr if type(hdr)==bytes else hdr.value
+    msg: bytes = hdr + bytes(body_len) + body
+    return msg
