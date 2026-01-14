@@ -5139,6 +5139,16 @@
 	)
 	(wire
 		(pts
+			(xy 214.63 113.03) (xy 237.49 113.03)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "1a2d4865-dc39-493d-a14c-f3a6987e7aaa")
+	)
+	(wire
+		(pts
 			(xy 60.96 58.42) (xy 64.77 58.42)
 		)
 		(stroke
@@ -6411,28 +6421,6 @@
 			)
 		)
 	)
-	(global_label "PulseEN"
-		(shape output)
-		(at 237.49 118.11 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "33fb5957-10b6-414e-b536-d79845949ed1")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 248.1556 118.11 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-	)
 	(global_label "Probe-"
 		(shape passive)
 		(at 60.96 33.02 180)
@@ -6862,6 +6850,28 @@
 		(uuid "d4db5ec3-812b-4c21-9c6a-5717db4727e3")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 248.3371 67.31 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "PulseEN"
+		(shape output)
+		(at 237.49 113.03 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "d6936ab4-21f8-4683-a753-582e056da6cb")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 248.1556 113.03 0)
 			(effects
 				(font
 					(size 1.27 1.27)

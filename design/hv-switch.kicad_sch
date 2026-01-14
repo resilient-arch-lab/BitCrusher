@@ -1594,16 +1594,6 @@
 		)
 		(uuid "94c93b35-db94-4d39-853d-3a07e18a16bc")
 	)
-	(text "Provides a buffer between \nProbe+ flybacks and the \ngate driver reference\n|\nV"
-		(exclude_from_sim no)
-		(at 212.344 105.664 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-		)
-		(uuid "da8a16de-a4eb-45e4-8a9e-87a68f3e12f9")
-	)
 	(junction
 		(at 243.84 106.68)
 		(diameter 0)
@@ -1771,6 +1761,16 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "d4ad3ef1-5b20-4f9b-a33a-e3fb752c43cd")
+	)
+	(wire
+		(pts
+			(xy 111.76 29.21) (xy 111.76 31.75)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "029322f4-3350-4187-964a-0f0b507db256")
 	)
 	(wire
 		(pts
@@ -2474,16 +2474,6 @@
 	)
 	(wire
 		(pts
-			(xy 111.76 30.48) (xy 111.76 31.75)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "b0ecc9b7-286e-4a1f-b857-ef6c72cf3d20")
-	)
-	(wire
-		(pts
 			(xy 118.11 63.5) (xy 111.76 63.5)
 		)
 		(stroke
@@ -2501,16 +2491,6 @@
 			(type default)
 		)
 		(uuid "b8c3880a-b1b9-4af3-896c-820dd99f9189")
-	)
-	(wire
-		(pts
-			(xy 111.76 20.32) (xy 111.76 22.86)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "ba6c60e1-4fb4-468a-9fcf-407f9ae50c03")
 	)
 	(wire
 		(pts
@@ -3588,7 +3568,7 @@
 	)
 	(symbol
 		(lib_id "power:VDD")
-		(at 111.76 20.32 0)
+		(at 111.76 29.21 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -3597,7 +3577,7 @@
 		(fields_autoplaced yes)
 		(uuid "2818c3d5-4676-4ff8-b777-de155df56ec3")
 		(property "Reference" "#PWR034"
-			(at 111.76 24.13 0)
+			(at 111.76 33.02 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3606,7 +3586,7 @@
 			)
 		)
 		(property "Value" "+6V"
-			(at 111.76 15.24 0)
+			(at 111.76 24.13 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3614,7 +3594,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 111.76 20.32 0)
+			(at 111.76 29.21 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3623,7 +3603,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 111.76 20.32 0)
+			(at 111.76 29.21 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3632,7 +3612,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"VDD\""
-			(at 111.76 20.32 0)
+			(at 111.76 29.21 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4184,76 +4164,6 @@
 		)
 	)
 	(symbol
-		(lib_id "Device:R")
-		(at 111.76 26.67 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "73fd4ed9-1753-42b9-8ce5-0dc99dfefcaf")
-		(property "Reference" "R20"
-			(at 114.3 25.3999 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "R"
-			(at 114.3 27.9399 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" ""
-			(at 109.982 26.67 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 111.76 26.67 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Resistor"
-			(at 111.76 26.67 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "2"
-			(uuid "589681ae-c953-4d08-9884-6414fd97d76a")
-		)
-		(pin "1"
-			(uuid "edb5ac58-1b93-47cb-9e88-55161033f6b7")
-		)
-		(instances
-			(project ""
-				(path "/e1be550d-9ce6-42b1-a89a-c00b9d7586dd/a0344160-5a1e-4ade-9868-d857907b9d6d"
-					(reference "R20")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "power:VDD")
 		(at 68.58 39.37 0)
 		(unit 1)
@@ -4747,7 +4657,7 @@
 				(justify right)
 			)
 		)
-		(property "Value" "R"
+		(property "Value" "0"
 			(at 204.47 133.3499 0)
 			(effects
 				(font
@@ -4972,7 +4882,7 @@
 				)
 			)
 		)
-		(property "Value" "R"
+		(property "Value" "0.1"
 			(at 212.09 115.57 90)
 			(effects
 				(font
@@ -5041,7 +4951,7 @@
 				(justify right)
 			)
 		)
-		(property "Value" "R"
+		(property "Value" "0"
 			(at 223.52 133.3499 0)
 			(effects
 				(font
