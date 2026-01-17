@@ -4892,12 +4892,6 @@
 		(uuid "2d48a44f-3a36-4b53-9650-e894f5c91529")
 	)
 	(junction
-		(at 64.77 50.8)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "2e5f920b-b866-42fd-ac25-04c72ffb2579")
-	)
-	(junction
 		(at 224.79 38.1)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -4914,6 +4908,12 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "42c39273-0331-4a8a-9b41-5990068a87d4")
+	)
+	(junction
+		(at 64.77 50.8)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "58eab229-f7ec-4612-aa6a-9ddd34779210")
 	)
 	(junction
 		(at 48.26 106.68)
@@ -5000,16 +5000,16 @@
 		(uuid "e47a08a1-8005-49ae-bd74-251d68197ff2")
 	)
 	(junction
+		(at 64.77 58.42)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "e48f5439-8cc4-4324-b8cf-98fc30f8293d")
+	)
+	(junction
 		(at 148.59 38.1)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "e602e3df-524b-4a7f-9f6c-423957a7f356")
-	)
-	(junction
-		(at 64.77 58.42)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "eb80b7ba-c0dd-433d-8078-7c6e30256eed")
 	)
 	(junction
 		(at 194.31 40.64)
@@ -5149,16 +5149,6 @@
 	)
 	(wire
 		(pts
-			(xy 60.96 58.42) (xy 64.77 58.42)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "1cc47ac5-43a6-43e1-9ef0-0e6d15ba3724")
-	)
-	(wire
-		(pts
 			(xy 196.85 140.97) (xy 196.85 139.7)
 		)
 		(stroke
@@ -5216,6 +5206,16 @@
 			(type default)
 		)
 		(uuid "268ad83e-ddb0-4def-9349-6d678f3ebf16")
+	)
+	(wire
+		(pts
+			(xy 64.77 58.42) (xy 71.12 58.42)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "2798d449-77fb-4d3b-8d64-233303e16e9d")
 	)
 	(wire
 		(pts
@@ -5326,6 +5326,16 @@
 			(type default)
 		)
 		(uuid "3fc0168f-8a87-472a-ba76-e68288be1d17")
+	)
+	(wire
+		(pts
+			(xy 64.77 50.8) (xy 66.04 50.8)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "430a1170-f1c3-4e54-9e6a-56678b440eba")
 	)
 	(wire
 		(pts
@@ -5449,7 +5459,7 @@
 	)
 	(wire
 		(pts
-			(xy 64.77 50.8) (xy 66.04 50.8)
+			(xy 60.96 50.8) (xy 64.77 50.8)
 		)
 		(stroke
 			(width 0)
@@ -5839,7 +5849,7 @@
 	)
 	(wire
 		(pts
-			(xy 71.12 58.42) (xy 64.77 58.42)
+			(xy 60.96 58.42) (xy 64.77 58.42)
 		)
 		(stroke
 			(width 0)
@@ -6056,16 +6066,6 @@
 			(type default)
 		)
 		(uuid "bd57451b-1b85-408b-a9e6-8bc8052e7ee2")
-	)
-	(wire
-		(pts
-			(xy 60.96 50.8) (xy 64.77 50.8)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "c0f05a92-06f6-4839-a2b5-36fb3c26f231")
 	)
 	(wire
 		(pts
@@ -7312,7 +7312,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
 			(at 214.3252 36.83 0)
 			(effects
 				(font
@@ -7422,75 +7422,6 @@
 		)
 	)
 	(symbol
-		(lib_id "Device:D_TVS")
-		(at 64.77 54.61 90)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "1b43f7a5-996d-4173-941e-8886dce2fd10")
-		(property "Reference" "D9"
-			(at 62.23 53.3399 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "D_TVS"
-			(at 62.23 55.8799 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" ""
-			(at 64.77 54.61 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 64.77 54.61 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Bidirectional transient-voltage-suppression diode"
-			(at 64.77 54.61 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "2"
-			(uuid "3fd8def6-4ec8-45e3-a379-1eabad0c8e40")
-		)
-		(pin "1"
-			(uuid "dd409880-a848-48cc-9547-8538e6c4e692")
-		)
-		(instances
-			(project "BitCrusher"
-				(path "/e1be550d-9ce6-42b1-a89a-c00b9d7586dd/29f45a98-1f25-4a6e-8231-3aa3a650ea17"
-					(reference "D9")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "power:GND")
 		(at 135.89 39.37 0)
 		(unit 1)
@@ -7585,7 +7516,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
 			(at 102.5652 92.71 0)
 			(effects
 				(font
@@ -7654,7 +7585,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
 			(at 65.7352 83.82 0)
 			(effects
 				(font
@@ -7790,7 +7721,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
 			(at 149.5552 36.83 0)
 			(effects
 				(font
@@ -7903,6 +7834,75 @@
 		)
 	)
 	(symbol
+		(lib_id "Device:D_TVS")
+		(at 64.77 54.61 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "2cc9919b-76c3-4f40-a1dc-d9895f64cd62")
+		(property "Reference" "D9"
+			(at 62.23 53.3399 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "SP3031-01ETG"
+			(at 62.23 55.8799 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Diode_SMD:D_SOD-882"
+			(at 64.77 54.61 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://www.littelfuse.com/assetdocs/tvs-diode-arrays-sp3031-datasheet?assetguid=2f63a461-bb1a-458d-97ab-119532f3b1f4"
+			(at 64.77 54.61 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Bidirectional transient-voltage-suppression diode"
+			(at 64.77 54.61 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "12d3b0d1-3378-4a76-9705-e78eeb30da04")
+		)
+		(pin "1"
+			(uuid "a2dc0dda-18c6-45bd-acc4-7fe9e53d6b95")
+		)
+		(instances
+			(project "BitCrusher"
+				(path "/e1be550d-9ce6-42b1-a89a-c00b9d7586dd/29f45a98-1f25-4a6e-8231-3aa3a650ea17"
+					(reference "D9")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Device:R")
 		(at 173.99 54.61 270)
 		(unit 1)
@@ -7927,7 +7927,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
 			(at 173.99 52.832 90)
 			(effects
 				(font
@@ -8134,7 +8134,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
 			(at 136.8552 36.83 0)
 			(effects
 				(font
@@ -8268,7 +8268,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
 			(at 57.15 98.298 90)
 			(effects
 				(font
@@ -8356,7 +8356,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical"
 			(at 34.29 162.56 0)
 			(effects
 				(font
@@ -8493,7 +8493,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
 			(at 187.6552 36.83 0)
 			(effects
 				(font
@@ -9113,7 +9113,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
 			(at 147.0152 59.69 0)
 			(effects
 				(font
@@ -9262,7 +9262,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
 			(at 162.2552 36.83 0)
 			(effects
 				(font
@@ -9573,7 +9573,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical"
 			(at 34.29 154.94 0)
 			(effects
 				(font
@@ -9710,7 +9710,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
 			(at 174.9552 36.83 0)
 			(effects
 				(font
@@ -9770,7 +9770,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "D_TVS"
+		(property "Value" "SP3031-01ETG"
 			(at 62.23 41.9099 90)
 			(effects
 				(font
@@ -9779,7 +9779,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Diode_SMD:D_SOD-882"
 			(at 64.77 40.64 0)
 			(effects
 				(font
@@ -9788,7 +9788,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "~"
+		(property "Datasheet" "https://www.littelfuse.com/assetdocs/tvs-diode-arrays-sp3031-datasheet?assetguid=2f63a461-bb1a-458d-97ab-119532f3b1f4"
 			(at 64.77 40.64 0)
 			(effects
 				(font
@@ -9988,7 +9988,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
 			(at 72.0852 83.82 0)
 			(effects
 				(font
@@ -10122,7 +10122,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
 			(at 57.15 100.838 90)
 			(effects
 				(font
@@ -10343,7 +10343,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
 			(at 225.7552 36.83 0)
 			(effects
 				(font
@@ -10412,7 +10412,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
 			(at 59.3852 83.82 0)
 			(effects
 				(font
