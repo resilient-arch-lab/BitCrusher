@@ -3,6 +3,7 @@
 """
 
 import serial
+from dataclasses import dataclass
 from enum import Enum
 
 # The BitCrusher UART protocol
@@ -43,6 +44,11 @@ class Protocol:
         get_arm_param = b"\xa2"
         disarm = b"\xaf"
     
+    @dataclass(frozen=True)
+    class Message:
+        hdr: Protocol.Headers
+        body: bytes
+
     # error checking responses (returned from device)
     # body of responses used to return any necessary values to commands sent from host
     success: bytes = b"\x01"
@@ -62,14 +68,21 @@ class Protocol:
     disarm: bytes = b"\xaf"
 
     @classmethod
-    def parse_from_bytes(cls, hdr: bytes, body: bytes):
+    def parse_from_bytes(cls, hdr: bytes, body: bytes) -> Message:
         try:
             hdr_val = cls.Headers(hdr)
         except KeyError as e:
             e.add_note(f"Failed to parse message: \"{hex(int(hdr))}\" is invalid header")
             raise e
 
-        return hdr_val, body
+        return Protocol.Message(hdr_val, body)
+    
+    @staticmethod
+    def to_bytes(msg: Protocol.Message) -> bytes:
+        hdr = msg.hdr.value
+        body = msg.body
+        out = hdr + bytes(len(body)) + body
+        return out
         
 # Convert header and body to formatted UART message
 def to_msg(hdr: bytes | Protocol.Headers, body: bytes) -> bytes:

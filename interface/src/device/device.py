@@ -3,10 +3,18 @@
 """
 
 from enum import Enum
-import serial
+import serial, ftd2xx
 from time import time
-from dataclasses import dataclass
-from .comms import Protocol, to_msg
+from dataclasses import dataclass, fields
+from .comms import Protocol
+# Message = Protocol.Message
+# Headers = Protocol.Headers
+
+class DeviceError(Exception):
+    pass
+
+class DeviceResponseError(DeviceError):
+    pass
 
 class Device:
     # Device States
@@ -26,39 +34,74 @@ class Device:
         trigger_mode: int = 0  # 0: continuous, 1: single
         trigger_src: int = 0  # 0: HW, 1: FW
 
-    serial_conn: serial.Serial  # the port (e.g. "/dev/ttyUSB0") should be passed as param to __init__ so that the port is opened on serial object creation
+    ftdi_conn: ftd2xx.FTD2XX
+    # serial_conn: serial.Serial  # the port (e.g. "/dev/ttyUSB0") should be passed as param to __init__ so that the port is opened on serial object creation
     arming_config: ArmingConfig
     state: States
 
     def __init__(self, port: str = "/dev/ttyUSB0", 
-                 baud_rate: int = 9600, serial_timeout: float | None = 3) -> None:
+                 baud_rate: int = 9600, serial_timeout: float = 3) -> None:
 
-        self.serial_conn = serial.Serial(port, baudrate=baud_rate, timeout=serial_timeout)
-        self.arming_config = self.ArmingConfig()
-        self.state = self.States.null
+        print("Searching for BitCrusher...")
 
-    def _write_msg(self, hdr: Protocol.Headers, body: bytes):
-        self.serial_conn.write(to_msg(hdr, body))
+        # Initialize serial connection
+        # self.serial_conn = serial.Serial(port, baudrate=baud_rate, timeout=serial_timeout)
+        ftdi_dev_ids = ftd2xx.listDevices()
+        if ftdi_dev_ids is None:
+            raise DeviceError("Found no FTDI USB bridge devices")
+        if len(ftdi_dev_ids) > 1:
+            print("Warning: found multiple FTDI devices")
+        for i, id in enumerate(ftdi_dev_ids):
+            ftdi_dev = ftd2xx.openEx(id)
+            print(f"Device {i}: {ftdi_dev.getDeviceInfo()}")
+            # TODO: this should check if the device is a BitCrusher, and set self.ftdi_conn
+            self.ftdi_conn = ftdi_dev
+            break
+        
+        # TODO: raise error if device isn't found
+        if not self.ftdi_conn:
+            raise DeviceError("No BitCrusher found")
+        # Finish configuring FTDI device
+        print("Connecting to BitCrusher...")
+        self.ftdi_conn.setTimeouts(int(serial_timeout*1000), int(serial_timeout*1000))
+        
+        # Check for device activity by getting device state
+        self.state = self.get_state()
+
+        self.arming_config = Device.ArmingConfig()
+
+    def _write_msg(self, msg: Protocol.Message):
+        # self.serial_conn.write(to_msg(hdr, body))
+        self.ftdi_conn.write(Protocol.to_bytes(msg))
     
-    def _read_msg(self, expects: Protocol.Headers | None = None) -> tuple[Protocol.Headers, bytes]:
-        hdr = self.serial_conn.read(1)
-        msg_len = int(self.serial_conn.read(1))
-        body = self.serial_conn.read(msg_len)
-        hdr, body = Protocol.parse_from_bytes(hdr, body)
+    def _read_msg(self, expects: Protocol.Headers | None = None) -> Protocol.Message:
+        hdr = self.ftdi_conn.read(1)
+        msg_len = int(self.ftdi_conn.read(1))
+        body = self.ftdi_conn.read(msg_len)
+        msg = Protocol.parse_from_bytes(hdr, body)
         if (expects != None and hdr != expects):
-            raise Exception(f"Expected response with header \"{expects}\", but got \"{hdr}\"")
-        return hdr, body
-
-    def _send_msg(self, hdr: Protocol.Headers, body: bytes, expects: Protocol.Headers | None = None):
-        self._write_msg(hdr, body)
-        resp_hdr, resp_body = self._read_msg(expects=expects)
-
+            raise DeviceResponseError(f"Expected response with header \"{expects}\", but got \"{hdr}\"")
+        return msg
+    
+    def _send_msg(self, msg: Protocol.Message, expects: Protocol.Headers | None = None) -> Protocol.Message:
+        self._write_msg(msg)
+        msg = self._read_msg(expects=expects)
+        return msg
 
     def get_state(self) -> States:
-        self._write_msg(Protocol.Headers.get_state, b"")
-        hdr, body = self._read_msg(expects=Protocol.Headers.success)
+        msg = Protocol.Message(Protocol.Headers.get_state, b"")
+        self._write_msg(msg)
+        resp = self._read_msg(expects=Protocol.Headers.success)
         try:
-            state = self.States(body)
+            state = self.States(resp.body)
         except KeyError as e:
-            e.add_note(f"Invalid device state: {body}")
+            e.add_note(f"Invalid device state: {resp.body}")
+            raise e
         return state
+
+    def _apply_arming_config(self):
+        for i, param in enumerate(fields(Device.ArmingConfig)):
+            msg = Protocol.Message(Protocol.Headers.set_arm_param, param.name.encode("utf-8"))
+            resp = self._send_msg(msg, Protocol.Headers.success)
+
+    
