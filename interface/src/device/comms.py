@@ -6,47 +6,30 @@ import serial
 from dataclasses import dataclass
 from enum import Enum
 
+class Headers(Enum):
+    success = b"\x01"
+    error = b"\x02"
+
+    # set global device parameters (sent from host)
+    get_param = b"\x11"
+    set_param = b"\x12"
+
+    # get device state (sent from host)
+    get_state = b"\x21"
+
+    # arming / disarming commands 
+    arm = b"\xa0"
+    set_arm_param = b"\xa1"
+    get_arm_param = b"\xa2"
+    disarm = b"\xaf"
+
 # The BitCrusher UART protocol
 class Protocol:
-    # headers: dict[str, bytes] = {
-    #     # error checking responses (returned from device)
-    #     "success": b"\x01",
-    #     "error": b"\x02",
-
-    #     # set global device parameters (sent from host)
-    #     "get_param": b"\x11",
-    #     "set_param": b"\x12",
-
-    #     # get device state (sent from host)
-    #     "get_state": b"\x21",
-
-    #     # arming / disarming commands 
-    #     "arm": b"\xa0",
-    #     "set_arm_param": b"\xa1",
-    #     "get_arm_param": b"\xa2",
-    #     "disarm": b"\xaf"
-    # }
-
-    class Headers(Enum):
-        success = b"\x01"
-        error = b"\x02"
-
-        # set global device parameters (sent from host)
-        get_param = b"\x11"
-        set_param = b"\x12"
-
-        # get device state (sent from host)
-        get_state = b"\x21"
-
-        # arming / disarming commands 
-        arm = b"\xa0"
-        set_arm_param = b"\xa1"
-        get_arm_param = b"\xa2"
-        disarm = b"\xaf"
+    Headers = Headers
     
     @dataclass(frozen=True)
     class Message:
-        hdr: Protocol.Headers
+        hdr: Headers
         body: bytes
 
     # error checking responses (returned from device)
@@ -75,15 +58,16 @@ class Protocol:
             e.add_note(f"Failed to parse message: \"{hex(int(hdr))}\" is invalid header")
             raise e
 
-        return Protocol.Message(hdr_val, body)
+        return cls.Message(hdr_val, body)
     
     @staticmethod
-    def to_bytes(msg: Protocol.Message) -> bytes:
+    def to_bytes(msg: Message) -> bytes:
         hdr = msg.hdr.value
         body = msg.body
         out = hdr + bytes(len(body)) + body
         return out
-        
+
+
 # Convert header and body to formatted UART message
 def to_msg(hdr: bytes | Protocol.Headers, body: bytes) -> bytes:
     body_len = len(body)
