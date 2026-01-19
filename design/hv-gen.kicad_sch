@@ -3183,6 +3183,16 @@
 		)
 		(uuid "068ef471-e12b-4428-a9f8-e3a1b2b9a9d5")
 	)
+	(text "Use series resistor network to\nincrease effective voltage rating.\nHelps avoid sourcing weird resistors"
+		(exclude_from_sim no)
+		(at 142.494 31.242 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+		(uuid "24f3610d-401b-4494-b621-2b3b0e7c1eec")
+	)
 	(text "Flyback Plant"
 		(exclude_from_sim no)
 		(at 146.05 53.34 0)
@@ -5851,6 +5861,76 @@
 		)
 	)
 	(symbol
+		(lib_id "Device:R")
+		(at 170.18 24.13 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "92f21a46-a965-4ac0-8984-06370855470f")
+		(property "Reference" "R24"
+			(at 172.72 22.8599 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "8.2M"
+			(at 172.72 25.3999 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" ""
+			(at 168.402 24.13 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 170.18 24.13 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 170.18 24.13 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "8cffd3fa-03b9-44d2-ab4a-cd1d76ef78cc")
+		)
+		(pin "1"
+			(uuid "a81a43ee-dc3f-4f7a-8c79-9a7b3ef03268")
+		)
+		(instances
+			(project ""
+				(path "/e1be550d-9ce6-42b1-a89a-c00b9d7586dd/1666a107-a514-488b-8729-5533040b5f76"
+					(reference "R24")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Device:C")
 		(at 82.55 72.39 0)
 		(unit 1)
@@ -6257,6 +6337,76 @@
 			(project "BitCrusher"
 				(path "/e1be550d-9ce6-42b1-a89a-c00b9d7586dd/1666a107-a514-488b-8729-5533040b5f76"
 					(reference "CBank2")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:R")
+		(at 170.18 31.75 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "c56c3382-d8d8-4ae7-a665-8585f95ff981")
+		(property "Reference" "R25"
+			(at 172.72 30.4799 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "1.8M"
+			(at 172.72 33.0199 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" ""
+			(at 168.402 31.75 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 170.18 31.75 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 170.18 31.75 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "c00d70fe-ccd7-4c80-aac6-cea0f70a4fa6")
+		)
+		(pin "1"
+			(uuid "ccbf1f23-1e19-4ca1-9427-9b8daf71c339")
+		)
+		(instances
+			(project "BitCrusher"
+				(path "/e1be550d-9ce6-42b1-a89a-c00b9d7586dd/1666a107-a514-488b-8729-5533040b5f76"
+					(reference "R25")
 					(unit 1)
 				)
 			)
