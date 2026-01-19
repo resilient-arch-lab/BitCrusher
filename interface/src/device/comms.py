@@ -66,11 +66,3 @@ class Protocol:
         body = msg.body
         out = hdr + bytes(len(body)) + body
         return out
-
-
-# Convert header and body to formatted UART message
-def to_msg(hdr: bytes | Protocol.Headers, body: bytes) -> bytes:
-    body_len = len(body)
-    hdr = hdr if type(hdr)==bytes else hdr.value
-    msg: bytes = hdr + bytes(body_len) + body
-    return msg

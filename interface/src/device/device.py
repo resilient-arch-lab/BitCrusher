@@ -3,12 +3,26 @@
 """
 
 from enum import Enum
+from typing import Callable
 import serial, ftd2xx
 from time import time
 from dataclasses import dataclass, fields
 from .comms import Protocol
 # Message = Protocol.Message
 # Headers = Protocol.Headers
+
+# The idea is to check the each property against its constraints with 
+# a constraint checking function (the lambda). The most important thing
+# is that the device itself doesn't use a bad config though, so this 
+# isn't super important.  
+class ConstrainedArmingConfig:
+    voltage: tuple[int, Callable] = (0, lambda x: x>=100 and x<=500)
+    trigger_polarity: tuple[int, Callable] = (0, lambda x: x in [0, 1])  # 0: low, 1: high
+    trigger_mode: tuple[int, Callable] = (0, lambda x: x in [0, 1])  # 0: continuous, 1: single
+    trigger_src: tuple[int, Callable] = (0, lambda x: x in [0, 1])  # 0: HW, 1: FW
+
+    
+
 
 class DeviceError(Exception):
     pass
