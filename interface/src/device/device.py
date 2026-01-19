@@ -64,6 +64,7 @@ class Device:
         # Finish configuring FTDI device
         print("Connecting to BitCrusher...")
         self.ftdi_conn.setTimeouts(int(serial_timeout*1000), int(serial_timeout*1000))
+        self.ftdi_conn.setBaudRate(baud_rate)
         
         # Check for device activity by getting device state
         self.state = self.get_state()
@@ -99,9 +100,36 @@ class Device:
             raise e
         return state
 
+    # To change device arm config:
+    #   modify device.arming_config members as desired
+    #   call _apply_arming_config()
     def _apply_arming_config(self):
         for i, param in enumerate(fields(Device.ArmingConfig)):
             msg = Protocol.Message(Protocol.Headers.set_arm_param, param.name.encode("utf-8"))
             resp = self._send_msg(msg, Protocol.Headers.success)
 
+    # configure reset, boot mode, and VBUS_Sense (make it boot normally)
+    def _config_ft230x_gpio(self):
+        # ucMask: Required value for bit mode mask. This sets up which bits are inputs and outputs. A bit value of
+        # 0 sets the corresponding pin to an input, a bit value of 1 sets the corresponding pin to an output.
+        # In the case of CBUS Bit Bang, the upper nibble of this value controls which pins are inputs and outputs,
+        # while the lower nibble controls which of the outputs are high and low.
+        # ucMode: Mode value. Can be one of the following:
+        # 0x0 = Reset
+        # 0x1 = Asynchronous Bit Bang
+        # 0x2 = MPSSE (FT2232, FT2232H, FT4232H and FT232H devices only)
+        # 0x4 = Synchronous Bit Bang (FT232R, FT245R, FT2232, FT2232H, FT4232H and FT232H devices only)
+        # 0x8 = MCU Host Bus Emulation Mode (FT2232, FT2232H, FT4232H and FT232H devices only)
+        # 0x10 = Fast Opto-Isolated Serial Mode (FT2232, FT2232H, FT4232H and FT232H devices only)
+        # 0x20 = CBUS Bit Bang Mode (FT232R and FT232H devices only)
+        # 0x40 = Single Channel Synchronous 245 FIFO Mode (FT2232H and FT232H devices only)
+        # 0: Reset, 1: Bootsel, 2: NC, 3: VBUS sense
+        self.ftdi_conn.setBitMode(0b00110001, 0x20)  # set CBUS0,1 to output; CBUS0 high, CBUS1 low
+        # TODO: not sure how to configure VBUS_Sense
+
     
+    def _config_ft230x(self):
+        # TODO: set power descriptor to 0, since device is self powered
+        # I can't figure out how to do this manually, so I might have to try it
+        # with the FTProg utility first
+        ...
