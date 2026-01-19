@@ -74,7 +74,7 @@ void SystemClock_Config(void);
 /* USER CODE BEGIN 0 */
 // Get message from UART, decode into msg_hdr, msg_len, and msg_body vars
 // returns 1 on error, 0 on success
-int get_raw_message(void) {
+int get_message(void) {
   // get header byte, validate
   HAL_StatusTypeDef res = HAL_UART_Receive(&huart1, &msg_hdr, 1, 1000);
   if (res != HAL_OK || !is_valid_header(msg_hdr)) return 1;
@@ -104,6 +104,8 @@ int send_message(void) {
   if (res != HAL_OK) return 1;
   return 0;
 }
+
+
 /* USER CODE END 0 */
 
 /**
@@ -140,7 +142,7 @@ int main(void)
     // UART loop
     // HAL_UART_Transmit(&huart1, (uint8_t *)tmp_str, 8, 100);
     // HAL_Delay(1000);
-    int res = get_raw_message();
+    int res = get_message();
     if (res) {
       HAL_UART_Transmit(&huart1, (uint8_t *)tmp_str, 6, 100);
     } else {
