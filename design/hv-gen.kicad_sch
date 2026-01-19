@@ -4626,6 +4626,76 @@
 		)
 	)
 	(symbol
+		(lib_id "Device:R")
+		(at 177.8 24.13 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "14b124fb-9b0e-410f-8a80-062aed8ccbbb")
+		(property "Reference" "R25"
+			(at 180.34 22.8599 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "2M, 150V"
+			(at 180.34 25.3999 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" ""
+			(at 176.022 24.13 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 177.8 24.13 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 177.8 24.13 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "45e75816-a218-49d9-82bf-d4ea806cd3fd")
+		)
+		(pin "1"
+			(uuid "6d6a3ffa-b405-43cf-98ac-b02d6d833cf5")
+		)
+		(instances
+			(project "BitCrusher"
+				(path "/e1be550d-9ce6-42b1-a89a-c00b9d7586dd/1666a107-a514-488b-8729-5533040b5f76"
+					(reference "R25")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "power:VDD")
 		(at 83.82 100.33 0)
 		(unit 1)
@@ -5862,16 +5932,16 @@
 	)
 	(symbol
 		(lib_id "Device:R")
-		(at 170.18 24.13 0)
+		(at 177.8 8.89 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
 		(fields_autoplaced yes)
-		(uuid "92f21a46-a965-4ac0-8984-06370855470f")
-		(property "Reference" "R24"
-			(at 172.72 22.8599 0)
+		(uuid "9f3800fb-9f21-4862-8102-d3754170bf18")
+		(property "Reference" "R26"
+			(at 180.34 7.6199 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5879,8 +5949,8 @@
 				(justify left)
 			)
 		)
-		(property "Value" "8.2M"
-			(at 172.72 25.3999 0)
+		(property "Value" "2M, 150V"
+			(at 180.34 10.1599 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5889,7 +5959,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 168.402 24.13 90)
+			(at 176.022 8.89 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5898,7 +5968,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 170.18 24.13 0)
+			(at 177.8 8.89 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5907,7 +5977,7 @@
 			)
 		)
 		(property "Description" "Resistor"
-			(at 170.18 24.13 0)
+			(at 177.8 8.89 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5916,15 +5986,85 @@
 			)
 		)
 		(pin "2"
-			(uuid "8cffd3fa-03b9-44d2-ab4a-cd1d76ef78cc")
+			(uuid "bbfa0cfc-ae61-4fe0-a77f-29cb5e33ace6")
 		)
 		(pin "1"
-			(uuid "a81a43ee-dc3f-4f7a-8c79-9a7b3ef03268")
+			(uuid "e87ff60d-98ab-46ed-aaff-baa8ff5c83f2")
 		)
 		(instances
-			(project ""
+			(project "BitCrusher"
 				(path "/e1be550d-9ce6-42b1-a89a-c00b9d7586dd/1666a107-a514-488b-8729-5533040b5f76"
-					(reference "R24")
+					(reference "R26")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:R")
+		(at 177.8 1.27 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "a25aaf38-1ae6-44b3-8014-3898166e7587")
+		(property "Reference" "R28"
+			(at 180.34 -0.0001 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "2M, 150V"
+			(at 180.34 2.5399 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" ""
+			(at 176.022 1.27 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 177.8 1.27 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 177.8 1.27 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "ad4d75b1-c5b9-4914-9be2-8910ddef3dd3")
+		)
+		(pin "1"
+			(uuid "77f071c7-b863-4704-9dd9-f463b20b2b84")
+		)
+		(instances
+			(project "BitCrusher"
+				(path "/e1be550d-9ce6-42b1-a89a-c00b9d7586dd/1666a107-a514-488b-8729-5533040b5f76"
+					(reference "R28")
 					(unit 1)
 				)
 			)
@@ -6343,76 +6483,6 @@
 		)
 	)
 	(symbol
-		(lib_id "Device:R")
-		(at 170.18 31.75 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "c56c3382-d8d8-4ae7-a665-8585f95ff981")
-		(property "Reference" "R25"
-			(at 172.72 30.4799 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "1.8M"
-			(at 172.72 33.0199 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" ""
-			(at 168.402 31.75 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 170.18 31.75 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Resistor"
-			(at 170.18 31.75 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "2"
-			(uuid "c00d70fe-ccd7-4c80-aac6-cea0f70a4fa6")
-		)
-		(pin "1"
-			(uuid "ccbf1f23-1e19-4ca1-9427-9b8daf71c339")
-		)
-		(instances
-			(project "BitCrusher"
-				(path "/e1be550d-9ce6-42b1-a89a-c00b9d7586dd/1666a107-a514-488b-8729-5533040b5f76"
-					(reference "R25")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "power:VDD")
 		(at 58.42 64.77 0)
 		(unit 1)
@@ -6564,6 +6634,76 @@
 			(project ""
 				(path "/e1be550d-9ce6-42b1-a89a-c00b9d7586dd/1666a107-a514-488b-8729-5533040b5f76"
 					(reference "T1")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:R")
+		(at 177.8 16.51 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "d4bb270b-59ad-4793-8169-168b5855e4c3")
+		(property "Reference" "R27"
+			(at 180.34 15.2399 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "2M, 150V"
+			(at 180.34 17.7799 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" ""
+			(at 176.022 16.51 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 177.8 16.51 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 177.8 16.51 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "97e2ba41-ea78-428d-8e3e-298ee1279beb")
+		)
+		(pin "1"
+			(uuid "5f82a7c8-49ad-43bb-900b-d543f0eaea8d")
+		)
+		(instances
+			(project "BitCrusher"
+				(path "/e1be550d-9ce6-42b1-a89a-c00b9d7586dd/1666a107-a514-488b-8729-5533040b5f76"
+					(reference "R27")
 					(unit 1)
 				)
 			)
@@ -6915,6 +7055,76 @@
 			(project "BitCrusher"
 				(path "/e1be550d-9ce6-42b1-a89a-c00b9d7586dd/1666a107-a514-488b-8729-5533040b5f76"
 					(reference "CBank5")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:R")
+		(at 177.8 31.75 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "ef3a0073-39b4-40fe-9c88-801f97c53d59")
+		(property "Reference" "R24"
+			(at 180.34 30.4799 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "2M, 150V"
+			(at 180.34 33.0199 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" ""
+			(at 176.022 31.75 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 177.8 31.75 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 177.8 31.75 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "c77d3e2f-84e1-4d55-98b4-c2e1607d322a")
+		)
+		(pin "1"
+			(uuid "de7a7eb2-3018-4c4d-915f-1c09b6d00bea")
+		)
+		(instances
+			(project ""
+				(path "/e1be550d-9ce6-42b1-a89a-c00b9d7586dd/1666a107-a514-488b-8729-5533040b5f76"
+					(reference "R24")
 					(unit 1)
 				)
 			)
