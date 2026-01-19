@@ -97,10 +97,21 @@ Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_tim.c \
 Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_tim_ex.c \
 Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_uart.c \
 Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_uart_ex.c \
+Src/adc.c \
+Src/comp.c \
+Src/dac.c \
+Src/dma.c \
+Src/flyback_control.c \
+Src/gpio.c \
 Src/main.c \
+Src/protocol.c \
 Src/stm32f3xx_hal_msp.c \
 Src/stm32f3xx_it.c \
-Src/system_stm32f3xx.c
+Src/syscalls.c \
+Src/sysmem.c \
+Src/system_stm32f3xx.c \
+Src/tim.c \
+Src/usart.c
 
 
 CXX_SOURCES = \
@@ -213,27 +224,9 @@ C_INCLUDES =  \
 -IInc/CMSIS/DSP/DSP_Lib_TestSuite/Common/inc/templates \
 -IInc/CMSIS/DSP/DSP_Lib_TestSuite/Common/inc/transform_tests \
 -IInc/CMSIS/DSP/DSP_Lib_TestSuite/RefLibs/inc \
--IInc/CMSIS/DSP/Examples/ARM/arm_convolution_example \
--IInc/CMSIS/DSP/Examples/ARM/arm_fir_example \
--IInc/CMSIS/DSP/Examples/ARM/arm_graphic_equalizer_example \
--IInc/CMSIS/DSP/Examples/ARM/arm_linear_interp_example \
--IInc/CMSIS/DSP/Examples/ARM/arm_matrix_example \
--IInc/CMSIS/DSP/Examples/ARM/arm_signal_converge_example \
 -IInc/CMSIS/DSP/Include \
 -IInc/CMSIS/Device/ST/STM32F3xx/Include \
 -IInc/CMSIS/Include \
--IInc/CMSIS/NN/Examples/ARM/arm_nn_examples/cifar10 \
--IInc/CMSIS/NN/Examples/ARM/arm_nn_examples/cifar10/RTE/Compiler \
--IInc/CMSIS/NN/Examples/ARM/arm_nn_examples/cifar10/RTE/_ARMCM0 \
--IInc/CMSIS/NN/Examples/ARM/arm_nn_examples/cifar10/RTE/_ARMCM3 \
--IInc/CMSIS/NN/Examples/ARM/arm_nn_examples/cifar10/RTE/_ARMCM4_FP \
--IInc/CMSIS/NN/Examples/ARM/arm_nn_examples/cifar10/RTE/_ARMCM7_SP \
--IInc/CMSIS/NN/Examples/ARM/arm_nn_examples/gru \
--IInc/CMSIS/NN/Examples/ARM/arm_nn_examples/gru/RTE/Compiler \
--IInc/CMSIS/NN/Examples/ARM/arm_nn_examples/gru/RTE/_ARMCM0 \
--IInc/CMSIS/NN/Examples/ARM/arm_nn_examples/gru/RTE/_ARMCM3 \
--IInc/CMSIS/NN/Examples/ARM/arm_nn_examples/gru/RTE/_ARMCM4_FP \
--IInc/CMSIS/NN/Examples/ARM/arm_nn_examples/gru/RTE/_ARMCM7_SP \
 -IInc/CMSIS/NN/Include \
 -IInc/CMSIS/NN/NN_Lib_Tests/nn_test \
 -IInc/CMSIS/NN/NN_Lib_Tests/nn_test/RTE/_ARMCM0 \

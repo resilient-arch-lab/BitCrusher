@@ -22,9 +22,17 @@
 #include "comp.h"
 #include "dac.h"
 #include "dma.h"
+#include "stm32f3xx_hal.h"
+#include "stm32f3xx_hal_def.h"
+#include "stm32f3xx_hal_uart.h"
 #include "tim.h"
 #include "usart.h"
 #include "gpio.h"
+#include "protocol.h"
+#include <stddef.h>
+#include <stdint.h>
+#include <stdio.h>
+#include <string.h>
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
@@ -49,6 +57,10 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
+uint8_t uart_buf[MSG_MAX_LEN];
+msg_hdr_t msg_hdr;
+msg_len_t msg_len;
+uint8_t msg_body[BODY_MAX_LEN];
 
 /* USER CODE END PV */
 
@@ -60,7 +72,38 @@ void SystemClock_Config(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
+// Get message from UART, decode into msg_hdr, msg_len, and msg_body vars
+// returns 1 on error, 0 on success
+int get_raw_message(void) {
+  // get header byte, validate
+  HAL_StatusTypeDef res = HAL_UART_Receive(&huart1, &msg_hdr, 1, 1000);
+  if (res != HAL_OK || !is_valid_header(msg_hdr)) return 1;
 
+  // get length byte
+  res = HAL_UART_Receive(&huart1, &msg_len, 1, 100);
+  if (res != HAL_OK) return 1;
+
+  // get the message body
+  res = HAL_UART_Receive(&huart1, msg_body, (uint16_t )msg_len, 100);
+  if (res != HAL_OK) return 1;
+  return 0;
+}
+
+// Encode message from msg_hdr, msg_len, and msg_body, and send over UART
+// returns 1 on error, 0 on success
+int send_message(void) {
+  // validate header, format message
+  if (!is_valid_header(msg_hdr)) return 1;
+  uart_buf[0] = msg_hdr;
+  uart_buf[1] = msg_len;
+  memcpy((void *)uart_buf+2, (void *)msg_body, msg_len);
+
+  // send over UART
+  // TODO: error check
+  HAL_StatusTypeDef res = HAL_UART_Transmit(&huart1, uart_buf, (uint16_t)msg_len+2, 100);
+  if (res != HAL_OK) return 1;
+  return 0;
+}
 /* USER CODE END 0 */
 
 /**
@@ -90,13 +133,24 @@ int main(void)
   MX_TIM3_Init();
   MX_USART1_UART_Init();
 
+  char *tmp_str = "Error\n";
+
   /* USER CODE BEGIN 2 */
   while (1) {
     // UART loop
-    
+    // HAL_UART_Transmit(&huart1, (uint8_t *)tmp_str, 8, 100);
+    // HAL_Delay(1000);
+    int res = get_raw_message();
+    if (res) {
+      HAL_UART_Transmit(&huart1, (uint8_t *)tmp_str, 6, 100);
+    } else {
+      res = send_message();  // send the same message back
+    }
+    HAL_Delay(100);
   }
-
 }
+
+
 
 /**
   * @brief System Clock Configuration
