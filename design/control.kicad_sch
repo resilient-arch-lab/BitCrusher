@@ -5044,6 +5044,10 @@
 		(uuid "a5efd1d9-a64e-45ef-9eaf-6cadaac33d08")
 	)
 	(no_connect
+		(at 109.22 116.84)
+		(uuid "c8887915-e288-4864-b7df-a5b60c5f060c")
+	)
+	(no_connect
 		(at 214.63 59.69)
 		(uuid "d4288780-61e0-47af-9e9d-03ada88e53a9")
 	)
