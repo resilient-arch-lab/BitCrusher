@@ -4698,7 +4698,7 @@
 		)
 		(uuid "573364b8-a47e-4011-ba47-bf1db4ae65ba")
 	)
-	(text "DAC1_OUT1"
+	(text "DAC1_OUT1 (3V)"
 		(exclude_from_sim no)
 		(at 216.408 59.944 0)
 		(effects
@@ -7795,7 +7795,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
 			(at 113.03 132.842 90)
 			(effects
 				(font
@@ -9923,7 +9923,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
 			(at 102.87 132.842 90)
 			(effects
 				(font
