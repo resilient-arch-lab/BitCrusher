@@ -29,10 +29,12 @@
 #include "usart.h"
 #include "gpio.h"
 #include "protocol.h"
+#include "arming.h"
 #include <stddef.h>
 #include <stdint.h>
 #include <stdio.h>
 #include <string.h>
+#include <sys/_pthreadtypes.h>
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
@@ -61,6 +63,13 @@ uint8_t uart_buf[MSG_MAX_LEN];
 msg_hdr_t msg_hdr;
 msg_len_t msg_len;
 uint8_t msg_body[BODY_MAX_LEN];
+
+arming_config_t arming_config = {
+  0,
+  1,
+  0,
+  0
+};
 
 /* USER CODE END PV */
 
@@ -104,6 +113,30 @@ int send_message(void) {
   if (res != HAL_OK) return 1;
   return 0;
 }
+
+int process_command(void) {
+  switch (msg_hdr) {
+    case HDR_GET_ARM_PARAM: {
+      if (msg_len != 1) return 1;
+      switch ((int )msg_body[0]) {
+        case 0: 
+      }
+    }
+  }
+}
+
+int get_arm_param(void) {
+  if (msg_len != 1) return 1;
+
+  switch ((int )msg_body[0]) {
+    case 0: {
+      uint16_t voltage = arming_config.voltage;
+      break;
+    }
+  }
+}
+
+
 
 
 /* USER CODE END 0 */
