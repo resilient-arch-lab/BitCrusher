@@ -51,14 +51,17 @@ end
     end
 
     eqs = Equation[
-        P ~ v * i
+        P ~ v * i,
     ]
 
     sys = System(eqs, t, vars, pars; name, systems)
     return extend(sys, resistor)
 end
 
-function PowerResistorTB() 
+@component function PowerResistorTB(; name)
+    pars = @parameters begin
+    end
+
     systems = @named begin
         resistor = PowerResistor()
         ground = Ground()
@@ -66,20 +69,30 @@ function PowerResistorTB()
         magnitude = Constant(k = 1.0)
     end
 
+    # vars = @variables begin
+    #     P(t), [description = "Resistor Power Disipation"]
+    #     v(t), [description = "Resistor Voltage Drop"]
+    # end
+
     eqs = Equation[
         source.V ~ magnitude.output,
         source.n ~ ground.g ~ resistor.n,
         source.p ~ resistor.p
     ]
 
-    @named sys = System(eqs, t, [], []; systems=systems)
+    sys = System(eqs, t; name=name, systems=systems)
+    return sys
+end
+
+function test_power_resistor()
+    @named sys = PowerResistorTB()
     model = mtkcompile(sys)
     prob = ODEProblem(model, Pair[], (0, 10))
     sol = solve(prob)
 
-    plot(sol, idxs = [model.resistor.v, model.resistor.P],
-    title = "RC Circuit Demonstration",
-    labels = ["Resistor voltage" "Resistor power dissipation"])
+    plot(sol, idxs = [model.v, model.P],
+        title = "RC Circuit Demonstration",
+        labels = ["Resistor voltage" "Resistor power dissipation"])
 end
 
 @named test_network = SeriesNetwork(10)
