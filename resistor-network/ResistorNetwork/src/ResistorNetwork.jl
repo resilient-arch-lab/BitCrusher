@@ -3,6 +3,7 @@ module ResistorNetwork
 using ModelingToolkit
 using Plots
 using OrdinaryDiffEq
+using Combinatorics
 
 using ModelingToolkitStandardLibrary.Electrical
 using ModelingToolkitStandardLibrary.Blocks: Constant, Step, Sine
@@ -33,13 +34,14 @@ using ModelingToolkit: t_nounits as t
     return extend(sys, oneport)
 end
 
-@component function PowerResistor(R=1.0, P_max=0.5; name)
+@component function PowerResistor(R=1.0, P_max=0.5, V_max=500; name)
     @named resistor = Resistor()
     @unpack v, i = resistor
 
     pars = @parameters begin
         R = R
         P_max = P_max
+        V_max = V_max
     end
 
     systems = @named begin
@@ -92,6 +94,7 @@ end
 function find_resistor_network(resistor::System, R_V_max::Real, R_P_max::Real)
     ESR = resistor.R
     P = resistor.P_max
+    V_max = resistor.V_max
 
     # Calculate network parallel size
     n_parallel = cld(P, R_P_max)
@@ -105,7 +108,29 @@ function find_resistor_network(resistor::System, R_V_max::Real, R_P_max::Real)
     #   - Made of only E24 values
 
     
+    
 
+end
+
+# Works for getting accurate networks, but I need to add logic so it handles
+# max voltage and power constraints
+function find_series_network(ESR::Real, V_max::Real, R_V_max::Real, R_P_max::Real)
+    E24_bases = [1.0 1.1 1.2 1.3 1.5 1.6 1.8 2.0 2.2 2.4 2.7 3.0 3.3 3.6 3.9 4.3 4.7 5.1 5.6 6.2 6.8 7.5 8.2 9.1]
+    E24_decades = [1e-2 1e-1 1 1e1 1e2 1e3 1e4 1e5 1e6]
+    ESR_decade = floor(Int, log10(ESR))
+    close_decades = [1*10^(ESR_decade-1) 1*10^(ESR_decade) 1*10^(ESR_decade+1)]
+    options = E24_bases' * close_decades  # [base, decade]
+
+    out = []
+
+    for n in 1:4
+        cmbs = collect(with_replacement_combinations(options, n))
+        esrs = vec(sum(stack(cmbs), dims=1))
+        error = abs.(esrs.-ESR)
+        best_idx = argmin(error)
+        best_error = ((esrs[best_idx] - ESR)/ESR) * 100
+        println("Best option for $n resistors: $(cmbs[best_idx]) ($best_error% error)")
+    end
 end
 
 end # module ResistorNetwork
