@@ -118,7 +118,7 @@ function find_series_network(ESR::Real, V_max::Real, R_V_max::Real, R_P_max::Rea
     E24_bases = [1.0 1.1 1.2 1.3 1.5 1.6 1.8 2.0 2.2 2.4 2.7 3.0 3.3 3.6 3.9 4.3 4.7 5.1 5.6 6.2 6.8 7.5 8.2 9.1]
     E24_decades = [1e-2 1e-1 1 1e1 1e2 1e3 1e4 1e5 1e6]
     ESR_decade = floor(Int, log10(ESR))
-    close_decades = [1*10^(ESR_decade-1) 1*10^(ESR_decade) 1*10^(ESR_decade+1)]
+    close_decades = [1*10^(ESR_decade-2) 1*10^(ESR_decade-1) 1*10^(ESR_decade)]
     options = E24_bases' * close_decades  # [base, decade]
 
     out = []
@@ -131,6 +131,16 @@ function find_series_network(ESR::Real, V_max::Real, R_V_max::Real, R_P_max::Rea
         best_error = ((esrs[best_idx] - ESR)/ESR) * 100
         println("Best option for $n resistors: $(cmbs[best_idx]) ($best_error% error)")
     end
+
+    # Exhaustive parameter search
+    # for n in 1:4
+    #     cmbs = collect(with_replacement_combinations(options, n))
+    #     esrs = vec(sum(stack(cmbs), dims=1))
+    #     error = abs.(esrs.-ESR)
+    #     best_idx = argmin(error)
+    #     best_error = ((esrs[best_idx] - ESR)/ESR) * 100
+    #     println("Best option for $n resistors: $(cmbs[best_idx]) ($best_error% error)")
+    # end
 end
 
 end # module ResistorNetwork
