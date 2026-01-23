@@ -115,11 +115,11 @@ end
 # Works for getting accurate networks, but I need to add logic so it handles
 # max voltage and power constraints
 function find_series_network(ESR::Real, V_max::Real, R_V_max::Real, R_P_max::Real)
-    E24_bases = [1.0 1.1 1.2 1.3 1.5 1.6 1.8 2.0 2.2 2.4 2.7 3.0 3.3 3.6 3.9 4.3 4.7 5.1 5.6 6.2 6.8 7.5 8.2 9.1]
-    E24_decades = [1e-2 1e-1 1 1e1 1e2 1e3 1e4 1e5 1e6]
+    E24_bases = [1.0, 1.1, 1.2, 1.3, 1.5, 1.6, 1.8, 2.0, 2.2, 2.4, 2.7, 3.0, 3.3, 3.6, 3.9, 4.3, 4.7, 5.1, 5.6, 6.2, 6.8, 7.5, 8.2, 9.1]
+    E24_decades = [1e-2, 1e-1, 1, 1e1, 1e2, 1e3, 1e4, 1e5, 1e6]
     ESR_decade = floor(Int, log10(ESR))
     close_decades = [1*10^(ESR_decade-2) 1*10^(ESR_decade-1) 1*10^(ESR_decade)]
-    options = E24_bases' * close_decades  # [base, decade]
+    options = E24_bases * close_decades  # [base, decade]
 
     out = []
 
@@ -132,15 +132,23 @@ function find_series_network(ESR::Real, V_max::Real, R_V_max::Real, R_P_max::Rea
         println("Best option for $n resistors: $(cmbs[best_idx]) ($best_error% error)")
     end
 
+
     # Exhaustive parameter search
-    # for n in 1:4
-    #     cmbs = collect(with_replacement_combinations(options, n))
-    #     esrs = vec(sum(stack(cmbs), dims=1))
-    #     error = abs.(esrs.-ESR)
-    #     best_idx = argmin(error)
-    #     best_error = ((esrs[best_idx] - ESR)/ESR) * 100
-    #     println("Best option for $n resistors: $(cmbs[best_idx]) ($best_error% error)")
-    # end
+    for n in 1:4
+        n_combinations = binomial(prod(size(options)) + n - 1, n)
+        esrs = Vector{Float}(undef, n_combinations)
+        best_cmb = nothing; best_error = nothing;
+        # cmbs = collect(with_replacement_combinations(options, n))
+        for (i, cmb) in enumerate(with_replacement_combinations(options, n))
+            # Calculate ESR and error
+            esr_i = sum(cmb)
+            esr_error = ((esr_i - ESR)/ESR)*100  # percent error
+
+            # Check that network satisfies R_V_max and R_P_max constraints
+            
+        end
+        println("Best option for $n resistors: $(cmbs[best_idx]) ($best_error% error)")
+    end
 end
 
 end # module ResistorNetwork
