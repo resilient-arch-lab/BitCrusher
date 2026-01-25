@@ -1,96 +1,99 @@
 module ResistorNetwork
 
-using ModelingToolkit
-import ModelingToolkit: parameter_values, parameter_index, parameters
-using Plots
-using OrdinaryDiffEq
+# using ModelingToolkit
+# import ModelingToolkit: parameter_values, parameter_index, parameters
+# using Plots
+# using OrdinaryDiffEq
 using Combinatorics
+using Atomix
 
-using ModelingToolkitStandardLibrary.Electrical
-using ModelingToolkitStandardLibrary.Blocks: Constant, Step, Sine
-using ModelingToolkit: t_nounits as t
+# using ModelingToolkitStandardLibrary.Electrical
+# using ModelingToolkitStandardLibrary.Blocks: Constant, Step, Sine
+# using ModelingToolkit: t_nounits as t
 
-@component function SeriesNetwork(ESR = 1.0; name)
-    @named oneport = OnePort()
-    @unpack v, i = oneport
+export find_resistor_network
 
-    pars = @parameters begin
-        ESR = ESR
-    end
+# @component function SeriesNetwork(ESR = 1.0; name)
+#     @named oneport = OnePort()
+#     @unpack v, i = oneport
 
-    systems = @named begin
-        r1 = Resistor(R=ESR/2)
-        r2 = Resistor(R=ESR/2)
-    end
+#     pars = @parameters begin
+#         ESR = ESR
+#     end
 
-    vars = @variables begin
+#     systems = @named begin
+#         r1 = Resistor(R=ESR/2)
+#         r2 = Resistor(R=ESR/2)
+#     end
+
+#     vars = @variables begin
         
-    end
+#     end
 
-    eqs = Equation[
-        v ~ r1.v + r2.v
-    ]
+#     eqs = Equation[
+#         v ~ r1.v + r2.v
+#     ]
 
-    sys = System(eqs, t, vars, pars; name, systems)
-    return extend(sys, oneport)
-end
+#     sys = System(eqs, t, vars, pars; name, systems)
+#     return extend(sys, oneport)
+# end
 
-@component function PowerResistor(R=1.0, P_max=0.5, V_max=500; name)
-    @named resistor = Resistor()
-    @unpack v, i = resistor
+# @component function PowerResistor(R=1.0, P_max=0.5, V_max=500; name)
+#     @named resistor = Resistor()
+#     @unpack v, i = resistor
 
-    pars = @parameters begin
-        R = R
-        P_max = P_max
-        V_max = V_max
-    end
+#     pars = @parameters begin
+#         R = R
+#         P_max = P_max
+#         V_max = V_max
+#     end
 
-    systems = @named begin
+#     systems = @named begin
         
-    end
+#     end
 
-    vars = @variables begin
-        P(t), [description = "Power disipation"]
-    end
+#     vars = @variables begin
+#         P(t), [description = "Power disipation"]
+#     end
 
-    eqs = Equation[
-        P ~ v * i,
-    ]
+#     eqs = Equation[
+#         P ~ v * i,
+#     ]
 
-    sys = System(eqs, t, vars, pars; name, systems)
-    return extend(sys, resistor)
-end
+#     sys = System(eqs, t, vars, pars; name, systems)
+#     return extend(sys, resistor)
+# end
 
-function PowerResistorTB()
-    systems = @named begin
-        magnitude = Sine(offset = 1, amplitude = 10, frequency = 5)
-        source = Voltage()
-        resistor = PowerResistor()
-        capacitor = Capacitor(C = 1, v = 0.0)
-        ground = Ground()
-    end
+# function PowerResistorTB()
+#     systems = @named begin
+#         magnitude = Sine(offset = 1, amplitude = 10, frequency = 5)
+#         source = Voltage()
+#         resistor = PowerResistor()
+#         capacitor = Capacitor(C = 1, v = 0.0)
+#         ground = Ground()
+#     end
 
-    eqs = [
-        connect(magnitude.output, source.V),
-        connect(resistor.n, source.n, capacitor.n, ground.g),
-        connect(resistor.p, source.p, capacitor.p),
-    ]
+#     eqs = [
+#         connect(magnitude.output, source.V),
+#         connect(resistor.n, source.n, capacitor.n, ground.g),
+#         connect(resistor.p, source.p, capacitor.p),
+#     ]
 
-    @named sys = System(eqs, t; systems=systems)
-    return sys
-end
+#     @named sys = System(eqs, t; systems=systems)
+#     return sys
+# end
 
-# Works now!
-function test_power_resistor()
-    sys = PowerResistorTB()
-    model = mtkcompile(sys)
-    prob = ODEProblem(model, Pair[], (0, 10))
-    sol = solve(prob)
+# # Works now!
+# function test_power_resistor()
+#     sys = PowerResistorTB()
+#     model = mtkcompile(sys)
+#     prob = ODEProblem(model, Pair[], (0, 10))
+#     sol = solve(prob)
 
-    plot(sol, idxs = [model.resistor.v, model.resistor.P],
-        title = "Power Resistor",
-        labels = ["Resistor voltage" "Resistor power dissipation"])
-end
+#     plot(sol, idxs = [model.resistor.v, model.resistor.P],
+#         title = "Power Resistor",
+#         labels = ["Resistor voltage" "Resistor power dissipation"])
+# end
 
 # Works for getting accurate networks, but I need to add logic so it handles
 # max voltage and power constraints
@@ -104,39 +107,36 @@ function find_series_network(ESR::Real, V_max::Real, I_max::Real, R_V_max::Real,
     # Exhaustive parameter search
     best_cmb = -1; best_error = Inf64
     best_R_Vs = Vector{Float64}(undef, n_resistors); best_R_Ps = Vector{Float64}(undef, n_resistors); 
-    best_idx = -1
     n_candidates = 0
     R_Vs = Vector{Float64}(undef, n_resistors)
     none_found = true
 
-    for (i, cmb) in enumerate(with_replacement_combinations(options, n_resistors))
+    for cmb in with_replacement_combinations(options, n_resistors)
         # Calculate ESR and error
         # cmb = [cmb...]
         esr_i = sum(cmb)
         esr_error = ((esr_i - ESR)/ESR)*100  # percent error
 
         # Check that network satisfies R_V_max constraints
-        R_Vs .= V_max.*(cmb./esr_i)
-        
         # Check R_P_max constraints
+        # If everything passes, assign new best
+        R_Vs .= V_max.*(cmb./esr_i)
         R_Ps = R_Vs .* I_max
 
-        # If everything passes, assign new best
         if !(all(R_Vs .< R_V_max) && all(R_Ps .< R_P_max)) continue end  # skip if voltage constraints not satisfied
-        n_candidates += 1
         if (none_found)  # assign if there is no current best
+            n_candidates += 1
             best_cmb = vec(cmb)
             best_error = esr_error
             best_R_Vs .= R_Vs
             best_R_Ps .= R_Ps
-            best_idx = i
             none_found = false
         elseif (abs(esr_error) < abs(best_error))  # assign if new error is lower
+            n_candidates += 1
             best_cmb .= cmb
             best_error = esr_error
             best_R_Vs .= R_Vs
             best_R_Ps .= R_Ps
-            best_idx = i
         end
     end
     # println("Best option for $n_resistors resistors from $n_candidates candidates: [$best_idx] $(best_cmb) ($best_error% error)")
@@ -151,42 +151,60 @@ end
 
 find_series_network(9999, 100, 1, 50, 10, 3)  # works :)
 
-function find_resistor_network(ESR::Real, P_max::Real, V_max::Real, I_max::Real, R_V_max::Real, R_P_max::Real, max_series::Real=4, max_parallel::Real=3)
-    P = V_max * I_max
+function find_resistor_network(ESR::Real, P_max::Real, V_max::Real, R_V_max::Real, R_P_max::Real, max_series::Real=4, max_parallel::Real=3)
+    I_max = P_max / V_max
 
-    # Calculate network parallel size
-    n_parallel = min(cld(P, R_P_max), max_parallel)
-    # Calculate ESR for each branch
-    branch_ESR = ESR^(1/n_parallel)
-    # Calculate P_max for each branch
-    branch_P_max = P / n_parallel
-    branch_I_max = (I_max) / n_parallel
+    satisfying_results = Vector{Any}(nothing, max_parallel)
 
-    # Now each branch must be:
-    #   - Identical
-    #   - Each resistor dissipating less than R_P_max
-    #   - Each resistor voltage drop less than R_V_max
-    #   - Made of only E24 values
+    Threads.@threads for n_parallel in 1:max_parallel
+        # println("n_parallel: $(n_parallel)")
 
-    for n_series in 1:max_series
-        cmb, esr_error, R_Vs, R_Ps = find_series_network(branch_ESR, V_max, branch_I_max, R_V_max, R_P_max, n_series)
-        if !isnothing(cmb)
-            network = repeat(reshape(cmb, 1, size(cmb, 1)), outer=n_parallel)
-            println("Best network with $n_series series resistors:")
-            display(network)
-        else
-            println("Cound not find a satisfying network of $n_series series resistors")
+        # Calculate ESR for each branch
+        branch_ESR = ESR * n_parallel
+        # Calculate max current for each branch
+        branch_I_max = (I_max) / n_parallel
+        # println("Branch ESR: $(branch_ESR)\nBranch I_max: $(branch_I_max)")
+
+        for n_series in 1:max_series
+            cmb, esr_error, R_Vs, R_Ps = find_series_network(branch_ESR, V_max, branch_I_max, R_V_max, R_P_max, n_series)
+            if !isnothing(cmb)
+                network = repeat(reshape(cmb, 1, size(cmb, 1)), outer=n_parallel)
+                satisfying_results[n_parallel] = (network, esr_error, R_Vs, R_Ps)
+                # push!(satisfying_results, (network, esr_error, R_Vs, R_Ps))
+                # println(satisfying_results[1])
+                # println("Best network with $n_series series resistors:")
+                # display(network)
+                # println("Error: $(esr_error)\nVoltage drops: $(R_Vs)\nPower Dissipation: $(R_Ps)")
+            else
+                # println("Cound not find a satisfying network of $n_series series resistors")
+            end
         end
-        
     end
+
+    println("Satisfying Results:")
+    for result in satisfying_results
+        if !isnothing(result)
+            display(result[1])
+            println("Error: $(result[2])%\nVoltage drops (V): $(result[3])\nPower Dissipation (W): $(result[4])\n")
+        end
+    end
+
 end
 
+# Also works!
 function test_find_network()
-    @named resistor = PowerResistor(9999, 50, 100)
-    find_resistor_network(9999, 50, 1, 100, 50, 10)
+    # @named resistor = PowerResistor(9999, 50, 100)
+    find_resistor_network(0.1, 70, 700, 200, 0.75, 5, 20)
 end
 
+function BitCrusher_calculations()
+    println("\nR13")
+    find_resistor_network(0.1, 70, 700, 200, 0.75, 5, 20)  # R13
+    println("\nR16")
+    find_resistor_network(0.02, 15, 700, 200, 0.75, 4, 20)  # R16
+end
 
-test_find_network()
+# test_find_network()
+BitCrusher_calculations()
 
 end # module ResistorNetwork
