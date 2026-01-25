@@ -428,6 +428,10 @@
     [
       "a0344160-5a1e-4ade-9868-d857907b9d6d",
       "High Voltage Switching"
+    ],
+    [
+      "aaeaccb9-e5bb-48b2-90c2-950050c029e3",
+      "Resistor Networks"
     ]
   ],
   "text_variables": {}
