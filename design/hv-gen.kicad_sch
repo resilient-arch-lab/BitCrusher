@@ -3295,6 +3295,16 @@
 		)
 		(uuid "fa2746cb-d22e-45b8-834d-f1a94a25f2f6")
 	)
+	(text "I think this needs to be made lower\nresistance because it would be \ndissipating 13W in this case, not practical."
+		(exclude_from_sim no)
+		(at 148.59 161.798 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+		(uuid "fa8e89d4-7208-4aa5-bc5e-d6b8eb43c629")
+	)
 	(junction
 		(at 166.37 85.09)
 		(diameter 0)
@@ -5236,7 +5246,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Diode_SMD:D_SOD-323"
 			(at 106.68 106.68 0)
 			(effects
 				(font
@@ -5660,7 +5670,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Diode_SMD:D_SMA"
 			(at 157.48 74.93 0)
 			(effects
 				(font
@@ -7361,7 +7371,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
 			(at 180.34 56.388 90)
 			(effects
 				(font

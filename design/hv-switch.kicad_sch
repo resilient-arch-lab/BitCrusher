@@ -3445,7 +3445,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
 			(at 242.57 104.902 90)
 			(effects
 				(font
@@ -3985,7 +3985,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "D"
+		(property "Value" "HF1600G"
 			(at 204.47 125.7299 90)
 			(effects
 				(font
@@ -3994,7 +3994,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Diode_THT:D_DO-41_SOD81_P7.62mm_Horizontal"
 			(at 201.93 124.46 0)
 			(effects
 				(font
@@ -4247,7 +4247,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
 			(at 215.9 149.352 90)
 			(effects
 				(font
@@ -4317,7 +4317,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Diode_SMD:D_SOD-123"
 			(at 152.4 59.69 0)
 			(effects
 				(font
@@ -4451,7 +4451,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
 			(at 238.76 149.352 90)
 			(effects
 				(font
@@ -4586,7 +4586,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
 			(at 231.14 104.902 90)
 			(effects
 				(font
@@ -4921,7 +4921,7 @@
 				(justify right)
 			)
 		)
-		(property "Value" "0"
+		(property "Value" "0R, 200V, 30A"
 			(at 204.47 133.3499 0)
 			(effects
 				(font
@@ -4930,7 +4930,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_2512_6332Metric"
 			(at 203.708 132.08 90)
 			(effects
 				(font
@@ -4948,7 +4948,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Resistor"
+		(property "Description" "HoT2512D-3W-0R"
 			(at 201.93 132.08 0)
 			(effects
 				(font
@@ -5059,7 +5059,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "D"
+		(property "Value" "HF1600G"
 			(at 227.33 125.7299 90)
 			(effects
 				(font
@@ -5068,7 +5068,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Diode_THT:D_DO-41_SOD81_P7.62mm_Horizontal"
 			(at 224.79 124.46 0)
 			(effects
 				(font
@@ -5147,7 +5147,7 @@
 				(justify right)
 			)
 		)
-		(property "Value" "0"
+		(property "Value" "0R, 200V, 30A"
 			(at 227.33 133.3499 0)
 			(effects
 				(font
@@ -5156,7 +5156,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_2512_6332Metric"
 			(at 226.568 132.08 90)
 			(effects
 				(font
@@ -5174,7 +5174,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Resistor"
+		(property "Description" "HoT2512D-3W-0R"
 			(at 224.79 132.08 0)
 			(effects
 				(font
@@ -5364,7 +5364,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
 			(at 226.06 149.352 90)
 			(effects
 				(font
