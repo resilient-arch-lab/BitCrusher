@@ -4598,7 +4598,7 @@
 	)
 	(rectangle
 		(start 19.05 20.32)
-		(end 90.17 63.5)
+		(end 94.615 63.5)
 		(stroke
 			(width 0)
 			(type default)
@@ -7036,7 +7036,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "SMB"
+		(property "Value" "BNC"
 			(at 44.45 26.9631 0)
 			(effects
 				(font
@@ -7045,7 +7045,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "project-footprints:KHBNC503511"
 			(at 40.64 25.4 0)
 			(effects
 				(font
@@ -7992,7 +7992,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "Conn-OScope"
+		(property "Value" "BWSMA-KE-Z001"
 			(at 74.93 52.3631 0)
 			(effects
 				(font
@@ -8001,7 +8001,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "project-footprints:SMA_BAT_Wireless_BWSMA-KE-Z001"
 			(at 71.12 50.8 0)
 			(effects
 				(font
@@ -9187,7 +9187,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "Conn-OScope"
+		(property "Value" "BWSMA-KE-Z001"
 			(at 74.93 38.3931 0)
 			(effects
 				(font
@@ -9196,7 +9196,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "project-footprints:SMA_BAT_Wireless_BWSMA-KE-Z001"
 			(at 71.12 36.83 0)
 			(effects
 				(font
@@ -9844,7 +9844,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "SMA"
+		(property "Value" "BWSMA-KWE-Z001"
 			(at 74.93 26.9631 0)
 			(effects
 				(font
@@ -9853,7 +9853,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Connector_Coaxial:SMA_BAT_Wireless_BWSMA-KWE-Z001"
 			(at 71.12 25.4 0)
 			(effects
 				(font

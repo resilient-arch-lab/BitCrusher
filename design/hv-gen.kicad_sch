@@ -3124,7 +3124,7 @@
 	)
 	(rectangle
 		(start 152.4 67.31)
-		(end 267.97 93.98)
+		(end 269.24 93.98)
 		(stroke
 			(width 0)
 			(type default)
@@ -3172,7 +3172,7 @@
 	)
 	(text "High Voltage Bank"
 		(exclude_from_sim no)
-		(at 267.97 67.31 0)
+		(at 269.24 67.31 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3215,6 +3215,17 @@
 			(justify right bottom)
 		)
 		(uuid "4914e07e-3957-476e-bdeb-435a48e2437c")
+	)
+	(text "TODO: Attach this to another comparator input to\nforce PWM DC to 0% when V_{CBank} > 500"
+		(exclude_from_sim no)
+		(at 220.98 36.068 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "501e6c2c-ff5c-48bc-928a-860a92f3d13b")
 	)
 	(text "1:10"
 		(exclude_from_sim no)
@@ -5304,7 +5315,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "1.5M, 1000V"
+		(property "Value" "1.5M, 1000V, 500mW"
 			(at 247.65 81.2799 0)
 			(effects
 				(font
@@ -5313,7 +5324,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_2512_6332Metric"
 			(at 243.332 80.01 90)
 			(effects
 				(font
