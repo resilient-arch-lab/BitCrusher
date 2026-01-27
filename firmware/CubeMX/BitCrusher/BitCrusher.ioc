@@ -1,7 +1,10 @@
 #MicroXplorer Configuration settings - do not modify
+ADC1.AWD1HighThreshold=3724
+ADC1.AWD1ITMode=ENABLE
 ADC1.Channel-0\#ChannelRegularConversion=ADC_CHANNEL_1
 ADC1.ContinuousConvMode=ENABLE
-ADC1.IPParameters=Rank-0\#ChannelRegularConversion,Channel-0\#ChannelRegularConversion,SamplingTime-0\#ChannelRegularConversion,OffsetNumber-0\#ChannelRegularConversion,Offset-0\#ChannelRegularConversion,NbrOfConversionFlag,ContinuousConvMode,master,SingleDiff-0\#ChannelRegularConversion
+ADC1.EnableAnalogWatchDog1=true
+ADC1.IPParameters=Rank-0\#ChannelRegularConversion,Channel-0\#ChannelRegularConversion,SamplingTime-0\#ChannelRegularConversion,OffsetNumber-0\#ChannelRegularConversion,Offset-0\#ChannelRegularConversion,NbrOfConversionFlag,ContinuousConvMode,master,SingleDiff-0\#ChannelRegularConversion,EnableAnalogWatchDog1,AWD1HighThreshold,AWD1ITMode
 ADC1.NbrOfConversionFlag=1
 ADC1.Offset-0\#ChannelRegularConversion=0
 ADC1.OffsetNumber-0\#ChannelRegularConversion=ADC_OFFSET_NONE
@@ -72,6 +75,7 @@ Mcu.UserConstants=TIM2_PWM_Period,100000
 Mcu.UserName=STM32F303RETx
 MxCube.Version=6.16.0
 MxDb.Version=DB.6.0.160
+NVIC.ADC1_2_IRQn=true\:0\:0\:false\:false\:true\:true\:true\:true
 NVIC.BusFault_IRQn=true\:0\:0\:false\:false\:true\:false\:false\:false
 NVIC.DMA1_Channel6_IRQn=true\:0\:0\:false\:false\:true\:false\:true\:true
 NVIC.DebugMonitor_IRQn=true\:0\:0\:false\:false\:true\:false\:false\:false
