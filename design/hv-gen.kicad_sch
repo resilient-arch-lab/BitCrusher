@@ -3193,16 +3193,6 @@
 		)
 		(uuid "0b9267c1-10de-4277-a873-3f7a3b995180")
 	)
-	(text "Use series resistor network to\nincrease effective voltage rating.\nHelps avoid sourcing weird resistors"
-		(exclude_from_sim no)
-		(at 142.494 31.242 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-		)
-		(uuid "24f3610d-401b-4494-b621-2b3b0e7c1eec")
-	)
 	(text "Flyback Plant"
 		(exclude_from_sim no)
 		(at 146.05 53.34 0)
@@ -3218,7 +3208,7 @@
 	)
 	(text "TODO: Route HVVS to comparator with inverting input set to \nthe MCU DAC generating a 3V signal. Route comparator \noutput to AND gate at input of gate driver."
 		(exclude_from_sim no)
-		(at 220.98 36.068 0)
+		(at 220.98 33.528 0)
 		(effects
 			(font
 				(size 1.27 1.27)
