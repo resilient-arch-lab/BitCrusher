@@ -3216,7 +3216,7 @@
 		)
 		(uuid "4914e07e-3957-476e-bdeb-435a48e2437c")
 	)
-	(text "TODO: Attach this to another comparator input to\nforce PWM DC to 0% when V_{CBank} > 500"
+	(text "TODO: Route HVVS to comparator with inverting input set to \nthe MCU DAC generating a 3V signal. Route comparator \noutput to AND gate at input of gate driver."
 		(exclude_from_sim no)
 		(at 220.98 36.068 0)
 		(effects
