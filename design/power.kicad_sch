@@ -4206,7 +4206,7 @@
 				)
 			)
 		)
-		(property "Value" "Barrel_Jack"
+		(property "Value" "PJ-002BH"
 			(at 21.59 17.78 0)
 			(effects
 				(font
@@ -4214,7 +4214,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "project-footprints:PJ-002B_CUI"
 			(at 22.86 25.146 0)
 			(effects
 				(font
@@ -4232,7 +4232,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "DC Barrel Jack"
+		(property "Description" "5.5x2.5mm"
 			(at 21.59 24.13 0)
 			(effects
 				(font

@@ -1804,7 +1804,7 @@
 	)
 	(wire
 		(pts
-			(xy 207.01 151.13) (xy 209.55 151.13)
+			(xy 203.2 151.13) (xy 209.55 151.13)
 		)
 		(stroke
 			(width 0)
@@ -1841,6 +1841,16 @@
 			(type default)
 		)
 		(uuid "0fc1c520-54e1-487e-b3dd-3eefa89def32")
+	)
+	(wire
+		(pts
+			(xy 203.2 154.94) (xy 205.74 154.94)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "12cf44c8-1eee-420d-869a-f88e87170977")
 	)
 	(wire
 		(pts
@@ -2001,6 +2011,16 @@
 			(type default)
 		)
 		(uuid "400017da-8abe-4a3f-83d3-427cec11014a")
+	)
+	(wire
+		(pts
+			(xy 205.74 154.94) (xy 205.74 157.48)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "4063ab7d-0ad0-40d6-abe0-c2915ea8b249")
 	)
 	(wire
 		(pts
@@ -2884,6 +2904,28 @@
 			)
 		)
 	)
+	(global_label "PulseCS-"
+		(shape output)
+		(at 203.2 154.94 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "32a3fc3a-9653-4630-a34a-8ee3e9365a54")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 190.962 154.94 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
+	)
 	(global_label "PulseEN"
 		(shape input)
 		(at 62.23 78.74 180)
@@ -3082,9 +3124,9 @@
 			)
 		)
 	)
-	(global_label "PulseCS"
+	(global_label "PulseCS+"
 		(shape output)
-		(at 207.01 151.13 180)
+		(at 203.2 151.13 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -3094,7 +3136,7 @@
 		)
 		(uuid "e0a26491-16c9-4417-837f-6faf4a7d21a9")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 196.3444 151.13 0)
+			(at 190.962 151.13 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3797,6 +3839,94 @@
 			(project "BitCrusher"
 				(path "/e1be550d-9ce6-42b1-a89a-c00b9d7586dd/a0344160-5a1e-4ade-9868-d857907b9d6d"
 					(reference "C26")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:D_Schottky")
+		(at 111.76 35.56 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "1f702815-5222-4584-8732-12ff08c1edde")
+		(property "Reference" "D6"
+			(at 114.3 34.6074 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Value" "1N5822"
+			(at 114.3 37.1474 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Footprint" "Diode_THT:D_DO-201AD_P12.70mm_Horizontal"
+			(at 111.76 35.56 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 111.76 35.56 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Schottky diode"
+			(at 111.76 35.56 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Device" "D"
+			(at 111.76 35.56 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Pins" "1=K 2=A"
+			(at 111.76 35.56 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "f8317bcd-ea57-4c33-81a6-82fad30e406a")
+		)
+		(pin "1"
+			(uuid "f2bcea23-0a6f-4b0c-a43f-1d2b94aae4a7")
+		)
+		(instances
+			(project "BitCrusher"
+				(path "/e1be550d-9ce6-42b1-a89a-c00b9d7586dd/a0344160-5a1e-4ade-9868-d857907b9d6d"
+					(reference "D6")
 					(unit 1)
 				)
 			)
@@ -5717,35 +5847,34 @@
 		)
 	)
 	(symbol
-		(lib_id "Device:D")
-		(at 111.76 35.56 90)
+		(lib_id "power:GNDPWR")
+		(at 205.74 157.48 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
 		(fields_autoplaced yes)
-		(uuid "fe1046d6-b15a-4979-b7ff-aefd35c16821")
-		(property "Reference" "D6"
-			(at 114.3 34.2899 90)
+		(uuid "fb77a5a7-08d1-4356-b234-c4b6c780a41f")
+		(property "Reference" "#PWR06"
+			(at 205.74 162.56 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify right)
+				(hide yes)
 			)
 		)
-		(property "Value" "D"
-			(at 114.3 36.8299 90)
+		(property "Value" "GNDHV"
+			(at 205.613 161.29 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify right)
 			)
 		)
 		(property "Footprint" ""
-			(at 111.76 35.56 0)
+			(at 205.74 158.75 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5753,8 +5882,8 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "~"
-			(at 111.76 35.56 0)
+		(property "Datasheet" ""
+			(at 205.74 158.75 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5762,43 +5891,22 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Diode"
-			(at 111.76 35.56 0)
+		(property "Description" "Power symbol creates a global label with name \"GNDPWR\" , global ground"
+			(at 205.74 157.48 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(hide yes)
 			)
-		)
-		(property "Sim.Device" "D"
-			(at 111.76 35.56 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Sim.Pins" "1=K 2=A"
-			(at 111.76 35.56 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "2"
-			(uuid "8e72e910-b94f-4821-8c07-a1218152b8ad")
 		)
 		(pin "1"
-			(uuid "bff998c4-5170-43f7-bcb4-45f0017070cf")
+			(uuid "55c26bf7-2566-4aa3-8235-cb46608b8245")
 		)
 		(instances
-			(project ""
+			(project "BitCrusher"
 				(path "/e1be550d-9ce6-42b1-a89a-c00b9d7586dd/a0344160-5a1e-4ade-9868-d857907b9d6d"
-					(reference "D6")
+					(reference "#PWR06")
 					(unit 1)
 				)
 			)
