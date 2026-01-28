@@ -2064,6 +2064,16 @@
 	)
 	(wire
 		(pts
+			(xy 262.89 110.49) (xy 265.43 110.49)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "4fda79b8-28d9-4df4-9eb7-b730555b1c90")
+	)
+	(wire
+		(pts
 			(xy 262.89 106.68) (xy 262.89 95.25)
 		)
 		(stroke
@@ -2331,6 +2341,16 @@
 			(type default)
 		)
 		(uuid "88410596-284b-4218-a1b0-59ddc95beb7e")
+	)
+	(wire
+		(pts
+			(xy 262.89 113.03) (xy 262.89 110.49)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "8cff9413-137f-414c-aaa4-22c63d4fe2ea")
 	)
 	(wire
 		(pts
@@ -2996,7 +3016,7 @@
 			)
 		)
 	)
-	(global_label "PulseVS"
+	(global_label "PulseVS+"
 		(shape output)
 		(at 265.43 106.68 0)
 		(fields_autoplaced yes)
@@ -3008,7 +3028,29 @@
 		)
 		(uuid "ab108ff0-c38b-48e2-9c46-1a7116b68937")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 279.1799 106.68 0)
+			(at 277.4866 106.68 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "PulseVS-"
+		(shape output)
+		(at 265.43 110.49 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "b34819e7-6a48-44ce-a473-c96958d41784")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 277.4866 110.49 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3482,6 +3524,72 @@
 			(project "BitCrusher"
 				(path "/e1be550d-9ce6-42b1-a89a-c00b9d7586dd/a0344160-5a1e-4ade-9868-d857907b9d6d"
 					(reference "R18")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GNDPWR")
+		(at 262.89 113.03 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "12541f7a-2233-493f-8bf1-b065a5108bb7")
+		(property "Reference" "#PWR043"
+			(at 262.89 118.11 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GNDHV"
+			(at 262.763 116.84 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 262.89 114.3 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 262.89 114.3 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GNDPWR\" , global ground"
+			(at 262.89 113.03 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "a61104d8-823c-4233-b9c6-84fb4ad2913a")
+		)
+		(instances
+			(project "BitCrusher"
+				(path "/e1be550d-9ce6-42b1-a89a-c00b9d7586dd/a0344160-5a1e-4ade-9868-d857907b9d6d"
+					(reference "#PWR043")
 					(unit 1)
 				)
 			)
@@ -4082,7 +4190,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "project-footprints:GAN080650EBEZ"
 			(at 198.12 78.105 0)
 			(effects
 				(font

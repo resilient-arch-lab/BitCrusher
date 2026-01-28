@@ -6447,7 +6447,7 @@
 			)
 		)
 	)
-	(global_label "HVVS"
+	(global_label "HVVS+"
 		(shape input)
 		(at 224.79 49.53 0)
 		(fields_autoplaced yes)
@@ -6459,7 +6459,7 @@
 		)
 		(uuid "5291d02a-b69e-412a-9404-2ad1a478aa78")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 232.4924 49.53 0)
+			(at 234.0648 49.53 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6555,7 +6555,7 @@
 			)
 		)
 	)
-	(global_label "PulseVS"
+	(global_label "PulseVS+"
 		(shape input)
 		(at 60.96 36.83 180)
 		(fields_autoplaced yes)
@@ -6567,7 +6567,7 @@
 		)
 		(uuid "7213e9ac-11a6-4c21-8161-22ad0994a049")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 50.4758 36.83 0)
+			(at 48.9034 36.83 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6577,7 +6577,7 @@
 			)
 		)
 	)
-	(global_label "ADC1_IN4"
+	(global_label "PulseVS-"
 		(shape input)
 		(at 224.79 57.15 0)
 		(fields_autoplaced yes)
@@ -6589,7 +6589,7 @@
 		)
 		(uuid "768fe5a2-6f2d-42c4-8f97-811dca3c8b2a")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 236.7257 57.15 0)
+			(at 236.8466 57.15 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6775,7 +6775,7 @@
 			)
 		)
 	)
-	(global_label "ADC1_IN2"
+	(global_label "HVVS-"
 		(shape input)
 		(at 224.79 52.07 0)
 		(fields_autoplaced yes)
@@ -6787,7 +6787,7 @@
 		)
 		(uuid "c249319a-9e97-4360-a4e5-9ee9eaf7ea21")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 236.7257 52.07 0)
+			(at 234.0648 52.07 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6907,7 +6907,7 @@
 			)
 		)
 	)
-	(global_label "PulseVS"
+	(global_label "PulseVS+"
 		(shape input)
 		(at 224.79 54.61 0)
 		(fields_autoplaced yes)
@@ -6919,12 +6919,34 @@
 		)
 		(uuid "e65609a2-d461-4f73-ac7a-9013ca751f67")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 235.2742 54.61 0)
+			(at 236.8466 54.61 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify left)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "PulseVS-"
+		(shape input)
+		(at 60.96 44.45 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "ef6f66c6-a355-4a77-b4bf-89b0cf4c249c")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 48.9034 44.45 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
 				(hide yes)
 			)
 		)
@@ -10181,72 +10203,6 @@
 			(project "BitCrusher"
 				(path "/e1be550d-9ce6-42b1-a89a-c00b9d7586dd/29f45a98-1f25-4a6e-8231-3aa3a650ea17"
 					(reference "R3")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "power:GNDPWR")
-		(at 60.96 44.45 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "f564b1d8-e37f-4129-9636-5e5857373335")
-		(property "Reference" "#PWR06"
-			(at 60.96 49.53 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "GNDHV"
-			(at 60.833 48.26 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 60.96 45.72 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 60.96 45.72 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Power symbol creates a global label with name \"GNDPWR\" , global ground"
-			(at 60.96 44.45 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "13eb7a05-c03d-49fe-89f9-0f5ad62a9d8f")
-		)
-		(instances
-			(project "BitCrusher"
-				(path "/e1be550d-9ce6-42b1-a89a-c00b9d7586dd/29f45a98-1f25-4a6e-8231-3aa3a650ea17"
-					(reference "#PWR06")
 					(unit 1)
 				)
 			)

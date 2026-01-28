@@ -3250,20 +3250,9 @@
 		)
 		(uuid "851e4ec2-7913-4888-9803-ba43260aa5a8")
 	)
-	(text "Slow discharge"
-		(exclude_from_sim no)
-		(at 247.904 83.82 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left top)
-		)
-		(uuid "a1886cb8-72e3-41e3-9499-ea64448fcba5")
-	)
 	(text "HV+ = 500V  =>  HVVS = 3V"
 		(exclude_from_sim no)
-		(at 202.184 53.34 0)
+		(at 204.724 53.34 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3368,6 +3357,12 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "73b873eb-a3a0-4bba-8703-b705aa7452b4")
+	)
+	(junction
+		(at 187.96 44.45)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "915ca5d4-908a-40e0-b3df-ed826199093a")
 	)
 	(junction
 		(at 121.92 69.85)
@@ -4413,6 +4408,16 @@
 	)
 	(wire
 		(pts
+			(xy 187.96 44.45) (xy 195.58 44.45)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "e74fe3d8-e715-480b-8598-a805037c1434")
+	)
+	(wire
+		(pts
 			(xy 161.29 66.04) (xy 161.29 64.77)
 		)
 		(stroke
@@ -4577,7 +4582,29 @@
 			)
 		)
 	)
-	(global_label "HVVS"
+	(global_label "HVVS-"
+		(shape output)
+		(at 195.58 44.45 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "90998cb1-c738-4254-a03b-84246e4be123")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 204.8548 44.45 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "HVVS+"
 		(shape output)
 		(at 195.58 54.61 0)
 		(fields_autoplaced yes)
@@ -4589,7 +4616,7 @@
 		)
 		(uuid "b7164bfc-47f5-488f-9c0e-32b0eb483d1c")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 203.2824 54.61 0)
+			(at 204.8548 54.61 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6699,7 +6726,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "project-footprints:SOP254P2413X978-12N"
 			(at 135.89 80.01 0)
 			(effects
 				(font
