@@ -5219,6 +5219,10 @@
 		(uuid "a5efd1d9-a64e-45ef-9eaf-6cadaac33d08")
 	)
 	(no_connect
+		(at 214.63 113.03)
+		(uuid "af1242b2-701b-489e-9fab-326d8d30fa3d")
+	)
+	(no_connect
 		(at 214.63 72.39)
 		(uuid "af9aeaa4-0ac6-4f8e-b1c3-a610cde2790e")
 	)
@@ -10402,6 +10406,83 @@
 			(project "BitCrusher"
 				(path "/e1be550d-9ce6-42b1-a89a-c00b9d7586dd/29f45a98-1f25-4a6e-8231-3aa3a650ea17"
 					(reference "#PWR015")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Connector:Conn_01x04_Pin")
+		(at 101.6 179.07 0)
+		(mirror y)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "b760606d-d609-440d-8e0a-0481fb03016e")
+		(property "Reference" "J11"
+			(at 102.87 179.0699 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Value" "Conn_01x04_Pin"
+			(at 102.87 181.6099 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Footprint" "Connector_PinHeader_2.54mm:PinHeader_1x04_P2.54mm_Vertical"
+			(at 101.6 179.07 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 101.6 179.07 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Generic connector, single row, 01x04, script generated"
+			(at 101.6 179.07 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "1336f35e-d43f-48de-b4eb-f69be64ab30d")
+		)
+		(pin "1"
+			(uuid "e17a876b-6628-461c-b85a-0f4cfad1e3d2")
+		)
+		(pin "3"
+			(uuid "514daf9e-71fa-49c7-ab93-cc856ab89a94")
+		)
+		(pin "4"
+			(uuid "d117414e-0ce3-4bf2-87d3-238050760d81")
+		)
+		(instances
+			(project "BitCrusher"
+				(path "/e1be550d-9ce6-42b1-a89a-c00b9d7586dd/29f45a98-1f25-4a6e-8231-3aa3a650ea17"
+					(reference "J11")
 					(unit 1)
 				)
 			)
