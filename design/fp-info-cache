@@ -1,4 +1,4 @@
-27121250216678768
+27121251820060849
 Audio_Module
 Reverb_BTDR-1H
 Digital Reverberation Unit, http://www.belton.co.kr/inc/downfile.php?seq=17&file=pdf (footprint from http://www.uk-electronic.de/PDF/BTDR-1.pdf)
@@ -107357,7 +107357,7 @@ GAN080-650EBEZ-4
 Integrated Circuit
 0
 9
-9
+5
 project-footprints
 KHBNC503511
 KH-BNC50-3511-2
@@ -107370,8 +107370,8 @@ PJ-002B_CUI
 
 PJ-002B 
 0
-0
-0
+3
+3
 project-footprints
 SMA_BAT_Wireless_BWSMA-KE-Z001
 BAT Wireless BWSMA-KWE-Z00 https://www.lcsc.com/datasheet/lcsc_datasheet_2310171703_BAT-WIRELESS-BWSMA-KWE-Z001_C496551.pdf

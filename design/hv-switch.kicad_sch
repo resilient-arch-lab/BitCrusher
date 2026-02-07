@@ -4331,7 +4331,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "https://assets.nexperia.com/documents/data-sheet/GAN080-650EBE.pdf"
+		(property "Datasheet" "https://gansystems.com/wp-content/uploads/2020/04/GS66508B-DS-Rev-200402.pdf"
 			(at 198.12 80.01 0)
 			(effects
 				(font
@@ -4341,7 +4341,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" ""
+		(property "Description" "Bottom-side cooled 650 V E-mode GaN transistor, 30A Id, GaN_PX"
 			(at 193.04 76.2 0)
 			(effects
 				(font
