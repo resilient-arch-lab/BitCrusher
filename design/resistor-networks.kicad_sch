@@ -188,66 +188,6 @@
 	)
 	(wire
 		(pts
-			(xy 57.15 74.93) (xy 55.88 74.93)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "240cbcbc-e859-455a-b3cd-db4e56d968c6")
-	)
-	(wire
-		(pts
-			(xy 46.99 80.01) (xy 46.99 85.09)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "3eb72279-d4c5-46ca-88fd-36a59a734720")
-	)
-	(wire
-		(pts
-			(xy 46.99 95.25) (xy 48.26 95.25)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "4ea44546-d70f-4211-939c-40d103943eed")
-	)
-	(wire
-		(pts
-			(xy 46.99 85.09) (xy 48.26 85.09)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "507cf610-e6f0-4df5-91a6-604f62f71d4f")
-	)
-	(wire
-		(pts
-			(xy 57.15 80.01) (xy 55.88 80.01)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "5c827b76-07dc-44fa-ade7-cc95e5844d91")
-	)
-	(wire
-		(pts
-			(xy 57.15 85.09) (xy 57.15 90.17)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "66d98e74-6be2-42d0-a96c-9479d88958d5")
-	)
-	(wire
-		(pts
 			(xy 105.41 44.45) (xy 118.11 44.45)
 		)
 		(stroke
@@ -258,83 +198,23 @@
 	)
 	(wire
 		(pts
-			(xy 46.99 80.01) (xy 48.26 80.01)
+			(xy 49.53 80.01) (xy 50.8 80.01)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "705bb28d-577b-4f1b-9e6c-99efe67af196")
+		(uuid "8a90955c-87bd-4295-87fb-c655df1b7e16")
 	)
 	(wire
 		(pts
-			(xy 57.15 74.93) (xy 57.15 80.01)
+			(xy 58.42 80.01) (xy 59.69 80.01)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "7d796efe-133d-4547-8b93-3182be787117")
-	)
-	(wire
-		(pts
-			(xy 57.15 90.17) (xy 55.88 90.17)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "863a746c-3fc3-4f48-80b3-dcffeaefc886")
-	)
-	(wire
-		(pts
-			(xy 46.99 90.17) (xy 48.26 90.17)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "8d9d9511-5358-4556-9875-21428fe2dd10")
-	)
-	(wire
-		(pts
-			(xy 46.99 90.17) (xy 46.99 95.25)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "9513ed19-b642-4279-8490-e753a8cfce7e")
-	)
-	(wire
-		(pts
-			(xy 58.42 95.25) (xy 55.88 95.25)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "9d0d6b84-5262-46dd-8253-0eff9bfb7ae4")
-	)
-	(wire
-		(pts
-			(xy 44.45 74.93) (xy 48.26 74.93)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "d3622f17-7829-40ba-a744-6f92a334caf5")
-	)
-	(wire
-		(pts
-			(xy 57.15 85.09) (xy 55.88 85.09)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "ee8b3d13-80d5-4e17-bea6-2ecd46c46e7a")
+		(uuid "9ebea02f-5bca-4980-901d-9a468d414164")
 	)
 	(wire
 		(pts
@@ -370,7 +250,7 @@
 	)
 	(global_label "RP_A+"
 		(shape input)
-		(at 44.45 74.93 180)
+		(at 49.53 80.01 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -380,7 +260,7 @@
 		)
 		(uuid "7d48c915-ac5e-499f-b547-9de43a86cd4d")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 35.2962 74.93 0)
+			(at 40.3762 80.01 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -414,7 +294,7 @@
 	)
 	(global_label "RP_A-"
 		(shape output)
-		(at 58.42 95.25 0)
+		(at 59.69 80.01 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -424,7 +304,7 @@
 		)
 		(uuid "a3a82814-53e1-46f6-b2c4-da93270eec9c")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 67.5738 95.25 0)
+			(at 68.8438 80.01 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -504,31 +384,32 @@
 	)
 	(symbol
 		(lib_id "Device:R")
-		(at 52.07 74.93 90)
+		(at 54.61 80.01 90)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "1e55d02e-11dd-4603-830e-bd5fce79adc6")
+		(fields_autoplaced yes)
+		(uuid "4306aa1e-9c75-4a8d-8283-2b306bb43121")
 		(property "Reference" "RP_A1"
-			(at 61.468 73.914 90)
+			(at 54.61 73.66 90)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
-		(property "Value" "WSHP2818R0200FEA"
-			(at 68.326 76.2 90)
+		(property "Value" "PF2472-0R1F1"
+			(at 54.61 76.2 90)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
-		(property "Footprint" "project-footprints:WSHP2818R0200FEA"
-			(at 52.07 76.708 90)
+		(property "Footprint" "Package_TO_SOT_THT:TO-247-2_Horizontal_TabDown"
+			(at 54.61 81.788 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -536,8 +417,8 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "https://jlcpcb.com/api/file/downloadByFileSystemAccessId/8589815038384517120"
-			(at 52.07 74.93 0)
+		(property "Datasheet" "~"
+			(at 54.61 80.01 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -546,7 +427,7 @@
 			)
 		)
 		(property "Description" "Resistor"
-			(at 52.07 74.93 0)
+			(at 54.61 80.01 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -555,283 +436,15 @@
 			)
 		)
 		(pin "2"
-			(uuid "1ba2a9cb-4981-44be-975d-5813632fc4a1")
+			(uuid "d28f167e-818a-476a-9e62-72ab4bc16026")
 		)
 		(pin "1"
-			(uuid "1caeac12-aafc-4e86-ae92-f092ab6ce5be")
+			(uuid "b03970d5-6753-4e9c-b615-03dcf3de498d")
 		)
 		(instances
-			(project "BitCrusher"
+			(project ""
 				(path "/e1be550d-9ce6-42b1-a89a-c00b9d7586dd/a0344160-5a1e-4ade-9868-d857907b9d6d/aaeaccb9-e5bb-48b2-90c2-950050c029e3"
 					(reference "RP_A1")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:R")
-		(at 52.07 95.25 90)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "1ea6b498-ed6d-45a7-80ab-2ff3dc230789")
-		(property "Reference" "RP_A5"
-			(at 42.418 94.234 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "WSHP2818R0200FEA"
-			(at 35.306 96.52 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "project-footprints:WSHP2818R0200FEA"
-			(at 52.07 97.028 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "https://jlcpcb.com/api/file/downloadByFileSystemAccessId/8589815038384517120"
-			(at 52.07 95.25 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Resistor"
-			(at 52.07 95.25 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "2"
-			(uuid "8b3b74f8-4c90-4f8f-a74a-8847a8094382")
-		)
-		(pin "1"
-			(uuid "849102f4-b141-4f97-ae7f-ba6932aa5d81")
-		)
-		(instances
-			(project "BitCrusher"
-				(path "/e1be550d-9ce6-42b1-a89a-c00b9d7586dd/a0344160-5a1e-4ade-9868-d857907b9d6d/aaeaccb9-e5bb-48b2-90c2-950050c029e3"
-					(reference "RP_A5")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:R")
-		(at 52.07 90.17 90)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "4ce090b6-95ce-420b-af5a-0599b16419a8")
-		(property "Reference" "RP_A4"
-			(at 42.418 89.154 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "WSHP2818R0200FEA"
-			(at 35.306 91.44 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "project-footprints:WSHP2818R0200FEA"
-			(at 52.07 91.948 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "https://jlcpcb.com/api/file/downloadByFileSystemAccessId/8589815038384517120"
-			(at 52.07 90.17 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Resistor"
-			(at 52.07 90.17 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "2"
-			(uuid "54e7ce28-8928-455e-ae23-4b8a463efaa1")
-		)
-		(pin "1"
-			(uuid "043c8068-f5b0-4ed3-aafd-f9b30763d3d3")
-		)
-		(instances
-			(project "BitCrusher"
-				(path "/e1be550d-9ce6-42b1-a89a-c00b9d7586dd/a0344160-5a1e-4ade-9868-d857907b9d6d/aaeaccb9-e5bb-48b2-90c2-950050c029e3"
-					(reference "RP_A4")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:R")
-		(at 52.07 80.01 90)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "a37a9b9b-8bc9-42f9-b014-4a6cae74d68f")
-		(property "Reference" "RP_A2"
-			(at 61.468 78.994 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "WSHP2818R0200FEA"
-			(at 68.326 81.28 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "project-footprints:WSHP2818R0200FEA"
-			(at 52.07 81.788 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "https://jlcpcb.com/api/file/downloadByFileSystemAccessId/8589815038384517120"
-			(at 52.07 80.01 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Resistor"
-			(at 52.07 80.01 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "2"
-			(uuid "a8cb4fd9-6303-4dab-ab05-6e042a979ab5")
-		)
-		(pin "1"
-			(uuid "e3cfd75d-6189-4cfa-8cfe-00723892beda")
-		)
-		(instances
-			(project "BitCrusher"
-				(path "/e1be550d-9ce6-42b1-a89a-c00b9d7586dd/a0344160-5a1e-4ade-9868-d857907b9d6d/aaeaccb9-e5bb-48b2-90c2-950050c029e3"
-					(reference "RP_A2")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:R")
-		(at 52.07 85.09 90)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "e161ccf6-e213-4ca4-84a2-3aba60e3286a")
-		(property "Reference" "RP_A3"
-			(at 42.418 84.074 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "WSHP2818R0200FEA"
-			(at 35.306 86.36 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "project-footprints:WSHP2818R0200FEA"
-			(at 52.07 86.868 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "https://jlcpcb.com/api/file/downloadByFileSystemAccessId/8589815038384517120"
-			(at 52.07 85.09 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Resistor"
-			(at 52.07 85.09 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "2"
-			(uuid "eed135b1-b42f-492e-b218-8a7a465ad034")
-		)
-		(pin "1"
-			(uuid "1d4cd0c0-06f2-44c2-b4c2-a714676e1c87")
-		)
-		(instances
-			(project "BitCrusher"
-				(path "/e1be550d-9ce6-42b1-a89a-c00b9d7586dd/a0344160-5a1e-4ade-9868-d857907b9d6d/aaeaccb9-e5bb-48b2-90c2-950050c029e3"
-					(reference "RP_A3")
 					(unit 1)
 				)
 			)
