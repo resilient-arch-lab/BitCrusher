@@ -5061,7 +5061,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "1u"
+		(property "Value" "FS55X105K631EHG"
 			(at 215.9 81.2799 0)
 			(effects
 				(font
@@ -5070,7 +5070,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
+		(property "Footprint" "Capacitor_SMD:C_2220_5750Metric"
 			(at 213.0552 83.82 0)
 			(effects
 				(font
@@ -5201,7 +5201,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "1u"
+		(property "Value" "FS55X105K631EHG"
 			(at 200.66 81.2799 0)
 			(effects
 				(font
@@ -5210,7 +5210,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
+		(property "Footprint" "Capacitor_SMD:C_2220_5750Metric"
 			(at 197.8152 83.82 0)
 			(effects
 				(font
@@ -5781,7 +5781,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "1u"
+		(property "Value" "FS55X105K631EHG"
 			(at 170.18 81.2799 0)
 			(effects
 				(font
@@ -5790,7 +5790,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
+		(property "Footprint" "Capacitor_SMD:C_2220_5750Metric"
 			(at 167.3352 83.82 0)
 			(effects
 				(font
@@ -6682,7 +6682,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "1u"
+		(property "Value" "FS55X105K631EHG"
 			(at 185.42 81.2799 0)
 			(effects
 				(font
@@ -6691,7 +6691,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
+		(property "Footprint" "Capacitor_SMD:C_2220_5750Metric"
 			(at 182.5752 83.82 0)
 			(effects
 				(font
@@ -7190,7 +7190,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "1u"
+		(property "Value" "FS55X105K631EHG"
 			(at 231.14 81.2799 0)
 			(effects
 				(font
@@ -7199,7 +7199,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
+		(property "Footprint" "Capacitor_SMD:C_2220_5750Metric"
 			(at 228.2952 83.82 0)
 			(effects
 				(font
