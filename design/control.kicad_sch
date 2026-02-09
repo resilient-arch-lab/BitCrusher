@@ -5314,6 +5314,16 @@
 	)
 	(wire
 		(pts
+			(xy 40.64 33.02) (xy 40.64 30.48)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "01d64000-6ce0-4b83-ae87-004275f9ac76")
+	)
+	(wire
+		(pts
 			(xy 58.42 76.2) (xy 58.42 74.93)
 		)
 		(stroke
@@ -5361,16 +5371,6 @@
 			(type default)
 		)
 		(uuid "08f51c36-64a6-4094-947a-359ea3343679")
-	)
-	(wire
-		(pts
-			(xy 93.98 124.46) (xy 93.98 127)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "10a097a2-11f3-46ee-b76b-3ecc73c40f57")
 	)
 	(wire
 		(pts
@@ -8424,10 +8424,9 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(fields_autoplaced yes)
 		(uuid "2bbfa34b-6a0b-4073-ba5c-2ea90e8de56a")
 		(property "Reference" "R5"
-			(at 114.3001 137.16 0)
+			(at 111.125 137.7949 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8436,7 +8435,7 @@
 			)
 		)
 		(property "Value" "10k"
-			(at 111.7601 137.16 0)
+			(at 111.125 140.3349 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9050,7 +9049,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 40.64 30.48 0)
+		(at 40.64 33.02 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -9059,7 +9058,7 @@
 		(fields_autoplaced yes)
 		(uuid "6a1a1958-0c6c-4d9d-b4f3-f9c2d51fb369")
 		(property "Reference" "#PWR03"
-			(at 40.64 36.83 0)
+			(at 40.64 39.37 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9068,7 +9067,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 40.64 35.56 0)
+			(at 40.64 38.1 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9077,7 +9076,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 40.64 30.48 0)
+			(at 40.64 33.02 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9086,7 +9085,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 40.64 30.48 0)
+			(at 40.64 33.02 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9095,7 +9094,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 40.64 30.48 0)
+			(at 40.64 33.02 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10182,7 +10181,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 93.98 127 0)
+		(at 93.98 124.46 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -10191,7 +10190,7 @@
 		(fields_autoplaced yes)
 		(uuid "9bae2d93-e07e-469c-b024-aff1bd7eb433")
 		(property "Reference" "#PWR012"
-			(at 93.98 133.35 0)
+			(at 93.98 130.81 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10200,7 +10199,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 93.98 132.08 0)
+			(at 93.98 129.54 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10209,7 +10208,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 93.98 127 0)
+			(at 93.98 124.46 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10218,7 +10217,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 93.98 127 0)
+			(at 93.98 124.46 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10227,7 +10226,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 93.98 127 0)
+			(at 93.98 124.46 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10281,7 +10280,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "https://jlcpcb.com/api/file/downloadByFileSystemAccessId/8590904416935489536"
+		(property "Datasheet" "https://www.usb.org/sites/default/files/documents/usb_type-c.zip"
 			(at 35.56 106.68 0)
 			(effects
 				(font
@@ -10705,10 +10704,9 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(fields_autoplaced yes)
 		(uuid "d6e562b6-8ec2-4345-aa36-57bf89d5b69d")
 		(property "Reference" "R4"
-			(at 104.1401 137.16 0)
+			(at 100.6475 138.1124 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10717,7 +10715,7 @@
 			)
 		)
 		(property "Value" "4.7k"
-			(at 101.6001 137.16 0)
+			(at 100.6475 140.6524 90)
 			(effects
 				(font
 					(size 1.27 1.27)
