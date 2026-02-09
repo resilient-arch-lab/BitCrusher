@@ -3284,7 +3284,7 @@
 		(uuid 337d6187-687d-4c56-bb4b-06314556524b)
 	)
 	(rectangle
-		(start 152.4 38.1)
+		(start 152.4 35.56)
 		(end 234.95 60.96)
 		(stroke
 			(width 0)
@@ -3333,7 +3333,7 @@
 	)
 	(text "TODO: Route HVVS to comparator with inverting input set to \nthe MCU DAC generating a 3V signal. Route comparator \noutput to AND gate at input of gate driver."
 		(exclude_from_sim no)
-		(at 220.98 33.528 0)
+		(at 220.98 30.988 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3367,7 +3367,7 @@
 	)
 	(text "200kHz low-pass filter"
 		(exclude_from_sim no)
-		(at 185.42 41.402 0)
+		(at 198.12 41.402 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3388,7 +3388,7 @@
 	)
 	(text "Voltage Sense"
 		(exclude_from_sim no)
-		(at 234.95 38.1 0)
+		(at 234.95 35.56 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -4373,6 +4373,16 @@
 	)
 	(wire
 		(pts
+			(xy 176.53 44.45) (xy 166.37 44.45)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b6f7abf2-4444-4fd7-8d89-1b7c2bbbaa56")
+	)
+	(wire
+		(pts
 			(xy 212.09 74.93) (xy 212.09 76.2)
 		)
 		(stroke
@@ -4413,7 +4423,7 @@
 	)
 	(wire
 		(pts
-			(xy 187.96 44.45) (xy 166.37 44.45)
+			(xy 187.96 44.45) (xy 184.15 44.45)
 		)
 		(stroke
 			(width 0)
@@ -5177,6 +5187,74 @@
 			(project ""
 				(path "/e1be550d-9ce6-42b1-a89a-c00b9d7586dd/1666a107-a514-488b-8729-5533040b5f76"
 					(reference "C23")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:R")
+		(at 180.34 44.45 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "38f9b0b5-e259-4bc0-b915-ef3a3ea57a11")
+		(property "Reference" "R26"
+			(at 180.34 38.1 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "0"
+			(at 180.34 40.64 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
+			(at 180.34 46.228 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 180.34 44.45 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 180.34 44.45 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "28f587ca-58c9-440d-92b2-12f1b2e5c868")
+		)
+		(pin "2"
+			(uuid "e52dfa2e-d87c-432e-85f0-76a037209dcf")
+		)
+		(instances
+			(project "BitCrusher"
+				(path "/e1be550d-9ce6-42b1-a89a-c00b9d7586dd/1666a107-a514-488b-8729-5533040b5f76"
+					(reference "R26")
 					(unit 1)
 				)
 			)
