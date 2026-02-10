@@ -466,4 +466,15 @@
 		(uuid "067e9118-8476-4007-87d8-293d4774a8de")
 	)
 	(embedded_fonts no)
+	(model "${KIPRJMOD}/3d-models/Same_Sky_PJ-002BH.step"
+		(offset
+			(xyz 0 13.7 6.6)
+		)
+		(scale
+			(xyz 1 1 1)
+		)
+		(rotate
+			(xyz -90 -0 -90)
+		)
+	)
 )
