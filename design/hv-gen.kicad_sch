@@ -5444,7 +5444,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_2512_6332Metric"
+		(property "Footprint" "Resistor_THT:R_Axial_DIN0414_L11.9mm_D4.5mm_P15.24mm_Horizontal"
 			(at 243.332 80.01 90)
 			(effects
 				(font
@@ -5463,6 +5463,15 @@
 			)
 		)
 		(property "Description" "Resistor"
+			(at 245.11 80.01 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "JLCPCB#" "C30187384"
 			(at 245.11 80.01 0)
 			(effects
 				(font

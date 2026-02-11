@@ -3672,6 +3672,15 @@
 				(hide yes)
 			)
 		)
+		(property "JLCPCB#" "C60077"
+			(at 153.67 48.26 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "962db214-5f5f-4e01-bf94-60e1130e2cfb")
 		)
