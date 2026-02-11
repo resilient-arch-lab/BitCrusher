@@ -1794,16 +1794,6 @@
 	)
 	(wire
 		(pts
-			(xy 247.65 137.16) (xy 246.38 137.16)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "05ce9968-27e9-47b9-9abc-b5db80346ef3")
-	)
-	(wire
-		(pts
 			(xy 203.2 151.13) (xy 209.55 151.13)
 		)
 		(stroke
@@ -1881,6 +1871,16 @@
 			(type default)
 		)
 		(uuid "1450c7d3-898e-4748-b64c-396364b9f0bc")
+	)
+	(wire
+		(pts
+			(xy 240.03 137.16) (xy 247.65 137.16)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "1b507c52-bac5-4e6b-bbb1-4b8b6e76335f")
 	)
 	(wire
 		(pts
@@ -2104,7 +2104,7 @@
 	)
 	(wire
 		(pts
-			(xy 224.79 137.16) (xy 226.06 137.16)
+			(xy 224.79 137.16) (xy 232.41 137.16)
 		)
 		(stroke
 			(width 0)
@@ -2294,7 +2294,7 @@
 	)
 	(wire
 		(pts
-			(xy 201.93 119.38) (xy 203.2 119.38)
+			(xy 201.93 119.38) (xy 209.55 119.38)
 		)
 		(stroke
 			(width 0)
@@ -2331,16 +2331,6 @@
 			(type default)
 		)
 		(uuid "8548a39a-10e6-48df-80bc-217ea014a74e")
-	)
-	(wire
-		(pts
-			(xy 223.52 119.38) (xy 224.79 119.38)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "8756602b-13b4-4f62-af5b-37599ba0b42c")
 	)
 	(wire
 		(pts
@@ -2624,6 +2614,16 @@
 	)
 	(wire
 		(pts
+			(xy 217.17 119.38) (xy 224.79 119.38)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c8cf79f8-a01f-4307-9f0a-c338e04f507b")
+	)
+	(wire
+		(pts
 			(xy 229.87 151.13) (xy 232.41 151.13)
 		)
 		(stroke
@@ -2882,28 +2882,6 @@
 		)
 		(uuid "cba25784-c41c-47df-9310-7ab1cebad740")
 	)
-	(global_label "RP_A-"
-		(shape input)
-		(at 223.52 119.38 180)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right)
-		)
-		(uuid "033949f4-8aa8-44fc-9af7-8f01ec2bae3d")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 214.3662 119.38 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-				(hide yes)
-			)
-		)
-	)
 	(global_label "PulseCS-"
 		(shape output)
 		(at 203.2 154.94 180)
@@ -2948,28 +2926,6 @@
 			)
 		)
 	)
-	(global_label "RP_A+"
-		(shape output)
-		(at 203.2 119.38 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "80696912-646c-4361-ad98-29fc7ac05826")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 212.3538 119.38 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-	)
 	(global_label "Probe-"
 		(shape passive)
 		(at 250.19 137.16 0)
@@ -2983,28 +2939,6 @@
 		(uuid "87b7d081-caa0-4e73-8fc4-b8d35fe4a8b5")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 259.0791 137.16 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-	)
-	(global_label "RP_B-"
-		(shape input)
-		(at 226.06 137.16 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "88b0f845-c457-4e56-9efb-8a28d722d9e8")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 235.2138 137.16 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3137,28 +3071,6 @@
 		(uuid "e0a26491-16c9-4417-837f-6faf4a7d21a9")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 190.962 151.13 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-				(hide yes)
-			)
-		)
-	)
-	(global_label "RP_B+"
-		(shape output)
-		(at 246.38 137.16 180)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right)
-		)
-		(uuid "e9b352b3-c369-4613-9aee-5d4ebb81d8cd")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 237.2262 137.16 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3362,6 +3274,74 @@
 			(project "BitCrusher"
 				(path "/e1be550d-9ce6-42b1-a89a-c00b9d7586dd/a0344160-5a1e-4ade-9868-d857907b9d6d"
 					(reference "#PWR042")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:R")
+		(at 236.22 137.16 90)
+		(mirror x)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "0603b453-7143-429e-a851-9f7544345df0")
+		(property "Reference" "RP_B1"
+			(at 236.22 142.24 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "WSHP2818R0200FEA"
+			(at 236.22 139.7 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "project-footprints:WSHP2818R0200FEA"
+			(at 236.22 135.382 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://jlcpcb.com/api/file/downloadByFileSystemAccessId/8589815038384517120"
+			(at 236.22 137.16 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 236.22 137.16 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "d3f8ba59-61ac-49ff-a715-8c412dfa2a30")
+		)
+		(pin "1"
+			(uuid "88ae2e53-2412-4798-8bb9-a5c48fd9d637")
+		)
+		(instances
+			(project "BitCrusher"
+				(path "/e1be550d-9ce6-42b1-a89a-c00b9d7586dd/a0344160-5a1e-4ade-9868-d857907b9d6d"
+					(reference "RP_B1")
 					(unit 1)
 				)
 			)
@@ -3665,7 +3645,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
 			(at 154.6352 52.07 0)
 			(effects
 				(font
@@ -4287,6 +4267,74 @@
 			(project ""
 				(path "/e1be550d-9ce6-42b1-a89a-c00b9d7586dd/a0344160-5a1e-4ade-9868-d857907b9d6d"
 					(reference "D8")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:R")
+		(at 213.36 119.38 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "4306aa1e-9c75-4a8d-8283-2b306bb43121")
+		(property "Reference" "RP_LIM1"
+			(at 213.36 113.03 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "PF2472-0R1F1"
+			(at 213.36 115.57 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Package_TO_SOT_THT:TO-247-2_Horizontal_TabDown"
+			(at 213.36 121.158 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 213.36 119.38 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 213.36 119.38 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "d28f167e-818a-476a-9e62-72ab4bc16026")
+		)
+		(pin "1"
+			(uuid "b03970d5-6753-4e9c-b615-03dcf3de498d")
+		)
+		(instances
+			(project "BitCrusher"
+				(path "/e1be550d-9ce6-42b1-a89a-c00b9d7586dd/a0344160-5a1e-4ade-9868-d857907b9d6d"
+					(reference "RP_LIM1")
 					(unit 1)
 				)
 			)
@@ -5908,48 +5956,6 @@
 				(path "/e1be550d-9ce6-42b1-a89a-c00b9d7586dd/a0344160-5a1e-4ade-9868-d857907b9d6d"
 					(reference "#PWR046")
 					(unit 1)
-				)
-			)
-		)
-	)
-	(sheet
-		(at 250.825 144.145)
-		(size 32.385 19.05)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(stroke
-			(width 0.1524)
-			(type solid)
-		)
-		(fill
-			(color 0 0 0 0.0000)
-		)
-		(uuid "aaeaccb9-e5bb-48b2-90c2-950050c029e3")
-		(property "Sheetname" "Resistor Networks"
-			(at 250.825 143.4334 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-			)
-		)
-		(property "Sheetfile" "resistor-networks.kicad_sch"
-			(at 250.825 163.7796 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left top)
-			)
-		)
-		(instances
-			(project "BitCrusher"
-				(path "/e1be550d-9ce6-42b1-a89a-c00b9d7586dd/a0344160-5a1e-4ade-9868-d857907b9d6d"
-					(page "6")
 				)
 			)
 		)

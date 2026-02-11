@@ -5623,7 +5623,7 @@
 				)
 			)
 		)
-		(property "Value" "15.4u"
+		(property "Value" "15u"
 			(at 80.01 55.88 90)
 			(effects
 				(font
@@ -5649,7 +5649,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "SL0630-100M 10uH 5.5A 5A ±20% SMD,7.1x6.6mm Inductors (SMD) ROHS"
+		(property "Description" "SL0630-150M"
 			(at 80.01 58.42 0)
 			(effects
 				(font
