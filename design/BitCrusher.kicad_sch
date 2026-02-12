@@ -107,7 +107,7 @@
 	)
 	(symbol
 		(lib_id "Mechanical:MountingHole")
-		(at 31.75 132.08 0)
+		(at 31.75 170.18 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom no)
@@ -116,7 +116,7 @@
 		(fields_autoplaced yes)
 		(uuid "060f51c0-7bbe-4af8-91c1-48efc8c8bd04")
 		(property "Reference" "H2"
-			(at 34.29 130.8099 0)
+			(at 34.29 168.9099 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -125,7 +125,7 @@
 			)
 		)
 		(property "Value" "MountingHole"
-			(at 34.29 133.3499 0)
+			(at 34.29 171.4499 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -134,7 +134,7 @@
 			)
 		)
 		(property "Footprint" "MountingHole:MountingHole_3.2mm_M3"
-			(at 31.75 132.08 0)
+			(at 31.75 170.18 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -143,7 +143,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 31.75 132.08 0)
+			(at 31.75 170.18 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -152,7 +152,25 @@
 			)
 		)
 		(property "Description" "Mounting Hole without connection"
-			(at 31.75 132.08 0)
+			(at 31.75 170.18 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "KLC_S4.2_3V3OUT" ""
+			(at 31.75 170.18 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "KLC_S4.2_VCC" ""
+			(at 31.75 170.18 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -171,7 +189,7 @@
 	)
 	(symbol
 		(lib_id "Mechanical:MountingHole")
-		(at 31.75 127 0)
+		(at 31.75 165.1 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom no)
@@ -180,7 +198,7 @@
 		(fields_autoplaced yes)
 		(uuid "9d90ebd2-8bc4-4605-93c2-d94dccce91b1")
 		(property "Reference" "H1"
-			(at 34.29 125.7299 0)
+			(at 34.29 163.8299 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -189,7 +207,7 @@
 			)
 		)
 		(property "Value" "MountingHole"
-			(at 34.29 128.2699 0)
+			(at 34.29 166.3699 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -198,7 +216,7 @@
 			)
 		)
 		(property "Footprint" "MountingHole:MountingHole_3.2mm_M3"
-			(at 31.75 127 0)
+			(at 31.75 165.1 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -207,7 +225,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 31.75 127 0)
+			(at 31.75 165.1 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -216,7 +234,25 @@
 			)
 		)
 		(property "Description" "Mounting Hole without connection"
-			(at 31.75 127 0)
+			(at 31.75 165.1 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "KLC_S4.2_3V3OUT" ""
+			(at 31.75 165.1 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "KLC_S4.2_VCC" ""
+			(at 31.75 165.1 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -235,7 +271,7 @@
 	)
 	(symbol
 		(lib_id "Mechanical:MountingHole")
-		(at 31.75 142.24 0)
+		(at 31.75 180.34 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom no)
@@ -244,7 +280,7 @@
 		(fields_autoplaced yes)
 		(uuid "a1a69fcd-9079-4db4-b427-f25b9963e2ef")
 		(property "Reference" "H4"
-			(at 34.29 140.9699 0)
+			(at 34.29 179.0699 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -253,7 +289,7 @@
 			)
 		)
 		(property "Value" "MountingHole"
-			(at 34.29 143.5099 0)
+			(at 34.29 181.6099 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -262,7 +298,7 @@
 			)
 		)
 		(property "Footprint" "MountingHole:MountingHole_3.2mm_M3"
-			(at 31.75 142.24 0)
+			(at 31.75 180.34 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -271,7 +307,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 31.75 142.24 0)
+			(at 31.75 180.34 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -280,7 +316,25 @@
 			)
 		)
 		(property "Description" "Mounting Hole without connection"
-			(at 31.75 142.24 0)
+			(at 31.75 180.34 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "KLC_S4.2_3V3OUT" ""
+			(at 31.75 180.34 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "KLC_S4.2_VCC" ""
+			(at 31.75 180.34 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -299,7 +353,7 @@
 	)
 	(symbol
 		(lib_id "Mechanical:MountingHole")
-		(at 31.75 137.16 0)
+		(at 31.75 175.26 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom no)
@@ -308,7 +362,7 @@
 		(fields_autoplaced yes)
 		(uuid "c60b47a2-109b-42b1-a4e7-ae56e410d252")
 		(property "Reference" "H3"
-			(at 34.29 135.8899 0)
+			(at 34.29 173.9899 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -317,7 +371,7 @@
 			)
 		)
 		(property "Value" "MountingHole"
-			(at 34.29 138.4299 0)
+			(at 34.29 176.5299 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -326,7 +380,7 @@
 			)
 		)
 		(property "Footprint" "MountingHole:MountingHole_3.2mm_M3"
-			(at 31.75 137.16 0)
+			(at 31.75 175.26 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -335,7 +389,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 31.75 137.16 0)
+			(at 31.75 175.26 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -344,7 +398,25 @@
 			)
 		)
 		(property "Description" "Mounting Hole without connection"
-			(at 31.75 137.16 0)
+			(at 31.75 175.26 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "KLC_S4.2_3V3OUT" ""
+			(at 31.75 175.26 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "KLC_S4.2_VCC" ""
+			(at 31.75 175.26 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -362,13 +434,12 @@
 		)
 	)
 	(sheet
-		(at 30.48 68.58)
-		(size 34.29 27.94)
+		(at 100.965 29.21)
+		(size 34.29 53.34)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(fields_autoplaced yes)
 		(stroke
 			(width 0.1524)
 			(type solid)
@@ -378,7 +449,7 @@
 		)
 		(uuid "1666a107-a514-488b-8729-5533040b5f76")
 		(property "Sheetname" "High Voltage Generation"
-			(at 30.48 67.8684 0)
+			(at 101.092 28.321 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -389,7 +460,7 @@
 			)
 		)
 		(property "Sheetfile" "hv-gen.kicad_sch"
-			(at 30.48 97.1046 0)
+			(at 101.092 82.804 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -407,7 +478,7 @@
 	)
 	(sheet
 		(at 30.48 29.21)
-		(size 34.29 30.48)
+		(size 58.42 53.34)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
@@ -421,7 +492,7 @@
 			(color 0 0 0 0.0000)
 		)
 		(uuid "29f45a98-1f25-4a6e-8231-3aa3a650ea17")
-		(property "Sheetname" "Control"
+		(property "Sheetname" "Control & Interface"
 			(at 30.48 28.4984 0)
 			(effects
 				(font
@@ -433,7 +504,7 @@
 			)
 		)
 		(property "Sheetfile" "control.kicad_sch"
-			(at 30.48 60.2746 0)
+			(at 30.48 83.1346 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -450,8 +521,8 @@
 		)
 	)
 	(sheet
-		(at 69.85 68.58)
-		(size 33.02 27.94)
+		(at 147.32 29.21)
+		(size 34.29 53.34)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
@@ -466,7 +537,7 @@
 		)
 		(uuid "a0344160-5a1e-4ade-9868-d857907b9d6d")
 		(property "Sheetname" "High Voltage Switching"
-			(at 69.85 67.8684 0)
+			(at 147.32 28.4984 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -477,7 +548,7 @@
 			)
 		)
 		(property "Sheetfile" "hv-switch.kicad_sch"
-			(at 69.85 97.1046 0)
+			(at 147.32 83.1346 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -494,8 +565,8 @@
 		)
 	)
 	(sheet
-		(at 69.85 29.21)
-		(size 33.02 30.48)
+		(at 30.48 95.885)
+		(size 58.42 30.48)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
@@ -509,8 +580,8 @@
 			(color 0 0 0 0.0000)
 		)
 		(uuid "e3389efa-d643-4121-9f24-b7f22e7fe0ec")
-		(property "Sheetname" "Primary Power"
-			(at 69.85 28.4984 0)
+		(property "Sheetname" "Primary Power Distribution"
+			(at 30.48 95.1734 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -521,7 +592,7 @@
 			)
 		)
 		(property "Sheetfile" "power.kicad_sch"
-			(at 69.85 60.2746 0)
+			(at 30.48 126.9496 0)
 			(effects
 				(font
 					(size 1.27 1.27)

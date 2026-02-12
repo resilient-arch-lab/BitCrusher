@@ -580,12 +580,90 @@
           "label": "Datasheet",
           "name": "Datasheet",
           "show": true
+        },
+        {
+          "group_by": false,
+          "label": "Field6",
+          "name": "Field6",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "JLCPCB#",
+          "name": "JLCPCB#",
+          "show": true
+        },
+        {
+          "group_by": false,
+          "label": "Sim.Device",
+          "name": "Sim.Device",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "Sim.Library",
+          "name": "Sim.Library",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "Sim.Name",
+          "name": "Sim.Name",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "Sim.Params",
+          "name": "Sim.Params",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "Sim.Pins",
+          "name": "Sim.Pins",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "Sim.Type",
+          "name": "Sim.Type",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "Field5",
+          "name": "Field5",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "Description",
+          "name": "Description",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "#",
+          "name": "${ITEM_NUMBER}",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "KLC_S4.2_VCC",
+          "name": "KLC_S4.2_VCC",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "KLC_S4.2_3V3OUT",
+          "name": "KLC_S4.2_3V3OUT",
+          "show": false
         }
       ],
       "filter_string": "",
       "group_symbols": true,
       "include_excluded_from_bom": true,
-      "name": "Default Editing",
+      "name": "",
       "sort_asc": true,
       "sort_field": "Reference"
     },
@@ -636,11 +714,11 @@
     ],
     [
       "29f45a98-1f25-4a6e-8231-3aa3a650ea17",
-      "Control"
+      "Control & Interface"
     ],
     [
       "e3389efa-d643-4121-9f24-b7f22e7fe0ec",
-      "Primary Power"
+      "Primary Power Distribution"
     ],
     [
       "1666a107-a514-488b-8729-5533040b5f76",
@@ -649,10 +727,6 @@
     [
       "a0344160-5a1e-4ade-9868-d857907b9d6d",
       "High Voltage Switching"
-    ],
-    [
-      "aaeaccb9-e5bb-48b2-90c2-950050c029e3",
-      "Resistor Networks"
     ]
   ],
   "text_variables": {}
