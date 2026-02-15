@@ -7,6 +7,8 @@ from dataclasses import dataclass
 from enum import Enum
 
 class Headers(Enum):
+    # error checking responses (returned from device)
+    # body of responses used to return any necessary values to commands sent from host
     success = b"\x01"
     error = b"\x02"
 
@@ -32,23 +34,8 @@ class Protocol:
         hdr: Headers
         body: bytes
 
-    # error checking responses (returned from device)
-    # body of responses used to return any necessary values to commands sent from host
-    success: bytes = b"\x01"
-    error: bytes = b"\x02"
-
-    # set global device parameters (sent from host)
-    get_param: bytes = b"\x11"
-    set_param: bytes = b"\x12"
-
-    # get device state (sent from host)
-    get_state: bytes = b"\x21"
-
-    # arming / disarming commands 
-    arm: bytes = b"\xa0"
-    set_arm_param: bytes = b"\xa1"
-    get_arm_param: bytes = b"\xa2"
-    disarm: bytes = b"\xaf"
+    # some other property definitions
+    body_max_len: int = 256
 
     @classmethod
     def parse_from_bytes(cls, hdr: bytes, body: bytes) -> Message:

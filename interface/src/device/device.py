@@ -11,6 +11,8 @@ from .comms import Protocol
 # Message = Protocol.Message
 # Headers = Protocol.Headers
 
+import numpy as np
+
 # The idea is to check the each property against its constraints with 
 # a constraint checking function (the lambda). The most important thing
 # is that the device itself doesn't use a bad config though, so this 
@@ -43,10 +45,10 @@ class Device:
     # These might have to become real (e.g. int32) datatypes
     @dataclass
     class ArmingConfig:
-        voltage: int = 0  # in [150V, 500V]
-        trigger_polarity: int = 0  # 0: low, 1: high
-        trigger_mode: int = 0  # 0: continuous, 1: single
-        trigger_src: int = 0  # 0: HW, 1: FW
+        voltage: np.uint16 = np.uint16(0)  # in [150V, 500V]
+        trigger_polarity: np.uint8 = np.uint8(0)  # 0: low, 1: high
+        trigger_mode: np.uint8 = np.uint8(0)  # 0: continuous, 1: single
+        trigger_src: np.uint8 = np.uint8(0)  # 0: HW, 1: FW
 
     ftdi_conn: ftd2xx.FTD2XX
     # serial_conn: serial.Serial  # the port (e.g. "/dev/ttyUSB0") should be passed as param to __init__ so that the port is opened on serial object creation
@@ -72,7 +74,6 @@ class Device:
             self.ftdi_conn = ftdi_dev
             break
         
-        # TODO: raise error if device isn't found
         if not self.ftdi_conn:
             raise DeviceError("No BitCrusher found")
         # Finish configuring FTDI device
@@ -85,6 +86,7 @@ class Device:
 
         self.arming_config = Device.ArmingConfig()
 
+    # TODO: Message sending / receiving messages should raise if they get an error response
     def _write_msg(self, msg: Protocol.Message):
         # self.serial_conn.write(to_msg(hdr, body))
         self.ftdi_conn.write(Protocol.to_bytes(msg))

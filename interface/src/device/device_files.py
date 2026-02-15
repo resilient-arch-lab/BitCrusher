@@ -14,13 +14,15 @@ out_dir = Path(__file__).parent.parent.parent/"device_files"  # outer-dir of src
 def generate_header_defs() -> str:
     header_defs = ""
     for header in Protocol.Headers:
-        header_defs += f"#define HDR_{header.name.upper()} 0x{header.value.hex()}\n"
+        header_defs += f"#define HDR_{header.name.upper()} (uint8_t )0x{header.value.hex()}\n"
     return header_defs
 
 def write_device_files():
     out_str = f"""
 #ifndef __PROTOCOL_H__
 #define __PROTOCOL_H__
+
+#define BODY_MAX_LEN {Protocol.body_max_len}
 
 {generate_header_defs()}
 

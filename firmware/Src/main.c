@@ -82,6 +82,7 @@ void SystemClock_Config(void);
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
 // Get message from UART, decode into msg_hdr, msg_len, and msg_body vars
+// Also checks header validity
 // returns 1 on error, 0 on success
 int get_message(void) {
   // get header byte, validate
@@ -114,30 +115,149 @@ int send_message(void) {
   return 0;
 }
 
-int process_command(void) {
-  switch (msg_hdr) {
-    case HDR_GET_ARM_PARAM: {
-      if (msg_len != 1) return 1;
-      switch ((int )msg_body[0]) {
-        case 0: 
-      }
-    }
-  }
-}
-
+// write length and value of arming param to msg buffer (or `HDR_ERROR` on failure). 
+// The arming parameter to check and copy is selected by casting `msg_body[0]` to
+// `uint8_t`. Returns 0 on success or 1 on failure. 
 int get_arm_param(void) {
   if (msg_len != 1) return 1;
+  // TODO: The error case at the end of this function fills the msg buf with
+  // an error response, but this one doesnt...
 
-  switch ((int )msg_body[0]) {
+  // lock values
+  uint8_t field = (uint8_t )msg_body[0];
+
+  switch (field) {
     case 0: {
-      uint16_t voltage = arming_config.voltage;
+      msg_len = 2;
+      msg_hdr = HDR_SUCCESS;
+      memcpy((void *)msg_body, (void *)&arming_config.voltage, 2);
+      return 0;
       break;
+    }
+    case 1: {
+      msg_len = 1;
+      msg_hdr = HDR_SUCCESS;
+      memcpy((void *)msg_body, (void *)&arming_config.trigger_polarity, 1);
+      return 0;
+      break;
+    }
+    case 2: {
+      msg_len = 1;
+      msg_hdr = HDR_SUCCESS;
+      memcpy((void *)msg_body, (void *)&arming_config.trigger_mode, 1);
+      return 0;
+      break;
+    }
+    case 3: {
+      msg_len = 1;
+      msg_hdr = HDR_SUCCESS;
+      memcpy((void *)msg_body, (void *)&arming_config.trigger_src, 1);
+      return 0;
+      break;
+    }
+    default: {
+      msg_len = 0;
+      msg_hdr = HDR_ERROR;
+      return 1;
+      break;
+      // TODO: Write a utility func or macro to do error / success responses
+      // TODO: Also, decide if the error response should come from here
+      // or the calling function checking the error code of this call...
+    }
+  }
+}
+
+int set_arm_param(void) {
+  if (msg_len != 1) return 1;
+
+  // lock values
+  uint8_t field = (uint8_t )msg_body[0];
+
+  switch (field) {
+    case 0: {
+      uint16_t val = (uint16_t )*msg_body;
+      if (val < 150 || val > 500) {
+        return 1;
+      }
+      arming_config.voltage = val;
+      return 0;
+      break;
+    }
+    case 1: {
+      uint8_t val = (uint8_t )*msg_body;
+      if (val != 0 || val != 1) {
+        return 1;
+      }
+      arming_config.trigger_polarity = val;
+      return 0;
+      break;
+    }
+    case 2: {
+      uint8_t val = (uint8_t )*msg_body;
+      if (val != 0 || val != 1) {
+        return 1;
+      }
+      arming_config.trigger_mode = val;
+      return 0;
+      break;
+    }
+    case 3: {
+      uint8_t val = (uint8_t )*msg_body;
+      if (val != 0 || val != 1) {
+        return 1;
+      }
+      arming_config.trigger_src = val;
+      return 0;
+      break;
+    }
+    default: {
+      msg_len = 0;
+      msg_hdr = HDR_ERROR;
+      return 1;
+      break;
+      // TODO: decide if the error response should come from here
+      // or the calling function checking the error code of this call...
     }
   }
 }
 
 
 
+
+
+int process_command(void) {
+  switch (msg_hdr) {
+
+    case HDR_GET_STATE: {
+      break;
+    }
+
+    case HDR_GET_ARM_PARAM: {
+      int ret = get_arm_param();
+      if (ret) {}  // do error response
+      else {}      // do success response
+      break;
+    }
+
+    case HDR_SET_ARM_PARAM: {
+      int ret = set_arm_param();
+      if (ret) {}  // do error response
+      else {}      // do success response
+      break;
+    }
+
+    case HDR_ARM: {
+      break;
+    }
+
+    case HDR_DISARM: {
+      break;
+    }
+
+    default: return 1;
+
+  }
+}
 
 /* USER CODE END 0 */
 
