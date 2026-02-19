@@ -34,7 +34,7 @@
 #include <stdint.h>
 #include <stdio.h>
 #include <string.h>
-#include <sys/_pthreadtypes.h>
+// #include <sys/_pthreadtypes.h>
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
