@@ -510,7 +510,7 @@
       "plot": "",
       "pos_files": "",
       "specctra_dsn": "",
-      "step": "BitCrusher.step",
+      "step": "../case/BitCrusher.step",
       "svg": "",
       "vrml": ""
     },
