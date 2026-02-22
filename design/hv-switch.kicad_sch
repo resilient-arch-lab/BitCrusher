@@ -4523,7 +4523,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Package_TO_SOT_THT:TO-247-2_Horizontal_TabDown"
+		(property "Footprint" "project-footprints:TO-247-2_Horizontal_TabDown"
 			(at 213.36 121.158 90)
 			(effects
 				(font
