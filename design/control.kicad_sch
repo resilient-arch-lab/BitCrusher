@@ -11076,7 +11076,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Connector_Coaxial:SMA_BAT_Wireless_BWSMA-KWE-Z001"
+		(property "Footprint" "project-footprints:SMA_BAT_Wireless_BWSMA-KWE-Z001"
 			(at 71.12 25.4 0)
 			(effects
 				(font

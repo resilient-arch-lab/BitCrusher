@@ -497,4 +497,15 @@
 		(uuid "9e3df029-7719-4246-ba82-7349477514ca")
 	)
 	(embedded_fonts no)
+	(model "${KIPRJMOD}/3d-models/ANT-TH_KH-BNC50-3511.step"
+		(offset
+			(xyz 2.5 15.75 0.5)
+		)
+		(scale
+			(xyz 1 1 1)
+		)
+		(rotate
+			(xyz -0 -0 -0)
+		)
+	)
 )

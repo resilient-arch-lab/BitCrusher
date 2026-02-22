@@ -579,4 +579,15 @@
 		(uuid "4827b1b4-fcc3-46b3-89bf-e66c7c8f7096")
 	)
 	(embedded_fonts no)
+	(model "${KIPRJMOD}/3d-models/TYPE-C-TH_TYPE-C-14P-CC-2.6.step"
+		(offset
+			(xyz 0 -2.93 3)
+		)
+		(scale
+			(xyz 1 1 1)
+		)
+		(rotate
+			(xyz -0 -0 -0)
+		)
+	)
 )
