@@ -23,7 +23,6 @@ class ConstrainedArmingConfig:
     trigger_mode: tuple[int, Callable] = (0, lambda x: x in [0, 1])  # 0: continuous, 1: single
     trigger_src: tuple[int, Callable] = (0, lambda x: x in [0, 1])  # 0: HW, 1: FW
 
-    
 
 
 class DeviceError(Exception):
@@ -143,9 +142,33 @@ class Device:
         self.ftdi_conn.setBitMode(0b00110001, 0x20)  # set CBUS0,1 to output; CBUS0 high, CBUS1 low
         # TODO: not sure how to configure VBUS_Sense
 
-    
     def _config_ft230x(self):
         # TODO: set power descriptor to 0, since device is self powered
         # I can't figure out how to do this manually, so I might have to try it
         # with the FTProg utility first
         ...
+
+# Class for testing prototype firmware on STM32 Dev Board with CH340 USB-UART connection
+class TestingDevice(Device):
+    serial_conn: serial.Serial
+
+    def __init__(self, port: str = "/dev/ttyUSB0", baud_rate: int = 9600, serial_timeout: float = 3) -> None:
+        print("Searching for BitCrusher...")
+        self.serial_conn = serial.Serial(port, baudrate=baud_rate, timeout=serial_timeout)
+
+        # Check for device activity by getting device state
+        self.state = self.get_state()
+        self.arming_config = Device.ArmingConfig()
+
+    # _write_msg and _read_msg must be redefined to use the CH340
+    def _write_msg(self, msg: Protocol.Message):
+        self.serial_conn.write(Protocol.to_bytes(msg))
+    
+    def _read_msg(self, expects: Protocol.Headers | None = None) -> Protocol.Message:
+        hdr = self.serial_conn.read(1)
+        msg_len = int(self.serial_conn.read(1))
+        body = self.serial_conn.read(msg_len)
+        msg = Protocol.parse_from_bytes(hdr, body)
+        if (expects != None and hdr != expects):
+            raise DeviceResponseError(f"Expected response with header \"{expects}\", but got \"{hdr}\"")
+        return msg
