@@ -94,13 +94,12 @@ void SystemClock_Config(void);
 // Also checks header validity
 // returns 1 on error, 0 on success
 int get_message(void) {
-  // get header byte, validate
-  HAL_StatusTypeDef res = HAL_UART_Receive(&huart1, &msg_hdr, 1, 1000);
-  if (res != HAL_OK || !is_valid_header(msg_hdr)) return 1;
-
-  // get length byte
-  res = HAL_UART_Receive(&huart1, &msg_len, 1, 100);
-  if (res != HAL_OK) return 1;
+  // get hdr byte and len byte, validate 
+  uint8_t hdr_and_len[2];
+  HAL_StatusTypeDef res = HAL_UART_Receive(&huart1, hdr_and_len, 2, 1000);
+  if (res != HAL_OK || !is_valid_header(hdr_and_len[0])) return 1;
+  msg_hdr = hdr_and_len[0];
+  msg_len = hdr_and_len[1];
 
   // get the message body
   res = HAL_UART_Receive(&huart1, msg_body, (uint16_t )msg_len, 100);
@@ -336,18 +335,31 @@ int main(void)
   MX_TIM3_Init();
   MX_USART1_UART_Init();
 
-  char *tmp_str = "Error\n";
+  // char *tmp_str = "Error\n";
 
-  /* USER CODE BEGIN 2 */
+  // /* USER CODE BEGIN 2 */
+  // while (1) {
+  //   // UART loop
+  //   // HAL_UART_Transmit(&huart1, (uint8_t *)tmp_str, 8, 100);
+  //   // HAL_Delay(1000);
+  //   int res = get_message();
+  //   if (res) {
+  //     HAL_UART_Transmit(&huart1, (uint8_t *)tmp_str, 6, 100);
+  //   } else {
+  //     res = send_message();  // send the same message back
+  //   }
+  //   HAL_Delay(100);
+  // }
+
+  // Basic command loop
   while (1) {
-    // UART loop
-    // HAL_UART_Transmit(&huart1, (uint8_t *)tmp_str, 8, 100);
-    // HAL_Delay(1000);
-    int res = get_message();
-    if (res) {
-      HAL_UART_Transmit(&huart1, (uint8_t *)tmp_str, 6, 100);
-    } else {
-      res = send_message();  // send the same message back
+    int res;
+    res = get_message();
+    if (!res) {
+      res = process_command();
+    }
+    if (!res) {
+      res = send_message();
     }
     HAL_Delay(100);
   }
