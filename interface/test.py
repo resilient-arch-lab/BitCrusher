@@ -3,8 +3,8 @@ from src import device
 
 def test_1():
     dev = TestingDevice()
-    dev.get_state()
-
+    res = dev.get_arming_param(1)
+    print(res)
 
 def main():
     test_1()

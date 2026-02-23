@@ -114,6 +114,13 @@ class Device:
             e.add_note(f"Invalid device state: {resp.body}")
             raise e
         return state
+    
+    def get_arming_param(self, p: int):
+        # TODO: make explicit mapping from ArmingConfig fields to indices for querrying device
+        msg = Protocol.Message(Protocol.Headers.get_arm_param, body=p.to_bytes(1))
+        self._write_msg(msg)
+        resp = self._read_msg(expects=Protocol.Headers.success)
+        return resp
 
     # To change device arm config:
     #   modify device.arming_config members as desired
@@ -152,23 +159,30 @@ class Device:
 class TestingDevice(Device):
     serial_conn: serial.Serial
 
-    def __init__(self, port: str = "/dev/ttyUSB0", baud_rate: int = 9600, serial_timeout: float = 3) -> None:
+    def __init__(self, port: str = "/dev/ttyUSB0", baud_rate: int = 115200, serial_timeout: float = 3) -> None:
         print("Searching for BitCrusher...")
         self.serial_conn = serial.Serial(port, baudrate=baud_rate, timeout=serial_timeout)
 
         # Check for device activity by getting device state
-        self.state = self.get_state()
+        # self.state = self.get_state()
         self.arming_config = Device.ArmingConfig()
 
     # _write_msg and _read_msg must be redefined to use the CH340
     def _write_msg(self, msg: Protocol.Message):
         self.serial_conn.write(Protocol.to_bytes(msg))
+        print(Protocol.to_bytes(msg))
+        print(f"Writing msg {msg}: {Protocol.to_bytes(msg)}")
     
     def _read_msg(self, expects: Protocol.Headers | None = None) -> Protocol.Message:
+        print("Receiving msg: ", end="")
         hdr = self.serial_conn.read(1)
-        msg_len = int(self.serial_conn.read(1))
+        print(f"hdr[{hdr} ({Protocol.Headers(hdr)})], ", end="")
+        msg_len = int.from_bytes(self.serial_conn.read(1))
+        print(f"len[{msg_len}], ", end="")
         body = self.serial_conn.read(msg_len)
+        print(f"bdy[{body}]")
         msg = Protocol.parse_from_bytes(hdr, body)
-        if (expects != None and hdr != expects):
+
+        if (expects != None and msg.hdr != expects):
             raise DeviceResponseError(f"Expected response with header \"{expects}\", but got \"{hdr}\"")
         return msg

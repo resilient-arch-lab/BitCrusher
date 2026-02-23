@@ -51,5 +51,5 @@ class Protocol:
     def to_bytes(msg: Message) -> bytes:
         hdr = msg.hdr.value
         body = msg.body
-        out = hdr + bytes(len(body)) + body
+        out = hdr + len(body).to_bytes(1) + body
         return out
