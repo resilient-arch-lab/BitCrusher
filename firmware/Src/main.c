@@ -92,19 +92,22 @@ void SystemClock_Config(void);
 
 // Get message from UART, decode into msg_hdr, msg_len, and msg_body vars
 // Also checks header validity
-// returns 1 on error, 0 on success
-int get_message(void) {
+// returns HAL error code from receiving UART message
+HAL_StatusTypeDef get_message(void) {
   // get hdr byte and len byte, validate 
   uint8_t hdr_and_len[2];
   HAL_StatusTypeDef res = HAL_UART_Receive(&huart1, hdr_and_len, 2, 1000);
-  if (res != HAL_OK || !is_valid_header(hdr_and_len[0])) return 1;
+
+  if (res == HAL_TIMEOUT) return HAL_TIMEOUT;
+
+  if (res != HAL_OK || !is_valid_header(hdr_and_len[0])) return HAL_ERROR;
   msg_hdr = hdr_and_len[0];
   msg_len = hdr_and_len[1];
 
   // get the message body
   res = HAL_UART_Receive(&huart1, msg_body, (uint16_t )msg_len, 100);
-  if (res != HAL_OK) return 1;
-  return 0;
+  if (res != HAL_OK) return HAL_ERROR;
+  return HAL_OK;
 }
 
 // Encode message from msg_hdr, msg_len, and msg_body, and send over UART
@@ -128,8 +131,6 @@ int send_message(void) {
 // `uint8_t`. Returns 0 on success or 1 on failure. 
 int get_arm_param(void) {
   if (msg_len != 1) return 1;
-  // TODO: The error case at the end of this function fills the msg buf with
-  // an error response, but this one doesnt...
 
   // lock values
   uint8_t field = (uint8_t )msg_body[0];
@@ -239,6 +240,7 @@ int process_command(void) {
   switch (msg_hdr) {
 
     case HDR_GET_STATE: {
+      return 1;
       break;
     }
 
@@ -246,21 +248,24 @@ int process_command(void) {
       if (get_arm_param()) {
         msg_hdr = HDR_ERROR;
         msg_len = 0;
+        return 1;
       } else {
         // get_arm_param already filled the message buffers
         // with the correct info, so it just needs to get sent
+        return 0;
       }
-      // TODO: send response message
       break;
     }
 
     case HDR_SET_ARM_PARAM: {
-      int ret = set_arm_param();
-      if (ret) {}  // do error response
-      else {}      // do success response
       if (set_arm_param()) {
         msg_hdr = HDR_ERROR;
         msg_len = 0;
+        return 1;
+      } else {
+        msg_hdr = HDR_SUCCESS;
+        msg_len = 0;
+        return 0;
       }
       break;
     }
@@ -354,14 +359,19 @@ int main(void)
   // Basic command loop
   while (1) {
     int res;
-    res = get_message();
-    if (!res) {
+    HAL_StatusTypeDef msg_res = get_message();
+    if (msg_res == HAL_OK) {
       res = process_command();
+      send_message();
+    } else if (msg_res == HAL_TIMEOUT) {
+      // timed out waiting for message, so carry on
+    } else {
+      // There was an error and an error response is in
+      // the message buffer, so send it
+      send_message();
     }
-    if (!res) {
-      res = send_message();
-    }
-    HAL_Delay(100);
+
+    // HAL_Delay(100);
   }
 }
 
