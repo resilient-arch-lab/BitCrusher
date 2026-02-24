@@ -50,7 +50,6 @@ class Device:
         trigger_src: np.uint8 = np.uint8(0)  # 0: HW, 1: FW
 
     ftdi_conn: ftd2xx.FTD2XX
-    # serial_conn: serial.Serial  # the port (e.g. "/dev/ttyUSB0") should be passed as param to __init__ so that the port is opened on serial object creation
     arming_config: ArmingConfig
     arming_config_params: dict[str, int] = {p : i for i, p in enumerate(ArmingConfig.__annotations__.keys())}
     state: States
@@ -150,19 +149,21 @@ class Device:
 
         return
 
-    # To change device arm config:
-    #   modify device.arming_config members as desired
-    #   call _apply_arming_config()
-    # TODO: refactor
-    def _apply_arming_config(self):
+
+    """
+    Write all values in `self.arming_config` to Device. 
+    """
+    def _write_arming_config(self):
         for i, param in enumerate(fields(Device.ArmingConfig)):
             msg = Protocol.Message(Protocol.Headers.set_arm_param, param.name.encode("utf-8"))
             resp = self._send_msg(msg, Protocol.Headers.success)
+        for k in self.arming_config_params.keys():
+            self._write_arming_param(k, self._write_arming_config.__getattribute__(k))
 
     """
     Ask device for all arming config parameters, updating them in `self.arming_config`.
     """
-    def _read_arming_config(self) -> ArmingConfig:
+    def _read_arming_config(self):
         for k in self.arming_config_params.keys():
             self._read_arming_param(k)
 
