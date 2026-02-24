@@ -2,8 +2,9 @@
 
 """
 
+from ctypes import ArgumentError
 from enum import Enum
-from typing import Callable
+from typing import Any, Callable
 import serial, ftd2xx
 from time import time
 from dataclasses import dataclass, fields
@@ -41,7 +42,6 @@ class Device:
         fault = 0xf0
 
     # Device arming configuration
-    # These might have to become real (e.g. int32) datatypes
     @dataclass
     class ArmingConfig:
         voltage: np.uint16 = np.uint16(0)  # in [150V, 500V]
@@ -52,6 +52,7 @@ class Device:
     ftdi_conn: ftd2xx.FTD2XX
     # serial_conn: serial.Serial  # the port (e.g. "/dev/ttyUSB0") should be passed as param to __init__ so that the port is opened on serial object creation
     arming_config: ArmingConfig
+    arming_config_params: dict[str, int] = {p : i for i, p in enumerate(ArmingConfig.__annotations__.keys())}
     state: States
 
     def __init__(self, port: str = "/dev/ttyUSB0", 
@@ -115,12 +116,34 @@ class Device:
             raise e
         return state
     
-    def get_arming_param(self, p: int):
+    def get_arming_param(self, p: str) -> Any:
         # TODO: make explicit mapping from ArmingConfig fields to indices for querrying device
-        msg = Protocol.Message(Protocol.Headers.get_arm_param, body=p.to_bytes(1))
+        if p not in self.arming_config_params.keys():
+            raise ArgumentError(f"Provided arming parameter not one of expected: {list(self.arming_config_params.keys())}")
+        msg = Protocol.Message(Protocol.Headers.get_arm_param, body=self.arming_config_params[p].to_bytes(1))
         self._write_msg(msg)
         resp = self._read_msg(expects=Protocol.Headers.success)
-        return resp
+        
+        # since all the ArmingConfig values are ints, the body is converted to an int before
+        # being converted to the numpy type to avoid a conversion error.
+        ptype: type[Any] = Device.ArmingConfig.__annotations__[p]
+        self.arming_config.__setattr__(p, ptype(np.frombuffer(resp.body, dtype=ptype)))  # update arming config locally
+
+        return self.arming_config.__getattribute__(p)
+        
+    def set_arming_param(self, p: str, v) -> None:
+        if p not in self.arming_config_params.keys():
+            raise ArgumentError(f"Provided arming parameter not one of expected: {list(self.arming_config_params.keys())}")
+
+        ptype: type[Any] = Device.ArmingConfig.__annotations__[p]  # gets type of field p
+        update_val = ptype(v)
+        msg = Protocol.Message(Protocol.Headers.set_arm_param, body=self.arming_config_params[p].to_bytes(1) + update_val.tobytes())
+        self._write_msg(msg)
+        resp = self._read_msg(expects=Protocol.Headers.success)
+
+        return
+
+
 
     # To change device arm config:
     #   modify device.arming_config members as desired
@@ -184,5 +207,5 @@ class TestingDevice(Device):
         msg = Protocol.parse_from_bytes(hdr, body)
 
         if (expects != None and msg.hdr != expects):
-            raise DeviceResponseError(f"Expected response with header \"{expects}\", but got \"{hdr}\"")
+            raise DeviceResponseError(f"Expected response with header \"{expects}\", but got \"{msg.hdr}\"")
         return msg
