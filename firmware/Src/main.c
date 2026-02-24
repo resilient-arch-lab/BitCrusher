@@ -54,6 +54,7 @@
 /* Private macro -------------------------------------------------------------*/
 /* USER CODE BEGIN PM */
 #define FLAG_ARMED (uint8_t )0xff
+#define FLAG_DISARMED (uint8_t )0x00
 #define STATE_INIT (uint8_t )0x01
 /* USER CODE END PM */
 
@@ -295,15 +296,23 @@ int arm_device(void) {
   return 0; 
 }
 
+int disarm_device(void) {
+  // disable trigger comparator output
+  // disable HVGen
+  // 
+  armed = FLAG_DISARMED;
+}
+
 int armed_loop(void) {
   if (armed != FLAG_ARMED) {
     // disarm device
   }
 
   // check for fault conditions
-  // check for a host device handshake msg
   // check if the handshake timer period has expired
-  //  if it has, disarm the device
+  // if it has, check for a host device handshake msg
+  // if not received, disarm the device
+  // otherwise, remain armed
   
   // if the program reaches here, the device should still be armed.
   // run the compensation loop (just once per armed_loop call i guess)
