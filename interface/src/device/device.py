@@ -4,7 +4,7 @@
 
 from ctypes import ArgumentError
 from enum import Enum
-from typing import Any, Callable
+from typing import Any, Callable, override
 import serial, ftd2xx
 from time import time
 from dataclasses import dataclass, fields
@@ -89,7 +89,7 @@ class Device:
     # TODO: Message sending / receiving messages should raise if they get an error response
     def _write_msg(self, msg: Protocol.Message):
         # self.serial_conn.write(to_msg(hdr, body))
-        self.ftdi_conn.write(Protocol.to_bytes(msg))
+        _ = self.ftdi_conn.write(Protocol.to_bytes(msg))
     
     def _read_msg(self, expects: Protocol.Headers | None = None) -> Protocol.Message:
         hdr = self.ftdi_conn.read(1)
@@ -116,22 +116,28 @@ class Device:
             raise e
         return state
     
-    def get_arming_param(self, p: str) -> Any:
+    """
+    Ask device for its current value of arming config parameter `p`. If the device responds, the 
+    corresponding value for `p` in `self.arming_config` is updated.
+    """
+    def _read_arming_param(self, p: str) -> Any:
         # TODO: make explicit mapping from ArmingConfig fields to indices for querrying device
         if p not in self.arming_config_params.keys():
             raise ArgumentError(f"Provided arming parameter not one of expected: {list(self.arming_config_params.keys())}")
         msg = Protocol.Message(Protocol.Headers.get_arm_param, body=self.arming_config_params[p].to_bytes(1))
         self._write_msg(msg)
         resp = self._read_msg(expects=Protocol.Headers.success)
-        
-        # since all the ArmingConfig values are ints, the body is converted to an int before
-        # being converted to the numpy type to avoid a conversion error.
-        ptype: type[Any] = Device.ArmingConfig.__annotations__[p]
+
+        ptype = Device.ArmingConfig.__annotations__[p]
         self.arming_config.__setattr__(p, ptype(np.frombuffer(resp.body, dtype=ptype)))  # update arming config locally
 
         return self.arming_config.__getattribute__(p)
-        
-    def set_arming_param(self, p: str, v) -> None:
+    
+    """
+    Write value `v` to parameter `p` in the device's arming config, and update in `self.arming_config`
+    if the device responds with a success. 
+    """
+    def _write_arming_param(self, p: str, v) -> None:
         if p not in self.arming_config_params.keys():
             raise ArgumentError(f"Provided arming parameter not one of expected: {list(self.arming_config_params.keys())}")
 
@@ -140,18 +146,25 @@ class Device:
         msg = Protocol.Message(Protocol.Headers.set_arm_param, body=self.arming_config_params[p].to_bytes(1) + update_val.tobytes())
         self._write_msg(msg)
         resp = self._read_msg(expects=Protocol.Headers.success)
+        self.arming_config.__setattr__(p, ptype(v))
 
         return
-
-
 
     # To change device arm config:
     #   modify device.arming_config members as desired
     #   call _apply_arming_config()
+    # TODO: refactor
     def _apply_arming_config(self):
         for i, param in enumerate(fields(Device.ArmingConfig)):
             msg = Protocol.Message(Protocol.Headers.set_arm_param, param.name.encode("utf-8"))
             resp = self._send_msg(msg, Protocol.Headers.success)
+
+    """
+    Ask device for all arming config parameters, updating them in `self.arming_config`.
+    """
+    def _read_arming_config(self) -> ArmingConfig:
+        for k in self.arming_config_params.keys():
+            self._read_arming_param(k)
 
     # configure reset, boot mode, and VBUS_Sense (make it boot normally)
     def _config_ft230x_gpio(self):
@@ -181,7 +194,7 @@ class Device:
 # Class for testing prototype firmware on STM32 Dev Board with CH340 USB-UART connection
 class TestingDevice(Device):
     serial_conn: serial.Serial
-
+    
     def __init__(self, port: str = "/dev/ttyUSB0", baud_rate: int = 115200, serial_timeout: float = 3) -> None:
         print("Searching for BitCrusher...")
         self.serial_conn = serial.Serial(port, baudrate=baud_rate, timeout=serial_timeout)
@@ -191,11 +204,13 @@ class TestingDevice(Device):
         self.arming_config = Device.ArmingConfig()
 
     # _write_msg and _read_msg must be redefined to use the CH340
+    @override
     def _write_msg(self, msg: Protocol.Message):
         self.serial_conn.write(Protocol.to_bytes(msg))
         print(Protocol.to_bytes(msg))
         print(f"Writing msg {msg}: {Protocol.to_bytes(msg)}")
     
+    @override
     def _read_msg(self, expects: Protocol.Headers | None = None) -> Protocol.Message:
         print("Receiving msg: ", end="")
         hdr = self.serial_conn.read(1)
