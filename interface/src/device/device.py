@@ -164,6 +164,10 @@ class Device:
         for k in self.arming_config_params.keys():
             self._read_arming_param(k)
 
+    """
+    Arm the device
+    Ensure handshake period is <= the handshake period programmed on device.
+    """
     def arm(self, handshake_period: float = 0.25):
         self._send_msg(Protocol.Message(Protocol.Headers.arm, b""), expects=Protocol.Headers.success)
         for _ in range(10):
