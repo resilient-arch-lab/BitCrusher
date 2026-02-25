@@ -9,6 +9,7 @@ import serial, ftd2xx
 from time import time
 from dataclasses import dataclass, fields
 from .comms import Protocol
+from time import sleep
 # Message = Protocol.Message
 # Headers = Protocol.Headers
 
@@ -149,16 +150,12 @@ class Device:
 
         return
 
-
     """
     Write all values in `self.arming_config` to Device. 
     """
     def _write_arming_config(self):
-        for i, param in enumerate(fields(Device.ArmingConfig)):
-            msg = Protocol.Message(Protocol.Headers.set_arm_param, param.name.encode("utf-8"))
-            resp = self._send_msg(msg, Protocol.Headers.success)
         for k in self.arming_config_params.keys():
-            self._write_arming_param(k, self._write_arming_config.__getattribute__(k))
+            self._write_arming_param(k, self.arming_config.__getattribute__(k))
 
     """
     Ask device for all arming config parameters, updating them in `self.arming_config`.
@@ -166,6 +163,18 @@ class Device:
     def _read_arming_config(self):
         for k in self.arming_config_params.keys():
             self._read_arming_param(k)
+
+    def arm(self, handshake_period: float = 0.25):
+        self._send_msg(Protocol.Message(Protocol.Headers.arm, b""), expects=Protocol.Headers.success)
+        for _ in range(10):
+            sleep(handshake_period)
+            self._send_msg(Protocol.Message(Protocol.Headers.arm, b""), expects=Protocol.Headers.success)
+        sleep(handshake_period)
+        self._send_msg(Protocol.Message(Protocol.Headers.disarm, b""), expects=Protocol.Headers.success)
+
+
+
+
 
     # configure reset, boot mode, and VBUS_Sense (make it boot normally)
     def _config_ft230x_gpio(self):
