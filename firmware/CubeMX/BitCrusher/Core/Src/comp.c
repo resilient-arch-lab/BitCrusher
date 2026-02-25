@@ -93,22 +93,21 @@ void HAL_COMP_MspInit(COMP_HandleTypeDef* compHandle)
   /* USER CODE END COMP2_MspInit 0 */
 
     __HAL_RCC_GPIOA_CLK_ENABLE();
-    __HAL_RCC_GPIOB_CLK_ENABLE();
     /**COMP2 GPIO Configuration
     PA7     ------> COMP2_INP
-    PB9     ------> COMP2_OUT
+    PA12     ------> COMP2_OUT
     */
-    GPIO_InitStruct.Pin = GPIO_PIN_7;
+    GPIO_InitStruct.Pin = HWTrig__Pin;
     GPIO_InitStruct.Mode = GPIO_MODE_ANALOG;
     GPIO_InitStruct.Pull = GPIO_NOPULL;
-    HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+    HAL_GPIO_Init(HWTrig__GPIO_Port, &GPIO_InitStruct);
 
-    GPIO_InitStruct.Pin = GPIO_PIN_9;
+    GPIO_InitStruct.Pin = IntTrig__Pin;
     GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
     GPIO_InitStruct.Pull = GPIO_NOPULL;
     GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
     GPIO_InitStruct.Alternate = GPIO_AF8_COMP2;
-    HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
+    HAL_GPIO_Init(IntTrig__GPIO_Port, &GPIO_InitStruct);
 
   /* USER CODE BEGIN COMP2_MspInit 1 */
 
@@ -124,10 +123,10 @@ void HAL_COMP_MspInit(COMP_HandleTypeDef* compHandle)
     /**COMP3 GPIO Configuration
     PB14     ------> COMP3_INP
     */
-    GPIO_InitStruct.Pin = GPIO_PIN_14;
+    GPIO_InitStruct.Pin = HVCS_Pin;
     GPIO_InitStruct.Mode = GPIO_MODE_ANALOG;
     GPIO_InitStruct.Pull = GPIO_NOPULL;
-    HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
+    HAL_GPIO_Init(HVCS_GPIO_Port, &GPIO_InitStruct);
 
   /* USER CODE BEGIN COMP3_MspInit 1 */
 
@@ -146,11 +145,9 @@ void HAL_COMP_MspDeInit(COMP_HandleTypeDef* compHandle)
 
     /**COMP2 GPIO Configuration
     PA7     ------> COMP2_INP
-    PB9     ------> COMP2_OUT
+    PA12     ------> COMP2_OUT
     */
-    HAL_GPIO_DeInit(GPIOA, GPIO_PIN_7);
-
-    HAL_GPIO_DeInit(GPIOB, GPIO_PIN_9);
+    HAL_GPIO_DeInit(GPIOA, HWTrig__Pin|IntTrig__Pin);
 
   /* USER CODE BEGIN COMP2_MspDeInit 1 */
 
@@ -165,7 +162,7 @@ void HAL_COMP_MspDeInit(COMP_HandleTypeDef* compHandle)
     /**COMP3 GPIO Configuration
     PB14     ------> COMP3_INP
     */
-    HAL_GPIO_DeInit(GPIOB, GPIO_PIN_14);
+    HAL_GPIO_DeInit(HVCS_GPIO_Port, HVCS_Pin);
 
   /* USER CODE BEGIN COMP3_MspDeInit 1 */
 

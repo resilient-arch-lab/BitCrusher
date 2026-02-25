@@ -36,9 +36,9 @@ int is_valid_trigger_src(uint8_t trigger_src){
 // Validate all values in arming config. Returns 0 if valid or 1 if invalid
 int is_valid_arming_config(arming_config_t *config) {
     int valid = 1;
-    valid &= is_valid_voltage(config->voltage);
-    valid &= is_valid_trigger_polarity(config->trigger_polarity);
-    valid &= is_valid_trigger_mode(config->trigger_mode);
-    valid &= is_valid_trigger_src(config->trigger_src);
+    valid &= !is_valid_voltage(config->voltage);
+    valid &= !is_valid_trigger_polarity(config->trigger_polarity);
+    valid &= !is_valid_trigger_mode(config->trigger_mode);
+    valid &= !is_valid_trigger_src(config->trigger_src);
     return valid;
 }

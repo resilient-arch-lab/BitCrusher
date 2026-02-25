@@ -21,9 +21,12 @@
 #include "adc.h"
 #include "comp.h"
 #include "dac.h"
-#include "dma.h"
+// #include "dma.h"
+#include "stm32f303xe.h"
 #include "stm32f3xx_hal.h"
+#include "stm32f3xx_hal_comp.h"
 #include "stm32f3xx_hal_def.h"
+#include "stm32f3xx_hal_gpio.h"
 #include "stm32f3xx_hal_uart.h"
 #include "tim.h"
 #include "usart.h"
@@ -73,6 +76,8 @@ uint8_t armed = 0;
 // device state variable
 uint8_t dev_state = STATE_INIT;
 
+
+
 arming_config_t arming_config = {
   0,
   1,
@@ -106,8 +111,10 @@ HAL_StatusTypeDef get_message(void) {
   msg_len = hdr_and_len[1];
 
   // get the message body
-  res = HAL_UART_Receive(&huart1, msg_body, (uint16_t )msg_len, 100);
-  if (res != HAL_OK) return HAL_ERROR;
+  if (msg_len > 0) {
+    res = HAL_UART_Receive(&huart1, msg_body, (uint16_t )msg_len, 100);
+    if (res != HAL_OK) return HAL_ERROR;
+  }
   return HAL_OK;
 }
 
@@ -235,6 +242,87 @@ int set_arm_param(void) {
   }
 }
 
+// check arming config and arm device. Return 1 on error or 0 on success
+int arm_device(void) {
+  // validate arming config, return error response if invalid
+  if (!is_valid_arming_config(&arming_config)) return 1;
+  // if device is already armed, return success here
+  if (armed == FLAG_ARMED) return 0;
+
+  // set the "PulseEN" GPIO
+  HAL_GPIO_WritePin(GPIOA, PulseEN_Pin, GPIO_PIN_SET);
+
+  // change the trigger comparator output back from being GPIO forced low
+  HAL_GPIO_DeInit(PulseEN_GPIO_Port, PulseEN_Pin);
+  MX_COMP2_Init();
+
+  // reset the `TIM3` WDT counter value and make sure it's not stopped (it's on one-pulse mode)
+  htim3.Instance->EGR &= TIM_EGR_UG;  // generate update event, clearing CNT
+  htim3.Instance->CR1 &= TIM_CR1_CEN;  // enable counting
+
+
+  // TODO: un-zero flyback PWM
+  
+  
+  
+  
+  // set armed flag
+  armed = FLAG_ARMED;  // device is now armed
+  return 0; 
+}
+
+int disarm_device(void) {
+  // reset PulseEN GPIO pin
+  HAL_GPIO_WritePin(GPIOA, PulseEN_Pin, GPIO_PIN_RESET);
+  
+  // disable trigger comparatorl
+  HAL_COMP_DeInit(&hcomp2);
+  MX_GPIO_Init();  // (this also resets PulseEN_Pin)
+
+  // nothing needs to happen with TIM3 since it generates no interrupts and is in
+  // one pulse mode
+
+  // TODO: force zero flyback PWM
+
+  // reset armed flag
+  armed = FLAG_DISARMED;
+  return 0;
+}
+
+int armed_loop(void) {
+  if (armed != FLAG_ARMED) {
+    disarm_device();
+    return 1;
+  }
+
+  // check for fault conditions
+  // check if the handshake timer period has expired
+  if (htim3.Instance->SR & TIM_SR_UIF) {
+    // period expired, check for host handshake msg
+    if (get_message() != HAL_OK) {
+      // if not received, disarm
+      disarm_device();
+      return 1;
+    }
+    if (msg_hdr != HDR_ARM || msg_len != 0) {
+      // if invalid or a request to disarm the device, disarm
+      disarm_device();
+      if (msg_hdr == HDR_DISARM) return 0;  // return success if disarmed intentionally
+      return 1;  // return error otherwise
+    }
+    // if received valid handshake, reset timer and remain armed
+    htim3.Instance->SR &= !TIM_SR_UIF;  // clear TIM3 interupt flag
+    htim3.Instance->CR1 &= TIM_CR1_CEN;  // resume TIM3 counting
+  } else {
+    // period not expired, remain armed
+  }
+  
+  // if the program reaches here, the device should still be armed.
+  // run the compensation loop (just once per armed_loop call i guess)
+  // and adjust the flyback converter PWM
+  return 0;
+}
+
 // For now, error responses propagate up to here, where they are handled
 int process_command(void) {
   // Each valid message header has a function to process it
@@ -272,6 +360,28 @@ int process_command(void) {
     }
 
     case HDR_ARM: {
+      if (arm_device()) {
+        msg_hdr = HDR_ERROR;
+        msg_len = 0;
+        return 1;
+      } else{
+        // tell host device armed successfully
+        msg_hdr = HDR_SUCCESS;
+        msg_len = 0;
+        send_message();
+
+        // start host handshake loop
+        int res = armed_loop();
+        while (!res) {
+          msg_hdr = HDR_SUCCESS;
+          msg_len = 0;
+          send_message();
+          res = armed_loop();
+        }
+        int disarmed = disarm_device();
+
+        return 0;
+      }
       break;
     }
 
@@ -282,41 +392,6 @@ int process_command(void) {
     default: return 1;
 
   }
-}
-
-// check arming config and arm device. Return 1 on error or 0 on success
-int arm_device(void) {
-  if (!is_valid_arming_config(&arming_config)) return 1;
-  
-  // TODO: set the "enable high voltage generation" GPIO
-  // TODO: change the trigger comparator output back from being GPIO forced low
-  // TODO: set armed flag
-
-  armed = FLAG_ARMED;  // device is now armed
-  return 0; 
-}
-
-int disarm_device(void) {
-  // disable trigger comparator output
-  // disable HVGen
-  // 
-  armed = FLAG_DISARMED;
-}
-
-int armed_loop(void) {
-  if (armed != FLAG_ARMED) {
-    // disarm device
-  }
-
-  // check for fault conditions
-  // check if the handshake timer period has expired
-  // if it has, check for a host device handshake msg
-  // if not received, disarm the device
-  // otherwise, remain armed
-  
-  // if the program reaches here, the device should still be armed.
-  // run the compensation loop (just once per armed_loop call i guess)
-  // and adjust the flyback converter PWM
 }
 
 
@@ -340,30 +415,14 @@ int main(void)
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
-  MX_DMA_Init();
+  // MX_DMA_Init();
   MX_ADC1_Init();
   MX_COMP2_Init();
   MX_COMP3_Init();
   MX_TIM2_Init();
   MX_DAC1_Init();
-  MX_TIM3_Init();
   MX_USART1_UART_Init();
-
-  // char *tmp_str = "Error\n";
-
-  // /* USER CODE BEGIN 2 */
-  // while (1) {
-  //   // UART loop
-  //   // HAL_UART_Transmit(&huart1, (uint8_t *)tmp_str, 8, 100);
-  //   // HAL_Delay(1000);
-  //   int res = get_message();
-  //   if (res) {
-  //     HAL_UART_Transmit(&huart1, (uint8_t *)tmp_str, 6, 100);
-  //   } else {
-  //     res = send_message();  // send the same message back
-  //   }
-  //   HAL_Delay(100);
-  // }
+  MX_TIM3_Init();
 
   // Basic command loop
   while (1) {

@@ -58,10 +58,20 @@ void Error_Handler(void);
 
 /* Private defines -----------------------------------------------------------*/
 #define TIM2_PWM_Period 100000
-#define HVSense_Pin GPIO_PIN_0
-#define HVSense_GPIO_Port GPIOA
-#define PulseVS_Pin GPIO_PIN_2
-#define PulseVS_GPIO_Port GPIOA
+#define HVSense__Pin GPIO_PIN_0
+#define HVSense__GPIO_Port GPIOA
+#define HVSense_A1_Pin GPIO_PIN_1
+#define HVSense_A1_GPIO_Port GPIOA
+#define HVPWM_Pin GPIO_PIN_5
+#define HVPWM_GPIO_Port GPIOA
+#define HWTrig__Pin GPIO_PIN_7
+#define HWTrig__GPIO_Port GPIOA
+#define HVCS_Pin GPIO_PIN_14
+#define HVCS_GPIO_Port GPIOB
+#define PulseEN_Pin GPIO_PIN_11
+#define PulseEN_GPIO_Port GPIOA
+#define IntTrig__Pin GPIO_PIN_12
+#define IntTrig__GPIO_Port GPIOA
 
 /* USER CODE BEGIN Private defines */
 
