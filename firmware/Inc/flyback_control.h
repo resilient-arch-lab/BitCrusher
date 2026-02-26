@@ -7,6 +7,17 @@ extern "C" {
 
 #include "main.h"
 
+
+#define HVVS_MAX 3
+#define HVVS_MIN 0
+#define VDDA (float )3.3
+#define HV_MIN 150
+#define HV_MAX 500
+
+#define ADC_TO_V(x) (VDDA/(0x0fff))*x
+#define V_TO_VHV(x) (HV_MAX/(HVVS_MAX - HVVS_MIN))*x
+
+
 typedef struct {
     float Kp;   // proportional gain
     float Ki;   // integral gain
@@ -26,8 +37,6 @@ typedef struct {
 } PI_handle_t;
 
 void PI_step(PI_config_t *cfg, PI_handle_t *pi, float fb, float set);
-
-
 
 
 #ifdef __cplusplus

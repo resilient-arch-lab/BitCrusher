@@ -262,6 +262,7 @@ int arm_device(void) {
 
 
   // TODO: un-zero flyback PWM
+  // TODO: set flyback PSR Ilim (DAC)
   
   
   
@@ -386,12 +387,17 @@ int process_command(void) {
     }
 
     case HDR_DISARM: {
-      break;
+      // Disarming from an armed state is handled from within processing
+      // the `arm` command.
+      msg_hdr = HDR_ERROR;
+      msg_len = 0;
+      return 1;
     }
-
-    default: return 1;
-
   }
+
+  msg_hdr = HDR_ERROR;
+  msg_len = 0;
+  return 1;
 }
 
 
