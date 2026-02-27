@@ -1,0 +1,3 @@
+[submodule "interface/ftx-prog"]
+	path = interface/ftx-prog
+	url = git@github.com:richardeoin/ftx-prog.git

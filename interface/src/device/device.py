@@ -42,6 +42,14 @@ class Device:
         armed = 0x03
         fault = 0xf0
 
+    class ResetState(Enum):
+        reset = 0b00
+        set = 0b01
+
+    class BootSelState(Enum):
+        normal = 0b00
+        bootloader = 0b01
+
     # Device arming configuration
     @dataclass
     class ArmingConfig:
@@ -54,6 +62,8 @@ class Device:
     arming_config: ArmingConfig
     arming_config_params: dict[str, int] = {p : i for i, p in enumerate(ArmingConfig.__annotations__.keys())}
     state: States
+    _reset_state: ResetState
+    _boot_sel_state: BootSelState
 
     def __init__(self, port: str = "/dev/ttyUSB0", 
                  baud_rate: int = 9600, serial_timeout: float = 3) -> None:
@@ -80,12 +90,20 @@ class Device:
         print("Connecting to BitCrusher...")
         self.ftdi_conn.setTimeouts(int(serial_timeout*1000), int(serial_timeout*1000))
         self.ftdi_conn.setBaudRate(baud_rate)
+
+        self._ftd230x_config_gpio()
         
         # Check for device activity by getting device state
-        self.state = self.get_state()
+        # self.state = self.get_state()
 
         self.arming_config = Device.ArmingConfig()
 
+    def _ftd230x_config_gpio(self):
+        # set CBUS0 and CBUS1 as output
+        select_mask = b'0011'  # output: 1, input: 0
+        set_mask = b'0010'  # high: 1, low: 0
+        self.ftdi_conn.setBitMode(0b00110010, 0x20)
+    
     # TODO: Message sending / receiving messages should raise if they get an error response
     def _write_msg(self, msg: Protocol.Message):
         # self.serial_conn.write(to_msg(hdr, body))
@@ -176,28 +194,22 @@ class Device:
         sleep(handshake_period)
         self._send_msg(Protocol.Message(Protocol.Headers.disarm, b""), expects=Protocol.Headers.success)
 
+    @property
+    def reset_state(self) -> ResetState:
+        return self._reset_state
 
+    @reset_state.setter
+    def reset_state(self, reset_state: ResetState):
+        # TODO: write function to generate bitmask based on desired GPIO state
+        # TODO: write reset state to ft230x GPIO
+        self._reset_state = reset_state
 
+    # TODO: boot_sel_state configuration methods
 
+    # TODO: firmware flashing method
 
-    # configure reset, boot mode, and VBUS_Sense (make it boot normally)
-    def _config_ft230x_gpio(self):
-        # ucMask: Required value for bit mode mask. This sets up which bits are inputs and outputs. A bit value of
-        # 0 sets the corresponding pin to an input, a bit value of 1 sets the corresponding pin to an output.
-        # In the case of CBUS Bit Bang, the upper nibble of this value controls which pins are inputs and outputs,
-        # while the lower nibble controls which of the outputs are high and low.
-        # ucMode: Mode value. Can be one of the following:
-        # 0x0 = Reset
-        # 0x1 = Asynchronous Bit Bang
-        # 0x2 = MPSSE (FT2232, FT2232H, FT4232H and FT232H devices only)
-        # 0x4 = Synchronous Bit Bang (FT232R, FT245R, FT2232, FT2232H, FT4232H and FT232H devices only)
-        # 0x8 = MCU Host Bus Emulation Mode (FT2232, FT2232H, FT4232H and FT232H devices only)
-        # 0x10 = Fast Opto-Isolated Serial Mode (FT2232, FT2232H, FT4232H and FT232H devices only)
-        # 0x20 = CBUS Bit Bang Mode (FT232R and FT232H devices only)
-        # 0x40 = Single Channel Synchronous 245 FIFO Mode (FT2232H and FT232H devices only)
-        # 0: Reset, 1: Bootsel, 2: NC, 3: VBUS sense
-        self.ftdi_conn.setBitMode(0b00110001, 0x20)  # set CBUS0,1 to output; CBUS0 high, CBUS1 low
-        # TODO: not sure how to configure VBUS_Sense
+    
+
 
     def _config_ft230x(self):
         # TODO: set power descriptor to 0, since device is self powered
