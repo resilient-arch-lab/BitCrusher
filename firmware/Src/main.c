@@ -21,9 +21,10 @@
 #include "adc.h"
 #include "comp.h"
 #include "dac.h"
-// #include "dma.h"
+#include "flyback_control.h"
 #include "stm32f303xe.h"
 #include "stm32f3xx_hal.h"
+#include "stm32f3xx_hal_adc.h"
 #include "stm32f3xx_hal_comp.h"
 #include "stm32f3xx_hal_def.h"
 #include "stm32f3xx_hal_gpio.h"
@@ -75,6 +76,17 @@ uint8_t armed = 0;
 
 // device state variable
 uint8_t dev_state = STATE_INIT;
+
+// flyback PI control config and handle
+PI_config_t flyback_PI_cfg = {
+    1.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    1.0
+};
+PI_handle_t flyback_PI_hdl = {0.0, 0.0, 0.0, 0.0};
 
 
 
@@ -262,6 +274,8 @@ int arm_device(void) {
 
 
   // TODO: un-zero flyback PWM
+  //  (this will be done automatically by the control loop)
+  
   // TODO: set flyback PSR Ilim (DAC)
   
   
@@ -283,10 +297,31 @@ int disarm_device(void) {
   // nothing needs to happen with TIM3 since it generates no interrupts and is in
   // one pulse mode
 
-  // TODO: force zero flyback PWM
+  // TODO: force zero flyback PWM1
+  htim2.Instance->CCR1 = 0;
 
   // reset armed flag
   armed = FLAG_DISARMED;
+  return 0;
+}
+
+int flyback_comp_step(void) {
+  // Convert ADC reading to float in [0, 500]
+  HAL_StatusTypeDef res = HAL_ADC_PollForConversion(&hadc1, 1);
+  if (res != HAL_OK) return 1;  // TODO: write error msg
+  uint32_t adc_reading = HAL_ADC_GetValue(&hadc1);
+  float V_HV_fb = V_TO_VHV(ADC_TO_V(adc_reading));  // real voltage at HV bank
+  float setpoint = (float )arming_config.voltage;
+
+  // Run PI on normalized input
+  PI_step(&flyback_PI_cfg, &flyback_PI_hdl, V_HV_fb/HV_MAX, setpoint/HV_MAX);
+
+  // Force control signal in bounds
+  if (flyback_PI_hdl.out > D_MAX) flyback_PI_hdl.out = D_MAX;
+  else if (flyback_PI_hdl.out < D_MIN) flyback_PI_hdl.out = D_MIN;
+  uint32_t duty_cycle = (uint32_t )(flyback_PI_hdl.out * PWM_P);
+
+  htim2.Instance->CCR1 = duty_cycle;
   return 0;
 }
 

@@ -7,16 +7,20 @@ extern "C" {
 
 #include "main.h"
 
-
+// voltage feedback conversion macros
 #define HVVS_MAX 3
 #define HVVS_MIN 0
 #define VDDA (float )3.3
 #define HV_MIN 150
 #define HV_MAX 500
 
-#define ADC_TO_V(x) (VDDA/(0x0fff))*x
-#define V_TO_VHV(x) (HV_MAX/(HVVS_MAX - HVVS_MIN))*x
+// PWM duty cycle macros
+#define D_MIN 0.1
+#define D_MAX 0.49
+#define PWM_P 720
 
+#define ADC_TO_V(x) (VDDA/(0x0fff))*x
+#define V_TO_VHV(x) ((float )HV_MAX/(float )(HVVS_MAX - HVVS_MIN))*x
 
 typedef struct {
     float Kp;   // proportional gain
@@ -33,11 +37,10 @@ typedef struct {
     float dv;           // derivative result
     float err;          // error value
     float out;          // output value
-    float out_norm;     // normalized output
+    // float out_norm;     // normalized output
 } PI_handle_t;
 
 void PI_step(PI_config_t *cfg, PI_handle_t *pi, float fb, float set);
-
 
 #ifdef __cplusplus
 }

@@ -1,9 +1,10 @@
 #include "arming.h"
+#include "flyback_control.h"
 #include <stdint.h>
 
 // Validate voltage value. Returns 0 if valid or 1 if invalid
 int is_valid_voltage(uint16_t voltage){
-    if (voltage < 150 || voltage > 500) {
+    if (voltage < HV_MIN || voltage > HV_MAX) {
         return 1;
     }
     return 0;
