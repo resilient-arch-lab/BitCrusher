@@ -26,6 +26,8 @@
 #include "stm32f3xx_hal.h"
 #include "stm32f3xx_hal_adc.h"
 #include "stm32f3xx_hal_comp.h"
+#include "stm32f3xx_hal_dac.h"
+#include "stm32f3xx_hal_dac_ex.h"
 #include "stm32f3xx_hal_def.h"
 #include "stm32f3xx_hal_gpio.h"
 #include "stm32f3xx_hal_uart.h"
@@ -276,11 +278,9 @@ int arm_device(void) {
   // TODO: un-zero flyback PWM
   //  (this will be done automatically by the control loop)
   
-  // TODO: set flyback PSR Ilim (DAC)
-  
-  
-  
-  
+  // set flyback PSR Ilim (DAC)
+  HAL_DAC_SetValue(&hdac1, DAC_CHANNEL_1, DAC_ALIGN_12B_R, (uint32_t )V_to_DAC(1));
+    
   // set armed flag
   armed = FLAG_ARMED;  // device is now armed
   return 0; 
@@ -291,13 +291,13 @@ int disarm_device(void) {
   HAL_GPIO_WritePin(GPIOA, PulseEN_Pin, GPIO_PIN_RESET);
   
   // disable trigger comparatorl
-  HAL_COMP_DeInit(&hcomp2);
+  HAL_COMP_DeInit(&hcomptrig);
   MX_GPIO_Init();  // (this also resets PulseEN_Pin)
 
   // nothing needs to happen with TIM3 since it generates no interrupts and is in
   // one pulse mode
 
-  // TODO: force zero flyback PWM1
+  // TODO: force zero flyback PWM1 (and maybe disable counting at all)
   htim2.Instance->CCR1 = 0;
 
   // reset armed flag

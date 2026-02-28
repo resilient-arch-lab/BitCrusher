@@ -36,6 +36,8 @@ extern DAC_HandleTypeDef hdac1;
 
 /* USER CODE BEGIN Private defines */
 
+#define V_to_DAC(v) (uint16_t )((4095 * v) / 3.3)
+
 /* USER CODE END Private defines */
 
 void MX_DAC1_Init(void);
