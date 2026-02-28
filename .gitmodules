@@ -1,3 +1,6 @@
 [submodule "interface/ftx-prog"]
 	path = interface/ftx-prog
 	url = git@github.com:richardeoin/ftx-prog.git
+[submodule "interface/stm32flash"]
+	path = interface/stm32flash
+	url = git://git.code.sf.net/p/stm32flash/code
