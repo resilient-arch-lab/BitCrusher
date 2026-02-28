@@ -133,7 +133,7 @@ class Device:
 
     def reset(self):
         self._ftd230x_gpio_set(self._ftd230x_gpio_reset_pin, 0)
-        sleep(0.2)
+        sleep(0.5)
         self._ftd230x_gpio_set(self._ftd230x_gpio_reset_pin, 1)        
 
     def _enter_bootloader(self): 

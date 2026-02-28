@@ -13,26 +13,26 @@ class TestArmingParameter(unittest.TestCase):
             self.dev = TestingDevice()
         super().__init__(methodName)
     
-    # def test_modify_arming_param(self):
-    #     self.dev._write_arming_param("voltage", 200)
-    #     res2 = self.dev._read_arming_param("voltage")
-    #     self.assertEqual(res2, 200)
+    def test_modify_arming_param(self):
+        self.dev._write_arming_param("voltage", 200)
+        res2 = self.dev._read_arming_param("voltage")
+        self.assertEqual(res2, 200)
         
-    #     # Try updating arming param to invalid value, check for error
-    #     # response and make sure the parameter wasn't updated
-    #     bad_voltage_error = False
-    #     try:
-    #         self.dev._write_arming_param("voltage", 600)
-    #     except DeviceResponseError as e:
-    #         bad_voltage_error = True
-    #     res3 = self.dev._read_arming_param("voltage")
-    #     self.assertTrue(bad_voltage_error)
-    #     self.assertEqual(res3, 200)
+        # Try updating arming param to invalid value, check for error
+        # response and make sure the parameter wasn't updated
+        bad_voltage_error = False
+        try:
+            self.dev._write_arming_param("voltage", 600)
+        except DeviceResponseError as e:
+            bad_voltage_error = True
+        res3 = self.dev._read_arming_param("voltage")
+        self.assertTrue(bad_voltage_error)
+        self.assertEqual(res3, 200)
     
-    def test_arm_disarm(self):
-        self.dev.arming_config.voltage = np.uint16(200)
-        self.dev._write_arming_config()
-        self.dev.arm()
+    # def test_arm_disarm(self):
+    #     self.dev.arming_config.voltage = np.uint16(200)
+    #     self.dev._write_arming_config()
+    #     self.dev.arm()
 
 if __name__ == "__main__":
     unittest.main()
