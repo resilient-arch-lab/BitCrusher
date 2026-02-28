@@ -3331,6 +3331,16 @@
 		)
 		(uuid "4914e07e-3957-476e-bdeb-435a48e2437c")
 	)
+	(text "2A -> 1V"
+		(exclude_from_sim no)
+		(at 91.694 149.86 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+		(uuid "4e90f07e-fe04-4de0-985b-778632bffa53")
+	)
 	(text "1:10"
 		(exclude_from_sim no)
 		(at 135.89 87.122 0)
