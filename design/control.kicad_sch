@@ -6,7 +6,7 @@
 	(paper "A4")
 	(title_block
 		(title "BitCrusher: Affordable, Open Source EMFI Platform")
-		(rev "0.1")
+		(rev "0.2")
 		(company "University of New Hampshire, Resilient Architecture Lab")
 		(comment 1 "Advisor: Dean Sullivan")
 		(comment 2 "Author: George Crane")
@@ -4755,16 +4755,16 @@
 		)
 		(uuid "1d26121a-f8c0-4709-8ae2-c2c0477c9c9f")
 	)
-	(text "USART1_RX"
+	(text "USART1_TX"
 		(exclude_from_sim no)
-		(at 179.07 84.328 0)
+		(at 214.63 71.628 0)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
-			(justify right)
+			(justify left)
 		)
-		(uuid "39ea3d7e-7a1a-4930-97f2-e535a2561ef9")
+		(uuid "3a15e1fa-7d47-47ae-a33c-7b75cf1d637e")
 	)
 	(text "H: Bootloader\nL: Normal"
 		(exclude_from_sim no)
@@ -4869,6 +4869,17 @@
 		)
 		(uuid "8fd1520f-79fc-4284-8456-e4a41a1450db")
 	)
+	(text "USART1_RX"
+		(exclude_from_sim no)
+		(at 214.63 74.168 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "a1b3a578-f0c0-4d05-acf9-586f78ca7071")
+	)
 	(text "Coaxial Interfaces"
 		(exclude_from_sim no)
 		(at 19.05 20.32 0)
@@ -4890,17 +4901,6 @@
 			(justify left)
 		)
 		(uuid "ca1c6ab6-94be-4a27-a493-c0f24c4339fb")
-	)
-	(text "USART1_TX"
-		(exclude_from_sim no)
-		(at 179.07 81.788 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right)
-		)
-		(uuid "dfff0607-04c6-43f8-95cf-f0c3f1b033f8")
 	)
 	(text "COMP3_INP"
 		(exclude_from_sim no)
@@ -5167,16 +5167,20 @@
 		(uuid "3a75c78a-72c2-4e8d-91f3-f19f23e22d55")
 	)
 	(no_connect
+		(at 179.07 85.09)
+		(uuid "5825bcb3-2833-413d-b960-a683a0ebb973")
+	)
+	(no_connect
 		(at 179.07 80.01)
 		(uuid "593f6358-58ae-443c-ba00-354a6af6ac73")
 	)
 	(no_connect
-		(at 214.63 80.01)
-		(uuid "63ab2cf2-3691-402d-bee7-e05598170455")
+		(at 179.07 82.55)
+		(uuid "5aee60cf-ce89-4f19-8673-0f97b97fa153")
 	)
 	(no_connect
-		(at 214.63 74.93)
-		(uuid "6ddf488a-4307-4655-b784-0d54e4f0e0c6")
+		(at 214.63 80.01)
+		(uuid "63ab2cf2-3691-402d-bee7-e05598170455")
 	)
 	(no_connect
 		(at 214.63 95.25)
@@ -5221,10 +5225,6 @@
 	(no_connect
 		(at 214.63 113.03)
 		(uuid "af1242b2-701b-489e-9fab-326d8d30fa3d")
-	)
-	(no_connect
-		(at 214.63 72.39)
-		(uuid "af9aeaa4-0ac6-4f8e-b1c3-a610cde2790e")
 	)
 	(no_connect
 		(at 214.63 118.11)
@@ -5504,6 +5504,16 @@
 	)
 	(wire
 		(pts
+			(xy 226.06 72.39) (xy 214.63 72.39)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "2fd65bee-351d-4646-a920-9caf99716634")
+	)
+	(wire
+		(pts
 			(xy 204.47 27.94) (xy 213.36 27.94)
 		)
 		(stroke
@@ -5551,6 +5561,16 @@
 			(type default)
 		)
 		(uuid "3c74a3c0-7d4a-4a84-91d6-885a1fde1e3d")
+	)
+	(wire
+		(pts
+			(xy 226.06 74.93) (xy 214.63 74.93)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "3d4913e6-8251-43c5-a6ad-2780eeeb0307")
 	)
 	(wire
 		(pts
@@ -5631,26 +5651,6 @@
 			(type default)
 		)
 		(uuid "469c3143-7df6-439e-8233-776fe804c219")
-	)
-	(wire
-		(pts
-			(xy 167.64 82.55) (xy 179.07 82.55)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "47093224-701c-4d47-9b79-0eff6b697f8f")
-	)
-	(wire
-		(pts
-			(xy 167.64 85.09) (xy 179.07 85.09)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "473fb02c-1779-4fdc-ad42-cff7fc89c830")
 	)
 	(wire
 		(pts
@@ -6034,7 +6034,7 @@
 	)
 	(wire
 		(pts
-			(xy 214.63 77.47) (xy 237.49 77.47)
+			(xy 214.63 77.47) (xy 247.65 77.47)
 		)
 		(stroke
 			(width 0)
@@ -6810,6 +6810,28 @@
 			)
 		)
 	)
+	(global_label "USART1_TX"
+		(shape output)
+		(at 226.06 72.39 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "1d99b10a-4d5e-472a-8db2-0c2d5c03655b")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 239.2656 72.39 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+	)
 	(global_label "Debug4"
 		(shape bidirectional)
 		(at 219.71 107.95 0)
@@ -6922,21 +6944,21 @@
 	)
 	(global_label "USART1_RX"
 		(shape input)
-		(at 167.64 85.09 180)
+		(at 226.06 74.93 0)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
-			(justify right)
+			(justify left)
 		)
-		(uuid "677af20d-60e1-48ee-8ff2-bed7894f1164")
+		(uuid "57616208-a85f-483c-bb17-15d0bb3d7852")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 175.722 85.09 0)
+			(at 217.978 74.93 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify right)
+				(justify left)
 				(hide yes)
 			)
 		)
@@ -7357,28 +7379,6 @@
 			)
 		)
 	)
-	(global_label "USART1_TX"
-		(shape output)
-		(at 167.64 82.55 180)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right)
-		)
-		(uuid "d8926d64-3b82-49d3-949c-1e4e3c3d92a1")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 154.4344 82.55 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-				(hide yes)
-			)
-		)
-	)
 	(global_label "Debug3"
 		(shape bidirectional)
 		(at 96.52 166.37 180)
@@ -7491,7 +7491,7 @@
 	)
 	(global_label "PulseEN"
 		(shape output)
-		(at 237.49 77.47 0)
+		(at 247.65 77.47 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -7501,7 +7501,7 @@
 		)
 		(uuid "fd41b56e-183b-4dad-9b24-9c689d84547e")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 248.1556 77.47 0)
+			(at 258.3156 77.47 0)
 			(effects
 				(font
 					(size 1.27 1.27)
