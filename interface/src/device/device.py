@@ -141,12 +141,12 @@ class Device:
         self._ftd230x_gpio_set(self._ftd230x_gpio_bootsel_pin, 1)
         self.reset()
         
-        self.ftdi_conn.write(b'7f')  # bootlader should ack with `7f 79` or just `79`
+        self.ftdi_conn.write(b'\x7f')  # bootlader should ack with `7f 79` or just `79`
         resp = self.ftdi_conn.read(2)
         
         print(resp)
         
-        if resp[-1] != b'79':
+        if resp[-1] != b'\x79':
             raise DeviceError("Failed to enter bootloader")
         
     def _exit_bootloader(self):
