@@ -5124,7 +5124,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "5u"
+		(property "Value" "1u"
 			(at 215.9 81.2799 0)
 			(effects
 				(font
@@ -5395,7 +5395,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "5u"
+		(property "Value" "1u"
 			(at 200.66 81.2799 0)
 			(effects
 				(font
@@ -6083,7 +6083,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "5u"
+		(property "Value" "1u"
 			(at 170.18 81.2799 0)
 			(effects
 				(font
@@ -7173,7 +7173,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "5u"
+		(property "Value" "1u"
 			(at 185.42 81.2799 0)
 			(effects
 				(font
@@ -7780,7 +7780,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "5u"
+		(property "Value" "1u"
 			(at 231.14 81.2799 0)
 			(effects
 				(font

@@ -4,3 +4,6 @@
 [submodule "interface/stm32flash"]
 	path = interface/stm32flash
 	url = git://git.code.sf.net/p/stm32flash/code
+[submodule "interface/stm32wl-openbl-apps"]
+	path = interface/stm32wl-openbl-apps
+	url = git@github.com:STMicroelectronics/stm32wl-openbl-apps.git
