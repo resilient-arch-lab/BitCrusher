@@ -148,6 +148,10 @@ class Device:
         
         if resp[-1] != b'\x79':
             raise DeviceError("Failed to enter bootloader")
+    
+    def _enter_open_bootloader(self):
+        self._write_msg(Protocol.Message(Protocol.Headers.bootloader, b""))  # expect no response
+        
         
     def _exit_bootloader(self):
         self._ftd230x_gpio_set(self._ftd230x_gpio_bootsel_pin, 0)

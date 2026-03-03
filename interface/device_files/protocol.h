@@ -11,6 +11,7 @@
 #define HDR_SET_ARM_PARAM 0xa1
 #define HDR_GET_ARM_PARAM 0xa2
 #define HDR_DISARM 0xaf
+#define HDR_BOOTLOADER 0xb0
 
 
 #endif  // #define __PROTOCOL_H__
