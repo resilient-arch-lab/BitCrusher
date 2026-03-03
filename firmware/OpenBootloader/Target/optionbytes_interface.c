@@ -86,54 +86,12 @@ void OPENBL_OB_Write(uint32_t Address, uint8_t *Data, uint32_t DataLength)
   HAL_FLASH_OB_Unlock();
 
   /* Clear error programming flags */
-  __HAL_FLASH_CLEAR_FLAG(FLASH_FLAG_ALL_ERRORS);
+  __HAL_FLASH_CLEAR_FLAG(FLASH_FLAG_PGERR | FLASH_FLAG_WRPERR);
 
   /* Write USER OPT + RDP level */
   if (DataLength >= 1U)
   {
-    WRITE_REG(FLASH->OPTR, (*(Data) | (*(Data + 1U) << 8U) | (*(Data + 2U) << 16U) | (*(Data + 3U) << 24U)));
-  }
-
-  /* Write PCROP1ASR */
-  if (DataLength > 8U)
-  {
-    WRITE_REG(FLASH->PCROP1ASR, (*(Data + 8U)));
-  }
-
-  /* Write PCROP1AER */
-  if (DataLength > 16U)
-  {
-    WRITE_REG(FLASH->PCROP1AER, (*(Data + 16U) | (*(Data + 19U) << 24U)));
-  }
-
-  /* Write WRP1AR */
-  if (DataLength > 24U)
-  {
-    WRITE_REG(FLASH->WRP1AR, (*(Data + 24U) | (*(Data + 26U) << 16U)));
-  }
-
-  /* Write WRP1BR */
-  if (DataLength > 32U)
-  {
-    WRITE_REG(FLASH->WRP1BR, (*(Data + 32U) | (*(Data + 34U) << 16U)));
-  }
-
-  /* Write PCROP1BSR */
-  if (DataLength > 40U)
-  {
-    WRITE_REG(FLASH->PCROP1BSR, (*(Data + 40U)));
-  }
-
-  /* Write PCROP1BER */
-  if (DataLength > 48U)
-  {
-    WRITE_REG(FLASH->PCROP1BER, (*(Data + 48U)));
-  }
-
-  /* Write IPCCBR */
-  if (DataLength > 104U)
-  {
-    WRITE_REG(FLASH->IPCCBR, (*(Data + 104U) | (*(Data + 105U) << 8U)));
+    WRITE_REG(FLASH->OBR, (*(Data) | (*(Data + 1U) << 8U) | (*(Data + 2U) << 16U) | (*(Data + 3U) << 24U)));
   }
 
   /* Check the BSY bit for potential FLASH on going operation */

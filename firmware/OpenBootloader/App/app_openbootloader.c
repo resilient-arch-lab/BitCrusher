@@ -20,19 +20,15 @@
 #include "main.h"
 #include "app_openbootloader.h"
 #include "usart_interface.h"
-#include "spi_interface.h"
 
 #include "flash_interface.h"
 #include "ram_interface.h"
 #include "systemmemory_interface.h"
-#include "optionbytes_interface.h"
-#include "otp_interface.h"
-#include "engibytes_interface.h"
+// #include "optionbytes_interface.h"
 
-#include "iwdg_interface.h"
+// #include "iwdg_interface.h"
 
 #include "openbl_usart_cmd.h"
-#include "openbl_spi_cmd.h"
 
 #include "openbl_core.h"
 #include "openbl_mem.h"
@@ -42,8 +38,7 @@
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
 static OPENBL_HandleTypeDef USART_Handle;
-static OPENBL_HandleTypeDef SPI_Handle;
-static OPENBL_HandleTypeDef IWDG_Handle;
+// static OPENBL_HandleTypeDef IWDG_Handle;
 
 static OPENBL_OpsTypeDef USART_Ops =
 {
@@ -55,26 +50,26 @@ static OPENBL_OpsTypeDef USART_Ops =
 };
 
 
-static OPENBL_OpsTypeDef SPI_Ops =
-{
-  OPENBL_SPI_Configuration,
-  OPENBL_SPI_DeInit,
-  OPENBL_SPI_ProtocolDetection,
-  OPENBL_SPI_GetCommandOpcode,
-  OPENBL_SPI_SendAcknowledgeByte
-};
+// static OPENBL_OpsTypeDef SPI_Ops =
+// {
+//   OPENBL_SPI_Configuration,
+//   OPENBL_SPI_DeInit,
+//   OPENBL_SPI_ProtocolDetection,
+//   OPENBL_SPI_GetCommandOpcode,
+//   OPENBL_SPI_SendAcknowledgeByte
+// };
 
 
 
 
-static OPENBL_OpsTypeDef IWDG_Ops =
-{
-  OPENBL_IWDG_Configuration,
-  NULL,
-  NULL,
-  NULL,
-  NULL
-};
+// static OPENBL_OpsTypeDef IWDG_Ops =
+// {
+//   OPENBL_IWDG_Configuration,
+//   NULL,
+//   NULL,
+//   NULL,
+//   NULL
+// };
 
 /* Exported variables --------------------------------------------------------*/
 uint16_t SpecialCmdList[SPECIAL_CMD_MAX_NUMBER] =
@@ -105,18 +100,18 @@ void OpenBootloader_Init(void)
   OPENBL_RegisterInterface(&USART_Handle);
 
 
-  /* Register SPI interfaces */
-  SPI_Handle.p_Ops = &SPI_Ops;
-  SPI_Handle.p_Cmd = OPENBL_SPI_GetCommandsList();
+  // /* Register SPI interfaces */
+  // SPI_Handle.p_Ops = &SPI_Ops;
+  // SPI_Handle.p_Cmd = OPENBL_SPI_GetCommandsList();
 
-  OPENBL_RegisterInterface(&SPI_Handle);
+  // OPENBL_RegisterInterface(&SPI_Handle);
 
 
   /* Register IWDG interfaces */
-  IWDG_Handle.p_Ops = &IWDG_Ops;
-  IWDG_Handle.p_Cmd = NULL;
+  // IWDG_Handle.p_Ops = &IWDG_Ops;
+  // IWDG_Handle.p_Cmd = NULL;
 
-  OPENBL_RegisterInterface(&IWDG_Handle);
+  // OPENBL_RegisterInterface(&IWDG_Handle);
 
   /* Initialize interfaces */
   OPENBL_Init();
@@ -125,9 +120,7 @@ void OpenBootloader_Init(void)
   OPENBL_MEM_RegisterMemory(&FLASH_Descriptor);
   OPENBL_MEM_RegisterMemory(&RAM_Descriptor);
   OPENBL_MEM_RegisterMemory(&ICP1_Descriptor);
-  OPENBL_MEM_RegisterMemory(&OB1_Descriptor);
-  OPENBL_MEM_RegisterMemory(&OTP_Descriptor);
-  OPENBL_MEM_RegisterMemory(&EB_Descriptor);
+  // OPENBL_MEM_RegisterMemory(&OB1_Descriptor);
 }
 
 /**
@@ -137,7 +130,7 @@ void OpenBootloader_Init(void)
   */
 void OpenBootloader_DeInit(void)
 {
-  System_DeInit();
+  // System_DeInit();
 }
 
 /**

@@ -80,6 +80,8 @@ includeDirectories:
   - Src/**
   - Core/Src/**
   - Core/Lib/**
+  - OpenBootloader/App/**
+  - OpenBootloader/Target/**
 
 
 # Files that should be included in the compilation.
@@ -91,6 +93,10 @@ sourceFiles:
   - Src/**
   - Core/Src/**
   - Core/Lib/**
+  - OpenBootloader/App/**
+  - OpenBootloader/Target/*.c
+  - Middlewares/ST/OpenBootloader/Modules/Mem/**
+  - Middlewares/ST/OpenBootloader/Modules/USART/**
 
 
 # When no makefile is present it will show a warning pop-up.

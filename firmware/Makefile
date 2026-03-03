@@ -66,8 +66,8 @@ Src/sysmem.c \
 Src/syscalls.c \
 Middlewares/ST/OpenBootloader/Core/openbl_core.c \
 Middlewares/ST/OpenBootloader/Modules/Mem/openbl_mem.c \
-Middlewares/ST/OpenBootloader/Modules/SPI/openbl_spi_cmd.c \
-Middlewares/ST/OpenBootloader/Modules/USART/openbl_usart_cmd.c
+Middlewares/ST/OpenBootloader/Modules/USART/openbl_usart_cmd.c \ 
+OpenBootloader/App/app_openbootloader.c
 
 # ASM sources
 ASM_SOURCES =  \
@@ -136,7 +136,6 @@ C_INCLUDES =  \
 -IMiddlewares/ST/OpenBootloader/Core \
 -IMiddlewares/ST/OpenBootloader/Modules/Mem \
 -IMiddlewares/ST/OpenBootloader/Modules/USART \
--IMiddlewares/ST/OpenBootloader/Modules/I2C \
 -IOpenBootloader/App \
 -IOpenBootloader/Target
 

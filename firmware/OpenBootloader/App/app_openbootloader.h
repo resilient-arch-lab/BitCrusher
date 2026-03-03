@@ -45,8 +45,6 @@ extern OPENBL_MemoryTypeDef FLASH_Descriptor;
 extern OPENBL_MemoryTypeDef RAM_Descriptor;
 extern OPENBL_MemoryTypeDef ICP1_Descriptor;
 extern OPENBL_MemoryTypeDef OB1_Descriptor;
-extern OPENBL_MemoryTypeDef OTP_Descriptor;
-extern OPENBL_MemoryTypeDef EB_Descriptor;
 
 extern uint16_t SpecialCmdList[SPECIAL_CMD_MAX_NUMBER];
 extern uint16_t ExtendedSpecialCmdList[EXTENDED_SPECIAL_CMD_MAX_NUMBER];

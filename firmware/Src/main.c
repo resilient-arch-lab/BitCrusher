@@ -18,6 +18,8 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
+#include "interfaces_conf.h"
+#include "app_openbootloader.h"
 #include "adc.h"
 #include "comp.h"
 #include "dac.h"
@@ -427,6 +429,13 @@ int process_command(void) {
       msg_hdr = HDR_ERROR;
       msg_len = 0;
       return 1;
+    }
+
+    case HDR_BOOTLOADER: {
+      OpenBootloader_Init();
+      while (1) {
+        OpenBootloader_ProtocolDetection();
+      }
     }
   }
 

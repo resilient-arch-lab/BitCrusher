@@ -90,6 +90,7 @@ extern "C" {
 #define FLASH_BANK2_ERASE                 0xFFFD
 
 #define INTERFACES_SUPPORTED              3U
+// I'm not supporting I2C or SPI, so this might need to be modified
 
 /* Exported macro ------------------------------------------------------------*/
 /* Exported functions ------------------------------------------------------- */

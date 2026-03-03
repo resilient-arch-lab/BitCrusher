@@ -91,9 +91,9 @@ void OPENBL_USART_Configuration(void)
           +-------------+
           |   USART1    |
     +-----+-------------+
-    | TX  |     PA9     |
+    | TX  |     PC4     |
     +-----+-------------+
-    | RX  |     PA10    |
+    | RX  |     PC5     |
     +-----+-------------+ */
   GPIO_InitStruct.Pin       = USARTx_TX_PIN;
   GPIO_InitStruct.Mode      = GPIO_MODE_AF_PP;
