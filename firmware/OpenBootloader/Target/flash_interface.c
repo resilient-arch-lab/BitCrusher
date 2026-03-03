@@ -415,6 +415,7 @@ static ErrorStatus OPENBL_FLASH_EnableWriteProtection(uint8_t *ListOfPages, uint
 
   flash_ob.OptionType = OPTIONBYTE_WRP;
 
+  // TODO: I dont't understand this write protection logic
   /* Write protection of all pages */
   if (Length >= 2U)
   {
