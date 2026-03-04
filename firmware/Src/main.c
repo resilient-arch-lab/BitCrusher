@@ -30,6 +30,7 @@
 #include "stm32f3xx_hal_dac_ex.h"
 #include "stm32f3xx_hal_def.h"
 #include "stm32f3xx_hal_gpio.h"
+#include "stm32f3xx_hal_tim.h"
 #include "stm32f3xx_hal_uart.h"
 #include "tim.h"
 #include "usart.h"
@@ -274,13 +275,14 @@ int arm_device(void) {
   htim3.Instance->EGR &= TIM_EGR_UG;  // generate update event, clearing CNT
   htim3.Instance->CR1 &= TIM_CR1_CEN;  // enable counting
 
-
-  // TODO: un-zero flyback PWM
-  //  (this will be done automatically by the control loop)
+  HAL_ADC_Start(&hadc1);
   
   // set flyback PSR Ilim (DAC)
   HAL_DAC_SetValue(&hdac1, DAC_CHANNEL_1, DAC_ALIGN_12B_R, (uint32_t )V_to_DAC(1));
-    
+  
+  // start HVPWM
+  HAL_TIM_PWM_Start(&htim2, TIM_CHANNEL_1);
+  
   // set armed flag
   armed = FLAG_ARMED;  // device is now armed
   return 0; 
@@ -290,7 +292,7 @@ int disarm_device(void) {
   // reset PulseEN GPIO pin
   HAL_GPIO_WritePin(GPIOA, PulseEN_Pin, GPIO_PIN_RESET);
   
-  // disable trigger comparatorl
+  // disable trigger comparator
   HAL_COMP_DeInit(&hcomptrig);
   MX_GPIO_Init();  // (this also resets PulseEN_Pin)
 
@@ -299,6 +301,11 @@ int disarm_device(void) {
 
   // TODO: force zero flyback PWM1 (and maybe disable counting at all)
   htim2.Instance->CCR1 = 0;
+  HAL_TIM_PWM_Stop(&htim2, TIM_CHANNEL_1);
+  
+  // htim2.Instance->CR1 &= ~TIM_CR1_CEN;  // disable counting
+  HAL_ADC_Stop(&hadc1);
+
 
   // reset armed flag
   armed = FLAG_DISARMED;
@@ -307,8 +314,8 @@ int disarm_device(void) {
 
 int flyback_comp_step(void) {
   // Convert ADC reading to float in [0, 500]
-  HAL_StatusTypeDef res = HAL_ADC_PollForConversion(&hadc1, 1);
-  if (res != HAL_OK) return 1;  // TODO: write error msg
+  HAL_StatusTypeDef res = HAL_ADC_PollForConversion(&hadc1, 10);
+  if (res != HAL_OK) return 1;
   uint32_t adc_reading = HAL_ADC_GetValue(&hadc1);
   float V_HV_fb = V_TO_VHV(ADC_TO_V(adc_reading));  // real voltage at HV bank
   float setpoint = (float )arming_config.voltage;
@@ -336,19 +343,24 @@ int armed_loop(void) {
   if (htim3.Instance->SR & TIM_SR_UIF) {
     // period expired, check for host handshake msg
     if (get_message() != HAL_OK) {
-      // if not received, disarm
-      disarm_device();
       return 1;
     }
-    if (msg_hdr != HDR_ARM || msg_len != 0) {
-      // if invalid or a request to disarm the device, disarm
-      disarm_device();
-      if (msg_hdr == HDR_DISARM) return 0;  // return success if disarmed intentionally
-      return 1;  // return error otherwise
+
+    if (msg_hdr != HDR_ARM) {
+      // If msg has DISARM header, disarm immedietly and return success
+      if (msg_hdr == HDR_DISARM) {
+        if (disarm_device()) return 1;
+        return 0;
+      }
+
+      // If header is something else, return error
+      return 1;
     }
+
     // if received valid handshake, reset timer and remain armed
-    htim3.Instance->SR &= !TIM_SR_UIF;  // clear TIM3 interupt flag
-    htim3.Instance->CR1 &= TIM_CR1_CEN;  // resume TIM3 counting
+    htim3.Instance->SR &= ~TIM_SR_UIF;  // clear TIM3 interupt flag
+    HAL_TIM_OnePulse_Start(&htim3, TIM_CHANNEL_1);
+    // htim3.Instance->CR1 &= TIM_CR1_CEN;  // resume TIM3 counting
   } else {
     // period not expired, remain armed
   }
@@ -356,6 +368,11 @@ int armed_loop(void) {
   // if the program reaches here, the device should still be armed.
   // run the compensation loop (just once per armed_loop call i guess)
   // and adjust the flyback converter PWM
+  if (flyback_comp_step()) {
+    // disarm_device();
+    return 1;
+  }
+
   return 0;
 }
 
@@ -397,27 +414,44 @@ int process_command(void) {
 
     case HDR_ARM: {
       if (arm_device()) {
+        disarm_device();
         msg_hdr = HDR_ERROR;
         msg_len = 0;
         return 1;
-      } else{
-        // tell host device armed successfully
-        msg_hdr = HDR_SUCCESS;
-        msg_len = 0;
-        send_message();
+      }
+      // tell host the device armed successfully
+      msg_hdr = HDR_SUCCESS;
+      msg_len = 0;
+      send_message();
 
-        // start host handshake loop
-        int res = armed_loop();
-        while (!res) {
+      // start host handshake loop
+      int res = 0;
+      while (!res && armed == FLAG_ARMED) {
+        // armed_loop returns 0 when disarmed intentionally, which could allow this to keep running maybe
+        res = armed_loop();
+        if (res) {
+          disarm_device();
+          msg_hdr = HDR_ERROR;
+          msg_len = 0;
+          return 1;
+        } else {
           msg_hdr = HDR_SUCCESS;
           msg_len = 0;
           send_message();
-          res = armed_loop();
         }
-        int disarmed = disarm_device();
-
+      }
+      
+      if (armed != FLAG_DISARMED) {
+        disarm_device();
+        msg_hdr = HDR_ERROR;
+        msg_len = 0;
+        return 1;
+      } else {
+        msg_hdr = HDR_SUCCESS;
+        msg_len = 0;
         return 0;
       }
+
       break;
     }
 
@@ -456,7 +490,6 @@ int main(void)
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
-  // MX_DMA_Init();
   MX_ADC1_Init();
   MX_COMP2_Init();
   MX_COMP3_Init();
