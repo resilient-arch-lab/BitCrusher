@@ -2,7 +2,7 @@
 	path = interface/ftx-prog
 	url = git@github.com:richardeoin/ftx-prog.git
 [submodule "interface/stm32flash"]
-	path = interface/stm32flash
+	path = interface/src/stm32flash
 	url = git://git.code.sf.net/p/stm32flash/code
 [submodule "interface/stm32wl-openbl-apps"]
 	path = interface/stm32wl-openbl-apps

@@ -10,6 +10,9 @@ from time import time
 from dataclasses import dataclass, fields
 from .comms import Protocol
 from time import sleep
+import subprocess
+from pathlib import Path
+import sys
 # Message = Protocol.Message
 # Headers = Protocol.Headers
 
@@ -62,8 +65,7 @@ class Device:
     arming_config: ArmingConfig
     arming_config_params: dict[str, int] = {p : i for i, p in enumerate(ArmingConfig.__annotations__.keys())}
     state: States
-    _reset_state: ResetState
-    _boot_sel_state: BootSelState
+    _in_bootloader: bool
 
     _ftd230x_gpio_reset_pin: int = 0b00
     _ftd230x_gpio_bootsel_pin: int = 0b01
@@ -141,13 +143,15 @@ class Device:
         self._ftd230x_gpio_set(self._ftd230x_gpio_bootsel_pin, 1)
         self.reset()
         
-        self.ftdi_conn.write(b'7f')  # bootlader should ack with `7f 79` or just `79`
+        self.ftdi_conn.write(b'\x7f')  # bootlader should ack with `7f 79` or just `79`
         resp = self.ftdi_conn.read(2)
         
         print(resp)
         
-        if resp[-1] != b'79':
+        if resp[-1] != b'\x79':
             raise DeviceError("Failed to enter bootloader")
+        
+        self._in_bootloader = True
         
     def _exit_bootloader(self):
         self._ftd230x_gpio_set(self._ftd230x_gpio_bootsel_pin, 0)
@@ -243,16 +247,6 @@ class Device:
         sleep(handshake_period)
         self._send_msg(Protocol.Message(Protocol.Headers.disarm, b""), expects=Protocol.Headers.success)
 
-    @property
-    def reset_state(self) -> ResetState:
-        return self._reset_state
-
-    @reset_state.setter
-    def reset_state(self, reset_state: ResetState):
-        # TODO: write function to generate bitmask based on desired GPIO state
-        # TODO: write reset state to ft230x GPIO
-        self._reset_state = reset_state
-
     # TODO: boot_sel_state configuration methods
 
     # TODO: firmware flashing method
@@ -268,6 +262,7 @@ class Device:
 class TestingDevice(Device):
     serial_conn: serial.Serial
     
+    @override
     def __init__(self, port: str = "/dev/ttyUSB0", baud_rate: int = 115200, serial_timeout: float = 3) -> None:
         print("Searching for BitCrusher...")
         self.serial_conn = serial.Serial(port, baudrate=baud_rate, timeout=serial_timeout)
@@ -294,6 +289,64 @@ class TestingDevice(Device):
         print(f"bdy[{body}]")
         msg = Protocol.parse_from_bytes(hdr, body)
 
+        self.serial_conn.reset_input_buffer()
+
         if (expects != None and msg.hdr != expects):
             raise DeviceResponseError(f"Expected response with header \"{expects}\", but got \"{msg.hdr}\"")
         return msg
+
+    @override
+    def _enter_bootloader(self):
+        # Attempt to enter serial bootloader
+        self.serial_conn.write(b'\x7f')
+        resp = self.serial_conn.read_all()
+
+        try:
+            print(f"Bootloader response: {resp}")
+            print(f"({resp.hex()})")
+        except:
+            pass
+        
+        if resp != b'\x79':
+            raise DeviceError("Failed to enter serial bootloader")
+        self._in_bootloader = True
+
+    def _flash_firmware(self):
+        if not self._in_bootloader:
+            raise DeviceError("Cannot flash device before entering serial bootloader. This cannot be automated from a testing device")
+        
+        # Disconnect from serial port
+        baud = self.serial_conn.baudrate
+        port = self.serial_conn.port
+        if port is None:
+            raise Exception("Something is wrong with the serial connection")
+        self.serial_conn.close()
+
+        # Flash firmware from default build directory to device
+        stm32flash_path = Path(__file__).parents[1] / 'stm32flash' / 'stm32flash'
+        firmware_path = Path(__file__).parents[3] / 'firmware' / 'build' / 'debug' / 'BitCrusher.bin'
+        try:
+            print("Attempting firmware flash...")
+            flash_proc = subprocess.run(
+                [str(stm32flash_path), '-b', str(baud), '-w', str(firmware_path), '-v', '-g', '0x0', port], 
+                stdout=sys.stdout, 
+                stderr=sys.stderr,
+                check=True
+            )
+        except subprocess.CalledProcessError as e:
+            raise DeviceError("Failed to flash device, stm32flash exited with error")
+
+        # If the flash succedeed, the firmware should be running already, exit bootloader state
+        self.serial_conn.open()  # open port with previous settings
+        self.serial_conn.reset_input_buffer()
+        self.serial_conn.reset_output_buffer()
+        self._in_bootloader = False
+
+        sleep(0.1)
+        
+        try: 
+            self._read_arming_param("voltage")
+        except:
+            raise DeviceError("unable to communicate with device after flash, try resetting device")
+        
+
