@@ -145,6 +145,8 @@ int send_message(void) {
   // send over UART
   // TODO: error check
   HAL_StatusTypeDef res = HAL_UART_Transmit(&huart1, uart_buf, (uint16_t)msg_len+2, 100);
+  msg_hdr = HDR_ERROR;
+  msg_len = 0;
   if (res != HAL_OK) return 1;
   return 0;
 }
@@ -269,16 +271,22 @@ int arm_device(void) {
 
   // change the trigger comparator output back from being GPIO forced low
   HAL_GPIO_DeInit(PulseEN_GPIO_Port, PulseEN_Pin);
-  MX_COMP2_Init();
+  // MX_COMP2_Init();
 
   // reset the `TIM3` WDT counter value and make sure it's not stopped (it's on one-pulse mode)
-  htim3.Instance->EGR &= TIM_EGR_UG;  // generate update event, clearing CNT
-  htim3.Instance->CR1 &= TIM_CR1_CEN;  // enable counting
+  // htim3.Instance->EGR &= TIM_EGR_UG;  // generate update event, clearing CNT
+  // htim3.Instance->CR1 &= TIM_CR1_CEN;  // enable counting
+  HAL_COMP_Start(&hcompHVCS);
+  HAL_COMP_Start(&hcomptrig);
+  HAL_GPIO_WritePin(GPIOD, GPIO_PIN_2, GPIO_PIN_RESET);
+  HAL_TIM_OnePulse_Start(&htim3, TIM_CHANNEL_1);
+  // tim3 output goes high here
 
   HAL_ADC_Start(&hadc1);
   
   // set flyback PSR Ilim (DAC)
-  HAL_DAC_SetValue(&hdac1, DAC_CHANNEL_1, DAC_ALIGN_12B_R, (uint32_t )V_to_DAC(1));
+  HAL_DAC_SetValue(&hdac1, DAC_CHANNEL_1, DAC_ALIGN_12B_R, (uint32_t )V_to_DAC(0.75));
+  HAL_DAC_Start(&hdac1, DAC_CHANNEL_1);
   
   // start HVPWM
   HAL_TIM_PWM_Start(&htim2, TIM_CHANNEL_1);
@@ -293,15 +301,21 @@ int disarm_device(void) {
   HAL_GPIO_WritePin(GPIOA, PulseEN_Pin, GPIO_PIN_RESET);
   
   // disable trigger comparator
-  HAL_COMP_DeInit(&hcomptrig);
+  // HAL_COMP_DeInit(&hcomptrig);
+  HAL_COMP_Stop(&hcomptrig);
+  HAL_COMP_Stop(&hcompHVCS);
+
   MX_GPIO_Init();  // (this also resets PulseEN_Pin)
 
   // nothing needs to happen with TIM3 since it generates no interrupts and is in
   // one pulse mode
 
-  // TODO: force zero flyback PWM1 (and maybe disable counting at all)
+  // disable PWM output
   htim2.Instance->CCR1 = 0;
   HAL_TIM_PWM_Stop(&htim2, TIM_CHANNEL_1);
+
+  HAL_DAC_Stop(&hdac1, DAC_CHANNEL_1);
+
   
   // htim2.Instance->CR1 &= ~TIM_CR1_CEN;  // disable counting
   HAL_ADC_Stop(&hadc1);
@@ -325,7 +339,7 @@ int flyback_comp_step(void) {
 
   // Force control signal in bounds
   if (flyback_PI_hdl.out > D_MAX) flyback_PI_hdl.out = D_MAX;
-  else if (flyback_PI_hdl.out < D_MIN) flyback_PI_hdl.out = D_MIN;
+  else if (flyback_PI_hdl.out < D_MIN) flyback_PI_hdl.out = 0;
   uint32_t duty_cycle = (uint32_t )(flyback_PI_hdl.out * PWM_P);
 
   htim2.Instance->CCR1 = duty_cycle;
@@ -340,7 +354,8 @@ int armed_loop(void) {
 
   // check for fault conditions
   // check if the handshake timer period has expired
-  if (htim3.Instance->SR & TIM_SR_UIF) {
+  // if (htim3.Instance->SR & TIM_SR_UIF) {
+  if (HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_6) != GPIO_PIN_SET) {
     // period expired, check for host handshake msg
     if (get_message() != HAL_OK) {
       return 1;
@@ -358,9 +373,8 @@ int armed_loop(void) {
     }
 
     // if received valid handshake, reset timer and remain armed
-    htim3.Instance->SR &= ~TIM_SR_UIF;  // clear TIM3 interupt flag
-    HAL_TIM_OnePulse_Start(&htim3, TIM_CHANNEL_1);
-    // htim3.Instance->CR1 &= TIM_CR1_CEN;  // resume TIM3 counting
+    HAL_GPIO_WritePin(GPIOD, GPIO_PIN_2, GPIO_PIN_SET);
+    HAL_GPIO_WritePin(GPIOD, GPIO_PIN_2, GPIO_PIN_RESET);
   } else {
     // period not expired, remain armed
   }

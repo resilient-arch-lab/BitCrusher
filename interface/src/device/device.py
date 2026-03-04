@@ -6,7 +6,7 @@ from ctypes import ArgumentError
 from enum import Enum
 from typing import Any, Callable, override
 import serial, ftd2xx
-from time import time
+from time import perf_counter, time
 from dataclasses import dataclass, fields
 from .comms import Protocol
 from time import sleep
@@ -243,9 +243,10 @@ class Device:
     Arm the device
     Ensure handshake period is <= the handshake period programmed on device.
     """
-    def arm(self, handshake_period: float = 0.25):
+    def arm(self, period: float = 1, handshake_period: float = 0.25):
         self._send_msg(Protocol.Message(Protocol.Headers.arm, b""), expects=Protocol.Headers.success)
-        for _ in range(10):
+        t0 = perf_counter()
+        while (perf_counter() - t0 < period):
             sleep(handshake_period)
             self._send_msg(Protocol.Message(Protocol.Headers.arm, b""), expects=Protocol.Headers.success)
         sleep(handshake_period)

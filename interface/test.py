@@ -34,6 +34,8 @@ class TestArmingParameter(unittest.TestCase):
     #     self.dev._write_arming_config()
     #     self.dev.arm()
 
+
+
 if __name__ == "__main__":
     unittest.main()
     raise(SystemExit())
