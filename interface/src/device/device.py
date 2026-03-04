@@ -152,7 +152,11 @@ class Device:
             raise DeviceError("Failed to enter bootloader")
         
         self._in_bootloader = True
-        
+    
+    def _flash_firmware(self):
+        # TODO: adapt from TestingDevice._flash_firmware
+        ...
+
     def _exit_bootloader(self):
         self._ftd230x_gpio_set(self._ftd230x_gpio_bootsel_pin, 0)
         self.reset()
@@ -247,16 +251,6 @@ class Device:
         sleep(handshake_period)
         self._send_msg(Protocol.Message(Protocol.Headers.disarm, b""), expects=Protocol.Headers.success)
 
-    # TODO: boot_sel_state configuration methods
-
-    # TODO: firmware flashing method
-
-
-    def _config_ft230x(self):
-        # TODO: set power descriptor to 0, since device is self powered
-        # I can't figure out how to do this manually, so I might have to try it
-        # with the FTProg utility first
-        ...
 
 # Class for testing prototype firmware on STM32 Dev Board with CH340 USB-UART connection
 class TestingDevice(Device):
@@ -311,6 +305,7 @@ class TestingDevice(Device):
             raise DeviceError("Failed to enter serial bootloader")
         self._in_bootloader = True
 
+    @override
     def _flash_firmware(self):
         if not self._in_bootloader:
             raise DeviceError("Cannot flash device before entering serial bootloader. This cannot be automated from a testing device")
