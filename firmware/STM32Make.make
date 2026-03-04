@@ -98,6 +98,7 @@ Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_tim_ex.c \
 Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_uart.c \
 Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_uart_ex.c \
 Src/adc.c \
+Src/arming.c \
 Src/comp.c \
 Src/dac.c \
 Src/dma.c \
