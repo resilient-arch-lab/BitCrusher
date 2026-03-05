@@ -285,7 +285,7 @@ int arm_device(void) {
   HAL_ADC_Start(&hadc1);
   
   // set flyback PSR Ilim (DAC)
-  HAL_DAC_SetValue(&hdac1, DAC_CHANNEL_1, DAC_ALIGN_12B_R, (uint32_t )V_to_DAC(0.75));
+  HAL_DAC_SetValue(&hdac1, DAC_CHANNEL_1, DAC_ALIGN_12B_R, (uint32_t )V_to_DAC(0.95));
   HAL_DAC_Start(&hdac1, DAC_CHANNEL_1);
   
   // start HVPWM
@@ -339,7 +339,8 @@ int flyback_comp_step(void) {
 
   // Force control signal in bounds
   if (flyback_PI_hdl.out > D_MAX) flyback_PI_hdl.out = D_MAX;
-  else if (flyback_PI_hdl.out < D_MIN) flyback_PI_hdl.out = 0;
+  else if (flyback_PI_hdl.out < 0) flyback_PI_hdl.out = 0;
+  else if (flyback_PI_hdl.out < D_MIN) flyback_PI_hdl.out = D_MIN;
   uint32_t duty_cycle = (uint32_t )(flyback_PI_hdl.out * PWM_P);
 
   htim2.Instance->CCR1 = duty_cycle;
