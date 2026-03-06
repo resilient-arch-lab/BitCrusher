@@ -6339,15 +6339,15 @@
 	(symbol
 		(lib_id "Device:Q_PNP")
 		(at 109.22 115.57 0)
+		(mirror x)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(fields_autoplaced yes)
 		(uuid "7f234813-a5ad-4efd-88e8-5bd8ddbf6473")
 		(property "Reference" "Q2"
-			(at 114.3 114.2999 0)
+			(at 114.3 114.3 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6356,7 +6356,7 @@
 			)
 		)
 		(property "Value" "2SA1213"
-			(at 114.3 116.8399 0)
+			(at 114.3 116.84 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6365,7 +6365,7 @@
 			)
 		)
 		(property "Footprint" "Package_TO_SOT_SMD:SOT-89-3"
-			(at 114.3 113.03 0)
+			(at 114.3 118.11 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7444,7 +7444,7 @@
 				)
 			)
 		)
-		(property "Value" "1"
+		(property "Value" "10"
 			(at 96.52 102.87 90)
 			(effects
 				(font
@@ -7452,7 +7452,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
 			(at 96.52 108.458 90)
 			(effects
 				(font
