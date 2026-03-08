@@ -12,8 +12,8 @@
       ],
       "dottedSecondary": true,
       "legend": {
-        "x": 825,
-        "y": 15
+        "x": 1142,
+        "y": 625
       },
       "margins": {
         "bottom": 45,
@@ -36,8 +36,18 @@
         },
         {
           "color": "rgb(166, 86, 40)",
-          "cursor1": {
-            "position": 0.00029807280513918625,
+          "signal": "V(/Vout)",
+          "trace_type": 257
+        },
+        {
+          "color": "rgb(55, 126, 184)",
+          "signal": "V(Net-_D1-A_)",
+          "trace_type": 257
+        },
+        {
+          "color": "rgb(152, 78, 163)",
+          "cursor2": {
+            "position": 0.0002487445986391196,
             "x_format": "3~s",
             "y_format": "3~V"
           },
@@ -45,20 +55,29 @@
             "x_format": "3~s",
             "y_format": "3~V"
           },
-          "signal": "V(/Vout)",
+          "signal": "V(Net-_Q1-D_)",
           "trace_type": 257
         },
         {
-          "color": "rgb(152, 78, 163)",
-          "signal": "V(Net-_Q1-D_)",
-          "trace_type": 257
+          "color": "rgb(255, 255, 51)",
+          "cursor1": {
+            "position": 3.060590991502991e-05,
+            "x_format": "3~s",
+            "y_format": "3~V"
+          },
+          "cursorD": {
+            "x_format": "3~s",
+            "y_format": "3~V"
+          },
+          "signal": " V(Net-_D2-K_) - V(Net-_Q1-D_)",
+          "trace_type": 256
         }
       ]
     },
     {
       "analysis": "TRAN",
       "commands": [
-        ".tran 20n 40u 0 20n uic",
+        ".tran 10n 40u 0 10n uic",
         ".kicad adjustpaths",
         ".save all",
         ".probe alli",
@@ -66,8 +85,8 @@
       ],
       "dottedSecondary": true,
       "legend": {
-        "x": -37,
-        "y": 1092
+        "x": -127,
+        "y": 4837
       },
       "margins": {
         "bottom": 45,
@@ -106,6 +125,8 @@
       ]
     }
   ],
-  "user_defined_signals": [],
+  "user_defined_signals": [
+    " V(Net-_D2-K_) - V(Net-_Q1-D_)"
+  ],
   "version": 6
 }
