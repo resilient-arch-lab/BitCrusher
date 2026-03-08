@@ -4,7 +4,7 @@
     {
       "analysis": "TRAN",
       "commands": [
-        ".tran 100n 500u 0 100n uic",
+        ".tran 20n 300u 0 100n uic",
         ".kicad adjustpaths",
         ".save all",
         ".probe alli",
@@ -12,13 +12,13 @@
       ],
       "dottedSecondary": true,
       "legend": {
-        "x": 867,
-        "y": 9
+        "x": 825,
+        "y": 15
       },
       "margins": {
         "bottom": 45,
         "left": 70,
-        "right": 160,
+        "right": 70,
         "top": 30
       },
       "measurements": [],
@@ -36,6 +36,15 @@
         },
         {
           "color": "rgb(166, 86, 40)",
+          "cursor1": {
+            "position": 0.00029807280513918625,
+            "x_format": "3~s",
+            "y_format": "3~V"
+          },
+          "cursorD": {
+            "x_format": "3~s",
+            "y_format": "3~V"
+          },
           "signal": "V(/Vout)",
           "trace_type": 257
         },
@@ -43,10 +52,55 @@
           "color": "rgb(152, 78, 163)",
           "signal": "V(Net-_Q1-D_)",
           "trace_type": 257
+        }
+      ]
+    },
+    {
+      "analysis": "TRAN",
+      "commands": [
+        ".tran 20n 40u 0 20n uic",
+        ".kicad adjustpaths",
+        ".save all",
+        ".probe alli",
+        ".probe allp"
+      ],
+      "dottedSecondary": true,
+      "legend": {
+        "x": -37,
+        "y": 1092
+      },
+      "margins": {
+        "bottom": 45,
+        "left": 70,
+        "right": 70,
+        "top": 30
+      },
+      "measurements": [],
+      "showGrid": true,
+      "traces": [
+        {
+          "color": "rgb(255, 255, 51)",
+          "signal": "I(LP1)",
+          "trace_type": 258
         },
         {
-          "color": "rgb(255, 127, 0)",
-          "signal": "V(Vin)",
+          "color": "rgb(247, 129, 191)",
+          "signal": "I(LS1)",
+          "trace_type": 258
+        },
+        {
+          "color": "rgb(55, 126, 184)",
+          "signal": "V(/CS)",
+          "trace_type": 257
+        },
+        {
+          "color": "rgb(77, 175, 74)",
+          "signal": "V(/Vout)",
+          "trace_type": 257
+        },
+        {
+          "color": "rgb(102, 194, 165)",
+          "signal": "V(Net-_Q1-S_)",
           "trace_type": 257
         }
       ]
