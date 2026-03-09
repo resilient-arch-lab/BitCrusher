@@ -6446,7 +6446,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "Q_NMOS_DGS"
+		(property "Value" "SW4N60"
 			(at 125.73 107.9499 0)
 			(effects
 				(font
@@ -6455,7 +6455,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Package_TO_SOT_SMD:TO-252-2"
+		(property "Footprint" "project-footprints:SW4N60"
 			(at 124.46 104.14 0)
 			(effects
 				(font
