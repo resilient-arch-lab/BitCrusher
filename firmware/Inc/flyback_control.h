@@ -8,16 +8,22 @@ extern "C" {
 #include "main.h"
 
 // voltage feedback conversion macros
-#define HVVS_MAX 3
+// #define HVVS_MAX 3
+#define HVVS_MAX 2.4
 #define HVVS_MIN 0
 #define VDDA (float )3.3
 #define HV_MIN 150
 #define HV_MAX 500
+#define HV_COMP_WINDOW 0.1
 
 // PWM duty cycle macros
 #define D_MIN 0.1
-#define D_MAX 0.49
+#define D_MAX 0.29
 #define PWM_P 720
+
+// current limit trip level
+#define V_ILIM 0.7
+// #define V_ILIM 0.86
 
 #define ADC_TO_V(x) (VDDA/(0x0fff))*x
 #define V_TO_VHV(x) ((float )HV_MAX/(float )(HVVS_MAX - HVVS_MIN))*x

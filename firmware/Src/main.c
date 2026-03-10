@@ -285,7 +285,7 @@ int arm_device(void) {
   HAL_ADC_Start(&hadc1);
   
   // set flyback PSR Ilim (DAC)
-  HAL_DAC_SetValue(&hdac1, DAC_CHANNEL_1, DAC_ALIGN_12B_R, (uint32_t )V_to_DAC(1.05));
+  HAL_DAC_SetValue(&hdac1, DAC_CHANNEL_1, DAC_ALIGN_12B_R, (uint32_t )V_to_DAC(V_ILIM));
   HAL_DAC_Start(&hdac1, DAC_CHANNEL_1);
   
   // start HVPWM
@@ -336,9 +336,12 @@ int flyback_comp_step(void) {
 
   // Run PI on normalized input
   PI_step(&flyback_PI_cfg, &flyback_PI_hdl, V_HV_fb/HV_MAX, setpoint/HV_MAX);
+  
+  // If the bank isn't even close to the setpoint yet, just run at max duty cycle
+  if (flyback_PI_hdl.err > HV_COMP_WINDOW) flyback_PI_hdl.out = D_MAX;
 
   // Force control signal in bounds
-  if (flyback_PI_hdl.out > D_MAX) flyback_PI_hdl.out = D_MAX;
+  else if (flyback_PI_hdl.out > D_MAX) flyback_PI_hdl.out = D_MAX;
   else if (flyback_PI_hdl.out < 0) flyback_PI_hdl.out = 0;
   else if (flyback_PI_hdl.out < D_MIN) flyback_PI_hdl.out = D_MIN;
   uint32_t duty_cycle = (uint32_t )(flyback_PI_hdl.out * PWM_P);
@@ -355,7 +358,6 @@ int armed_loop(void) {
 
   // check for fault conditions
   // check if the handshake timer period has expired
-  // if (htim3.Instance->SR & TIM_SR_UIF) {
   if (HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_6) != GPIO_PIN_SET) {
     // period expired, check for host handshake msg
     if (get_message() != HAL_OK) {
