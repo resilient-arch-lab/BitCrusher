@@ -29,10 +29,17 @@
           "color": "rgb(77, 175, 74)",
           "signal": "V(Net-_D1-K_)",
           "trace_type": 257
+        },
+        {
+          "color": "rgb(55, 126, 184)",
+          "signal": "V(HVVS+) * 166.6667",
+          "trace_type": 257
         }
       ]
     }
   ],
-  "user_defined_signals": [],
+  "user_defined_signals": [
+    "V(HVVS+) * 166.6667"
+  ],
   "version": 6
 }
