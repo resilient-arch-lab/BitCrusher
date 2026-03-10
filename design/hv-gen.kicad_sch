@@ -3364,16 +3364,6 @@
 		)
 		(uuid "818c85bf-e813-473c-a9ea-ccb871fb2ebb")
 	)
-	(text "200kHz low-pass filter"
-		(exclude_from_sim no)
-		(at 198.12 41.402 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-		)
-		(uuid "851e4ec2-7913-4888-9803-ba43260aa5a8")
-	)
 	(text "HV+ = 500V  =>  HVVS = 3V"
 		(exclude_from_sim no)
 		(at 204.724 53.34 0)
@@ -5693,7 +5683,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "240n"
+		(property "Value" "2.2n"
 			(at 191.77 50.7999 0)
 			(effects
 				(font
