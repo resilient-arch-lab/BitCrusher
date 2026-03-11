@@ -337,13 +337,17 @@ int flyback_comp_step(void) {
   // Run PI on normalized input
   PI_step(&flyback_PI_cfg, &flyback_PI_hdl, V_HV_fb/HV_MAX, setpoint/HV_MAX);
   
-  // If the bank isn't even close to the setpoint yet, just run at max duty cycle
-  if (flyback_PI_hdl.err > HV_COMP_WINDOW) flyback_PI_hdl.out = D_MAX;
-
-  // Force control signal in bounds
-  else if (flyback_PI_hdl.out > D_MAX) flyback_PI_hdl.out = D_MAX;
-  else if (flyback_PI_hdl.out < 0) flyback_PI_hdl.out = 0;
-  else if (flyback_PI_hdl.out < D_MIN) flyback_PI_hdl.out = D_MIN;
+  // Force control signal inbounds
+  if (flyback_PI_hdl.out < 0){
+    flyback_PI_hdl.out = 0;
+  } else if (flyback_PI_hdl.out < D_MIN) {
+    __HAL_TIM_SET_AUTORELOAD(&htim2, PWM_P*4);
+    flyback_PI_hdl.out = D_MIN;
+  } else {
+    __HAL_TIM_SET_AUTORELOAD(&htim2, PWM_P);
+    // If the bank isn't even close to the setpoint yet, just run at max duty cycle
+    if (flyback_PI_hdl.err > HV_COMP_WINDOW || flyback_PI_hdl.out > D_MAX) flyback_PI_hdl.out = D_MAX;
+  }
   uint32_t duty_cycle = (uint32_t )(flyback_PI_hdl.out * PWM_P);
 
   htim2.Instance->CCR1 = duty_cycle;
