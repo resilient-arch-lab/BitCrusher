@@ -14,7 +14,7 @@ extern "C" {
 #define VDDA (float )3.3
 #define HV_MIN 150
 #define HV_MAX 500
-#define HV_COMP_WINDOW 0.03
+#define HV_COMP_WINDOW 0.05
 
 // PWM duty cycle macros
 #define D_MIN 0.08
@@ -22,9 +22,10 @@ extern "C" {
 #define PWM_P 720
 
 // current limit trip level
-#define V_ILIM_MAX 0.87
-#define V_ILIM_MIN 0.7
+#define V_ILIM_MAX 0.9
+#define V_ILIM_MIN 0.8
 #define V_ILIM V_ILIM_MAX
+#define D_TO_ILIM(D) ((V_ILIM_MIN - V_ILIM_MAX)*D) + V_ILIM_MIN
 
 // #define V_ILIM 0.86
 

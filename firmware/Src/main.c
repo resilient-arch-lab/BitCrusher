@@ -81,7 +81,7 @@ uint8_t armed = 0;
 uint8_t dev_state = STATE_INIT;
 
 // flyback PI control config and handle
-PI_config_t flyback_PI_cfg = {
+PI_config_t flyback_PWM_PI_cfg = {
     1.0,
     0.0,
     0.0,
@@ -89,8 +89,7 @@ PI_config_t flyback_PI_cfg = {
     0.0,
     1.0
 };
-PI_handle_t flyback_PI_hdl = {0.0, 0.0, 0.0, 0.0};
-
+PI_handle_t flyback_PWM_PI_hdl = {0.0, 0.0, 0.0, 0.0};
 
 
 arming_config_t arming_config = {
@@ -335,22 +334,35 @@ int flyback_comp_step(void) {
   float setpoint = (float )arming_config.voltage;
 
   // Run PI on normalized input
-  PI_step(&flyback_PI_cfg, &flyback_PI_hdl, V_HV_fb/HV_MAX, setpoint/HV_MAX);
+  PI_step(&flyback_PWM_PI_cfg, &flyback_PWM_PI_hdl, V_HV_fb/HV_MAX, setpoint/HV_MAX);
+  float CS_ctrl = flyback_PWM_PI_hdl.out;
   
   // Force control signal inbounds
-  if (flyback_PI_hdl.out < 0){
-    flyback_PI_hdl.out = 0;
-  } else if (flyback_PI_hdl.out < D_MIN) {
-    __HAL_TIM_SET_AUTORELOAD(&htim2, PWM_P*4);
-    flyback_PI_hdl.out = D_MIN;
+  if (flyback_PWM_PI_hdl.out < 0){
+    flyback_PWM_PI_hdl.out = 0;
+    CS_ctrl = 0.0;
+  } else if (flyback_PWM_PI_hdl.out < D_MIN) {
+    // prevents shorter pulses than gate driver is rated for
+    __HAL_TIM_SET_AUTORELOAD(&htim2, PWM_P*1);
+    flyback_PWM_PI_hdl.out = D_MIN;
+    // CS_ctrl = 0.0;
   } else {
     __HAL_TIM_SET_AUTORELOAD(&htim2, PWM_P);
     // If the bank isn't even close to the setpoint yet, just run at max duty cycle
-    if (flyback_PI_hdl.err > HV_COMP_WINDOW || flyback_PI_hdl.out > D_MAX) flyback_PI_hdl.out = D_MAX;
+    if (flyback_PWM_PI_hdl.err > HV_COMP_WINDOW || flyback_PWM_PI_hdl.out > D_MAX) {
+      flyback_PWM_PI_hdl.out = D_MAX;
+      CS_ctrl = 1.0;
+    }
   }
-  uint32_t duty_cycle = (uint32_t )(flyback_PI_hdl.out * PWM_P);
 
+  // update PWM duty cycle
+  uint32_t duty_cycle = (uint32_t )(flyback_PWM_PI_hdl.out * PWM_P);
   htim2.Instance->CCR1 = duty_cycle;
+
+  // update primary current limit
+  HAL_DAC_SetValue(&hdac1, DAC_CHANNEL_1, DAC_ALIGN_12B_R, (uint32_t )V_to_DAC(D_TO_ILIM(CS_ctrl)));
+
+
   return 0;
 }
 
