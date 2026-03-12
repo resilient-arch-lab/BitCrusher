@@ -330,11 +330,16 @@ int flyback_comp_step(void) {
   HAL_StatusTypeDef res = HAL_ADC_PollForConversion(&hadc1, 10);
   if (res != HAL_OK) return 1;
   uint32_t adc_reading = HAL_ADC_GetValue(&hadc1);
-  float V_HV_fb = V_TO_VHV(ADC_TO_V(adc_reading));  // real voltage at HV bank
+  float V_HV_fb = ADC_TO_V(adc_reading) - 1;  // voltage measured at HVVS
+  float HV_fb = V_TO_VHV(V_HV_fb);  // real voltage at HV bank
   float setpoint = (float )arming_config.voltage;
 
+  memcpy(msg_body, &V_HV_fb, sizeof(float));  // wrtie ADC reading to UART
+  memcpy(msg_body+sizeof(float), &HV_fb, sizeof(float));  // wrtie ADC reading to UART
+  msg_len = 2*sizeof(float);
+
   // Run PI on normalized input
-  PI_step(&flyback_PWM_PI_cfg, &flyback_PWM_PI_hdl, V_HV_fb/HV_MAX, setpoint/HV_MAX);
+  PI_step(&flyback_PWM_PI_cfg, &flyback_PWM_PI_hdl, HV_fb/HV_MAX, setpoint/HV_MAX);
   float CS_ctrl = flyback_PWM_PI_hdl.out;
   
   // Force control signal inbounds
@@ -343,7 +348,7 @@ int flyback_comp_step(void) {
     CS_ctrl = 0.0;
   } else if (flyback_PWM_PI_hdl.out < D_MIN) {
     // prevents shorter pulses than gate driver is rated for
-    __HAL_TIM_SET_AUTORELOAD(&htim2, PWM_P*1);
+    __HAL_TIM_SET_AUTORELOAD(&htim2, PWM_P*2);
     flyback_PWM_PI_hdl.out = D_MIN;
     // CS_ctrl = 0.0;
   } else {
@@ -469,7 +474,7 @@ int process_command(void) {
           return 1;
         } else {
           msg_hdr = HDR_SUCCESS;
-          msg_len = 0;
+          // msg_len = 0; // msg buffer holds current feedback value
           send_message();
         }
       }

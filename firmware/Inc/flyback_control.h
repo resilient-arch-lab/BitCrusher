@@ -9,7 +9,7 @@ extern "C" {
 
 // voltage feedback conversion macros
 // #define HVVS_MAX 3
-#define HVVS_MAX 2.6
+#define HVVS_MAX 3
 #define HVVS_MIN 0
 #define VDDA (float )3.3
 #define HV_MIN 150
@@ -26,8 +26,6 @@ extern "C" {
 #define V_ILIM_MIN 0.8
 #define V_ILIM V_ILIM_MAX
 #define D_TO_ILIM(D) ((V_ILIM_MIN - V_ILIM_MAX)*D) + V_ILIM_MIN
-
-// #define V_ILIM 0.86
 
 #define ADC_TO_V(x) (VDDA/(0x0fff))*x
 #define V_TO_VHV(x) ((float )HV_MAX/(float )(HVVS_MAX - HVVS_MIN))*x
