@@ -167,10 +167,13 @@ class Device:
         _ = self.ftdi_conn.write(Protocol.to_bytes(msg))
     
     def _read_msg(self, expects: Protocol.Headers | None = None) -> Protocol.Message:
+        # read message header
         hdr = self.ftdi_conn.read(1)
+
         msg_len = int(self.ftdi_conn.read(1))
         body = self.ftdi_conn.read(msg_len)
         msg = Protocol.parse_from_bytes(hdr, body)
+
         if (expects != None and hdr != expects):
             raise DeviceResponseError(f"Expected response with header \"{expects}\", but got \"{hdr}\"")
         return msg
@@ -248,7 +251,11 @@ class Device:
         t0 = perf_counter()
         while (perf_counter() - t0 < period):
             sleep(handshake_period)
-            self._send_msg(Protocol.Message(Protocol.Headers.arm, b""), expects=Protocol.Headers.success)
+            res = self._send_msg(Protocol.Message(Protocol.Headers.arm, b""), expects=Protocol.Headers.success)
+            tmp = np.frombuffer(res.body, dtype=np.float32)
+            fb_voltage = tmp[0]
+            hv_voltage = tmp[1]
+            print(f"HVVS voltage: {fb_voltage:.4f}\tHV voltage: {hv_voltage:.4f}")
         sleep(handshake_period)
         self._send_msg(Protocol.Message(Protocol.Headers.disarm, b""), expects=Protocol.Headers.success)
 

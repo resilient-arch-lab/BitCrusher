@@ -25,6 +25,9 @@ class Headers(Enum):
     get_arm_param = b"\xa2"
     disarm = b"\xaf"
 
+    # debugging headers
+    debug = b"\xd0"
+
 # The BitCrusher UART protocol
 class Protocol:
     Headers = Headers
