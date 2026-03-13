@@ -24,8 +24,8 @@
 
 /* USER CODE END 0 */
 
-COMP_HandleTypeDef hcomptrig;
-COMP_HandleTypeDef hcompHVCS;
+COMP_HandleTypeDef hcomp2;
+COMP_HandleTypeDef hcomp3;
 
 /* COMP2 init function */
 void MX_COMP2_Init(void)
@@ -38,14 +38,14 @@ void MX_COMP2_Init(void)
   /* USER CODE BEGIN COMP2_Init 1 */
 
   /* USER CODE END COMP2_Init 1 */
-  hcomptrig.Instance = COMP2;
-  hcomptrig.Init.InvertingInput = COMP_INVERTINGINPUT_VREFINT;
-  hcomptrig.Init.NonInvertingInput = COMP_NONINVERTINGINPUT_IO1;
-  hcomptrig.Init.Output = COMP_OUTPUT_NONE;
-  hcomptrig.Init.OutputPol = COMP_OUTPUTPOL_NONINVERTED;
-  hcomptrig.Init.BlankingSrce = COMP_BLANKINGSRCE_NONE;
-  hcomptrig.Init.TriggerMode = COMP_TRIGGERMODE_NONE;
-  if (HAL_COMP_Init(&hcomptrig) != HAL_OK)
+  hcomp2.Instance = COMP2;
+  hcomp2.Init.InvertingInput = COMP_INVERTINGINPUT_VREFINT;
+  hcomp2.Init.NonInvertingInput = COMP_NONINVERTINGINPUT_IO1;
+  hcomp2.Init.Output = COMP_OUTPUT_NONE;
+  hcomp2.Init.OutputPol = COMP_OUTPUTPOL_NONINVERTED;
+  hcomp2.Init.BlankingSrce = COMP_BLANKINGSRCE_NONE;
+  hcomp2.Init.TriggerMode = COMP_TRIGGERMODE_NONE;
+  if (HAL_COMP_Init(&hcomp2) != HAL_OK)
   {
     Error_Handler();
   }
@@ -65,14 +65,14 @@ void MX_COMP3_Init(void)
   /* USER CODE BEGIN COMP3_Init 1 */
 
   /* USER CODE END COMP3_Init 1 */
-  hcompHVCS.Instance = COMP3;
-  hcompHVCS.Init.InvertingInput = COMP_INVERTINGINPUT_DAC1_CH1;
-  hcompHVCS.Init.NonInvertingInput = COMP_NONINVERTINGINPUT_IO1;
-  hcompHVCS.Init.Output = COMP_OUTPUT_TIM2OCREFCLR;
-  hcompHVCS.Init.OutputPol = COMP_OUTPUTPOL_NONINVERTED;
-  hcompHVCS.Init.BlankingSrce = COMP_BLANKINGSRCE_NONE;
-  hcompHVCS.Init.TriggerMode = COMP_TRIGGERMODE_NONE;
-  if (HAL_COMP_Init(&hcompHVCS) != HAL_OK)
+  hcomp3.Instance = COMP3;
+  hcomp3.Init.InvertingInput = COMP_INVERTINGINPUT_DAC1_CH1;
+  hcomp3.Init.NonInvertingInput = COMP_NONINVERTINGINPUT_IO1;
+  hcomp3.Init.Output = COMP_OUTPUT_TIM2OCREFCLR;
+  hcomp3.Init.OutputPol = COMP_OUTPUTPOL_NONINVERTED;
+  hcomp3.Init.BlankingSrce = COMP_BLANKINGSRCE_TIM2OC4;
+  hcomp3.Init.TriggerMode = COMP_TRIGGERMODE_NONE;
+  if (HAL_COMP_Init(&hcomp3) != HAL_OK)
   {
     Error_Handler();
   }
