@@ -1593,7 +1593,7 @@
 		)
 		(uuid "2855a582-ea84-43ba-880e-173ef12db523")
 	)
-	(text "V_UVLO = 2 * (1 + R1/R2)\nV_UVLO = 6V\nR1 = 20k\nR2 = (6/2 - 1) * 20k = 40k"
+	(text "UVLO = 2 * (1 + R1/R2)\nUVLO = 5V\nR1 = 20k\nR2 = (5/2 - 1) * 20k = 30k"
 		(exclude_from_sim no)
 		(at 102.616 91.44 0)
 		(effects
@@ -4235,7 +4235,7 @@
 				)
 			)
 		)
-		(property "Value" "40k"
+		(property "Value" "30k"
 			(at 129.54 85.09 90)
 			(effects
 				(font
