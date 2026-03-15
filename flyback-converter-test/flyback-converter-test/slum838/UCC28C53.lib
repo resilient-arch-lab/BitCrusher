@@ -1,0 +1,165 @@
+ * PSpice Model Editor - Version 17.4.0
+*$
+*****************************************************************************
+** This product is designed as an aid for customers of Texas Instruments.  **
+** No warranties, either expressed or implied, with respect to this third  **
+** party software (if any) or with respect to its fitness for any          **
+** particular purpose is claimed by Texas Instruments or the author. The   **
+** software (if any) is provided solely on an "as is" basis. The entire    **
+** risk as to its quality and performance is with the customer             **
+*****************************************************************************
+* This model was developed by Texas Instruments Incorporated by:
+* This model is subject to change without notice. 
+* Texas Instruments Incorporatedis not responsible for updating this model.
+*****************************************************************************
+* (C) Copyright 2022 Texas Instruments Incorporated. All rights reserved.
+* Released by: High Voltage Power, Texas Instruments Inc.
+* Part: UCC28C53
+* Date: 8/04/2022
+* Model Type: Transient
+* Simulator: PSpice
+* Datasheet: SLUSEV2, Jun 2022
+*
+*****************************************************************************
+* Updates:
+* Prelim 1.0
+* Final Released to Web.
+*****************************************************************************
+.SUBCKT UCC28C53  COMP   FB   CS   RTCT    GND    OUT   VDD   VREF  
+****OSCILLATOR*****
+STOF1 8 GND RTCT GND SOSC
+GBDISCH RTCT GND Value = { IF ( V(8,GND) < 2.5 & V(VREF,GND) > 4.5, 8.4M, 0 ) }
+RPULL 8 VREF 100K
+****UVLO***********
+STOF2 VDD 19 VDD GND SUVLO
+RUVLO 19 GND 1MEG
+***CDUMMY 19 GND 0.01p
+RSTDBY VDD GND 300K ; startup current 
+ROP 10 GND 10000 ; operating current
+****REFERENCE*******
+EBREF 13 100 Value = { IF ( V(19,GND) > 6, 5, 0 ) }
+I_I1  GND 100 DC 45e-3
+D_D1  100 GND Dbreak
+RREG 10 VREF 0.158
+CREF VREF GND 1N
+V3 13 10 
+***GB6 19 GND Value = { IF ( V(19,GND) > 4 , I(V3) , 0 ) }
+GB6 19 GND Value = { IF (V(19,GND) > 4 , IF((I(V3)-I(EMY19))>2,
++2, IF((I(V3)-I(EMY19))<0, 0,(I(V3)-I(EMY19)))), 0 ) }
+****CURRENT COMPARATOR*******
+EB3 21 GND Value = { IF ( V(CS,GND) > V(16,GND), 5, 0 ) }
+R7 CS GND 1MEG
+RDELAY 21 22 1K
+CDELAY 22 GND 200P
+****ERROR AMPLIFIER**********
+XAMP VREF FB COMP GND 28C4xAMP
+****OFFSET LIMITER***********
+R4 12 11 2MEG
+R6 11 GND 1MEG
+EB2 16 GND Value = { IF ( V(11,GND) > 1, 1, V(11,GND) ) }
+V4 COMP 9 1
+D1 9 12 D2
+****OUTPUT DRIVER************
+EMY19 191 GND VALUE = {V(19,GND)} 
+***XDRIVE 19 GND 5 OUT FETOUTC4X ; FETOUTC4X 2845OUT 
+XDRIVE 191 GND 5 OUT FETOUTC4X ; FETOUTC4X 2845OUT 
+****S-R LATCH****************
+XLATCH 8 VREF 22 GND 6 7 FFLOPC2
+****OUTPUT AND GATE**********
+EOut 5 GND Value = { IF ( V(VREF,GND) > 2.5 & V(7,GND) > 
++2.5 & V(8,GND) > 2.5, 5, 0 ) }
+.MODEL SOSC VSWITCH (RON=.01 ROFF=1MEG VT=1.45 VH=0.95) ; VT=1.45 set to match 53k @ 3.3n/10k
+.MODEL SUVLO VSWITCH (RON=.01 ROFF=5MEG VT=8 VH=0.4)
+.MODEL D2 D 
+.MODEL Dbreak D( RS=1e-3 N=0.001 )
+.ENDS UCC28C53
+*$
+.SUBCKT 28C4xAMP  4     1    9   20
+*                VREF  INV  OUT V-
+R1 10 4 100K
+R2 10 20 100K
+R3 6 20 316MEG
+C1 6 20 8.7p ; Bandwidth
+E1 5 20 6 20 1
+R4 1 20 50MEG ; Input Bias
+I2 4 9 1m ; Isource
+R6 20 3 300
+Q1 20 13 9 QPMOD
+I3 13 20 68U 
+D14 3 13 DMOD
+D15 20 6 DCLAMP
+L1 2 3 10U
+C2 3 20 200P
+R9 5 2 5
+C5 2 20 0.02U
+G1 20 6 10 1 100U
+.MODEL QPMOD PNP BF=217.647 ; sets the Isink current
+.MODEL DCLAMP D (RS=10 BV=5.0 IBV=.01) 
+.MODEL DMOD D
+.ENDS 28C4xAMP
+*$
+.SUBCKT 2845OUT  4  7  3  12
+*                +V -V IN OUT
+I3 4 8 100U
+D3 8 4 DMOD
+D4 12 8 DMOD
+Q3 8 1 9 QIN
+Q4 12 9 7 QMOD
+Q5 4 8 6 QMOD
+I4 7 1 .9M
+R1 3 2 10K
+Q8 1 2 7 QIN
+Q2 4 6 12 QMOD2
+.MODEL QMOD NPN RC=1.5 RE=.5 RB=100 IKF=0.5 CJC=0.4P
+.MODEL QMOD2 NPN TF=400P TR=400P
+.MODEL QIN NPN BF=100 BR=2 IS=1E-16 VAF=50 
++ CJE=1.5P CJC=.15P TR=1N TF=4N
+.MODEL DMOD D RS=1 IS=0.4U
+.ENDS 2845OUT
+*$
+.SUBCKT FETOUTC4X  Vcc  Gnd In Out
+*                  Vcc  -V  IN OUT
+* simplify with b element with 5.5 ohms make it stiff vcc and zero
+Rm1 Vcc Out 10MEG
+M1 Vcc 3 Out Out _NMOS 
+Rm2 Out Gnd 10MEG
+M2 Gnd 3 Out Out _PMOS 
+EB1 2 Out Value= { IF ( V(In,Gnd) > 2 , 5 , -5 ) }
+R1 2 3 75
+C2 3 Gnd 10p
+C3 3 Vcc 10p
+R2 3 Gnd 10Meg
+.MODEL _NMOS NMOS KP=1 NSUB=1E9 RD=10 VTO=3
+.MODEL _PMOS PMOS KP=1 RD=5.5 VTO=-3 NSUB=1E9
+.ENDS FETOUTC4X
+*$
+.SUBCKT FFLOPC2 1  2 11 12 5  6
+*              CLK D R  S  QB Q
+X1 7 4 2 8 NAND3_0C2 
+X2 8 3 10 9 NAND3_0C2 
+X3 1 8 10 7 NAND3_1C2 
+X4 4 9 1 10 NAND3_0C2 
+X5 4 7 6 5 NAND3_1C2 
+X6 5 10 3 6 NAND3_0C2 
+X7 11 4 INV 
+X8 12 3 INV 
+.ENDS FFLOPC2
+*$
+.SUBCKT NAND3_0C2 1 2 3 4
+E1 5 0 VALUE = { IF ( (V(1)>800M) & (V(2)>800M) & (V(3)>800M), 0, 5 ) }
+R1 5 4 100
+C1 4 0 20P IC=0
+.ENDS NAND3_0C2 
+*$
+.SUBCKT NAND3_1C2 1 2 3 4
+E1 5 0 VALUE = { IF ( (V(1)>800M) & (V(2)>800M) & (V(3)>800M), 0, 5 ) }
+R1 5 4 100
+C1 4 0 20P IC=3.5
+.ENDS NAND3_1C2 
+*$
+.SUBCKT INV 1 2
+E1 3 0 VALUE = { IF ( V(1)>800mV, 0, 5 ) }
+R1 3 2 100
+C1 2 0 10P IC=3.5
+.ENDS INV
+*$

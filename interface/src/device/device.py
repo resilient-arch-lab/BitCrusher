@@ -150,6 +150,10 @@ class Device:
         
         if resp[-1] != b'\x79':
             raise DeviceError("Failed to enter bootloader")
+    
+    def _enter_open_bootloader(self):
+        self._write_msg(Protocol.Message(Protocol.Headers.bootloader, b""))  # expect no response
+        
         
         self._in_bootloader = True
     

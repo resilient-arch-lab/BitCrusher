@@ -23,6 +23,7 @@ typedef uint8_t msg_hdr_t;
 #define HDR_SET_ARM_PARAM (uint8_t )0xa1
 #define HDR_GET_ARM_PARAM (uint8_t )0xa2
 #define HDR_DISARM (uint8_t )0xaf
+#define HDR_BOOTLOADER 0xb0
 
 int is_valid_header(uint8_t hdr);
 

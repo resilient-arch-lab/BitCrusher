@@ -63,7 +63,11 @@ Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_uart.c \
 Inc/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_uart_ex.c \
 Src/system_stm32f3xx.c \
 Src/sysmem.c \
-Src/syscalls.c  
+Src/syscalls.c \
+Middlewares/ST/OpenBootloader/Core/openbl_core.c \
+Middlewares/ST/OpenBootloader/Modules/Mem/openbl_mem.c \
+Middlewares/ST/OpenBootloader/Modules/USART/openbl_usart_cmd.c \ 
+OpenBootloader/App/app_openbootloader.c
 
 # ASM sources
 ASM_SOURCES =  \
@@ -128,8 +132,12 @@ C_INCLUDES =  \
 -IInc/STM32F3xx_HAL_Driver/Inc \
 -IInc/STM32F3xx_HAL_Driver/Inc/Legacy \
 -IInc/CMSIS/Device/ST/STM32F3xx/Include \
--IInc/CMSIS/Include
-
+-IInc/CMSIS/Include \
+-IMiddlewares/ST/OpenBootloader/Core \
+-IMiddlewares/ST/OpenBootloader/Modules/Mem \
+-IMiddlewares/ST/OpenBootloader/Modules/USART \
+-IOpenBootloader/App \
+-IOpenBootloader/Target
 
 # compile gcc flags
 ASFLAGS = $(MCU) $(AS_DEFS) $(AS_INCLUDES) $(OPT) -Wall -fdata-sections -ffunction-sections
