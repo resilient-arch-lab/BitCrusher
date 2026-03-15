@@ -25,8 +25,8 @@ class Headers(Enum):
     get_arm_param = b"\xa2"
     disarm = b"\xaf"
 
-    # bootloader commands
-    bootloader = b"\xb0"
+    # debugging headers
+    debug = b"\xd0"
 
 # The BitCrusher UART protocol
 class Protocol:

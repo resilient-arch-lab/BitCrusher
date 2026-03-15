@@ -32,9 +32,9 @@ extern "C" {
 
 /* USER CODE END Includes */
 
-extern COMP_HandleTypeDef hcomptrig;
+extern COMP_HandleTypeDef hcomp2;
 
-extern COMP_HandleTypeDef hcompHVCS;
+extern COMP_HandleTypeDef hcomp3;
 
 /* USER CODE BEGIN Private defines */
 

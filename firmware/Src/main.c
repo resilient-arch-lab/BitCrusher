@@ -83,10 +83,7 @@ uint8_t armed = 0;
 uint8_t dev_state = STATE_INIT;
 
 // flyback PI control config and handle
-PI_config_t flyback_PWM_PI_cfg = {
-    1.0,
-    0.0,
-    0.0,
+const PI_config_t flyback_PWM_PI_cfg = {
     1.0,
     0.0,
     1.0
@@ -271,14 +268,14 @@ int arm_device(void) {
   HAL_GPIO_WritePin(GPIOA, PulseEN_Pin, GPIO_PIN_SET);
 
   // change the trigger comparator output back from being GPIO forced low
-  HAL_GPIO_DeInit(PulseEN_GPIO_Port, PulseEN_Pin);
+  // HAL_GPIO_DeInit(PulseEN_GPIO_Port, PulseEN_Pin);
   // MX_COMP2_Init();
 
   // reset the `TIM3` WDT counter value and make sure it's not stopped (it's on one-pulse mode)
   // htim3.Instance->EGR &= TIM_EGR_UG;  // generate update event, clearing CNT
   // htim3.Instance->CR1 &= TIM_CR1_CEN;  // enable counting
-  HAL_COMP_Start(&hcompHVCS);
-  HAL_COMP_Start(&hcomptrig);
+  HAL_COMP_Start(&hcomp3);
+  HAL_COMP_Start(&hcomp2);
   HAL_GPIO_WritePin(GPIOD, GPIO_PIN_2, GPIO_PIN_RESET);
   HAL_TIM_OnePulse_Start(&htim3, TIM_CHANNEL_1);
   // tim3 output goes high here
@@ -291,6 +288,7 @@ int arm_device(void) {
   
   // start HVPWM
   HAL_TIM_PWM_Start(&htim2, TIM_CHANNEL_1);
+  HAL_TIM_PWM_Start(&htim2, TIM_CHANNEL_4);
   
   // set armed flag
   armed = FLAG_ARMED;  // device is now armed
@@ -303,8 +301,8 @@ int disarm_device(void) {
   
   // disable trigger comparator
   // HAL_COMP_DeInit(&hcomptrig);
-  HAL_COMP_Stop(&hcomptrig);
-  HAL_COMP_Stop(&hcompHVCS);
+  HAL_COMP_Stop(&hcomp2);
+  HAL_COMP_Stop(&hcomp3);
 
   MX_GPIO_Init();  // (this also resets PulseEN_Pin)
 
@@ -314,6 +312,7 @@ int disarm_device(void) {
   // disable PWM output
   htim2.Instance->CCR1 = 0;
   HAL_TIM_PWM_Stop(&htim2, TIM_CHANNEL_1);
+  HAL_TIM_PWM_Stop(&htim2, TIM_CHANNEL_4);
 
   HAL_DAC_Stop(&hdac1, DAC_CHANNEL_1);
 
@@ -332,20 +331,27 @@ int flyback_comp_step(void) {
   HAL_StatusTypeDef res = HAL_ADC_PollForConversion(&hadc1, 10);
   if (res != HAL_OK) return 1;
   uint32_t adc_reading = HAL_ADC_GetValue(&hadc1);
-  float V_HV_fb = V_TO_VHV(ADC_TO_V(adc_reading));  // real voltage at HV bank
+  float V_HV_fb = ADC_TO_V(adc_reading);  // voltage measured at HVVS
+  float HV_fb = V_TO_VHV(V_HV_fb);  // real voltage at HV bank
   float setpoint = (float )arming_config.voltage;
 
   // Run PI on normalized input
-  PI_step(&flyback_PWM_PI_cfg, &flyback_PWM_PI_hdl, V_HV_fb/HV_MAX, setpoint/HV_MAX);
+  PI_step(&flyback_PWM_PI_cfg, &flyback_PWM_PI_hdl, HV_fb/HV_MAX, setpoint/HV_MAX);
+  // flyback_PWM_PI_hdl.out *= 2;
   float CS_ctrl = flyback_PWM_PI_hdl.out;
+
+  memcpy(msg_body, &V_HV_fb, sizeof(float));  // wrtie ADC reading to UART
+  memcpy(msg_body+sizeof(float), &HV_fb, sizeof(float));  // wrtie ADC reading to UART
+  memcpy(msg_body+(2*sizeof(float)), &flyback_PWM_PI_hdl.err, sizeof(float));  // wrtie ADC reading to UART
+  msg_len = 3*sizeof(float);
   
   // Force control signal inbounds
   if (flyback_PWM_PI_hdl.out < 0){
     flyback_PWM_PI_hdl.out = 0;
     CS_ctrl = 0.0;
   } else if (flyback_PWM_PI_hdl.out < D_MIN) {
-    // prevents shorter pulses than gate driver is rated for
-    __HAL_TIM_SET_AUTORELOAD(&htim2, PWM_P*1);
+    // prevent shorter pulses than gate driver is rated for
+    __HAL_TIM_SET_AUTORELOAD(&htim2, PWM_P*2);
     flyback_PWM_PI_hdl.out = D_MIN;
     // CS_ctrl = 0.0;
   } else {
@@ -471,7 +477,7 @@ int process_command(void) {
           return 1;
         } else {
           msg_hdr = HDR_SUCCESS;
-          msg_len = 0;
+          // msg_len = 0; // msg buffer holds current feedback value
           send_message();
         }
       }

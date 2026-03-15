@@ -70,7 +70,7 @@ void MX_COMP3_Init(void)
   hcomp3.Init.NonInvertingInput = COMP_NONINVERTINGINPUT_IO1;
   hcomp3.Init.Output = COMP_OUTPUT_TIM2OCREFCLR;
   hcomp3.Init.OutputPol = COMP_OUTPUTPOL_NONINVERTED;
-  hcomp3.Init.BlankingSrce = COMP_BLANKINGSRCE_NONE;
+  hcomp3.Init.BlankingSrce = COMP_BLANKINGSRCE_TIM2OC4;
   hcomp3.Init.TriggerMode = COMP_TRIGGERMODE_NONE;
   if (HAL_COMP_Init(&hcomp3) != HAL_OK)
   {

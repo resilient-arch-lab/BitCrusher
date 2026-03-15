@@ -14,7 +14,7 @@ extern "C" {
 #define VDDA (float )3.3
 #define HV_MIN 150
 #define HV_MAX 500
-#define HV_COMP_WINDOW 0.05
+#define HV_COMP_WINDOW 0.1
 
 // PWM duty cycle macros
 #define D_MIN 0.08
@@ -22,23 +22,19 @@ extern "C" {
 #define PWM_P 720
 
 // current limit trip level
-#define V_ILIM_MAX 0.9
-#define V_ILIM_MIN 0.8
+#define V_ILIM_MAX 0.6
+#define V_ILIM_MIN 0.2
 #define V_ILIM V_ILIM_MAX
 #define D_TO_ILIM(D) ((V_ILIM_MIN - V_ILIM_MAX)*D) + V_ILIM_MIN
 
-// #define V_ILIM 0.86
-
 #define ADC_TO_V(x) (VDDA/(0x0fff))*x
-#define V_TO_VHV(x) ((float )HV_MAX/(float )(HVVS_MAX - HVVS_MIN))*x
+#define VHV_OFFSET 0.6
+#define V_TO_VHV(x) ((float )HV_MAX/(float )(HVVS_MAX - HVVS_MIN))*(x - VHV_OFFSET)
 
 typedef struct {
-    float Kp;   // proportional gain
-    float Ki;   // integral gain
-    float Kd;   // derivative gain
-    float norm_max;  // output max
-    float norm_min;  // output min
-    float T;    // timestep for integral / derivative calculation
+    float Kp;       // proportional gain
+    float Ki;       // integral gain
+    float T;        // timestep for integral / derivative calculation
 } PI_config_t;
 
 // persistent state / cache of the PID controller instance
@@ -50,7 +46,7 @@ typedef struct {
     // float out_norm;     // normalized output
 } PI_handle_t;
 
-void PI_step(PI_config_t *cfg, PI_handle_t *pi, float fb, float set);
+void PI_step(const PI_config_t *cfg, PI_handle_t *pi, float fb, float set);
 
 #ifdef __cplusplus
 }

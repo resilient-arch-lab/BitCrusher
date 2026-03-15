@@ -1593,7 +1593,7 @@
 		)
 		(uuid "2855a582-ea84-43ba-880e-173ef12db523")
 	)
-	(text "UVLO = 2 * (1 + R1/R2)\nUVLO = 5V\nR1 = 20k\nR2 = (5/2 - 1) * 20k = 30k"
+	(text "UVLO = 5V = 2 * (1 + R_{ADJ1}/R_{ADJ2})\nR_{ADJ1} = 20k\nR_{ADJ2} = (5/2 - 1) * 20k = 30k"
 		(exclude_from_sim no)
 		(at 102.616 91.44 0)
 		(effects
@@ -2334,6 +2334,16 @@
 	)
 	(wire
 		(pts
+			(xy 128.27 43.18) (xy 115.57 43.18)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "8787c001-347b-456b-bbe9-654f8f435b88")
+	)
+	(wire
+		(pts
 			(xy 153.67 53.34) (xy 153.67 52.07)
 		)
 		(stroke
@@ -2371,16 +2381,6 @@
 			(type default)
 		)
 		(uuid "8f2ee47d-ef95-4c39-91e8-2e8fa5777e42")
-	)
-	(wire
-		(pts
-			(xy 115.57 43.18) (xy 128.27 43.18)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "90066683-1685-41da-8bab-ccd997405e53")
 	)
 	(wire
 		(pts
@@ -2481,16 +2481,6 @@
 			(type default)
 		)
 		(uuid "aba0a08d-31ab-4141-bcd9-691bfb9d5049")
-	)
-	(wire
-		(pts
-			(xy 128.27 43.18) (xy 140.97 43.18)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "adca850e-d6ff-4851-a123-5f5455ba53f1")
 	)
 	(wire
 		(pts
@@ -2814,6 +2804,16 @@
 	)
 	(wire
 		(pts
+			(xy 128.27 43.18) (xy 140.97 43.18)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f9f6d5f9-9b95-4ac2-b988-87ad3690104b")
+	)
+	(wire
+		(pts
 			(xy 195.58 137.16) (xy 195.58 139.7)
 		)
 		(stroke
@@ -2871,6 +2871,16 @@
 			(type default)
 		)
 		(uuid "ff68a462-913b-481f-ad7a-e872680f03a4")
+	)
+	(label "VDD_DRV"
+		(at 130.81 43.18 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "9f1fec3e-e82f-42be-85f2-f1e3fb8de8ee")
 	)
 	(label "HVSW+"
 		(at 195.58 83.82 0)
