@@ -1575,7 +1575,7 @@
 	)
 	(text "These turn on / off resistor values \nare on the higher (safer) side for \nQ3's gate capacitance and rated turn\non / off times, and can modified \nafter prototype evaluation"
 		(exclude_from_sim no)
-		(at 160.782 85.598 0)
+		(at 163.576 85.344 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -1595,7 +1595,7 @@
 	)
 	(text "UVLO = 5V = 2 * (1 + R_{ADJ1}/R_{ADJ2})\nR_{ADJ1} = 20k\nR_{ADJ2} = (5/2 - 1) * 20k = 30k"
 		(exclude_from_sim no)
-		(at 102.616 91.44 0)
+		(at 105.41 89.662 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -4927,7 +4927,7 @@
 				(hide yes)
 			)
 		)
-		(property "Value" "+5V"
+		(property "Value" "+3V3"
 			(at 68.58 34.29 0)
 			(effects
 				(font
@@ -5433,7 +5433,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
+		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric"
 			(at 129.2352 52.07 0)
 			(effects
 				(font
