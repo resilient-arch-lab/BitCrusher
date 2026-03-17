@@ -264,8 +264,8 @@ int arm_device(void) {
   // if device is already armed, return success here
   if (armed == FLAG_ARMED) return 0;
 
-  // set the "PulseEN" GPIO
-  HAL_GPIO_WritePin(GPIOA, PulseEN_Pin, GPIO_PIN_SET);
+  // set the "PulseEN" GPIO (gate driver EN pin is low active)
+  HAL_GPIO_WritePin(GPIOA, PulseEN_Pin, GPIO_PIN_RESET);
 
   // change the trigger comparator output back from being GPIO forced low
   // HAL_GPIO_DeInit(PulseEN_GPIO_Port, PulseEN_Pin);
@@ -297,7 +297,7 @@ int arm_device(void) {
 
 int disarm_device(void) {
   // reset PulseEN GPIO pin
-  HAL_GPIO_WritePin(GPIOA, PulseEN_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOA, PulseEN_Pin, GPIO_PIN_SET);
   
   // disable trigger comparator
   // HAL_COMP_DeInit(&hcomptrig);
@@ -316,10 +316,8 @@ int disarm_device(void) {
 
   HAL_DAC_Stop(&hdac1, DAC_CHANNEL_1);
 
-  
   // htim2.Instance->CR1 &= ~TIM_CR1_CEN;  // disable counting
   HAL_ADC_Stop(&hadc1);
-
 
   // reset armed flag
   armed = FLAG_DISARMED;
