@@ -198,6 +198,7 @@
         0.2,
         0.3,
         0.5,
+        0.7,
         1.0,
         2.0
       ],
@@ -246,7 +247,7 @@
       "internal_id": "",
       "mfg": "",
       "mpn": "",
-      "sch_revision": ""
+      "sch_revision": "0.2"
     },
     "layer_pairs": [],
     "layer_presets": [],
@@ -742,7 +743,7 @@
       {
         "filename": "BitCrusher.kicad_sch",
         "name": "BitCrusher",
-        "uuid": "00000000-0000-0000-0000-000000000000"
+        "uuid": "e1be550d-9ce6-42b1-a89a-c00b9d7586dd"
       }
     ],
     "used_designators": "",
@@ -751,7 +752,7 @@
   "sheets": [
     [
       "e1be550d-9ce6-42b1-a89a-c00b9d7586dd",
-      "Root"
+      "BitCrusher"
     ],
     [
       "29f45a98-1f25-4a6e-8231-3aa3a650ea17",
