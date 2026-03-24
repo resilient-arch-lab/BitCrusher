@@ -1,0 +1,12 @@
+chipwhisperer==6.0.0
+configobj==5.0.9
+Cython==3.2.4
+ECPy==1.2.5
+fastdtw==0.3.4
+libusb1==3.3.1
+numpy==1.26.4
+pyserial==3.5
+tqdm==4.67.3
+matplotlib==3.10.8
+setuptools==80.10.2
+apio==1.3.0

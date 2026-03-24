@@ -7,3 +7,6 @@
 [submodule "interface/stm32wl-openbl-apps"]
 	path = interface/stm32wl-openbl-apps
 	url = git@github.com:STMicroelectronics/stm32wl-openbl-apps.git
+[submodule "tests/ice40-tdc-calibration/picoemp-tdc-paper"]
+	path = tests/ice40-tdc-calibration/picoemp-tdc-paper
+	url = https://github.com/colinoflynn/picoemp-tdc-paper.git
