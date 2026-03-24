@@ -7,6 +7,3 @@
 [submodule "interface/stm32wl-openbl-apps"]
 	path = interface/stm32wl-openbl-apps
 	url = git@github.com:STMicroelectronics/stm32wl-openbl-apps.git
-[submodule "firmware/stm32wl-openbl-apps"]
-	path = firmware/stm32wl-openbl-apps
-	url = git@github.com:STMicroelectronics/stm32wl-openbl-apps.git

@@ -239,7 +239,12 @@ C_INCLUDES =  \
 -IInc/CMSIS/RTOS2/Include \
 -IInc/CMSIS/RTOS2/Template \
 -IInc/STM32F3xx_HAL_Driver/Inc \
--IInc/STM32F3xx_HAL_Driver/Inc/Legacy
+-IInc/STM32F3xx_HAL_Driver/Inc/Legacy \
+-IMiddlewares/ST/OpenBootloader/Core \
+-IMiddlewares/ST/OpenBootloader/Modules/Mem \
+-IMiddlewares/ST/OpenBootloader/Modules/USART \
+-IOpenBootloader/App \
+-IOpenBootloader/Target
 
 
 
