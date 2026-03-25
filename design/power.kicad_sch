@@ -2629,7 +2629,7 @@
 	)
 	(text "Capacitor Bank Constraints:\nCout_ESR <= 0.0991657145320887\n7.02833e-5 <= Cout <= 0.001"
 		(exclude_from_sim no)
-		(at 117.602 107.442 0)
+		(at 117.602 102.362 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2652,7 +2652,7 @@
 	)
 	(text "Capacitor Bank Constraints:\nCout_ESR <= 0.0935111400227679\n8.54028e-6 <= Cout <= 0.001"
 		(exclude_from_sim no)
-		(at 117.602 54.102 0)
+		(at 117.602 49.022 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -9962,7 +9962,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "1u"
+		(property "Value" "5u"
 			(at 194.31 57.1499 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -10478,7 +10478,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "1u"
+		(property "Value" "5u"
 			(at 233.68 57.1499 0)
 			(show_name no)
 			(do_not_autoplace no)

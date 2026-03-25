@@ -1758,6 +1758,17 @@
 		)
 		(uuid "9b45bf2d-e579-48f6-9432-9d7842296734")
 	)
+	(text "Place C27, 29, 30 Near VSSB\nPlace C28 across VDDB and VSSB"
+		(exclude_from_sim no)
+		(at 138.684 36.576 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "dbfa78ba-26f4-4247-a63b-8629eaff405f")
+	)
 	(junction
 		(at 128.27 43.18)
 		(diameter 0)
