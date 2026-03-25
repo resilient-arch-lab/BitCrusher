@@ -521,6 +521,172 @@
 			)
 			(embedded_fonts no)
 		)
+		(symbol "Device:D_Zener"
+			(pin_numbers
+				(hide yes)
+			)
+			(pin_names
+				(offset 1.016)
+				(hide yes)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(in_pos_files yes)
+			(duplicate_pin_numbers_are_jumpers no)
+			(property "Reference" "D"
+				(at 0 2.54 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "D_Zener"
+				(at 0 -2.54 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Datasheet" ""
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Description" "Zener diode"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_keywords" "diode"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_fp_filters" "TO-???* *_Diode_* *SingleDiode* D_*"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(symbol "D_Zener_0_1"
+				(polyline
+					(pts
+						(xy -1.27 -1.27) (xy -1.27 1.27) (xy -0.762 1.27)
+					)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 1.27 0) (xy -1.27 0)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 1.27 -1.27) (xy 1.27 1.27) (xy -1.27 0) (xy 1.27 -1.27)
+					)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(symbol "D_Zener_1_1"
+				(pin passive line
+					(at -3.81 0 0)
+					(length 2.54)
+					(name "K"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 3.81 0 180)
+					(length 2.54)
+					(name "A"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
 		(symbol "Device:Q_PNP"
 			(pin_numbers
 				(hide yes)
@@ -3580,6 +3746,12 @@
 		(uuid "122f3737-66f9-40a8-87d4-4888b2351fca")
 	)
 	(junction
+		(at 198.12 54.61)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "152aed9b-3a66-402e-88ab-be7453f35fba")
+	)
+	(junction
 		(at 107.95 67.31)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -3634,6 +3806,12 @@
 		(uuid "460f193d-433b-4fa5-a771-9ffb19094d6e")
 	)
 	(junction
+		(at 185.42 54.61)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "5b34262d-8908-4a25-9ee6-441479f80778")
+	)
+	(junction
 		(at 181.61 85.09)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -3664,16 +3842,22 @@
 		(uuid "73b873eb-a3a0-4bba-8703-b705aa7452b4")
 	)
 	(junction
-		(at 185.42 44.45)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "915ca5d4-908a-40e0-b3df-ed826199093a")
-	)
-	(junction
 		(at 121.92 69.85)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "9eb770fd-9959-4e5e-9067-9feef9fcdb1c")
+	)
+	(junction
+		(at 185.42 44.45)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "a04b682b-d5ca-4442-92f4-664fe6c265f4")
+	)
+	(junction
+		(at 198.12 44.45)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "aa511b34-b6da-4223-9b7a-f346e9460143")
 	)
 	(junction
 		(at 95.25 77.47)
@@ -3746,12 +3930,6 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "efd76f04-9b42-4a4b-9dec-d1a269d0b365")
-	)
-	(junction
-		(at 185.42 54.61)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "f0eddec3-cfaa-4fe4-b9f9-a95ca650cd46")
 	)
 	(junction
 		(at 77.47 111.76)
@@ -3918,6 +4096,16 @@
 			(type default)
 		)
 		(uuid "269b7399-837e-4a4d-ac4c-e08a59cea53d")
+	)
+	(wire
+		(pts
+			(xy 198.12 44.45) (xy 198.12 45.72)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "26c49e14-12c1-40c3-8ad6-cb48cd7bcf9c")
 	)
 	(wire
 		(pts
@@ -4211,6 +4399,16 @@
 	)
 	(wire
 		(pts
+			(xy 198.12 54.61) (xy 205.74 54.61)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "56c4cd6f-7701-4649-a600-296d14a4d452")
+	)
+	(wire
+		(pts
 			(xy 140.97 74.93) (xy 153.67 74.93)
 		)
 		(stroke
@@ -4241,7 +4439,7 @@
 	)
 	(wire
 		(pts
-			(xy 185.42 54.61) (xy 193.04 54.61)
+			(xy 185.42 54.61) (xy 198.12 54.61)
 		)
 		(stroke
 			(width 0)
@@ -4591,6 +4789,16 @@
 	)
 	(wire
 		(pts
+			(xy 198.12 53.34) (xy 198.12 54.61)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c458241b-029e-4aaf-8edd-cbc6a0fe1d31")
+	)
+	(wire
+		(pts
 			(xy 106.68 156.21) (xy 106.68 157.48)
 		)
 		(stroke
@@ -4671,6 +4879,16 @@
 	)
 	(wire
 		(pts
+			(xy 198.12 44.45) (xy 205.74 44.45)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "da65390d-65e6-4231-9f4e-5ac01976c912")
+	)
+	(wire
+		(pts
 			(xy 166.37 54.61) (xy 173.99 54.61)
 		)
 		(stroke
@@ -4711,7 +4929,7 @@
 	)
 	(wire
 		(pts
-			(xy 185.42 44.45) (xy 193.04 44.45)
+			(xy 185.42 44.45) (xy 198.12 44.45)
 		)
 		(stroke
 			(width 0)
@@ -4893,7 +5111,7 @@
 	)
 	(global_label "HVVS-"
 		(shape output)
-		(at 193.04 44.45 0)
+		(at 205.74 44.45 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -4903,7 +5121,7 @@
 		)
 		(uuid "90998cb1-c738-4254-a03b-84246e4be123")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 202.3148 44.45 0)
+			(at 215.0148 44.45 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -4917,7 +5135,7 @@
 	)
 	(global_label "HVVS+"
 		(shape output)
-		(at 193.04 54.61 0)
+		(at 205.74 54.61 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -4927,7 +5145,7 @@
 		)
 		(uuid "b7164bfc-47f5-488f-9c0e-32b0eb483d1c")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 202.3148 54.61 0)
+			(at 215.0148 54.61 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -7203,6 +7421,88 @@
 		)
 	)
 	(symbol
+		(lib_id "Device:D_Zener")
+		(at 198.12 49.53 270)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "96570970-0932-4468-9abb-a9ccfbf43a30")
+		(property "Reference" "D10"
+			(at 200.66 48.2599 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "BZT52C3V3"
+			(at 200.66 50.7999 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Diode_SMD:D_SOD-123"
+			(at 198.12 49.53 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 198.12 49.53 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "3.3V Zener diode"
+			(at 198.12 49.53 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "2"
+			(uuid "f9ba1a8b-8d1a-4a77-8d51-371efbd7220f")
+		)
+		(pin "1"
+			(uuid "15ad7e85-40eb-4752-bb0a-2bf53688a425")
+		)
+		(instances
+			(project "BitCrusher"
+				(path "/e1be550d-9ce6-42b1-a89a-c00b9d7586dd/1666a107-a514-488b-8729-5533040b5f76"
+					(reference "D10")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Device:C")
 		(at 82.55 72.39 0)
 		(unit 1)
@@ -8113,7 +8413,7 @@
 				)
 			)
 		)
-		(property "Value" "10"
+		(property "Value" "22"
 			(at 93.98 102.87 90)
 			(show_name no)
 			(do_not_autoplace no)
