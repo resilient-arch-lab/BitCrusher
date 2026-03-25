@@ -1,6 +1,3 @@
-from ice40-tdc-calibration.ice40tdc.glitchmeter import GlitchMeter
-
-
 import time
 from ice40tdc.glitchmeter import GlitchMeter
 from datetime import datetime
@@ -71,11 +68,19 @@ def run_EMFI_prototype(gm:GlitchMeter):
 
     gm.build_and_load(NUM_ELEMENTS, "triggered", "GPIO4")
 
-    time.sleep(0.01)
-    scope.io.tio4 = True
-    time.sleep(0.001)
-    scope.io.tio4 = False
-    time.sleep(0.1)
+    # scope.io.tio1 = True
+    # time.sleep(0.01)
+    # scope.io.tio1 = False
+
+    # time.sleep(0.01)
+    # scope.io.tio4 = True
+    # time.sleep(0.001)
+    # scope.io.tio4 = False
+    # time.sleep(0.1)
+
+    # gm.scope.wa
+
+    _ = input("Press enter to retrieve result")
 
     pattern = gm.getpattern(True)
 
@@ -85,4 +90,15 @@ def run_EMFI_prototype(gm:GlitchMeter):
         pltdata.append(value)
 
     plt.plot(pltdata)
-    plt.show()
+    # plt.show()
+    plt.savefig("fault.png", dpi=300)
+
+def main():
+    gm = husky_setup()
+    run_EMFI_prototype(gm)
+    return
+
+
+if __name__ == "__main__":
+    main()
+    raise SystemExit()
