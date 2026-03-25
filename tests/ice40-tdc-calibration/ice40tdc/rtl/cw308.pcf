@@ -1,0 +1,17 @@
+# 12 MHz clock
+set_io -nowarn CLK_IN      B3
+
+# RS232
+set_io  GPIO1          E5
+set_io  GPIO2          D5
+
+# LEDs and Button
+set_io  GPIO4              A1
+set_io  GPIO3_LED          A5             
+
+
+# SPI Flash
+set_io  FLASH_SCK  D1
+set_io  FLASH_SSB  C1
+set_io  FLASH_IO0  F1
+set_io  FLASH_IO1  E1
