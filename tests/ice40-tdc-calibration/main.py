@@ -9,7 +9,7 @@ import struct
 import numpy as np
 import matplotlib.pyplot as plt
 
-def setup() -> GlitchMeter:
+def husky_setup() -> GlitchMeter:
     gm = GlitchMeter(None, None, dir="rtl")
     scope = gm.scope
     scope.clock.adc_mul = 1
@@ -26,7 +26,6 @@ def setup() -> GlitchMeter:
     scope.io.glitch_trig_mcx = "glitch"
 
     return gm
-
 
 def run_husky_fault(gm:GlitchMeter):
     NUM_ELEMENTS = 3
