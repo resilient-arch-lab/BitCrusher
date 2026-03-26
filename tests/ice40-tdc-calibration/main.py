@@ -82,9 +82,10 @@ def run_EMFI_prototype(gm:GlitchMeter):
 
     npdata = np.array(pltdata)
     np.save(f"results/25mhz_tdc_bitcrusher_{datetime.now().strftime("%Y-%m-%d %H:%M:%S")}.npy", npdata)
+
     plt.plot(pltdata)
     # plt.show()
-    plt.savefig(f"25mhz_tdc_bitcrusher_{datetime.now().strftime("%Y-%m-%d %H:%M:%S")}.png", dpi=600)
+    plt.savefig(f"results/25mhz_tdc_bitcrusher_{datetime.now().strftime("%Y-%m-%d %H:%M:%S")}.png", dpi=600)
 
 
 def main():
