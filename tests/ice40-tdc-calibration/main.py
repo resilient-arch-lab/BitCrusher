@@ -1,3 +1,6 @@
+from typing import Any
+
+
 import time
 from ice40tdc.glitchmeter import GlitchMeter
 from datetime import datetime
@@ -68,30 +71,21 @@ def run_EMFI_prototype(gm:GlitchMeter):
 
     gm.build_and_load(NUM_ELEMENTS, "triggered", "GPIO4")
 
-    # scope.io.tio1 = True
-    # time.sleep(0.01)
-    # scope.io.tio1 = False
-
-    # time.sleep(0.01)
-    # scope.io.tio4 = True
-    # time.sleep(0.001)
-    # scope.io.tio4 = False
-    # time.sleep(0.1)
-
-    # gm.scope.wa
-
     _ = input("Press enter to retrieve result")
 
     pattern = gm.getpattern(True)
 
-    pltdata = []
+    pltdata: list[int] = []
     for p in pattern:
         value = bin(int(p.hex(), 16)).count('1')
         pltdata.append(value)
 
+    npdata = np.array(pltdata)
+    np.save(f"results/25mhz_tdc_bitcrusher_{datetime.now().strftime("%Y-%m-%d %H:%M:%S")}.npy", npdata)
     plt.plot(pltdata)
     # plt.show()
-    plt.savefig("fault.png", dpi=300)
+    plt.savefig(f"25mhz_tdc_bitcrusher_{datetime.now().strftime("%Y-%m-%d %H:%M:%S")}.png", dpi=600)
+
 
 def main():
     gm = husky_setup()
