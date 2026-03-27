@@ -5329,7 +5329,6 @@
 		(on_board yes)
 		(in_pos_files yes)
 		(dnp no)
-		(fields_autoplaced yes)
 		(uuid "5d2a1ca5-36f0-44ee-96b5-b61818e472b3")
 		(property "Reference" "D7"
 			(at 172.4025 64.77 0)
@@ -5341,9 +5340,8 @@
 				)
 			)
 		)
-		(property "Value" "D_Schottky"
-			(at 173.6724 66.04 90)
-			(hide yes)
+		(property "Value" "JSCJ B5819W SL"
+			(at 164.338 66.294 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects

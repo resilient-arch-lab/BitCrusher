@@ -9962,7 +9962,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "5u"
+		(property "Value" "1u"
 			(at 194.31 57.1499 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -10478,7 +10478,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "5u"
+		(property "Value" "1u"
 			(at 233.68 57.1499 0)
 			(show_name no)
 			(do_not_autoplace no)
