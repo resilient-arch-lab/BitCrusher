@@ -335,7 +335,8 @@ int flyback_comp_step(void) {
 
   // Run PI on normalized input
   PI_step(&flyback_PWM_PI_cfg, &flyback_PWM_PI_hdl, HV_fb/HV_MAX, setpoint/HV_MAX);
-  // flyback_PWM_PI_hdl.out *= 2;
+  // flyback_PWM_PI_hdl.out *= 1;
+  flyback_PWM_PI_hdl.out *= (1 + RAMP(setpoint));
   float CS_ctrl = flyback_PWM_PI_hdl.out;
 
   memcpy(msg_body, &V_HV_fb, sizeof(float));  // wrtie ADC reading to UART
@@ -346,10 +347,10 @@ int flyback_comp_step(void) {
   // Force control signal inbounds
   if (flyback_PWM_PI_hdl.out < 0){
     flyback_PWM_PI_hdl.out = 0;
-    CS_ctrl = 0.0;
+    // CS_ctrl = 0.0;
   } else if (flyback_PWM_PI_hdl.out < D_MIN) {
     // prevent shorter pulses than gate driver is rated for
-    __HAL_TIM_SET_AUTORELOAD(&htim2, PWM_P*2);
+    __HAL_TIM_SET_AUTORELOAD(&htim2, PWM_P*6);
     flyback_PWM_PI_hdl.out = D_MIN;
     // CS_ctrl = 0.0;
   } else {
