@@ -6,6 +6,9 @@ from ctypes import ArgumentError
 from enum import Enum
 from typing import Any, Callable, override
 import serial, ftd2xx
+from ftd2xx import _ftd2xx_linux
+import pylibftdi
+from serial.tools import list_ports
 from time import perf_counter, time
 from dataclasses import dataclass, fields
 from .comms import Protocol
@@ -13,22 +16,14 @@ from time import sleep
 import subprocess
 from pathlib import Path
 import sys
-# Message = Protocol.Message
-# Headers = Protocol.Headers
-
 import numpy as np
 
-# The idea is to check the each property against its constraints with 
-# a constraint checking function (the lambda). The most important thing
-# is that the device itself doesn't use a bad config though, so this 
-# isn't super important.  
-class ConstrainedArmingConfig:
-    voltage: tuple[int, Callable] = (0, lambda x: x>=100 and x<=500)
-    trigger_polarity: tuple[int, Callable] = (0, lambda x: x in [0, 1])  # 0: low, 1: high
-    trigger_mode: tuple[int, Callable] = (0, lambda x: x in [0, 1])  # 0: continuous, 1: single
-    trigger_src: tuple[int, Callable] = (0, lambda x: x in [0, 1])  # 0: HW, 1: FW
-
-
+def get_ftd2xx_path(dev_id: bytes):
+    ports = list_ports.comports(include_links=True)
+    for p in ports:
+        print(p.serial_number)
+        if p.serial_number == dev_id.decode():
+            return p.device
 
 class DeviceError(Exception):
     pass
@@ -62,16 +57,20 @@ class Device:
         trigger_src: np.uint8 = np.uint8(0)  # 0: HW, 1: FW
 
     ftdi_conn: ftd2xx.FTD2XX
+    _ftdi_id: bytes
     arming_config: ArmingConfig
     arming_config_params: dict[str, int] = {p : i for i, p in enumerate(ArmingConfig.__annotations__.keys())}
     state: States
-    _in_bootloader: bool
+    _in_bootloader: bool = False
 
     _ftd230x_gpio_reset_pin: int = 0b00
     _ftd230x_gpio_bootsel_pin: int = 0b01
 
     def __init__(self, port: str = "/dev/ttyUSB0", 
                  baud_rate: int = 115200, serial_timeout: float = 1) -> None:
+
+
+        
 
         print("Searching for BitCrusher...")
 
@@ -87,6 +86,8 @@ class Device:
             print(f"Device {i}: {ftdi_dev.getDeviceInfo()}")
             # TODO: this should check if the device is a BitCrusher, and set self.ftdi_conn
             self.ftdi_conn = ftdi_dev
+            self._ftdi_id = id
+            self._ftdi_port = port
             break
         
         if not self.ftdi_conn:
@@ -95,6 +96,8 @@ class Device:
         print("Connecting to BitCrusher...")
         self.ftdi_conn.setTimeouts(int(serial_timeout*1000), int(serial_timeout*1000))
         self.ftdi_conn.setBaudRate(baud_rate)
+        self._ftdi_baud = baud_rate
+
 
         self.arming_config = Device.ArmingConfig()
 
@@ -108,7 +111,7 @@ class Device:
             print("device ack'd")
         except:
             # device didn't respond, probably needs a firmware flash
-            print("device did not ack")
+            print("device did not ack, firmware flash likely required")
     
     def _ftd230x_gpio_set(self, pin: int, state: int):
         if (pin not in range(4)) or (state not in (0, 1)):
@@ -130,8 +133,8 @@ class Device:
         self.ftdi_conn.setBitMode(bits, 0x20)
     
     def _ftd230x_normal_state_gpio(self):
-        self._ftd230x_gpio_set(0, 1)
-        self._ftd230x_gpio_set(1, 0)
+        self._ftd230x_gpio_set(self._ftd230x_gpio_reset_pin, 1)
+        self._ftd230x_gpio_set(self._ftd230x_gpio_bootsel_pin, 0)
 
     def reset(self):
         self._ftd230x_gpio_set(self._ftd230x_gpio_reset_pin, 0)
@@ -141,28 +144,62 @@ class Device:
     def _enter_bootloader(self): 
         # To enter bootloader, bootsel pin set high and held high while device is reset
         self._ftd230x_gpio_set(self._ftd230x_gpio_bootsel_pin, 1)
+        sleep(0.1)
         self.reset()
+        sleep(0.1)
         
+        self.ftdi_conn.purge()
+        sleep(0.1)
         self.ftdi_conn.write(b'\x7f')  # bootlader should ack with `7f 79` or just `79`
-        resp = self.ftdi_conn.read(2)
+        sleep(0.1)
+        resp = self.ftdi_conn.read(self.ftdi_conn.getQueueStatus())
         
         print(resp)
         
-        if resp[-1] != b'\x79':
+        if resp != b'y':
             raise DeviceError("Failed to enter bootloader")
     
-    def _enter_open_bootloader(self):
-        self._write_msg(Protocol.Message(Protocol.Headers.bootloader, b""))  # expect no response
-        
-        
-        self._in_bootloader = True
-    
     def _flash_firmware(self):
-        # TODO: adapt from TestingDevice._flash_firmware
-        ...
+        if not self._in_bootloader:
+            self._enter_bootloader()
+                
+        # Disconnect from serial port
+        baud = self._ftdi_baud
+        port = self._ftdi_port
+        if port is None:
+            raise Exception("Something is wrong with the serial connection")
+        self.ftdi_conn.close()
+        sleep(0.1)
+
+        # Flash firmware from default build directory to device
+        stm32flash_path = Path(__file__).parents[1] / 'stm32flash' / 'stm32flash'
+        firmware_path = Path(__file__).parents[3] / 'firmware' / 'build' / 'debug' / 'BitCrusher.bin'
+        try:
+            print("Attempting firmware flash...")
+            flash_proc = subprocess.run(
+                [str(stm32flash_path), '-b', str(baud), '-w', str(firmware_path), '-v', '-g', '0x0', port], 
+                stdout=sys.stdout, 
+                stderr=sys.stderr,
+                check=True
+            )
+        except subprocess.CalledProcessError as e:
+            raise DeviceError("Failed to flash device, stm32flash exited with error")
+
+        # If the flash succedeed, the firmware should be running already, exit bootloader state
+        self.ftdi_conn = ftd2xx.openEx(self._ftdi_id)
+        self.ftdi_conn.purge()
+        self._exit_bootloader()
+
+        sleep(0.1)
+        
+        try: 
+            self._read_arming_param("voltage")
+        except:
+            raise DeviceError("unable to communicate with device after flash, try resetting device")
 
     def _exit_bootloader(self):
         self._ftd230x_gpio_set(self._ftd230x_gpio_bootsel_pin, 0)
+        sleep(0.1)
         self.reset()
 
     # TODO: Message sending / receiving messages should raise if they get an error response

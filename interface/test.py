@@ -35,6 +35,16 @@ class TestArmingParameter(unittest.TestCase):
     #     self.dev.arm()
 
 
+def InterfaceListing():
+    device = Device()  # connect to and initialize device
+
+    device._flash_firmware("path/to/firmware.bin")  # update device firmware
+
+    device.arming_config.voltage = np.uint16(200)  # configure high voltage generation to 200 volts
+
+    device.arm(5)  # arm device for at most 5 seconds
+
+    device.reset()
 
 if __name__ == "__main__":
     unittest.main()
