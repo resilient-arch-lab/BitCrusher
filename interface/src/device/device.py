@@ -55,7 +55,7 @@ class Device:
 
     arming_config: Device.ArmingConfig = ArmingConfig()
     arming_config_params: dict[str, int] = {
-        p: i for i, p in enumerate(Device.ArmingConfig.__annotations__.keys())
+        p: i for i, p in enumerate(ArmingConfig.__annotations__.keys())
     }
 
     def __init__(self, baudrate: int = 115200, timeout: float = 1.0):
