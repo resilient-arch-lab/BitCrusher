@@ -81,6 +81,8 @@ class Device:
 
         self._gpio_state: int = 0x00
         self._ft230x_normal_state_gpio()
+        self.reset()
+        sleep(0.1)
 
         # test communication
         try:
@@ -186,7 +188,10 @@ class Device:
         msg_len = int.from_bytes(self._ft230x_handle.read(1), 'little')
         body = self._ft230x_handle.read(msg_len)
 
-        msg = Protocol.parse_from_bytes(hdr, body)
+        try:
+            msg = Protocol.parse_from_bytes(hdr, body)
+        except Exception as e:
+            raise DeviceResponseError(f"Failed to parse device response {hdr}, {msg_len}, {body}")
 
         if expects is not None and msg.hdr != expects:
             raise DeviceResponseError(f"Expected response with header \"{expects}\", got \"{msg.hdr}\"")
