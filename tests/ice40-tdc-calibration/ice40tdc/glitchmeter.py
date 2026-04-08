@@ -87,6 +87,7 @@ class GlitchMeter():
         self.scope = scope
 
         self.YB = YosysBuild(dir)
+        self.dir = dir
         
         if daccom:
             self.dac = DAC(daccom)
@@ -107,7 +108,7 @@ class GlitchMeter():
         self.YB.build()
 
         self.ice.erase_and_init()
-        self.ice.program(os.path.join("rtl", "hardware.bin"))
+        self.ice.program(os.path.join(self.dir, "hardware.bin"))
 
     def getpattern(self, printpattern=False):
         BRAM_WIDTH = 32

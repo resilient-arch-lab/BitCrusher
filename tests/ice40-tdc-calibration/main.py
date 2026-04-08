@@ -10,7 +10,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 def husky_setup() -> GlitchMeter:
-    gm = GlitchMeter(None, None, dir="rtl")
+    gm = GlitchMeter(None, None, dir="ice40tdc/rtl")
     scope = gm.scope
     scope.clock.adc_mul = 1
     scope.clock.clkgen_freq = 25E6
@@ -43,6 +43,8 @@ def run_husky_fault(gm:GlitchMeter):
     scope.io.glitch_lp = True
     scope.io.glitch_hp = True
 
+    scope.io.glitch_trig_mcx = 'trigger'
+
     scope.io.tio1 = True
     time.sleep(0.01)
     scope.io.tio1 = False
@@ -61,13 +63,18 @@ def run_husky_fault(gm:GlitchMeter):
     for p in pattern:
         value = bin(int(p.hex(), 16)).count('1')
         pltdata.append(value)
+    
+    npdata = np.array(pltdata)
+    np.save(f"results/25mhz_tdc_husky_{datetime.now().strftime("%Y-%m-%d %H:%M:%S")}.npy", npdata)
 
     plt.plot(pltdata)
-    plt.show()
+    # plt.show()
+    plt.savefig(f"results/25mhz_tdc_husky_{datetime.now().strftime("%Y-%m-%d %H:%M:%S")}.png", dpi=600)
 
 def run_EMFI_prototype(gm:GlitchMeter):
     NUM_ELEMENTS = 3
     scope = gm.scope
+    scope.io.glitch_trig_mcx = 'trigger'
 
     gm.build_and_load(NUM_ELEMENTS, "triggered", "GPIO4")
 
@@ -90,7 +97,8 @@ def run_EMFI_prototype(gm:GlitchMeter):
 
 def main():
     gm = husky_setup()
-    run_EMFI_prototype(gm)
+    run_husky_fault(gm)
+    # run_EMFI_prototype(gm)
     return
 
 
