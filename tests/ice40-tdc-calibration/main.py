@@ -23,7 +23,7 @@ def husky_setup() -> GlitchMeter:
     scope.clock.clkgen_freq = 25E6
 
     scope.io.glitch_trig_mcx = "trigger"
-    scope.io.glitch_trig_mcx = "glitch"
+    # scope.io.glitch_trig_mcx = "glitch"
 
     return gm
 
@@ -74,9 +74,14 @@ def run_husky_fault(gm:GlitchMeter):
 def run_EMFI_prototype(gm:GlitchMeter):
     NUM_ELEMENTS = 3
     scope = gm.scope
-    scope.io.glitch_trig_mcx = 'trigger'
+    scope.io.tio4 = 'high_z'  # set trigger pin as input
+    scope.trigger.module = 'basic'  # use basic (edge) triggering
+    scope.trigger.triggers = 'tio4'  # set trigger module input to tio4
+    scope.io.glitch_trig_mcx = 'trigger'  # output tirgger signal on glitch / trig SMB connector
 
     gm.build_and_load(NUM_ELEMENTS, "triggered", "GPIO4")
+
+    scope.arm()
 
     _ = input("Press enter to retrieve result")
 
@@ -93,7 +98,6 @@ def run_EMFI_prototype(gm:GlitchMeter):
     plt.plot(pltdata)
     # plt.show()
     plt.savefig(f"results/25mhz_tdc_bitcrusher_{datetime.now().strftime("%Y-%m-%d %H:%M:%S")}.png", dpi=600)
-
 
 def main():
     gm = husky_setup()
