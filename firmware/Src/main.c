@@ -65,6 +65,8 @@
 #define FLAG_ARMED (uint8_t )0xff
 #define FLAG_DISARMED (uint8_t )0x00
 #define STATE_INIT (uint8_t )0x01
+
+#define PULSE_EN_ALWAYS
 /* USER CODE END PM */
 
 /* Private variables ---------------------------------------------------------*/
@@ -301,7 +303,9 @@ int disarm_device(void) {
   
   // disable trigger comparator
   // HAL_COMP_DeInit(&hcomptrig);
+#ifndef PULSE_EN_ALWAYS
   HAL_COMP_Stop(&hcomp2);
+#endif
   HAL_COMP_Stop(&hcomp3);
 
   MX_GPIO_Init();  // (this also resets PulseEN_Pin)
