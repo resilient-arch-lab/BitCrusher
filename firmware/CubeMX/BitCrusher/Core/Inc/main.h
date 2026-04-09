@@ -70,8 +70,8 @@ void Error_Handler(void);
 #define HVCS_GPIO_Port GPIOB
 #define PulseEN_Pin GPIO_PIN_11
 #define PulseEN_GPIO_Port GPIOA
-#define IntTrig__Pin GPIO_PIN_12
-#define IntTrig__GPIO_Port GPIOA
+#define IntTrig__Pin GPIO_PIN_9
+#define IntTrig__GPIO_Port GPIOB
 
 /* USER CODE BEGIN Private defines */
 
