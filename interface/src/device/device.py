@@ -297,3 +297,7 @@ class Device:
             Protocol.Message(Protocol.Headers.disarm, b""),
             expects=Protocol.Headers.success
         )
+
+        self._read_msg(expects=Protocol.Headers.success)
+        # For some reason, somwhere in this sequence an extra success message is sent. This is
+        # a hack to compensate.
