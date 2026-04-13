@@ -34,7 +34,6 @@ class TestArmingParameter(unittest.TestCase):
     #     self.dev._write_arming_config()
     #     self.dev.arm()
 
-
 def InterfaceListing():
     device = Device()  # connect to and initialize device
 

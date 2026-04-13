@@ -13,7 +13,7 @@ import serial.tools.list_ports
 
 from .comms import Protocol
 
-
+# Base class for all BitCrusher exceptions
 class DeviceError(Exception):
     pass
 
@@ -22,23 +22,16 @@ class DeviceResponseError(DeviceError):
 
 
 class Device:
-    class States(Enum):
-        null = 0x00
-        init = 0x01
-        idle = 0x02
-        armed = 0x03
-        fault = 0xF0
-
-    class ResetState(Enum):
-        reset = 0b00
-        set = 0b01
-
-    class BootSelState(Enum):
-        normal = 0b00
-        bootloader = 0b01
-
+    """
+    Represents a connected BitCrusher device.
+    """
+    
     @dataclass
     class ArmingConfig:
+        """
+        A struct of control setpoints and config variables present on BitCrusher. These values
+        are synchronized between the connected device and the `Device` object
+        """
         voltage: np.uint16 = np.uint16(0)
         trigger_polarity: np.uint8 = np.uint8(0)
         trigger_mode: np.uint8 = np.uint8(0)
@@ -50,13 +43,14 @@ class Device:
     _ft230x_serial_num: str
     _ft230x_gpio_reset_pin: int = 0b00
     _ft230x_gpio_bootsel_pin: int = 0b01
-    _ftd230x_vid: int = 0x0403  # default FT230X VID
-    _ftd230x_pid: int = 0x6015  # default FT230X PID
+    _ft230x_vid: int = 0x0403  # default FT230X VID
+    _ft230x_pid: int = 0x6015  # default FT230X PID
 
     arming_config: Device.ArmingConfig = ArmingConfig()
     arming_config_params: dict[str, int] = {
         p: i for i, p in enumerate(ArmingConfig.__annotations__.keys())
     }
+    arm_handshake_period: float = 0.25
 
     def __init__(self, baudrate: int = 115200, timeout: float = 1.0):
         self.serial_timeout = timeout
@@ -92,6 +86,9 @@ class Device:
             print("Device did not respond (may need firmware flash)")
             print(e)
             print("Initialization incomplete, at a later time this would raise an exception")
+
+        # read arming config from device
+        self._read_arming_config()
 
     def _ft230x_port(self):
         ports = serial.tools.list_ports.comports()
@@ -146,14 +143,14 @@ class Device:
         sleep(0.1)
         self.reset()
 
+    # TODO: make this so it accepts a firmware path, or can flash non-debug builds
     def _flash_firmware(self):
         self._enter_bootloader()
 
-        baud = self._ft230x_handle.baudrate  # TODO: make sure baudrate and timeout are restored when connection is re-opened
+        baud = self._ft230x_handle.baudrate
         self._ft230x_handle.close()
         port = self._ft230x_port()
         
-
         stm32flash_path = Path(__file__).parents[1] / 'stm32flash' / 'stm32flash'
         firmware_path = Path(__file__).parents[3] / 'firmware' / 'build' / 'debug' / 'BitCrusher.bin'
 
@@ -209,11 +206,6 @@ class Device:
         sleep(0.5)
         self._ft230x_gpio_set(self._ft230x_gpio_reset_pin, 1)
     
-    def get_state(self) -> States:
-        msg = Protocol.Message(Protocol.Headers.get_state, b"")
-        resp = self._send_msg(msg, expects=Protocol.Headers.success)
-        return self.States(resp.body)
-
     """
     Ask device for its current value of arming config parameter `p`. If the device responds, the 
     corresponding value for `p` in `self.arming_config` is updated.
@@ -270,17 +262,17 @@ class Device:
 
     """
     Arm the device
-    Ensure handshake period is <= the handshake period programmed on device.
+    period: Length in seconds to arm device, or `None` for indefinite. Defaults to None
     """
-    def arm(self, period: float = 1, handshake_period: float = 0.25):
+    def arm(self, period: float | None = None):
         _ = self._send_msg(
             Protocol.Message(Protocol.Headers.arm, b""),
             expects=Protocol.Headers.success
         )
 
         t0 = perf_counter()
-        while perf_counter() - t0 < period:
-            sleep(handshake_period)
+        while ((perf_counter() - t0 < period) if period != None else True):
+            sleep(self.arm_handshake_period)
             res = self._send_msg(
                 Protocol.Message(Protocol.Headers.arm, b""),
                 expects=Protocol.Headers.success
@@ -291,7 +283,7 @@ class Device:
                 f"HVVS: {tmp[0]:.4f}  HV: {tmp[1]:.4f}  PID: {tmp[2]:.4f}"
             )
 
-        sleep(handshake_period)
+        sleep(self.arm_handshake_period)
 
         self._send_msg(
             Protocol.Message(Protocol.Headers.disarm, b""),
