@@ -4,8 +4,6 @@ from typing import Any
 import time
 from ice40tdc.glitchmeter import GlitchMeter
 from datetime import datetime
-import json
-import struct
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -98,6 +96,21 @@ def run_EMFI_prototype(gm:GlitchMeter):
     plt.plot(pltdata)
     # plt.show()
     plt.savefig(f"results/25mhz_tdc_bitcrusher_{datetime.now().strftime("%Y-%m-%d %H:%M:%S")}.png", dpi=600)
+
+def pretty_plot_tdc_trace(trace: np.ndarray) -> None:
+    # Format data
+    a, b = -10.707508204773282, 1230.4499787903817  # for fitting TDC reading to core voltage
+    y = (a*trace + b) / 1000.0
+    x = np.arange(0, trace.shape[0]) * (1/(25e6*1.843))
+
+    # Set up figure
+    fig, ax = plt.subplots(1, 1, figsize=(8, 8))
+    ax.plot(x*1e6, y)
+    ax.set_ylabel("Measured Core Voltage (V)")
+    ax.set_xlabel("Time (\u03BCs)")
+    ax.set_title("")
+    ...
+
 
 def main():
     gm = husky_setup()
