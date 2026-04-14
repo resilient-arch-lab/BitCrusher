@@ -6,6 +6,7 @@ from time import perf_counter, sleep
 from dataclasses import dataclass
 import sys
 import subprocess
+import asyncio
 
 import numpy as np
 import pylibftdi
@@ -36,6 +37,8 @@ class Device:
         trigger_polarity: np.uint8 = np.uint8(0)
         trigger_mode: np.uint8 = np.uint8(0)
         trigger_src: np.uint8 = np.uint8(0)
+    
+    _async: asyncio.AbstractEventLoop = asyncio.new_event_loop()
 
     serial_timeout: float = 1  # serial read timeout
     _ft230x_driver: pylibftdi.Driver
@@ -51,6 +54,7 @@ class Device:
         p: i for i, p in enumerate(ArmingConfig.__annotations__.keys())
     }
     arm_handshake_period: float = 0.25
+    is_armed: bool = False
 
     def __init__(self, baudrate: int = 115200, timeout: float = 1.0):
         self.serial_timeout = timeout
@@ -89,6 +93,12 @@ class Device:
 
         # read arming config from device
         self._read_arming_config()
+
+    def _check_unarmed(self):
+        if self.is_armed != False:
+            raise DeviceError("Device is armed")
+        else:
+            return
 
     def _ft230x_port(self):
         ports = serial.tools.list_ports.comports()
@@ -170,9 +180,19 @@ class Device:
         self._exit_bootloader()
 
     def _write_msg(self, msg: Protocol.Message):
+        try:
+            self._check_unarmed()
+        except DeviceError as e:
+            raise DeviceError("Cannot initialize new communications with device while armed") from e
+
         _ = self._ft230x_handle.write(Protocol.to_bytes(msg))
 
     def _read_msg(self, expects: Protocol.Headers | None = None) -> Protocol.Message:
+        try:
+            self._check_unarmed()
+        except DeviceError as e:
+            raise DeviceError("Cannot initialize new communications with device while armed") from e
+
         t0 = perf_counter()
         while perf_counter() - t0 < self.serial_timeout:
             hdr = self._ft230x_handle.read(1)
@@ -260,18 +280,12 @@ class Device:
         for k in self.arming_config_params.keys():
             self._read_arming_param(k)
 
-    """
-    Arm the device
-    period: Length in seconds to arm device, or `None` for indefinite. Defaults to None
-    """
-    def arm(self, period: float | None = None):
-        _ = self._send_msg(
-            Protocol.Message(Protocol.Headers.arm, b""),
-            expects=Protocol.Headers.success
-        )
-
+    async def _armed_handshake(self, period: float | None = None) -> None:
         t0 = perf_counter()
         while ((perf_counter() - t0 < period) if period != None else True):
+            if self.is_armed != True:
+                break
+            
             sleep(self.arm_handshake_period)
             res = self._send_msg(
                 Protocol.Message(Protocol.Headers.arm, b""),
@@ -282,14 +296,35 @@ class Device:
             print(
                 f"HVVS: {tmp[0]:.4f}  HV: {tmp[1]:.4f}  PID: {tmp[2]:.4f}"
             )
-
+        
         sleep(self.arm_handshake_period)
 
-        self._send_msg(
+        _ = self._send_msg(
             Protocol.Message(Protocol.Headers.disarm, b""),
             expects=Protocol.Headers.success
         )
 
-        self._read_msg(expects=Protocol.Headers.success)
-        # For some reason, somwhere in this sequence an extra success message is sent. This is
-        # a hack to compensate.
+        self.is_armed = False
+
+        _ = self._read_msg(expects=Protocol.Headers.success)
+
+    # TODO: The device must be able to be armed without the interface being stuck in
+    # this loop. Perhaps running the handshake asyncronously would work?
+    # I don't think this async implementation would works as I expected. The handshake
+    # loop must run after the `arm()` call exits, but it must also be cleanly interuptable.
+    """
+    Arm the device
+    period: Length in seconds to arm device, or `None` for indefinite. Defaults to None
+    """
+    def arm(self, period: float | None = None):
+        # enter armed state
+        _ = self._send_msg(
+            Protocol.Message(Protocol.Headers.arm, b""),
+            expects=Protocol.Headers.success
+        )
+        self.is_armed = True
+        
+        # begin handshake loop
+        asyncio.run(self._armed_handshake(period))
+        # self._armed_handshake(period)
+        
