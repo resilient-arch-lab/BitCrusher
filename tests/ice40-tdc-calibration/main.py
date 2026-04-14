@@ -1,11 +1,12 @@
 from typing import Any
 
-
 import time
 from ice40tdc.glitchmeter import GlitchMeter
 from datetime import datetime
 import numpy as np
 import matplotlib.pyplot as plt
+
+from ...interface.src.device.device import Device
 
 def husky_setup() -> GlitchMeter:
     gm = GlitchMeter(None, None, dir="ice40tdc/rtl")
@@ -22,6 +23,26 @@ def husky_setup() -> GlitchMeter:
 
     scope.io.glitch_trig_mcx = "trigger"
     # scope.io.glitch_trig_mcx = "glitch"
+
+    return gm
+
+def husky_setup_relay() -> GlitchMeter:
+    gm = GlitchMeter(None, None, dir="ice40tdc/rtl")
+    scope = gm.scope
+    scope.clock.adc_mul = 1
+    scope.clock.clkgen_freq = 25E6
+
+    scope.glitch.enabled = True
+
+    scope.glitch.clk_src = "pll"
+    scope.glitch.trigger_src = "ext_single"
+
+    scope.clock.clkgen_freq = 25E6
+
+    scope.io.tio4 = 'high_z'  # set trigger pin as input
+    scope.trigger.module = 'basic'  # use basic (edge) triggering
+    scope.trigger.triggers = 'tio4'  # set trigger module input to tio4
+    scope.io.glitch_trig_mcx = 'trigger'  # output tirgger signal on glitch / trig SMB connector
 
     return gm
 
@@ -97,19 +118,44 @@ def run_EMFI_prototype(gm:GlitchMeter):
     # plt.show()
     plt.savefig(f"results/25mhz_tdc_bitcrusher_{datetime.now().strftime("%Y-%m-%d %H:%M:%S")}.png", dpi=600)
 
-def pretty_plot_tdc_trace(trace: np.ndarray) -> None:
-    # Format data
-    a, b = -10.707508204773282, 1230.4499787903817  # for fitting TDC reading to core voltage
-    y = (a*trace + b) / 1000.0
-    x = np.arange(0, trace.shape[0]) * (1/(25e6*1.843))
+def run_EMFI_bitcrusher(gm: GlitchMeter):
+    NUM_ELEMENTS = 3
+    scope = gm.scope
+    
+    # configure husky to relay trigger to SMB output
+    scope.io.tio4 = 'high_z'  # set trigger pin as input
+    scope.trigger.module = 'basic'  # use basic (edge) triggering
+    scope.trigger.triggers = 'tio4'  # set trigger module input to tio4
+    scope.io.glitch_trig_mcx = 'trigger'  # output tirgger signal on glitch / trig SMB connector
 
-    # Set up figure
-    fig, ax = plt.subplots(1, 1, figsize=(8, 8))
-    ax.plot(x*1e6, y)
-    ax.set_ylabel("Measured Core Voltage (V)")
-    ax.set_xlabel("Time (\u03BCs)")
-    ax.set_title("")
-    ...
+    gm.build_and_load(NUM_ELEMENTS, "triggered", "GPIO4")
+    
+    # connect to BitCrusher
+    _ = input("Press enter to begin")
+    bc = Device()
+    bc.arming_config.voltage = np.uint16(300)
+    bc._write_arming_config()
+    bc.arm(3)
+
+    scope.arm()
+
+    # TODO: Need to generate a precise trigger signal from the husky, or route a rough trigger signal from the 
+    # husky to an AD3.
+    # This will be done with the AD3, it doesn't seem like theres a good way to do this with the husky
+
+    pattern = gm.getpattern(True)
+
+    pltdata: list[int] = []
+    for p in pattern:
+        value = bin(int(p.hex(), 16)).count('1')
+        pltdata.append(value)
+
+    npdata = np.array(pltdata)
+    np.save(f"results/rev-2/25mhz_tdc_bitcrusher_{datetime.now().strftime("%Y-%m-%d %H:%M:%S")}.npy", npdata)
+
+    plt.plot(pltdata)
+    # plt.show()
+    plt.savefig(f"results/rev-2/25mhz_tdc_bitcrusher_{datetime.now().strftime("%Y-%m-%d %H:%M:%S")}.png", dpi=600)
 
 
 def main():
