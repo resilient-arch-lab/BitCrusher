@@ -105,9 +105,6 @@ class Device:
 
     @property
     def armed(self) -> bool:
-        if self._armed_context != None:
-            if self._armed_context.handshake_thread.is_alive():
-
         return self._armed_context != None  # If the device is armed, it will have an armed context
 
     def _assert_unarmed(self):
@@ -297,6 +294,7 @@ class Device:
         while ((perf_counter() - t0 < period) if period != None else True):
             # make sure we should still be running
             if (not self.armed) or self._armed_context.kill:
+                print(f"disarmed: {not self.armed}, kill: {self._armed_context.kill}")
                 break
             
             sleep(self.arm_handshake_period)
@@ -339,8 +337,8 @@ class Device:
 
         # begin handshake loop
         handshake_thread = threading.Thread(target=self._armed_handshake, args=(period, ))
-        handshake_thread.start()
         self._armed_context = self.ArmedContext(handshake_thread, period)
+        handshake_thread.start()
     
     def disarm(self, throw: bool = False) -> None:
         if throw and not self.armed:
@@ -350,7 +348,7 @@ class Device:
             handshake_thread = self._armed_context.handshake_thread
             self._armed_context.kill = True
             self._armed_context = None
-            if (self._armed_context.handshake_thread.ident == threading.get_ident()):
+            if (handshake_thread.ident == threading.get_ident()):
                 return
             handshake_thread.join(2*self.arm_handshake_period)
             if handshake_thread.is_alive():
