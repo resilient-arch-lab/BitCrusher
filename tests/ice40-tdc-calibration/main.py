@@ -124,7 +124,7 @@ def run_EMFI_bitcrusher(gm: GlitchMeter):
     scope = gm.scope
     
     # configure husky to relay trigger to SMB output
-    # scope.io.tio4 = 'high_z'  # set trigger pin as input
+    scope.io.tio4 = 'high_z'  # set trigger pin as input
     scope.trigger.module = 'basic'  # use basic (edge) triggering
     scope.trigger.triggers = 'tio4'  # set trigger module input to tio4
     scope.io.glitch_trig_mcx = 'trigger'  # output tirgger signal on glitch / trig SMB connector
@@ -145,11 +145,13 @@ def run_EMFI_bitcrusher(gm: GlitchMeter):
     # husky to an AD3.
     # This triggers the AD3 to generate the pulse signal
     time.sleep(0.01)
-    scope.io.tio4 = True
+    scope.io.tio3 = True
     time.sleep(0.001)
-    scope.io.tio4 = False
+    scope.io.tio3 = False
     time.sleep(0.1)
-    # scope.io.tio4 = 'high_z'  # set trigger pin as input
+
+    # AD3 signal goes to tio4, which is relayed to bitcrusher 
+
 
     pattern = gm.getpattern(True)
 
