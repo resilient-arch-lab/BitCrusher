@@ -57,13 +57,13 @@ class Device:
     _ft230x_gpio_bootsel_pin: int = 0b01
     _ft230x_vid: int = 0x0403  # default FT230X VID
     _ft230x_pid: int = 0x6015  # default FT230X PID
+    _comm_lock: threading.Lock = threading.Lock()
 
     arming_config: Device.ArmingConfig = ArmingConfig()
     arming_config_params: dict[str, int] = {
         p: i for i, p in enumerate(ArmingConfig.__annotations__.keys())
     }
     arm_handshake_period: float = 0.25
-    is_armed: bool = False
 
     def __init__(self, baudrate: int = 115200, timeout: float = 1.0):
         self.serial_timeout = timeout
@@ -193,19 +193,15 @@ class Device:
         self._exit_bootloader()
 
     def _write_msg(self, msg: Protocol.Message):
-        try:
-            self._assert_unarmed()
-        except DeviceError as e:
-            raise DeviceError("Cannot initialize new communications with device while armed") from e
+        if self.armed and (self._armed_context.handshake_thread.ident != threading.get_ident()):
+            raise Exception("Cannot initialize new communications with device while arming handshake continues")
 
         _ = self._ft230x_handle.write(Protocol.to_bytes(msg))
 
     def _read_msg(self, expects: Protocol.Headers | None = None) -> Protocol.Message:
-        try:
-            self._assert_unarmed()
-        except DeviceError as e:
-            raise DeviceError("Cannot initialize new communications with device while armed") from e
-
+        if self.armed and (self._armed_context.handshake_thread.ident != threading.get_ident()):
+            raise Exception("Cannot initialize new communications with device while arming handshake continues")
+        
         t0 = perf_counter()
         while perf_counter() - t0 < self.serial_timeout:
             hdr = self._ft230x_handle.read(1)
