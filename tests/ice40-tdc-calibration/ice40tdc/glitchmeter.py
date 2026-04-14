@@ -109,6 +109,11 @@ class GlitchMeter():
 
         self.ice.erase_and_init()
         self.ice.program(os.path.join(self.dir, "hardware.bin"))
+    
+    def load(self) -> None:
+        self.ice.erase_and_init()
+        self.ice.program(os.path.join(self.dir, "hardware.bin"))
+
 
     def getpattern(self, printpattern=False):
         BRAM_WIDTH = 32

@@ -6,7 +6,7 @@ from datetime import datetime
 import numpy as np
 import matplotlib.pyplot as plt
 
-from ...interface.src.device.device import Device
+from device import Device
 
 def husky_setup() -> GlitchMeter:
     gm = GlitchMeter(None, None, dir="ice40tdc/rtl")
@@ -26,6 +26,7 @@ def husky_setup() -> GlitchMeter:
 
     return gm
 
+# Configure husky to relay trigger signal to SMB output
 def husky_setup_relay() -> GlitchMeter:
     gm = GlitchMeter(None, None, dir="ice40tdc/rtl")
     scope = gm.scope
@@ -123,7 +124,7 @@ def run_EMFI_bitcrusher(gm: GlitchMeter):
     scope = gm.scope
     
     # configure husky to relay trigger to SMB output
-    scope.io.tio4 = 'high_z'  # set trigger pin as input
+    # scope.io.tio4 = 'high_z'  # set trigger pin as input
     scope.trigger.module = 'basic'  # use basic (edge) triggering
     scope.trigger.triggers = 'tio4'  # set trigger module input to tio4
     scope.io.glitch_trig_mcx = 'trigger'  # output tirgger signal on glitch / trig SMB connector
@@ -135,6 +136,7 @@ def run_EMFI_bitcrusher(gm: GlitchMeter):
     bc = Device()
     bc.arming_config.voltage = np.uint16(300)
     bc._write_arming_config()
+    time.sleep(0.1)
     bc.arm(3)
 
     scope.arm()
@@ -142,6 +144,12 @@ def run_EMFI_bitcrusher(gm: GlitchMeter):
     # TODO: Need to generate a precise trigger signal from the husky, or route a rough trigger signal from the 
     # husky to an AD3.
     # This will be done with the AD3, it doesn't seem like theres a good way to do this with the husky
+    time.sleep(0.01)
+    scope.io.tio4 = True
+    time.sleep(0.001)
+    scope.io.tio4 = False
+    time.sleep(0.1)
+    # scope.io.tio4 = 'high_z'  # set trigger pin as input
 
     pattern = gm.getpattern(True)
 
