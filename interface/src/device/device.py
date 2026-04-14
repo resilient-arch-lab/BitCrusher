@@ -6,7 +6,7 @@ from time import perf_counter, sleep
 from dataclasses import dataclass
 import sys
 import subprocess
-import asyncio
+import threading
 
 import numpy as np
 import pylibftdi
@@ -38,7 +38,16 @@ class Device:
         trigger_mode: np.uint8 = np.uint8(0)
         trigger_src: np.uint8 = np.uint8(0)
     
-    _async: asyncio.AbstractEventLoop = asyncio.new_event_loop()
+    @dataclass
+    class ArmedContext:
+        handshake_thread: threading.Thread
+        armed_period: float | None
+        kill: bool = False
+    
+    # _async: asyncio.AbstractEventLoop = asyncio.new_event_loop()
+    # _handshake_thread: threading.Thread | None = None
+    # _armed_period: float | None = None
+    _armed_context: ArmedContext | None = None
 
     serial_timeout: float = 1  # serial read timeout
     _ft230x_driver: pylibftdi.Driver
@@ -94,8 +103,12 @@ class Device:
         # read arming config from device
         self._read_arming_config()
 
-    def _check_unarmed(self):
-        if self.is_armed != False:
+    @property
+    def armed(self) -> bool:
+        return self._armed_context != None  # If the device is armed, it will have an armed context
+
+    def _assert_unarmed(self):
+        if self.armed:
             raise DeviceError("Device is armed")
         else:
             return
@@ -181,7 +194,7 @@ class Device:
 
     def _write_msg(self, msg: Protocol.Message):
         try:
-            self._check_unarmed()
+            self._assert_unarmed()
         except DeviceError as e:
             raise DeviceError("Cannot initialize new communications with device while armed") from e
 
@@ -189,7 +202,7 @@ class Device:
 
     def _read_msg(self, expects: Protocol.Headers | None = None) -> Protocol.Message:
         try:
-            self._check_unarmed()
+            self._assert_unarmed()
         except DeviceError as e:
             raise DeviceError("Cannot initialize new communications with device while armed") from e
 
@@ -280,10 +293,11 @@ class Device:
         for k in self.arming_config_params.keys():
             self._read_arming_param(k)
 
-    async def _armed_handshake(self, period: float | None = None) -> None:
+    def _armed_handshake(self, period: float | None = None) -> None:
         t0 = perf_counter()
         while ((perf_counter() - t0 < period) if period != None else True):
-            if self.is_armed != True:
+            # make sure we should still be running
+            if (not self.armed) or self._armed_context.kill:
                 break
             
             sleep(self.arm_handshake_period)
@@ -304,17 +318,18 @@ class Device:
             expects=Protocol.Headers.success
         )
 
-        self.is_armed = False
-
         _ = self._read_msg(expects=Protocol.Headers.success)
+
+        self.disarm()
 
     # TODO: The device must be able to be armed without the interface being stuck in
     # this loop. Perhaps running the handshake asyncronously would work?
     # I don't think this async implementation would works as I expected. The handshake
     # loop must run after the `arm()` call exits, but it must also be cleanly interuptable.
     """
-    Arm the device
+    Arm the device. Non blocking.
     period: Length in seconds to arm device, or `None` for indefinite. Defaults to None
+    WARNING: Device must be explicitly disarmed (`Device.disarm()`) if period is None
     """
     def arm(self, period: float | None = None):
         # enter armed state
@@ -322,9 +337,26 @@ class Device:
             Protocol.Message(Protocol.Headers.arm, b""),
             expects=Protocol.Headers.success
         )
-        self.is_armed = True
-        
+
         # begin handshake loop
-        asyncio.run(self._armed_handshake(period))
-        # self._armed_handshake(period)
+        handshake_thread = threading.Thread(target=self._armed_handshake, args=(period, ))
+        handshake_thread.start()
+        self._armed_context = self.ArmedContext(handshake_thread, period)
+    
+    def disarm(self, throw: bool = False) -> None:
+        if throw and not self.armed:
+            raise DeviceError("Failed to disarm device, device already disarmed")
         
+        if self.armed:
+            self._armed_context.kill = True
+            self._armed_context.handshake_thread.join(2*self.arm_handshake_period)
+            if self._armed_context.handshake_thread.is_alive():
+                raise Exception("Failed to kill device handshake thread")
+            self._armed_context = None
+    
+    def await_disarm(self) -> None:
+        if not self.armed:
+            return
+        
+        self._armed_context.handshake_thread.join()
+        self.disarm()
