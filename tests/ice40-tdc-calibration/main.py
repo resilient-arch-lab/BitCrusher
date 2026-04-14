@@ -139,11 +139,11 @@ def run_EMFI_bitcrusher(gm: GlitchMeter):
     time.sleep(0.1)
     bc.arm(3)
 
-    scope.arm()
+    # scope.arm()
 
     # TODO: Need to generate a precise trigger signal from the husky, or route a rough trigger signal from the 
     # husky to an AD3.
-    # This will be done with the AD3, it doesn't seem like theres a good way to do this with the husky
+    # This triggers the AD3 to generate the pulse signal
     time.sleep(0.01)
     scope.io.tio4 = True
     time.sleep(0.001)
