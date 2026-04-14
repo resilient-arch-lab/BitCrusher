@@ -105,6 +105,9 @@ class Device:
 
     @property
     def armed(self) -> bool:
+        if self._armed_context != None:
+            if self._armed_context.handshake_thread.is_alive():
+
         return self._armed_context != None  # If the device is armed, it will have an armed context
 
     def _assert_unarmed(self):
@@ -316,7 +319,7 @@ class Device:
 
         _ = self._read_msg(expects=Protocol.Headers.success)
 
-        self.disarm()
+        self.disarm()  # a thread can't `join` itself. 
 
     # TODO: The device must be able to be armed without the interface being stuck in
     # this loop. Perhaps running the handshake asyncronously would work?
@@ -344,11 +347,14 @@ class Device:
             raise DeviceError("Failed to disarm device, device already disarmed")
         
         if self.armed:
+            handshake_thread = self._armed_context.handshake_thread
             self._armed_context.kill = True
-            self._armed_context.handshake_thread.join(2*self.arm_handshake_period)
-            if self._armed_context.handshake_thread.is_alive():
-                raise Exception("Failed to kill device handshake thread")
             self._armed_context = None
+            if (self._armed_context.handshake_thread.ident == threading.get_ident()):
+                return
+            handshake_thread.join(2*self.arm_handshake_period)
+            if handshake_thread.is_alive():
+                raise Exception("Failed to kill device handshake thread")
     
     def await_disarm(self) -> None:
         if not self.armed:
