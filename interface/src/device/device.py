@@ -293,8 +293,8 @@ class Device:
         t0 = perf_counter()
         while ((perf_counter() - t0 < period) if period != None else True):
             # make sure we should still be running
-            if (not self.armed) or self._armed_context.kill:
-                print(f"disarmed: {not self.armed}, kill: {self._armed_context.kill}")
+            if (not self.armed) or (self.armed and self._armed_context.kill):
+                print(f"disarmed: {not self.armed}, ArmedContext: {self._armed_context}")
                 break
             
             sleep(self.arm_handshake_period)
@@ -317,7 +317,7 @@ class Device:
 
         _ = self._read_msg(expects=Protocol.Headers.success)
 
-        self.disarm()  # a thread can't `join` itself. 
+        self.disarm()  # a thread can't `join` itself.
 
     # TODO: The device must be able to be armed without the interface being stuck in
     # this loop. Perhaps running the handshake asyncronously would work?
@@ -349,6 +349,7 @@ class Device:
             self._armed_context.kill = True
             self._armed_context = None
             if (handshake_thread.ident == threading.get_ident()):
+                # A thread can't join itself
                 return
             handshake_thread.join(2*self.arm_handshake_period)
             if handshake_thread.is_alive():
