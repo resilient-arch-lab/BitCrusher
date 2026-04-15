@@ -119,7 +119,7 @@ def run_EMFI_prototype(gm:GlitchMeter):
     # plt.show()
     plt.savefig(f"results/25mhz_tdc_bitcrusher_{datetime.now().strftime("%Y-%m-%d %H:%M:%S")}.png", dpi=600)
 
-def run_EMFI_bitcrusher(gm: GlitchMeter):
+def run_EMFI_bitcrusher(gm: GlitchMeter, count: int = 1):
     NUM_ELEMENTS = 3
     scope = gm.scope
     
@@ -137,36 +137,35 @@ def run_EMFI_bitcrusher(gm: GlitchMeter):
     bc.arming_config.voltage = np.uint16(300)
     bc._write_arming_config()
     time.sleep(0.1)
-    bc.arm(3)
+    bc.arm()
 
-    # scope.arm()
+    for i in range(count):
+        # bc.arm(3)
 
-    # TODO: Need to generate a precise trigger signal from the husky, or route a rough trigger signal from the 
-    # husky to an AD3.
-    # This triggers the AD3 to generate the pulse signal
-    time.sleep(0.01)
-    scope.io.tio3 = True
-    time.sleep(0.001)
-    scope.io.tio3 = False
-    time.sleep(0.1)
+        # TODO: Need to generate a precise trigger signal from the husky, or route a rough trigger signal from the 
+        # husky to an AD3.
+        # This triggers the AD3 to generate the pulse signal
+        time.sleep(0.01)
+        scope.io.tio3 = True
+        time.sleep(0.001)
+        scope.io.tio3 = False
+        time.sleep(0.1)
 
-    # AD3 signal goes to tio4, which is relayed to bitcrusher 
+        pattern = gm.getpattern(True)
 
+        pltdata: list[int] = []
+        for p in pattern:
+            value = bin(int(p.hex(), 16)).count('1')
+            pltdata.append(value)
 
-    pattern = gm.getpattern(True)
+        npdata = np.array(pltdata)
+        np.save(f"results/rev-2/25mhz_tdc_bitcrusher_{datetime.now().strftime("%Y-%m-%d %H:%M:%S")}.npy", npdata)
 
-    pltdata: list[int] = []
-    for p in pattern:
-        value = bin(int(p.hex(), 16)).count('1')
-        pltdata.append(value)
+        plt.plot(pltdata)
+        # plt.show()
+        plt.savefig(f"results/rev-2/25mhz_tdc_bitcrusher_{datetime.now().strftime("%Y-%m-%d %H:%M:%S")}.png", dpi=600)
 
-    npdata = np.array(pltdata)
-    np.save(f"results/rev-2/25mhz_tdc_bitcrusher_{datetime.now().strftime("%Y-%m-%d %H:%M:%S")}.npy", npdata)
-
-    plt.plot(pltdata)
-    # plt.show()
-    plt.savefig(f"results/rev-2/25mhz_tdc_bitcrusher_{datetime.now().strftime("%Y-%m-%d %H:%M:%S")}.png", dpi=600)
-
+    bc.disarm()
 
 def main():
     gm = husky_setup()
