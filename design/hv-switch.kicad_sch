@@ -1737,9 +1737,9 @@
 		)
 		(uuid "2855a582-ea84-43ba-880e-173ef12db523")
 	)
-	(text "UVLO = 5V = 2 * (1 + R_{ADJ1}/R_{ADJ2})\nR_{ADJ1} = 20k\nR_{ADJ2} = (5/2 - 1) * 20k = 30k"
+	(text "V_{ADJ} = (V_{DDB} - GND_DRV) * (R_{ADJ1}/R_{ADJ1}+R_{ADJ2})\nUVLO = 5V = 2 * (1 + R_{ADJ1}/R_{ADJ2})\nR_{ADJ1} = 20k\nR_{ADJ2} = (5/2 - 1) * 20k = 30k"
 		(exclude_from_sim no)
-		(at 105.41 89.662 0)
+		(at 101.6 91.948 0)
 		(effects
 			(font
 				(size 1.27 1.27)
