@@ -1,8 +1,17 @@
+import itertools
+from numpy._typing._array_like import NDArray
+
+
+from numpy import float64
+
+
 from ctypes import ArgumentError
 from curses import baudrate
 from datetime import datetime
 from pathlib import Path
+from itertools import product
 
+import numpy as np
 import chipwhisperer as cw
 from gscrib import GCodeBuilder
 
@@ -61,6 +70,14 @@ class EnderMover:
 
         print("Interactive z axis calibration complete")
 
+    def grid_sequence_generator(self, origin: tuple[float, float], shape: tuple[float, float], points_per_dim: int = 10):
+        axes = tuple(np.linspace(origin[i], origin[i]+shape[i], points_per_dim) for i in range(2))
+        for x, y in product(*axes):
+            self.g.move(x=x, y=y)
+            self.g.sleep(duration=0)
+            yield x, y
+            
+
 def main() -> None:
     run_id = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     g = GCodeBuilder(
@@ -74,6 +91,4 @@ def main() -> None:
     # I can't just run auto homing since removing the print head removes the z axis probe
     # If I could auto home only the x and y axes that would be perfect, since the z axis will
     # need to be manually set every experiment anyway.
-
-
 
