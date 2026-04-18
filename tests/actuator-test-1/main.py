@@ -1,10 +1,3 @@
-import itertools
-from numpy._typing._array_like import NDArray
-
-
-from numpy import float64
-
-
 from ctypes import ArgumentError
 from curses import baudrate
 from datetime import datetime
@@ -14,6 +7,7 @@ from itertools import product
 import numpy as np
 import chipwhisperer as cw
 from gscrib import GCodeBuilder
+from device import Device
 
 class EnderMover:
     g: GCodeBuilder
@@ -79,16 +73,15 @@ class EnderMover:
             
 
 def main() -> None:
-    run_id = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    g = GCodeBuilder(
-        output = Path(run_id + ".gcode"),
-        direct_write = "serial",
-        port = "/dev/ttyUSB0",
-        baudrate = 115200
-    )
+    mover = EnderMover()
+    dev = Device()
 
-    # The printer starts at an unknown position (since it has no encoder feedback to my knowlege).
-    # I can't just run auto homing since removing the print head removes the z axis probe
-    # If I could auto home only the x and y axes that would be perfect, since the z axis will
-    # need to be manually set every experiment anyway.
+    x_orig = float(input("x origin: "))
+    y_orig = float(input("y origin: "))
+    
+    dev.arm()
+    for x, y in mover.grid_sequence_generator((x_orig, y_orig), (7, 7)):
+        input(f"At x={x}, y={y}. Press enter to proceed...")
+
+    dev.disarm()    
 
