@@ -3,6 +3,7 @@ from curses import baudrate
 from datetime import datetime
 from pathlib import Path
 from itertools import product
+from time import sleep
 
 import numpy as np
 import chipwhisperer as cw
@@ -64,24 +65,54 @@ class EnderMover:
 
         print("Interactive z axis calibration complete")
 
+    # Works smoothly
     def grid_sequence_generator(self, origin: tuple[float, float], shape: tuple[float, float], points_per_dim: int = 10):
         axes = tuple(np.linspace(origin[i], origin[i]+shape[i], points_per_dim) for i in range(2))
         for x, y in product(*axes):
             self.g.move(x=x, y=y)
             self.g.sleep(duration=0)
             yield x, y
-            
+
+def connect_husky():
+    scope = cw.scope()
+    scope.clock.adc_mul = 1
+    scope.clock.clkgen_freq = 25E6
+
+    scope.glitch.enabled = True
+
+    scope.glitch.clk_src = "pll"
+    scope.glitch.trigger_src = "ext_single"
+
+    scope.clock.clkgen_freq = 25E6
+
+    scope.io.glitch_trig_mcx = "trigger"
+
+    return scope
 
 def main() -> None:
     mover = EnderMover()
     dev = Device()
+    husky = connect_husky()
 
-    x_orig = float(input("x origin: "))
-    y_orig = float(input("y origin: "))
+    # configure CWHusky trigger forwarding
+    husky.io.tio4 = 'high_z'  # set trigger pin as input
+    husky.trigger.module = 'basic'  # use basic (edge) triggering
+    husky.trigger.triggers = 'tio4'  # set trigger module input to tio4
+    husky.io.glitch_trig_mcx = 'trigger'  # output tirgger signal on glitch / trig SMB connector
+
+    x_orig = float(input(f"x origin (bounds: {mover.g.state.get_bounds("X")}): "))
+    y_orig = float(input(f"y origin (bounds: {mover.g.state.get_bounds("Y")}): "))
     
     dev.arm()
     for x, y in mover.grid_sequence_generator((x_orig, y_orig), (7, 7)):
-        input(f"At x={x}, y={y}. Press enter to proceed...")
+        print(f"At x={x}, y={y}. Beginning fault routine...", end="\t")
+        # Activate AD3 pulse generation
+        sleep(0.01)
+        husky.io.tio1 = True
+        sleep(0.001)
+        husky.io.tio1 = False
+        sleep(0.1)
+        _ = input("Done! press enter to continue")
 
-    dev.disarm()    
+    dev.disarm()
 
