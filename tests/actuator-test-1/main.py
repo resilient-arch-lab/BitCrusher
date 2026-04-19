@@ -100,15 +100,19 @@ def main() -> None:
     husky.trigger.triggers = 'tio4'  # set trigger module input to tio4
     husky.io.glitch_trig_mcx = 'trigger'  # output tirgger signal on glitch / trig SMB connector
 
+    # calibrate mover
     x_orig = float(input(f"x origin: "))
     y_orig = float(input(f"y origin: "))
     mover.g.move(x=x_orig, y=y_orig)
     mover.g.sleep(duration=0)
     mover.calibrate_z_min()
     
+    # configure / arm chipwhisperer
     dev._write_arming_param("voltage", 300)
     dev.arm()
-    for x, y in mover.grid_sequence_generator((x_orig, y_orig), (7, -7)):
+
+    # start surface fault scan
+    for x, y in mover.grid_sequence_generator((x_orig, y_orig), (7, -7), points_per_dim=15):
         print(f"At x={x}, y={y}. Beginning fault routine...", end="\t")
         for _ in range(10):
             sleep(0.01)
@@ -117,7 +121,8 @@ def main() -> None:
             sleep(0.001)
             husky.io.tio1 = False
             sleep(0.1)
-        _ = input("Done! press enter to continue")
+        # _ = input("Done! press enter to continue")
+        print("Done!")
 
     dev.disarm()
 
