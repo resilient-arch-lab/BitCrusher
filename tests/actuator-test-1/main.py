@@ -10,6 +10,10 @@ import chipwhisperer as cw
 from gscrib import GCodeBuilder
 from device import Device
 
+fault_locations: dict[str, tuple[float, float]] = {
+    "Reset": (44, 99.5)
+}
+
 class EnderMover:
     g: GCodeBuilder
     # z axis bounds are adjusted during use, representing offset from z position on machine start
@@ -113,7 +117,7 @@ def main() -> None:
 
     triggers_per_point = 20
     points_per_dim = 20
-
+    
     # start surface fault scan
     for x, y in mover.grid_sequence_generator((x_orig, y_orig), (7, -7), points_per_dim=points_per_dim):
         print(f"At x={x}, y={y}. Beginning fault routine...", end="\t")
@@ -123,7 +127,7 @@ def main() -> None:
             husky.io.tio1 = True
             sleep(0.001)
             husky.io.tio1 = False
-            sleep(0.1)
+            sleep(0.05)
         # _ = input("Done! press enter to continue")
         print("Done!")
 
