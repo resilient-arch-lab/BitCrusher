@@ -28,7 +28,7 @@ class EnderMover:
         self.g.set_axis(x=0, y=0, z=0)
         self.g.rapid(x=self.axes_bounds_max[0]/2, y=self.axes_bounds_max[1]/2, z=self.g.state.position[2])
         self.g.sleep(duration=0)  # wait for movements to complete
-        self.calibrate_z_min()
+        # self.calibrate_z_min()
 
     # Configure ender3v3 SE axes bounds and stuff
     def _bounds_config(self) -> None :
@@ -100,18 +100,19 @@ def main() -> None:
     husky.trigger.triggers = 'tio4'  # set trigger module input to tio4
     husky.io.glitch_trig_mcx = 'trigger'  # output tirgger signal on glitch / trig SMB connector
 
-    x_orig = float(input(f"x origin (bounds: {mover.g.state.get_bounds("X")}): "))
-    y_orig = float(input(f"y origin (bounds: {mover.g.state.get_bounds("Y")}): "))
+    x_orig = float(input(f"x origin: "))
+    y_orig = float(input(f"y origin: "))
     
     dev.arm()
-    for x, y in mover.grid_sequence_generator((x_orig, y_orig), (7, 7)):
+    for x, y in mover.grid_sequence_generator((x_orig, y_orig), (7, -7)):
         print(f"At x={x}, y={y}. Beginning fault routine...", end="\t")
-        # Activate AD3 pulse generation
-        sleep(0.01)
-        husky.io.tio1 = True
-        sleep(0.001)
-        husky.io.tio1 = False
-        sleep(0.1)
+        for _ in range(10):
+            sleep(0.01)
+            # Activate AD3 pulse generation
+            husky.io.tio1 = True
+            sleep(0.001)
+            husky.io.tio1 = False
+            sleep(0.1)
         _ = input("Done! press enter to continue")
 
     dev.disarm()
