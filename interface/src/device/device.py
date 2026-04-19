@@ -289,7 +289,7 @@ class Device:
         for k in self.arming_config_params.keys():
             self._read_arming_param(k)
 
-    def _armed_handshake(self, period: float | None = None) -> None:
+    def _armed_handshake(self, period: float | None = None, print_feedback: bool = False) -> None:
         t0 = perf_counter()
         while ((perf_counter() - t0 < period) if period != None else True):
             # make sure we should still be running
@@ -304,9 +304,10 @@ class Device:
             )
 
             tmp = np.frombuffer(res.body, dtype=np.float32)
-            print(
-                f"HVVS: {tmp[0]:.4f}  HV: {tmp[1]:.4f}  PID: {tmp[2]:.4f}"
-            )
+            if print_feedback:
+                print(
+                    f"HVVS: {tmp[0]:.4f}  HV: {tmp[1]:.4f}  PID: {tmp[2]:.4f}"
+                )
         
         sleep(self.arm_handshake_period)
 
@@ -328,7 +329,7 @@ class Device:
     period: Length in seconds to arm device, or `None` for indefinite. Defaults to None
     WARNING: Device must be explicitly disarmed (`Device.disarm()`) if period is None
     """
-    def arm(self, period: float | None = None):
+    def arm(self, period: float | None = None, print_feedback: bool = False):
         # enter armed state
         _ = self._send_msg(
             Protocol.Message(Protocol.Headers.arm, b""),
@@ -336,7 +337,7 @@ class Device:
         )
 
         # begin handshake loop
-        handshake_thread = threading.Thread(target=self._armed_handshake, args=(period, ))
+        handshake_thread = threading.Thread(target=self._armed_handshake, args=(period, print_feedback))
         self._armed_context = self.ArmedContext(handshake_thread, period)
         handshake_thread.start()
     
