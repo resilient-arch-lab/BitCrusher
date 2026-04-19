@@ -111,10 +111,13 @@ def main() -> None:
     dev._write_arming_param("voltage", 300)
     dev.arm()
 
+    triggers_per_point = 20
+    points_per_dim = 20
+
     # start surface fault scan
-    for x, y in mover.grid_sequence_generator((x_orig, y_orig), (7, -7), points_per_dim=15):
+    for x, y in mover.grid_sequence_generator((x_orig, y_orig), (7, -7), points_per_dim=points_per_dim):
         print(f"At x={x}, y={y}. Beginning fault routine...", end="\t")
-        for _ in range(10):
+        for _ in range(triggers_per_point):
             sleep(0.01)
             # Activate AD3 pulse generation
             husky.io.tio1 = True
