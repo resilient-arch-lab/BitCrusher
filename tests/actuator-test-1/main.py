@@ -102,7 +102,11 @@ def main() -> None:
 
     x_orig = float(input(f"x origin: "))
     y_orig = float(input(f"y origin: "))
+    mover.g.move(x=x_orig, y=y_orig)
+    mover.g.sleep(duration=0)
+    mover.calibrate_z_min()
     
+    dev._write_arming_param("voltage", 300)
     dev.arm()
     for x, y in mover.grid_sequence_generator((x_orig, y_orig), (7, -7)):
         print(f"At x={x}, y={y}. Beginning fault routine...", end="\t")
@@ -117,3 +121,6 @@ def main() -> None:
 
     dev.disarm()
 
+if __name__ == "__main__":
+    main()
+    raise SystemExit()
