@@ -1,0 +1,57 @@
+{
+  "last_sch_text_sim_command": "",
+  "tabs": [
+    {
+      "analysis": "TRAN",
+      "commands": [
+        ".tran 100n 500u 0 100n uic",
+        ".kicad adjustpaths",
+        ".save all",
+        ".probe alli",
+        ".probe allp"
+      ],
+      "dottedSecondary": true,
+      "legend": {
+        "x": 867,
+        "y": 9
+      },
+      "margins": {
+        "bottom": 45,
+        "left": 70,
+        "right": 160,
+        "top": 30
+      },
+      "measurements": [],
+      "showGrid": true,
+      "traces": [
+        {
+          "color": "rgb(77, 175, 74)",
+          "signal": "I(LP1)",
+          "trace_type": 258
+        },
+        {
+          "color": "rgb(228, 26, 28)",
+          "signal": "I(LS1)",
+          "trace_type": 258
+        },
+        {
+          "color": "rgb(166, 86, 40)",
+          "signal": "V(/Vout)",
+          "trace_type": 257
+        },
+        {
+          "color": "rgb(152, 78, 163)",
+          "signal": "V(Net-_Q1-D_)",
+          "trace_type": 257
+        },
+        {
+          "color": "rgb(255, 127, 0)",
+          "signal": "V(Vin)",
+          "trace_type": 257
+        }
+      ]
+    }
+  ],
+  "user_defined_signals": [],
+  "version": 6
+}

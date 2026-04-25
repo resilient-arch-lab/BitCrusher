@@ -1,0 +1,12 @@
+README.md
+pyproject.toml
+src/__init__.py
+src/BitCrusher.egg-info/PKG-INFO
+src/BitCrusher.egg-info/SOURCES.txt
+src/BitCrusher.egg-info/dependency_links.txt
+src/BitCrusher.egg-info/requires.txt
+src/BitCrusher.egg-info/top_level.txt
+src/device/__init__.py
+src/device/comms.py
+src/device/device.py
+src/device/device_files.py
