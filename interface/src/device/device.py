@@ -44,9 +44,6 @@ class Device:
         armed_period: float | None
         kill: bool = False
     
-    # _async: asyncio.AbstractEventLoop = asyncio.new_event_loop()
-    # _handshake_thread: threading.Thread | None = None
-    # _armed_period: float | None = None
     _armed_context: ArmedContext | None = None
 
     serial_timeout: float = 1  # serial read timeout
@@ -57,7 +54,6 @@ class Device:
     _ft230x_gpio_bootsel_pin: int = 0b01
     _ft230x_vid: int = 0x0403  # default FT230X VID
     _ft230x_pid: int = 0x6015  # default FT230X PID
-    _comm_lock: threading.Lock = threading.Lock()
 
     arming_config: Device.ArmingConfig = ArmingConfig()
     arming_config_params: dict[str, int] = {
@@ -166,8 +162,8 @@ class Device:
         sleep(0.1)
         self.reset()
 
-    # TODO: make this so it accepts a firmware path, or can flash non-debug builds
-    def _flash_firmware(self):
+    # TODO: make this so it accepts a firmware path
+    def _flash_firmware(self, debug: bool = False):
         self._enter_bootloader()
 
         baud = self._ft230x_handle.baudrate
@@ -175,7 +171,7 @@ class Device:
         port = self._ft230x_port()
         
         stm32flash_path = Path(__file__).parents[1] / 'stm32flash' / 'stm32flash'
-        firmware_path = Path(__file__).parents[3] / 'firmware' / 'build' / 'debug' / 'BitCrusher.bin'
+        firmware_path = Path(__file__).parents[3] / 'firmware' / 'build' / ('debug' if debug else 'release') / 'BitCrusher.bin'
 
         sleep(0.1)
 
