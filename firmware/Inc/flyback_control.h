@@ -28,7 +28,8 @@ extern "C" {
 #define V_ILIM V_ILIM_MAX
 #define D_TO_ILIM(D) ((V_ILIM_MIN - V_ILIM_MAX)*D) + V_ILIM_MIN
 
-#define ADC_TO_V(x) (VDDA/(0x0fff))*x
+// #define ADC_TO_V(x) (VDDA/(0x0fff))*x
+#define ADC_TO_V(x) (x * 3.3f) / 4095.0f
 #define VHV_OFFSET 0.85
 #define V_TO_VHV(x) ((float )HV_MAX/(float )(HVVS_MAX - HVVS_MIN))*(x - VHV_OFFSET)
 

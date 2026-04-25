@@ -66,7 +66,7 @@
 #define FLAG_DISARMED (uint8_t )0x00
 #define STATE_INIT (uint8_t )0x01
 
-#define PULSE_EN_ALWAYS
+// #define PULSE_EN_ALWAYS
 /* USER CODE END PM */
 
 /* Private variables ---------------------------------------------------------*/
