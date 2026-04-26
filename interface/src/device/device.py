@@ -316,10 +316,6 @@ class Device:
 
         self.disarm()  # a thread can't `join` itself.
 
-    # TODO: The device must be able to be armed without the interface being stuck in
-    # this loop. Perhaps running the handshake asyncronously would work?
-    # I don't think this async implementation would works as I expected. The handshake
-    # loop must run after the `arm()` call exits, but it must also be cleanly interuptable.
     """
     Arm the device. Non blocking.
     period: Length in seconds to arm device, or `None` for indefinite. Defaults to None
