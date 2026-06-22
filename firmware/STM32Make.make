@@ -256,7 +256,7 @@ CFLAGS = $(MCU) $(C_DEFS) $(C_INCLUDES) $(OPTIMIZATION_FLAGS)
 CXXFLAGS = $(MCU) $(CXX_DEFS) $(C_INCLUDES) $(OPTIMIZATION_FLAGS)
 
 # Add additional flags
-CFLAGS += -Wall -fdata-sections -ffunction-sections 
+CFLAGS += -Wall -fdata-sections -ffunction-sections -std=c23 
 ASFLAGS += -Wall -fdata-sections -ffunction-sections 
 CXXFLAGS += -fno-exceptions -fno-rtti 
 

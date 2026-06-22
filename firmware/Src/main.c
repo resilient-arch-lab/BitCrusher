@@ -85,11 +85,6 @@ uint8_t armed = 0;
 uint8_t dev_state = STATE_INIT;
 
 // flyback PI control config and handle
-const PI_config_t flyback_PWM_PI_cfg = {
-    1.0,
-    0.0,
-    1.0
-};
 PI_handle_t flyback_PWM_PI_hdl = {0.0, 0.0, 0.0, 0.0};
 
 
@@ -332,7 +327,7 @@ int flyback_comp_step(void) {
   // Convert ADC reading to float in [0, 500]
   HAL_StatusTypeDef res = HAL_ADC_PollForConversion(&hadc1, 10);
   if (res != HAL_OK) return 1;
-  uint32_t adc_reading = HAL_ADC_GetValue(&hadc1);
+  uint32_t adc_reading = HAL_ADC_GetValue(&hadc1) & 0x0fff;
   float V_HV_fb = ADC_TO_V(adc_reading);  // voltage measured at HVVS
   float HV_fb = V_TO_VHV(V_HV_fb);  // real voltage at HV bank
   float setpoint = (float )arming_config.voltage;
