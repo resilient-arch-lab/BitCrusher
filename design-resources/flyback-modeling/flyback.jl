@@ -17,7 +17,7 @@ function FlybackCCMAveraged( ; name, V_d=1.7, R=1.5e6, R_c=0.05, R_sw=2, C_L=5e-
 
     @variables begin
         # state vars 
-        i_Lm(t) 
+        i_Lm(t)
         v_c(t)
         
         # input vars  ( can the V_d parameter be assigned as a variable)
