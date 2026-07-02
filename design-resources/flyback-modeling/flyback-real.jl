@@ -40,22 +40,21 @@ function CoupledInductor(; name, i1, i2, L1=10e-6, Nps=0.1, K=0.97)
 end
 
 function CoupledInductorTest1(; name)
-    @named L1 = CoupledInductor(i1=0, i2=0, K=0.97)
+    @named L1 = CoupledInductor(i1=0, i2=0, Nps=0.1, K=0.97)
     @named gnd = Ground()
     @named source = Voltage()
-    @named source_val = RealOutput()
+    @named source_val = Square(frequency = 100000, amplitude = 1.0, smooth=true)
     @named C1 = Capacitor(C=5e-6, v=0.0)
     @named R1 = Resistor(R=0.1)
-    @named RLoad = Resistor(R=50000)
+    @named RLoad = Resistor(R=1.5e6)
 
     test_system_eqs = [
-        connect(source_val, source.V)
+        connect(source_val.output, source.V)
         connect(source.p, L1.p1)
         connect(L1.p2, C1.p, RLoad.p)
         connect(L1.n1, R1.p)
         connect(source.n, R1.n, L1.n2, C1.n, RLoad.n, gnd.g)
-        # source_val.u ~ 1 - (1*(t>0.05))
-        source_val.u ~ 0 + ((0.1)*((t>0.01) & (t<0.05))) - ((20*(t-0.055))*((t>=0.05) & (t<0.055)))
+        # source_val.u ~ 0 + ((0.1)*((t>0.01) & (t<0.05))) - ((20*(t-0.055))*((t>=0.05) & (t<0.055)))
     ]
 
     System(test_system_eqs, t, [], [], systems=[L1, gnd, source, source_val, C1, R1, RLoad], initial_conditions=[L1.v1 => 0]; name=name)
@@ -63,11 +62,11 @@ end
 
 @named test_system = CoupledInductorTest1()
 test_system_compiled = mtkcompile(test_system)
-prob = ODEProblem(test_system_compiled, [], (0.0, 0.1))
+prob = ODEProblem(test_system_compiled, [], (0.0, 0.00005))
 sol = solve(prob)
 plot(
     sol, 
-    idxs=[test_system_compiled.L1.i1, test_system_compiled.L1.i2, test_system_compiled.L1.v1, test_system_compiled.L1.v2],
+    idxs=[test_system_compiled.L1.i1, test_system_compiled.L1.i2, test_system_compiled.L1.v1, test_system_compiled.L1.v2, source_val.output.u],
     # idxs=[test_system_compiled.L1.p1.i, test_system_compiled.L1.p2.i, test_system_compiled.L1.p2.v, test_system_compiled.C1.v],
     dpi=300
 )
