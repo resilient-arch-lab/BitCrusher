@@ -66,7 +66,7 @@ prob = ODEProblem(test_system_compiled, [], (0.0, 0.00005))
 sol = solve(prob)
 plot(
     sol, 
-    idxs=[test_system_compiled.L1.i1, test_system_compiled.L1.i2, test_system_compiled.L1.v1, test_system_compiled.L1.v2, source_val.output.u],
+    idxs=[test_system_compiled.L1.i1, test_system_compiled.L1.i2, test_system_compiled.L1.v1, test_system_compiled.L1.v2],
     # idxs=[test_system_compiled.L1.p1.i, test_system_compiled.L1.p2.i, test_system_compiled.L1.p2.v, test_system_compiled.C1.v],
     dpi=300
 )
