@@ -5,6 +5,8 @@ using ModelingToolkitStandardLibrary.Blocks
 using LinearAlgebra
 using ControlSystemsBase
 
+
+
 function FlybackCCMAveraged( ; name, N=1, R_L=1, C_L=1, L_m=1, D1=0.2)
     D1 = D1
     D2 = 1-D1
@@ -119,10 +121,12 @@ function FlybackParasiticCCMAveragedTest()
 end
 
 
-
-function FlybackParasiticCCMAveraged( ; name, V_d=1.7, R_L=1.5e6, R_c=0.05, R_sw=2, C_L=5e-6, L_m=10e-6, N=0.1)
+# I need to figure out how to calculate D2 and D3 from D1 and the magnitizing current
+function FlybackParasiticDCMAveraged(; name, V_d=1.7, R_L=1.5e6, R_c=0.05, R_sw=2, C_L=5e-6, L_m=10e-6, N=0.1, D1=0.2, D2=0.6)
     D1 = D1
-    D2 = 1-D1
+    D2 = D2
+    D3 = 1 - (D1 + D2)
+   
     A1 = [
         -R_sw/L_m       0; 
         0               -1/((R_L*C_L)+(R_c*C_L))
@@ -131,6 +135,10 @@ function FlybackParasiticCCMAveraged( ; name, V_d=1.7, R_L=1.5e6, R_c=0.05, R_sw
         (N^2 * R_c * R_L)/(R_L*L_m - R_c*L_m) (N*R_L)/(R_L*L_m - R_c*L_m);
         -(N*R_L)/(R_L*C_L - R_c*C_L)            -(1)/(R_L*C_L + R_c*C_L)
     ]  # interval 2 state matrix
+    A3 = [
+        0 0;
+        0 -1/(R_L*C_L + R_c*C_L)     
+    ]  # interval 3 state matrix
 
     B1 = [
         -1/L_m  0;
@@ -140,13 +148,18 @@ function FlybackParasiticCCMAveraged( ; name, V_d=1.7, R_L=1.5e6, R_c=0.05, R_sw
         0       -N/L_m;
         0       0
     ]  # interval 2 input matrix
+    B3 = [
+        0 0;
+        0 0
+    ]  # interval 3 input matrix
 
     C1 = [1 0; 0 R_L/(R_L+R_c)]  # interval 1 output vector
     C2 = [0 0; (N*R_L*R_c)/(R_L-R_c) R_L/(R_L-R_c)]  # interval 2 output vector
-    
-    A = (A1.*D1) + (A2.*(1-D1))
-    B = (B1.*D1) + (B2.*(1-D1))
-    C = (C1.*D1) + (C2.*(1-D1))
+    C3 = [0 0; 0 R_L/(R_L+R_c)]  # interval 3 output vector
+
+    A = (A1.*D1) + (A2.*D2) + (A3.*D3)
+    B = (B1.*D1) + (B2.*D2) + (B3.*D3)
+    C = (C1.*D1) + (C2.*D2) + (C3.*D3)
 
     @named statespace = StateSpace(A, B, C)
     @named vin = VoltageSensor()
@@ -163,7 +176,29 @@ function FlybackParasiticCCMAveraged( ; name, V_d=1.7, R_L=1.5e6, R_c=0.05, R_sw
 
 end
 
+function FlybackParasiticDCMAveragedTestbench(; name)
+    
+    @named flyback = FlybackParasiticDCMAveraged(V_d=1.7, R_L=1.5e6, R_c=0.05, R_sw=2, C_L=5e-6, L_m=10e-6, N=0.1, D1=0.2, D2=0.6)
+    @named vdd = Voltage()
+    @named V = Constant(k=22)
+    @named gnd = Ground()
 
+    eqs = [
+       connect(V.output, vdd.V)
+       connect(vdd.p, flyback.vin.p)
+       connect(vdd.n, flyback.vin.n, flyback.vout.n, gnd.g)
+    ]
+
+    System(eqs, t, [], []; systems=[flyback, vdd, gnd, V], name)
+end
+
+function FlybackParasiticDCMAveragedTest()
+    @named flyback_test = FlybackParasiticDCMAveragedTestbench()
+    compiled = mtkcompile(flyback_test)
+    prob = ODEProblem(compiled, [], (0.0, 0.01))
+    sol = solve(prob)
+    plot(sol, idxs=[flyback_test.flyback.vout.v, flyback_test.flyback.vin.v, flyback_test.flyback.statespace.x[1]]; dpi=300)
+end
 
 # inputs: primary curret, capacitor voltage
 # outputs: primary curret, output voltage
