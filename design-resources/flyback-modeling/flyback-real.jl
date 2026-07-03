@@ -3,7 +3,12 @@ using ModelingToolkit: t_nounits as t, D_nounits as D
 using ModelingToolkitStandardLibrary.Electrical
 using ModelingToolkitStandardLibrary.Blocks
 
-function CoupledInductor(; name, i1, i2, L1=10e-6, Nps=0.1, K=0.97)
+function square(x, f, amplitude, start_time)
+     (x > start_time) * ((0.5*amplitude) + ((0.5*amplitude) *
+     (4 * floor(f * (x - start_time)) - 2 * floor(2 * (x - start_time) * f) + 1)))
+end
+
+function CoupledInductor(; name, L1=10e-6, Nps=0.1, K=0.97)
     @parameters begin
         K=K
         Nps=Nps  # Np/Ns = 0.1
@@ -12,10 +17,10 @@ function CoupledInductor(; name, i1, i2, L1=10e-6, Nps=0.1, K=0.97)
         M=K * Nps * L2
     end
 
-    @named p1 = Pin(i=i1)
-    @named p2 = Pin(i=-i1)
-    @named n1 = Pin(i=i2)
-    @named n2 = Pin(i=-i2)
+    @named p1 = Pin()
+    @named p2 = Pin()
+    @named n1 = Pin()
+    @named n2 = Pin()
 
     @variables begin
         v1(t)
@@ -39,34 +44,56 @@ function CoupledInductor(; name, i1, i2, L1=10e-6, Nps=0.1, K=0.97)
     System(eqs, t, [v1, v2, i1, i2], [L1, L2, K, M, Nps], systems=[p1, p2, n1, n2]; name=name)
 end
 
+# this simulation is stable until inductor.v2 falls below resistor_load.v,
+# probably due to the diode.
 function CoupledInductorTest1(; name)
-    @named L1 = CoupledInductor(i1=0, i2=0, Nps=0.1, K=0.97)
+    @parameters begin
+        f = 100000
+        Imax = 1
+        Tstop = 0.0001
+    end
+
+    @named inductor = CoupledInductor(Nps=0.1, K=0.97)
     @named gnd = Ground()
-    @named source = Voltage()
-    @named source_val = Square(frequency = 100000, amplitude = 1.0, smooth=true)
-    @named C1 = Capacitor(C=5e-6, v=0.0)
-    @named R1 = Resistor(R=0.1)
-    @named RLoad = Resistor(R=1.5e6)
+    @named source = Current()
+    # @named source_val = Square(frequency = 100000, amplitude = 0.5, offset=0.5, start_time=0, smooth=false)
+    @named source_val = RealOutput()
+    @named capacitor_load = Capacitor(C=5e-6, v=0.0)
+    @named resistor_p = Resistor(R=0.1)
+    @named resistor_load = Resistor(R=1.5e6)
+    @named diode = Diode()
 
     test_system_eqs = [
-        connect(source_val.output, source.V)
-        connect(source.p, L1.p1)
-        connect(L1.p2, C1.p, RLoad.p)
-        connect(L1.n1, R1.p)
-        connect(source.n, R1.n, L1.n2, C1.n, RLoad.n, gnd.g)
-        # source_val.u ~ 0 + ((0.1)*((t>0.01) & (t<0.05))) - ((20*(t-0.055))*((t>=0.05) & (t<0.055)))
+        source_val.u ~ ifelse(
+            ((4 * floor(f * (t - start_time)) - 2 * floor(2 * (t - start_time) * f) + 2) >= 1), 
+            (Imax * 2) * ((-(t)*1e5) - (-floor(f * (t - start_time)))) * (t<=Tstop),
+            0
+        )
+        connect(source_val, source.I)
+        connect(source.p, inductor.p1)
+        connect(inductor.p2, diode.p)
+        connect(diode.n, capacitor_load.p, resistor_load.p)
+        connect(inductor.n1, resistor_p.p)
+        connect(source.n, resistor_p.n, inductor.n2, capacitor_load.n, resistor_load.n, gnd.g)
     ]
 
-    System(test_system_eqs, t, [], [], systems=[L1, gnd, source, source_val, C1, R1, RLoad], initial_conditions=[L1.v1 => 0]; name=name)
+    System(test_system_eqs, t, [], [f, Imax, Tstop], systems=[inductor, gnd, source, source_val, capacitor_load, resistor_p, resistor_load, diode], initial_conditions=[inductor.v2 => 0]; name=name)
 end
 
 @named test_system = CoupledInductorTest1()
 test_system_compiled = mtkcompile(test_system)
-prob = ODEProblem(test_system_compiled, [], (0.0, 0.00005))
+prob = ODEProblem(test_system_compiled, [], (0.0, 1e-3))
 sol = solve(prob)
 plot(
     sol, 
-    idxs=[test_system_compiled.L1.i1, test_system_compiled.L1.i2, test_system_compiled.L1.v1, test_system_compiled.L1.v2],
+    idxs=[test_system_compiled.inductor.i1, test_system_compiled.inductor.i2, test_system_compiled.inductor.v1, test_system_compiled.inductor.v2],
+    # idxs=[test_system_compiled.L1.p1.i, test_system_compiled.L1.p2.i, test_system_compiled.L1.p2.v, test_system_compiled.C1.v],
+    dpi=300
+)
+
+plot(
+    sol, 
+    idxs=[test_system_compiled.source.p.v, test_system_compiled.inductor.i1, test_system_compiled.resistor_load.p.v],
     # idxs=[test_system_compiled.L1.p1.i, test_system_compiled.L1.p2.i, test_system_compiled.L1.p2.v, test_system_compiled.C1.v],
     dpi=300
 )
