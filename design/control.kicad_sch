@@ -4955,6 +4955,17 @@
 		)
 		(uuid "d73be89b-ce94-402b-8184-6004d7dccb53")
 	)
+	(text "OPAMP1_VINP"
+		(exclude_from_sim no)
+		(at 205.74 57.15 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "0faaccde-6bc9-42ca-bfff-1c5ce28f4298")
+	)
 	(text "ADC1_IN2"
 		(exclude_from_sim no)
 		(at 240.03 52.07 0)
@@ -5101,6 +5112,17 @@
 			(justify left)
 		)
 		(uuid "a1b3a578-f0c0-4d05-acf9-586f78ca7071")
+	)
+	(text "OPAMP1_VOUT"
+		(exclude_from_sim no)
+		(at 205.74 54.61 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "a1fb6d28-e7b0-4581-87f2-d2eabe204c6a")
 	)
 	(text "Coaxial Interfaces"
 		(exclude_from_sim no)

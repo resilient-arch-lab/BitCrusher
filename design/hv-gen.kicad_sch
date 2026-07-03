@@ -3698,7 +3698,7 @@
 		)
 		(uuid "818c85bf-e813-473c-a9ea-ccb871fb2ebb")
 	)
-	(text "HV+ = 500V  =>  HVVS = 3V"
+	(text "HV+ = 500V  =>  HVVS = 0.5V"
 		(exclude_from_sim no)
 		(at 234.442 37.338 0)
 		(effects
@@ -3842,6 +3842,12 @@
 		(uuid "73b873eb-a3a0-4bba-8703-b705aa7452b4")
 	)
 	(junction
+		(at 170.18 44.45)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "92d16456-3635-4349-b200-c483ef0c6118")
+	)
+	(junction
 		(at 121.92 69.85)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -3936,6 +3942,16 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "fd4f2bb7-04b1-411b-87de-40b66e9d7e84")
+	)
+	(wire
+		(pts
+			(xy 170.18 44.45) (xy 173.99 44.45)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "05da2989-60de-435d-ac69-0b9f4a13ed7a")
 	)
 	(wire
 		(pts
@@ -4119,6 +4135,16 @@
 	)
 	(wire
 		(pts
+			(xy 185.42 41.91) (xy 170.18 41.91)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "28c3f367-3523-44c6-bdc6-3928d9c12632")
+	)
+	(wire
+		(pts
 			(xy 121.92 156.21) (xy 121.92 157.48)
 		)
 		(stroke
@@ -4236,6 +4262,16 @@
 			(type default)
 		)
 		(uuid "39559fb5-75d7-4384-ad74-ea29e4256583")
+	)
+	(wire
+		(pts
+			(xy 170.18 44.45) (xy 166.37 44.45)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "3a66fec0-141e-48cf-81a3-f18bd888f6cc")
 	)
 	(wire
 		(pts
@@ -4749,16 +4785,6 @@
 	)
 	(wire
 		(pts
-			(xy 173.99 44.45) (xy 166.37 44.45)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "b6f7abf2-4444-4fd7-8d89-1b7c2bbbaa56")
-	)
-	(wire
-		(pts
 			(xy 212.09 74.93) (xy 212.09 76.2)
 		)
 		(stroke
@@ -4879,6 +4905,16 @@
 	)
 	(wire
 		(pts
+			(xy 170.18 41.91) (xy 170.18 44.45)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "d6b198d5-5fa6-4de5-ad81-45c762ff36b3")
+	)
+	(wire
+		(pts
 			(xy 198.12 44.45) (xy 205.74 44.45)
 		)
 		(stroke
@@ -4966,6 +5002,16 @@
 			(type default)
 		)
 		(uuid "e8ad8c5e-eb20-4006-9db3-9e5b581da28d")
+	)
+	(wire
+		(pts
+			(xy 185.42 44.45) (xy 185.42 41.91)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "e9bed87f-10d0-48bb-bbec-aefc3785ed19")
 	)
 	(wire
 		(pts
@@ -5780,108 +5826,6 @@
 			(project "BitCrusher"
 				(path "/e1be550d-9ce6-42b1-a89a-c00b9d7586dd/1666a107-a514-488b-8729-5533040b5f76"
 					(reference "C23")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:R")
-		(at 177.8 44.45 90)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "38f9b0b5-e259-4bc0-b915-ef3a3ea57a11")
-		(property "Reference" "R26"
-			(at 177.8 38.1 90)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "0"
-			(at 177.8 40.64 90)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
-			(at 177.8 46.228 90)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 177.8 44.45 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "Resistor"
-			(at 177.8 44.45 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "KLC_S4.2_3V3OUT" ""
-			(at 177.8 44.45 90)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "KLC_S4.2_VCC" ""
-			(at 177.8 44.45 90)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "28f587ca-58c9-440d-92b2-12f1b2e5c868")
-		)
-		(pin "2"
-			(uuid "e52dfa2e-d87c-432e-85f0-76a037209dcf")
-		)
-		(instances
-			(project "BitCrusher"
-				(path "/e1be550d-9ce6-42b1-a89a-c00b9d7586dd/1666a107-a514-488b-8729-5533040b5f76"
-					(reference "R26")
 					(unit 1)
 				)
 			)
@@ -7629,7 +7573,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "60k"
+		(property "Value" "10k"
 			(at 168.91 50.7999 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -9118,10 +9062,9 @@
 		(on_board yes)
 		(in_pos_files yes)
 		(dnp no)
-		(fields_autoplaced yes)
 		(uuid "fa33b68a-57b7-4c2f-9846-e296560fc312")
 		(property "Reference" "R7"
-			(at 177.8 48.26 90)
+			(at 177.8 57.15 90)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -9131,7 +9074,7 @@
 			)
 		)
 		(property "Value" "1.6"
-			(at 177.8 50.8 90)
+			(at 177.8 59.69 90)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
