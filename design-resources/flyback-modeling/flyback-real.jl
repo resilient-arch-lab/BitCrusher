@@ -51,6 +51,7 @@ function CoupledInductorTest1(; name)
         f = 100000
         Imax = 1
         Tstop = 0.0001
+        start_time=0
     end
 
     @named inductor = CoupledInductor(Nps=0.1, K=0.97)
@@ -77,7 +78,7 @@ function CoupledInductorTest1(; name)
         connect(source.n, resistor_p.n, inductor.n2, capacitor_load.n, resistor_load.n, gnd.g)
     ]
 
-    System(test_system_eqs, t, [], [f, Imax, Tstop], systems=[inductor, gnd, source, source_val, capacitor_load, resistor_p, resistor_load, diode], initial_conditions=[inductor.v2 => 0]; name=name)
+    System(test_system_eqs, t, [], [f, Imax, Tstop, start_time], systems=[inductor, gnd, source, source_val, capacitor_load, resistor_p, resistor_load, diode], initial_conditions=[inductor.v2 => 0]; name=name)
 end
 
 @named test_system = CoupledInductorTest1()
