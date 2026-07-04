@@ -21,6 +21,7 @@ function CoupledInductor(; name, L1=10e-6, Nps=0.1, K=0.97)
     @named p2 = Pin()
     @named n1 = Pin()
     @named n2 = Pin()
+    # @named magnetizing_inductor = Inductor()
 
     @variables begin
         v1(t)
@@ -40,13 +41,67 @@ function CoupledInductor(; name, L1=10e-6, Nps=0.1, K=0.97)
         
         v1 ~ L1*D(i1) + M*D(i2)
         v2 ~ L2*D(i2) + M*D(i1)
+
+        # connect(magnetizing_inductor.p, p1)
+        # connect(magnetizing_inductor.n, n1)
     ]
-    System(eqs, t, [v1, v2, i1, i2], [L1, L2, K, M, Nps], systems=[p1, p2, n1, n2]; name=name)
+    System(eqs, t, [v1, v2, i1, i2], [L1, L2, K, M, Nps], systems=[p1, p2, n1, n2, magnetizing_inductor]; name=name)
+end
+
+function IdealTransformer(; name, Nps)
+    @parameters begin
+        Nps=Nps  # Np/Ns = 0.1
+    end
+    
+    @named p1 = Pin()
+    @named p2 = Pin()
+    @named n1 = Pin()
+    @named n2 = Pin()
+
+    @variables begin
+        v1(t)
+        v2(t)
+        i1(t)
+        i2(t)
+    end
+
+    eqs = [
+        v1 ~ p1.v - n1.v
+        v2 ~ p2.v - n2.v
+        
+        i2 ~ i1*Nps
+    ]
+
+    System(eqs, t, [v1, v2, i1, i2], [Nps], systems=[p1, p2, n1, n2], name=name)
+end
+
+function FlybackTransformer(; name, L_m=10e-6, Nps=0.1)
+    @parameters begin
+        Nps=Nps  # Np/Ns = 0.1
+        L_m=L_m
+    end
+
+    @named p1 = Pin()
+    @named p2 = Pin()
+    @named n1 = Pin()
+    @named n2 = Pin()
+    @named magnetizing_inductor = Inductor(L=L_m)
+    @named transformer = IdealTransformer(Nps=Nps) 
+
+    eqs = [
+        connect(p1, magnetizing_inductor.p, transformer.p1)
+        connect(p2, transformer.p2)
+        connect(n1, magnetizing_inductor.n, transformer.n1)
+        connect(n2, transformer.n2)
+    ]
+
+    System(eqs, t, [], [Nps, L_m], systems=[p1, p2, n1, n2, magnetizing_inductor, transformer], name=name)
 end
 
 # this simulation is stable until inductor.v2 falls below resistor_load.v,
-# probably due to the diode.
-function CoupledInductorTest1(; name)
+# probably due to the diode. Or maybe some interaction between the diode 
+# and the coupled inductance
+function CoupledInductorTest2(; name)
     @parameters begin
         f = 100000
         Imax = 1
@@ -57,12 +112,13 @@ function CoupledInductorTest1(; name)
     @named inductor = CoupledInductor(Nps=0.1, K=0.97)
     @named gnd = Ground()
     @named source = Current()
+    # @named source = Voltage()
     # @named source_val = Square(frequency = 100000, amplitude = 0.5, offset=0.5, start_time=0, smooth=false)
     @named source_val = RealOutput()
     @named capacitor_load = Capacitor(C=5e-6, v=0.0)
     @named resistor_p = Resistor(R=0.1)
     @named resistor_load = Resistor(R=1.5e6)
-    @named diode = Diode()
+    @named diode = Diode(Is=1e-3, n=0.95)
 
     test_system_eqs = [
         source_val.u ~ ifelse(
@@ -72,8 +128,11 @@ function CoupledInductorTest1(; name)
         )
         connect(source_val, source.I)
         connect(source.p, inductor.p1)
+
         connect(inductor.p2, diode.p)
         connect(diode.n, capacitor_load.p, resistor_load.p)
+        # connect(inductor.p2, capacitor_load.p, resistor_load.p)
+        
         connect(inductor.n1, resistor_p.p)
         connect(source.n, resistor_p.n, inductor.n2, capacitor_load.n, resistor_load.n, gnd.g)
     ]
@@ -81,9 +140,48 @@ function CoupledInductorTest1(; name)
     System(test_system_eqs, t, [], [f, Imax, Tstop, start_time], systems=[inductor, gnd, source, source_val, capacitor_load, resistor_p, resistor_load, diode], initial_conditions=[inductor.v2 => 0]; name=name)
 end
 
+function CoupledInductorTest1(; name)
+    @parameters begin
+        f = 100000
+        Imax = 1
+        Tstop = 0.0001
+        start_time=0
+    end
+
+    @named inductor = FlybackTransformer(Nps=0.1, K=0.97)
+    @named gnd = Ground()
+    @named source = Current()
+    # @named source = Voltage()
+    # @named source_val = Square(frequency = 100000, amplitude = 0.5, offset=0.5, start_time=0, smooth=false)
+    @named source_val = RealOutput()
+    @named capacitor_load = Capacitor(C=5e-6, v=0.0)
+    @named resistor_p = Resistor(R=0.1)
+    @named resistor_load = Resistor(R=1.5e6)
+    @named diode = Diode(Is=1e-3, n=0.95)
+
+    test_system_eqs = [
+        source_val.u ~ ifelse(
+            ((4 * floor(f * (t - start_time)) - 2 * floor(2 * (t - start_time) * f) + 2) >= 1), 
+            (Imax * 2) * ((-(t)*1e5) - (-floor(f * (t - start_time)))) * (t<=Tstop),
+            0
+        )
+        connect(source_val, source.I)
+        connect(source.p, inductor.p1)
+
+        connect(inductor.p2, diode.p)
+        connect(diode.n, capacitor_load.p, resistor_load.p)
+        # connect(inductor.p2, capacitor_load.p, resistor_load.p)
+        
+        connect(inductor.n1, resistor_p.p)
+        connect(source.n, resistor_p.n, inductor.n2, capacitor_load.n, resistor_load.n, gnd.g)
+    ]
+
+    System(test_system_eqs, t, [], [f, Imax, Tstop, start_time], systems=[inductor, gnd, source, source_val, capacitor_load, resistor_p, resistor_load, diode], initial_conditions=[inductor.transformer.v2 => 0]; name=name)
+end
+
 @named test_system = CoupledInductorTest1()
 test_system_compiled = mtkcompile(test_system)
-prob = ODEProblem(test_system_compiled, [], (0.0, 1e-3))
+prob = ODEProblem(test_system_compiled, [], (0.0, 3e-4))
 sol = solve(prob)
 plot(
     sol, 
