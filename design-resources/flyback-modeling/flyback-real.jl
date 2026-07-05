@@ -91,7 +91,7 @@ function FlybackTransformer(; name, L_m=10e-6, Nps=0.1)
     @named p2 = Pin()
     @named n1 = Pin()
     @named n2 = Pin()
-    @named magnetizing_inductor = Inductor(L=L_m)
+    @named magnetizing_inductor = Inductor(L=L_m, i=0)
     @named transformer_port = OnePort()
     # @named transformer = IdealTransformer(Nps=Nps)
 
@@ -118,7 +118,7 @@ function FlybackTransformer(; name, L_m=10e-6, Nps=0.1)
         # Primary side current properties
         itp ~ transformer_port.i
         ilm ~ magnetizing_inductor.i
-        iin ~ ilm + itp
+        # iin ~ itp + ilm
 
         # Ideal transformer equations
         iout ~ -itp*Nps
@@ -197,12 +197,13 @@ function CoupledInductorTest2(; name)
     @named source = Current()
     @named source_val = RealOutput()
     @named capacitor_load = Capacitor(C=5e-6, v=0.0)
-    @named resistor_p = Resistor(R=0.1)
+    # @named resistor_p = Resistor(R=0.1)
     @named resistor_load = Resistor(R=1.5e6)
 
-    @named diode = Diode(Is=1e-6, n=0.95)
-    @named diode_r_s = Resistor(R=1)    # no impact on stability
-    @named diode_r_p = Resistor(R=1e6)  # no impact on stability
+    # @named diode = Diode(Is=1e-6, n=0.95)
+    @named diode = VariableResistor(R_ref = 1e7)
+    # @named diode_r_s = Resistor(R=1)    # no impact on stability
+    # @named diode_r_p = Resistor(R=1e6)  # no impact on stability
 
 
     test_system_eqs = [
@@ -214,18 +215,22 @@ function CoupledInductorTest2(; name)
         connect(source_val, source.I)
         connect(source.p, transformer.p1)
 
-        connect(transformer.p2, diode_r_s.p, diode_r_p.p)
-        connect(diode_r_p.n, diode.n)
+        # connect(transformer.p2, diode_r_s.p, diode_r_p.p)
+        # connect(diode_r_p.n, diode.n)
 
-        connect(diode_r_s.n, diode.p)
-        connect(diode.n, capacitor_load.p, resistor_load.p)
+        # connect(diode_r_s.n, diode.p)
+        # connect(diode.n, capacitor_load.p, resistor_load.p)
         # connect(transformer.p2, capacitor_load.p, resistor_load.p)
+        connect(transformer.p2, diode.p)
+        connect(diode.n, capacitor_load.p, resistor_load.p)
+        diode.position.u ~ ifelse(diode.v <= 0, 1, 0)
         
-        connect(transformer.n1, resistor_p.p)
-        connect(source.n, resistor_p.n, transformer.n2, capacitor_load.n, resistor_load.n, gnd.g)
+        # connect(transformer.n1, resistor_p.p)
+        # connect(source.n, resistor_p.n, transformer.n2, capacitor_load.n, resistor_load.n, gnd.g)
+        connect(source.n, transformer.n1, transformer.n2, capacitor_load.n, resistor_load.n, gnd.g)
     ]
 
-    System(test_system_eqs, t, [], [f, Imax, Tstop, start_time], systems=[transformer, gnd, source, source_val, capacitor_load, resistor_p, resistor_load, diode, diode_r_s, diode_r_p], initial_conditions=[transformer.vout => 0]; name=name)
+    System(test_system_eqs, t, [], [f, Imax, Tstop, start_time], systems=[transformer, gnd, source, source_val, capacitor_load, resistor_load, diode], initial_conditions=[transformer.vout => 0]; name=name)
 end
 
 @named test_system = CoupledInductorTest2()
@@ -241,7 +246,7 @@ plot(
 
 plot(
     sol, 
-    idxs=[test_system_compiled.transformer.vin, test_system_compiled.transformer.vout],
+    idxs=[test_system_compiled.transformer.vin, test_system_compiled.transformer.vout, test_system_compiled.capacitor_load.v],
     # idxs=[test_system_compiled.L1.p1.i, test_system_compiled.L1.p2.i, test_system_compiled.L1.p2.v, test_system_compiled.C1.v],
     dpi=300
 )
