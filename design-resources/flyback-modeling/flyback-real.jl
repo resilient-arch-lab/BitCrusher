@@ -80,6 +80,7 @@ function IdealTransformer(; name, Nps)
     System(eqs, t, [v1, v2, i1, i2], [Nps], systems=[p1, p2, n1, n2], name=name)
 end
 
+
 function FlybackTransformer(; name, L_m=10e-6, Nps=0.1)
     @parameters begin
         Nps=Nps  # Np/Ns = 0.1
@@ -130,6 +131,15 @@ function FlybackTransformer(; name, L_m=10e-6, Nps=0.1)
     System(eqs, t, [vin, vout, iin, iout, ilm, itp], [Nps, L_m], systems=[p1, p2, n1, n2, magnetizing_inductor, transformer_port], name=name)
 end
 
+function PerfectDiode(; name)
+    @named oneport = OnePort()
+    @unpack v, i = oneport
+    
+    event = [v <= 0] => [i ~ 0]
+
+    extend(System([], t, [v, i], []; name=name), oneport)
+end
+
 # this simulation is stable until inductor.v2 falls below resistor_load.v,
 # probably due to the diode. Or maybe some interaction between the diode 
 # and the coupled inductance
@@ -172,7 +182,7 @@ function CoupledInductorTest1(; name)
     System(test_system_eqs, t, [], [f, Imax, Tstop, start_time], systems=[inductor, gnd, source, source_val, capacitor_load, resistor_p, resistor_load, diode], initial_conditions=[inductor.v2 => 0]; name=name)
 end
 
-# Works, but not with the diode. Still not quite accurate though, as the secondary
+# Works, but not with the diode. Still not quite accurate though, the secondary
 # side current is induced during the primary side current ramp (should be after)
 function CoupledInductorTest2(; name)
     @parameters begin
@@ -185,13 +195,15 @@ function CoupledInductorTest2(; name)
     @named transformer = FlybackTransformer(L_m=10e-6, Nps=0.1)
     @named gnd = Ground()
     @named source = Current()
-    # @named source = Voltage()
-    # @named source_val = Square(frequency = 100000, amplitude = 0.5, offset=0.5, start_time=0, smooth=false)
     @named source_val = RealOutput()
     @named capacitor_load = Capacitor(C=5e-6, v=0.0)
     @named resistor_p = Resistor(R=0.1)
     @named resistor_load = Resistor(R=1.5e6)
-    # @named diode = Diode(Is=1e-3, n=0.95)
+
+    @named diode = Diode(Is=1e-6, n=0.95)
+    @named diode_r_s = Resistor(R=1)    # no impact on stability
+    @named diode_r_p = Resistor(R=1e6)  # no impact on stability
+
 
     test_system_eqs = [
         source_val.u ~ ifelse(
@@ -202,21 +214,24 @@ function CoupledInductorTest2(; name)
         connect(source_val, source.I)
         connect(source.p, transformer.p1)
 
-        # connect(inductor.p2, diode.p)
-        # connect(diode.n, capacitor_load.p, resistor_load.p)
-        connect(transformer.p2, capacitor_load.p, resistor_load.p)
+        connect(transformer.p2, diode_r_s.p, diode_r_p.p)
+        connect(diode_r_p.n, diode.n)
+
+        connect(diode_r_s.n, diode.p)
+        connect(diode.n, capacitor_load.p, resistor_load.p)
+        # connect(transformer.p2, capacitor_load.p, resistor_load.p)
         
         connect(transformer.n1, resistor_p.p)
         connect(source.n, resistor_p.n, transformer.n2, capacitor_load.n, resistor_load.n, gnd.g)
     ]
 
-    System(test_system_eqs, t, [], [f, Imax, Tstop, start_time], systems=[transformer, gnd, source, source_val, capacitor_load, resistor_p, resistor_load], initial_conditions=[transformer.vout => 0]; name=name)
+    System(test_system_eqs, t, [], [f, Imax, Tstop, start_time], systems=[transformer, gnd, source, source_val, capacitor_load, resistor_p, resistor_load, diode, diode_r_s, diode_r_p], initial_conditions=[transformer.vout => 0]; name=name)
 end
 
 @named test_system = CoupledInductorTest2()
 test_system_compiled = mtkcompile(test_system)
 prob = ODEProblem(test_system_compiled, [], (0.0, 2e-4))
-sol = solve(prob)
+sol = solve(prob, Rodas5P(), abstol=1e-9, reltol=1e-12)
 plot(
     sol, 
     idxs=[test_system_compiled.transformer.iin, test_system_compiled.transformer.itp, test_system_compiled.transformer.ilm, test_system_compiled.transformer.iout],
