@@ -3842,12 +3842,6 @@
 		(uuid "73b873eb-a3a0-4bba-8703-b705aa7452b4")
 	)
 	(junction
-		(at 170.18 44.45)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "92d16456-3635-4349-b200-c483ef0c6118")
-	)
-	(junction
 		(at 121.92 69.85)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -3942,16 +3936,6 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "fd4f2bb7-04b1-411b-87de-40b66e9d7e84")
-	)
-	(wire
-		(pts
-			(xy 170.18 44.45) (xy 173.99 44.45)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "05da2989-60de-435d-ac69-0b9f4a13ed7a")
 	)
 	(wire
 		(pts
@@ -4135,16 +4119,6 @@
 	)
 	(wire
 		(pts
-			(xy 185.42 41.91) (xy 170.18 41.91)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "28c3f367-3523-44c6-bdc6-3928d9c12632")
-	)
-	(wire
-		(pts
 			(xy 121.92 156.21) (xy 121.92 157.48)
 		)
 		(stroke
@@ -4265,7 +4239,7 @@
 	)
 	(wire
 		(pts
-			(xy 170.18 44.45) (xy 166.37 44.45)
+			(xy 166.37 44.45) (xy 185.42 44.45)
 		)
 		(stroke
 			(width 0)
@@ -4835,16 +4809,6 @@
 	)
 	(wire
 		(pts
-			(xy 185.42 44.45) (xy 181.61 44.45)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "c9989d35-d61f-4691-9142-119dc87012d8")
-	)
-	(wire
-		(pts
 			(xy 156.21 66.04) (xy 156.21 64.77)
 		)
 		(stroke
@@ -4902,16 +4866,6 @@
 			(type default)
 		)
 		(uuid "d2b68865-4ffd-41bb-9945-aca5e863ae62")
-	)
-	(wire
-		(pts
-			(xy 170.18 41.91) (xy 170.18 44.45)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "d6b198d5-5fa6-4de5-ad81-45c762ff36b3")
 	)
 	(wire
 		(pts
@@ -5002,16 +4956,6 @@
 			(type default)
 		)
 		(uuid "e8ad8c5e-eb20-4006-9db3-9e5b581da28d")
-	)
-	(wire
-		(pts
-			(xy 185.42 44.45) (xy 185.42 41.91)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "e9bed87f-10d0-48bb-bbec-aefc3785ed19")
 	)
 	(wire
 		(pts
@@ -5144,30 +5088,6 @@
 		(uuid "2bdff8b7-0b22-4db2-92f8-ee9c84879db3")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 257.1667 74.93 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-	)
-	(global_label "HVVS-"
-		(shape output)
-		(at 205.74 44.45 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "90998cb1-c738-4254-a03b-84246e4be123")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 215.0148 44.45 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
