@@ -2207,7 +2207,7 @@
 	)
 	(wire
 		(pts
-			(xy 224.79 119.38) (xy 248.92 119.38)
+			(xy 224.79 119.38) (xy 250.19 119.38)
 		)
 		(stroke
 			(width 0)
@@ -3083,7 +3083,7 @@
 	)
 	(global_label "Probe+"
 		(shape passive)
-		(at 248.92 119.38 0)
+		(at 250.19 119.38 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -3093,7 +3093,7 @@
 		)
 		(uuid "a9cf7546-5067-4adb-9e97-af6475c3fd1b")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 257.8091 119.38 0)
+			(at 259.0791 119.38 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
