@@ -763,7 +763,7 @@
         "uuid": "e1be550d-9ce6-42b1-a89a-c00b9d7586dd"
       }
     ],
-    "used_designators": "TP1-2,R26,D10-11,C31,#GND10-11",
+    "used_designators": "RP_B2,TP1-2,R26,D10-11,C31,#GND10-11",
     "variants": []
   },
   "sheets": [

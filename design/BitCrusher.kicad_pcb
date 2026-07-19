@@ -16415,7 +16415,7 @@
 		(descr "BAT Wireless BWSMA-KWE-Z00 https://www.lcsc.com/datasheet/lcsc_datasheet_2310171703_BAT-WIRELESS-BWSMA-KWE-Z001_C496551.pdf")
 		(tags "SMA THT Female Jack Horizontal")
 		(property "Reference" "J3"
-			(at -3.46 -5.25 180)
+			(at -4.71 -3.675 180)
 			(layer "F.SilkS")
 			(uuid "6dafdbe0-e498-4139-b0ac-47c6ebaed59f")
 			(effects
@@ -30188,7 +30188,7 @@
 		(descr "BAT Wireless BWSMA-KWE-Z00 https://www.lcsc.com/datasheet/lcsc_datasheet_2310171703_BAT-WIRELESS-BWSMA-KWE-Z001_C496551.pdf")
 		(tags "SMA THT Female Jack Horizontal")
 		(property "Reference" "J4"
-			(at -3.46 -5.25 180)
+			(at -4.79 -3.675 180)
 			(layer "F.SilkS")
 			(uuid "7c5cf112-7866-4266-916b-8620098956a0")
 			(effects
@@ -34009,6 +34009,30 @@
 			(justify left)
 		)
 	)
+	(gr_text "1:10\n±30V_{PP}"
+		(at 212.75 108 0)
+		(layer "F.SilkS")
+		(uuid "16d5cb0a-35ec-4b67-9696-134f323569d6")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+			(justify right top)
+		)
+	)
+	(gr_text "1:20\n±30V_{PP}"
+		(at 212.75 118.25 0)
+		(layer "F.SilkS")
+		(uuid "4c1e7494-818f-4d24-8f54-49f117bf2bfe")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+			(justify right top)
+		)
+	)
 	(gr_text "DESIGNED BY GEORGE CRANE\nUNH, RESILIENT ARCH. LAB"
 		(at 169.25 100.75 0)
 		(layer "F.SilkS")
@@ -34061,8 +34085,8 @@
 			(justify left bottom)
 		)
 	)
-	(gr_text "Pulse\nCS"
-		(at 213 103.5 0)
+	(gr_text "Current\nSense"
+		(at 213 103 0)
 		(layer "F.SilkS")
 		(uuid "de000c41-d5f2-4f2b-aba9-a0ddecf161a6")
 		(effects
@@ -34074,7 +34098,7 @@
 			(justify right top)
 		)
 	)
-	(gr_text "Pulse\nVS"
+	(gr_text "Voltage\nSense"
 		(at 213 113.25 0)
 		(layer "F.SilkS")
 		(uuid "f6b1a44a-a2e7-4283-a80d-80ee14aecbb7")
@@ -37180,12 +37204,12 @@
 		(uuid "375214ea-7468-46d5-9263-7996dc4bd75b")
 	)
 	(segment
-		(start 214.835 104.42)
-		(end 214.835 109.5)
+		(start 214.75 109.5)
+		(end 219.915 109.5)
 		(width 1.3)
 		(layer "B.Cu")
 		(net "PulseCS-")
-		(uuid "3db2f59b-cb0b-4a52-b240-d915bc8a27a0")
+		(uuid "5f880271-7d10-425f-9be4-72defe9bd141")
 	)
 	(segment
 		(start 186.425 79.13)
@@ -37212,20 +37236,20 @@
 		(uuid "7d039e42-ad88-499a-9b79-77d698b04393")
 	)
 	(segment
-		(start 219.915 104.42)
-		(end 214.835 104.42)
-		(width 1.3)
-		(layer "B.Cu")
-		(net "PulseCS-")
-		(uuid "8ba40f2f-0f0f-4895-9ea9-0910999e47e5")
-	)
-	(segment
 		(start 186.425 79.175)
 		(end 188 80.75)
 		(width 1)
 		(layer "B.Cu")
 		(net "PulseCS-")
 		(uuid "9790bfbc-0e48-44a7-bef5-4294852548d2")
+	)
+	(segment
+		(start 214.75 104.42)
+		(end 214.75 109.5)
+		(width 1.3)
+		(layer "B.Cu")
+		(net "PulseCS-")
+		(uuid "a23e24b9-d397-44d4-8e53-41f9cafdb50b")
 	)
 	(segment
 		(start 185 80.5)
@@ -37252,20 +37276,20 @@
 		(uuid "dd8ae398-2792-4fef-9ab2-c78e137a32ab")
 	)
 	(segment
+		(start 219.915 104.42)
+		(end 214.75 104.42)
+		(width 1.3)
+		(layer "B.Cu")
+		(net "PulseCS-")
+		(uuid "e18d5d52-92cd-431e-b92d-afb942d94553")
+	)
+	(segment
 		(start 214.635 119.83)
 		(end 219.715 119.83)
 		(width 1.3)
 		(layer "B.Cu")
 		(net "PulseCS-")
 		(uuid "f53ac689-c97d-4616-a567-6f72788897a1")
-	)
-	(segment
-		(start 214.835 109.5)
-		(end 219.915 109.5)
-		(width 1.3)
-		(layer "B.Cu")
-		(net "PulseCS-")
-		(uuid "fd3605a1-3269-4922-a3a1-c95bb8e722aa")
 	)
 	(segment
 		(start 204.2725 92.2875)
