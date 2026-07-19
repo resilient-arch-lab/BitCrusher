@@ -9091,7 +9091,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "SP3031-01ETG"
+		(property "Value" "SP3130-01ETG"
 			(at 62.23 55.8799 90)
 			(show_name no)
 			(do_not_autoplace no)
@@ -11835,7 +11835,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "SP3031-01ETG"
+		(property "Value" "SP3130-01ETG"
 			(at 62.23 41.9099 90)
 			(show_name no)
 			(do_not_autoplace no)
