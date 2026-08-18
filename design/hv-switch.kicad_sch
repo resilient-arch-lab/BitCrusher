@@ -4265,7 +4265,7 @@
 				(justify right)
 			)
 		)
-		(property "Value" "1N5822"
+		(property "Value" "ES1M"
 			(at 114.3 37.1474 90)
 			(show_name no)
 			(do_not_autoplace no)
@@ -4276,7 +4276,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "Diode_THT:D_DO-201AD_P12.70mm_Horizontal"
+		(property "Footprint" "Diode_SMD:D_SMA"
 			(at 111.76 35.56 0)
 			(hide yes)
 			(show_name no)
@@ -4298,7 +4298,7 @@
 				)
 			)
 		)
-		(property "Description" "Schottky diode"
+		(property "Description" "1.7V@1A 1A 1kV 35ns"
 			(at 111.76 35.56 0)
 			(hide yes)
 			(show_name no)
