@@ -2648,7 +2648,7 @@
 				)
 			)
 		)
-		(property "Value" "TLP152TPL_E"
+		(property "Value" "e"
 			(at 0 0 90)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -3265,6 +3265,17 @@
 			(uuid "ac6df016-cff7-4699-ab0d-c39f37b02ef9")
 		)
 		(embedded_fonts no)
+		(model "${KIPRJMOD}/3d-models/TLP152_TPL,E.stp"
+			(offset
+				(xyz 0 0 0)
+			)
+			(scale
+				(xyz 1 1 1)
+			)
+			(rotate
+				(xyz 0 0 0)
+			)
+		)
 	)
 	(footprint "Capacitor_SMD:C_0402_1005Metric"
 		(layer "F.Cu")
@@ -12943,7 +12954,7 @@
 			(uuid "c0709b1b-fd9a-4656-89db-0b8f2cdca7c6")
 		)
 		(embedded_fonts no)
-		(model "WSHP2818R0200FEA.stp"
+		(model "${KIPRJMOD}/3d-models/WSHP2818R0200FEA.stp"
 			(offset
 				(xyz 0 -2.299999918 0.1500000037)
 			)
@@ -21528,6 +21539,17 @@
 			(uuid "b5f7597d-2bc6-4595-9f82-5db112d6ea20")
 		)
 		(embedded_fonts no)
+		(model "${KIPRJMOD}/3d-models/21-0041-A_8L.step"
+			(offset
+				(xyz 0 0 0)
+			)
+			(scale
+				(xyz 1 1 1)
+			)
+			(rotate
+				(xyz 0 0 0)
+			)
+		)
 	)
 	(footprint "Capacitor_SMD:C_0402_1005Metric"
 		(layer "F.Cu")
