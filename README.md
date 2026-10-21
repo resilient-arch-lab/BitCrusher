@@ -1,6 +1,8 @@
 # BitCrusher: An Affordable, Open Source, Electromagnetic Fault Injection Platform
 _NOTE: This repository is still under construction, and may be difficult to navigate in its current state_
 
+![alt text](assets/BitCrusher.png)
+
 Security researchers need attainable, effective tooling to secure computing infrastructure against physical attacks. Tools for hardware security research have been
 getting cheaper and more effective over recent years, but EMFI tooling has been left behind. The cost of commercial EMFI tooling is typically on the order of tens to hundreds of thousands of dollars, and the highly-coupled proprietary equipment offers little insight to researchers developing or characterizing EMFI techniques. BitCrusher is being developed with the goal of addressing several challenges in this space:
 
@@ -9,7 +11,9 @@ getting cheaper and more effective over recent years, but EMFI tooling has been 
 - Lowering the high barrier to entry of replicating and expanding upon existing EMFI research by providing high performance equipment that is both affordable and easy to integrate with common existing hardware security instrumentation frameworks (e.g. ChipWhisperer)
 
 ## State of BitCrusher
-BitCrusher was started as an undergraduate senior project in September 2025. Beginning April 2026, development efforts have been focused on working out design flaws and thoroughly verifying device performance. 
+BitCrusher was started as an undergraduate senior project in September 2025. Beginning April 2026, development efforts have been focused on working out design flaws and thoroughly verifying device performance.
+
+See `/design.md` for status of ongoing design work.
 
 
 ## Licensing
