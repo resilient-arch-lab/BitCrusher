@@ -2,7 +2,7 @@
 
 ## Electronic Design
 ### Pulse Feedback
-Currently, the two pulse feedback lines (`PulseCS` and `PulseVS`) are implemented as naive attenuator circuits for connection to a $1\text{M}\Omega$ oscilloscope input. `PulseVS` functions as a 20:1 attenuator between the `Probe+` and `GNDHV` nets. `PulseCS` functions as a 10:1 attenuator between the `Probe-` and `GNDHV` nets, with a $20\text{m}\Omega$ current sense resistor also separating the nets. The `PulseCS` attenuator signal is proportional to the current through the current sense resistor, and can also be used in conjunction with the `PulseVS` attenuator to determine the voltage drop over `Probe+` to `Probe-` (rather than just `Probe+` to `GNDHV`).  
+Currently, the two pulse feedback lines (`PulseCS` and `PulseVS`) are implemented as naive attenuator circuits for connection to a $1\text{M}\Omega$ oscilloscope input. `PulseVS` functions as a 20:1 attenuator between the `Probe+` and `GNDHV` nets. `PulseCS` functions as a 10:1 attenuator between the `Probe-` and `GNDHV` nets, with a $20\text{m}\Omega$ current sense resistor also separating the nets. The `PulseCS` attenuator signal is proportional to the current through the current sense resistor, and can also be used in conjunction with the `PulseVS` attenuator to determine the voltage drop over `Probe+` to `Probe-` (rather than just `Probe+` to `GNDHV`).
 
 ![pulse measurement schematic graphic](assets/pulse-meas.png)
 
@@ -36,6 +36,16 @@ Conveniently, the obvious solution to both of these issues is to buffer the feed
 - [ ] Research other considerations for good buffer design (e.g. temperature, parasitics, ...)
 - [ ] Opamp component selection
 - [ ] Layout
+
+### High Voltage Switching
+The diode `D6` between the bootstrap capacitors and the `+6V` line was selected poorly in revision 0.2.
+
+**Next Steps**
+- [x] Select appropriate diode for `D6` (SMC ES1K: 35ns 800V rectifier diode, 1.7Vf @ 1A)
+- [ ] Change buck converter design so that the voltage at the bootstrap capacitors is 6V with low current through `D6` (check Vf vs. If in ES1K datasheet).
+    - Would it make more sense to do something like changing `+6V` to `+10V` and add an adjustable LDO before the gate driver?
+- [ ] Recalculate gate driver adjustable UVLO resistors
+    - If there were an adjustable LDO powering the gate driver, the UVLO adjust circuit would have to be set to the minimum expected voltage or be adjustable itself.
 
 ## Firmware
 ### Voltage Generation Control System
