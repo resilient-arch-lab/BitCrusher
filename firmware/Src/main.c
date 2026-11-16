@@ -37,6 +37,7 @@
 #include "tim.h"
 #include "usart.h"
 #include "gpio.h"
+#include "opamp.h"
 #include "protocol.h"
 #include "arming.h"
 #include <stddef.h>
@@ -536,6 +537,7 @@ int main(void)
   MX_DAC1_Init();
   MX_USART1_UART_Init();
   MX_TIM3_Init();
+  MX_OPAMP1_Init();
 
   // Basic command loop
   while (1) {
