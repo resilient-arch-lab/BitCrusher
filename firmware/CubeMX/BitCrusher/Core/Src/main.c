@@ -21,6 +21,7 @@
 #include "adc.h"
 #include "comp.h"
 #include "dac.h"
+#include "opamp.h"
 #include "tim.h"
 #include "usart.h"
 #include "gpio.h"
@@ -98,6 +99,7 @@ int main(void)
   MX_DAC1_Init();
   MX_USART1_UART_Init();
   MX_TIM3_Init();
+  MX_OPAMP1_Init();
   /* USER CODE BEGIN 2 */
 
   /* USER CODE END 2 */
